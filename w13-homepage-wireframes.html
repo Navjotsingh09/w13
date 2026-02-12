@@ -1,0 +1,1324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>W13 Group Homepage - Detailed Wireframes</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Inter', sans-serif;
+            background: #f5f5f5;
+            padding: 40px 20px;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        h1 {
+            font-size: 42px;
+            margin-bottom: 10px;
+            color: #1A2B4A;
+        }
+
+        .subtitle {
+            font-size: 18px;
+            color: #666;
+            margin-bottom: 40px;
+        }
+
+        .wireframe-section {
+            margin-bottom: 80px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .section-header {
+            background: #1A2B4A;
+            color: white;
+            padding: 20px 30px;
+        }
+
+        .section-header h2 {
+            font-size: 28px;
+            margin-bottom: 5px;
+        }
+
+        .section-header p {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        .wireframe-content {
+            padding: 30px;
+        }
+
+        .layout-row {
+            display: flex;
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .layout-col {
+            flex: 1;
+        }
+
+        .device-label {
+            background: #FFD700;
+            color: #1A2B4A;
+            padding: 8px 16px;
+            border-radius: 4px;
+            font-weight: bold;
+            display: inline-block;
+            margin-bottom: 15px;
+            font-size: 14px;
+        }
+
+        .wireframe-box {
+            border: 2px dashed #bbb;
+            border-radius: 4px;
+            padding: 20px;
+            background: #fafafa;
+            position: relative;
+            min-height: 100px;
+        }
+
+        .wireframe-box.hero {
+            min-height: 400px;
+            background: linear-gradient(135deg, #e3f2fd 0%, #f5f5f5 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+
+        .wireframe-box.mobile {
+            max-width: 375px;
+        }
+
+        .box-label {
+            font-size: 12px;
+            color: #666;
+            text-transform: uppercase;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .element {
+            margin-bottom: 15px;
+        }
+
+        .element-box {
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            padding: 15px;
+            margin-bottom: 10px;
+        }
+
+        .element-title {
+            font-weight: 600;
+            color: #1A2B4A;
+            margin-bottom: 5px;
+            font-size: 14px;
+        }
+
+        .element-desc {
+            font-size: 13px;
+            color: #666;
+        }
+
+        .grid-demo {
+            display: grid;
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .grid-4 {
+            grid-template-columns: repeat(4, 1fr);
+        }
+
+        .grid-3 {
+            grid-template-columns: repeat(3, 1fr);
+        }
+
+        .grid-2 {
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        .card-demo {
+            background: white;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 20px;
+            text-align: center;
+            min-height: 200px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .card-icon {
+            width: 60px;
+            height: 60px;
+            background: #B2E1FD;
+            border-radius: 50%;
+            margin: 0 auto 15px;
+        }
+
+        .card-title {
+            font-weight: 700;
+            font-size: 18px;
+            color: #1A2B4A;
+            margin-bottom: 10px;
+        }
+
+        .card-text {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 15px;
+        }
+
+        .cta-button {
+            background: #FFD700;
+            color: #1A2B4A;
+            padding: 10px 20px;
+            border-radius: 4px;
+            border: none;
+            font-weight: 600;
+            cursor: pointer;
+            display: inline-block;
+            font-size: 14px;
+        }
+
+        .annotation {
+            background: #fff9e6;
+            border-left: 4px solid #FFD700;
+            padding: 15px;
+            margin-top: 20px;
+            border-radius: 4px;
+        }
+
+        .annotation-title {
+            font-weight: 600;
+            color: #1A2B4A;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+
+        .annotation-list {
+            font-size: 13px;
+            color: #666;
+            padding-left: 20px;
+        }
+
+        .annotation-list li {
+            margin-bottom: 5px;
+        }
+
+        .measurement {
+            position: absolute;
+            font-size: 11px;
+            color: #999;
+            font-weight: 600;
+        }
+
+        .hero-text {
+            font-size: 48px;
+            font-weight: 700;
+            color: #1A2B4A;
+            text-align: center;
+            margin-bottom: 15px;
+        }
+
+        .hero-subtext {
+            font-size: 20px;
+            color: #666;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .hero-ctas {
+            display: flex;
+            gap: 15px;
+        }
+
+        .stat-box {
+            background: white;
+            border: 2px solid #2196F3;
+            border-radius: 8px;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 36px;
+            font-weight: 700;
+            color: #1A2B4A;
+            margin-bottom: 5px;
+        }
+
+        .stat-label {
+            font-size: 14px;
+            color: #666;
+        }
+
+        .filter-tab {
+            display: inline-block;
+            padding: 10px 20px;
+            background: #f5f5f5;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            margin-right: 10px;
+            font-size: 14px;
+            cursor: pointer;
+        }
+
+        .filter-tab.active {
+            background: #FFD700;
+            border-color: #FFD700;
+            color: #1A2B4A;
+            font-weight: 600;
+        }
+
+        .project-card {
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            overflow: hidden;
+            height: 300px;
+            position: relative;
+        }
+
+        .project-image {
+            height: 200px;
+            background: linear-gradient(135deg, #e0e0e0 0%, #f5f5f5 100%);
+        }
+
+        .project-info {
+            padding: 15px;
+        }
+
+        .project-title {
+            font-weight: 600;
+            color: #1A2B4A;
+            margin-bottom: 5px;
+        }
+
+        .project-meta {
+            font-size: 13px;
+            color: #666;
+        }
+
+        .specs-table {
+            width: 100%;
+            margin-top: 15px;
+        }
+
+        .specs-table td {
+            padding: 8px;
+            border-bottom: 1px solid #eee;
+            font-size: 13px;
+        }
+
+        .specs-table td:first-child {
+            font-weight: 600;
+            color: #1A2B4A;
+        }
+
+        .color-swatch {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            border-radius: 4px;
+            border: 2px solid #ddd;
+            margin-right: 10px;
+        }
+
+        .toc {
+            background: #f9f9f9;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 25px;
+            margin-bottom: 40px;
+        }
+
+        .toc h3 {
+            color: #1A2B4A;
+            margin-bottom: 15px;
+            font-size: 20px;
+        }
+
+        .toc-list {
+            list-style: none;
+        }
+
+        .toc-list li {
+            padding: 8px 0;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .toc-list li:last-child {
+            border-bottom: none;
+        }
+
+        .toc-list a {
+            color: #666;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .toc-list a:hover {
+            color: #1A2B4A;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>W13 Group Homepage</h1>
+        <p class="subtitle">Detailed Wireframes & Specifications | Desktop & Mobile Layouts</p>
+
+        <!-- Table of Contents -->
+        <div class="toc">
+            <h3>📋 Wireframe Sections</h3>
+            <ul class="toc-list">
+                <li><a href="#section-1">Section 1: Hero with 3D Visualization</a></li>
+                <li><a href="#section-2">Section 2: Business Divisions Grid</a></li>
+                <li><a href="#section-3">Section 3: By The Numbers</a></li>
+                <li><a href="#section-4">Section 4: Featured Projects</a></li>
+                <li><a href="#section-5">Section 5: Development Pipeline</a></li>
+                <li><a href="#section-6">Section 6: Investor Relations</a></li>
+                <li><a href="#section-7">Section 7: What Sets Us Apart</a></li>
+                <li><a href="#section-8">Section 8: Latest Insights</a></li>
+                <li><a href="#section-9">Section 9: Working With W13</a></li>
+                <li><a href="#footer">Footer</a></li>
+                <li><a href="#specs">Design Specifications</a></li>
+            </ul>
+        </div>
+
+        <!-- SECTION 1: HERO -->
+        <div class="wireframe-section" id="section-1">
+            <div class="section-header">
+                <h2>Section 1: Hero with 3D Visualization</h2>
+                <p>Full viewport height | Immersive 3D building model | Minimal text overlay</p>
+            </div>
+            <div class="wireframe-content">
+                <div class="layout-row">
+                    <!-- Desktop Layout -->
+                    <div class="layout-col">
+                        <div class="device-label">🖥️ DESKTOP (1920px)</div>
+                        <div class="wireframe-box hero">
+                            <div style="position: absolute; top: 30px; left: 30px; right: 30px; display: flex; justify-content: space-between; align-items: center;">
+                                <div style="font-weight: 700; font-size: 20px; color: #1A2B4A;">W13 GROUP</div>
+                                <div style="display: flex; gap: 25px; font-size: 14px; color: #666;">
+                                    <span>About</span>
+                                    <span>Divisions ▾</span>
+                                    <span>Projects</span>
+                                    <span>Services</span>
+                                    <span>Investors</span>
+                                </div>
+                            </div>
+                            <div style="text-align: center; z-index: 10;">
+                                <div style="font-size: 64px; font-weight: 700; color: #1A2B4A; margin-bottom: 20px; line-height: 1.1;">
+                                    Building Communities.<br>Creating Value.
+                                </div>
+                                <div style="font-size: 24px; color: #666; margin-bottom: 40px;">
+                                    Delivering Excellence Across Property Development
+                                </div>
+                                <div style="display: flex; gap: 20px; justify-content: center;">
+                                    <button class="cta-button" style="padding: 15px 35px; font-size: 16px;">Explore Our Work</button>
+                                    <button class="cta-button" style="padding: 15px 35px; font-size: 16px; background: transparent; border: 2px solid #1A2B4A; color: #1A2B4A;">Investor Relations</button>
+                                </div>
+                            </div>
+                            <div style="position: absolute; bottom: 30px; left: 50%; transform: translateX(-50%); text-align: center;">
+                                <div style="font-size: 12px; color: #999; margin-bottom: 10px;">SCROLL TO EXPLORE</div>
+                                <div style="width: 30px; height: 50px; border: 2px solid #999; border-radius: 15px; margin: 0 auto; position: relative;">
+                                    <div style="width: 4px; height: 8px; background: #999; border-radius: 2px; position: absolute; top: 8px; left: 50%; transform: translateX(-50%);"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="annotation">
+                            <div class="annotation-title">💡 Desktop Implementation Notes:</div>
+                            <ul class="annotation-list">
+                                <li><strong>3D Element:</strong> Three.js scene with GLTF building model, subtle rotation on mouse movement</li>
+                                <li><strong>Height:</strong> 100vh (full viewport)</li>
+                                <li><strong>Animation:</strong> Text fades in with 0.3s delay, CTAs slide up with 0.5s delay</li>
+                                <li><strong>Background:</strong> 3D scene with subtle depth of field blur</li>
+                                <li><strong>Scroll Indicator:</strong> Animated pulse effect (CSS animation)</li>
+                                <li><strong>Performance:</strong> Lazy load 3D assets, optimize model to <2MB</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Mobile Layout -->
+                    <div class="layout-col">
+                        <div class="device-label">📱 MOBILE (375px)</div>
+                        <div class="wireframe-box hero mobile" style="max-width: 375px; min-height: 600px;">
+                            <div style="position: absolute; top: 20px; left: 20px; right: 20px; display: flex; justify-content: space-between; align-items: center;">
+                                <div style="font-weight: 700; font-size: 16px; color: #1A2B4A;">W13</div>
+                                <div style="font-size: 24px; color: #1A2B4A;">☰</div>
+                            </div>
+                            <div style="text-align: center; padding: 0 20px;">
+                                <div style="font-size: 36px; font-weight: 700; color: #1A2B4A; margin-bottom: 15px; line-height: 1.2;">
+                                    Building<br>Communities
+                                </div>
+                                <div style="font-size: 16px; color: #666; margin-bottom: 30px;">
+                                    Property Development Excellence
+                                </div>
+                                <div style="display: flex; flex-direction: column; gap: 12px; width: 100%;">
+                                    <button class="cta-button" style="width: 100%; padding: 14px;">Explore Our Work</button>
+                                    <button class="cta-button" style="width: 100%; padding: 14px; background: transparent; border: 2px solid #1A2B4A; color: #1A2B4A;">Investors</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="annotation">
+                            <div class="annotation-title">💡 Mobile Implementation Notes:</div>
+                            <ul class="annotation-list">
+                                <li><strong>3D Disabled:</strong> Replace with high-res static hero image (WebP)</li>
+                                <li><strong>Image:</strong> 750x1334px @ 2x retina (compressed to ~200KB)</li>
+                                <li><strong>Typography:</strong> Reduced heading sizes (64px → 36px)</li>
+                                <li><strong>CTAs:</strong> Full-width stacked buttons for better touch targets</li>
+                                <li><strong>Menu:</strong> Hamburger icon triggers full-screen overlay menu</li>
+                                <li><strong>Performance:</strong> Load mobile hero first, defer everything else</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <table class="specs-table">
+                    <tr>
+                        <td>Section Height</td>
+                        <td>Desktop: 100vh (900-1080px typical) | Mobile: 100vh (667-844px typical)</td>
+                    </tr>
+                    <tr>
+                        <td>Text Hierarchy</td>
+                        <td>H1: 64px/700 Desktop, 36px/700 Mobile | Body: 24px/400 Desktop, 16px/400 Mobile</td>
+                    </tr>
+                    <tr>
+                        <td>CTA Buttons</td>
+                        <td>Primary: #FFD700 | Secondary: Transparent with border | Hover: Scale 1.05</td>
+                    </tr>
+                    <tr>
+                        <td>Animations</td>
+                        <td>Fade-in (0.8s ease-out) | Slide-up (0.6s ease-out) | Scroll indicator pulse (2s infinite)</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        <!-- SECTION 2: BUSINESS DIVISIONS -->
+        <div class="wireframe-section" id="section-2">
+            <div class="section-header">
+                <h2>Section 2: Business Divisions Grid</h2>
+                <p>4-column layout | Icon-based cards | Hover interactions</p>
+            </div>
+            <div class="wireframe-content">
+                <div class="layout-row">
+                    <!-- Desktop Layout -->
+                    <div class="layout-col">
+                        <div class="device-label">🖥️ DESKTOP (1920px)</div>
+                        <div class="wireframe-box" style="padding: 60px 80px; background: white;">
+                            <div style="text-align: center; margin-bottom: 50px;">
+                                <div style="font-size: 42px; font-weight: 700; color: #1A2B4A; margin-bottom: 15px;">
+                                    Our Business Divisions
+                                </div>
+                                <div style="font-size: 18px; color: #666; max-width: 700px; margin: 0 auto;">
+                                    Integrated property development solutions from land acquisition to asset management
+                                </div>
+                            </div>
+
+                            <div class="grid-demo grid-4">
+                                <!-- Card 1 -->
+                                <div class="card-demo">
+                                    <div class="card-icon" style="background: #8BC34A;"></div>
+                                    <div class="card-title">Land &<br>Development</div>
+                                    <div class="card-text">From concept to completion across residential and commercial projects</div>
+                                    <button class="cta-button" style="font-size: 13px; padding: 8px 16px;">View Projects</button>
+                                </div>
+
+                                <!-- Card 2 -->
+                                <div class="card-demo">
+                                    <div class="card-icon" style="background: #FF9800;"></div>
+                                    <div class="card-title">Master<br>Developer</div>
+                                    <div class="card-text">Creating sustainable communities and new town infrastructure</div>
+                                    <button class="cta-button" style="font-size: 13px; padding: 8px 16px;">View Projects</button>
+                                </div>
+
+                                <!-- Card 3 -->
+                                <div class="card-demo">
+                                    <div class="card-icon" style="background: #2196F3;"></div>
+                                    <div class="card-title">Asset<br>Management</div>
+                                    <div class="card-text">Maximizing investment returns across our portfolio</div>
+                                    <button class="cta-button" style="font-size: 13px; padding: 8px 16px;">Opportunities</button>
+                                </div>
+
+                                <!-- Card 4 -->
+                                <div class="card-demo">
+                                    <div class="card-icon" style="background: #00BCD4;"></div>
+                                    <div class="card-title">Consultancy<br>Services</div>
+                                    <div class="card-text">Expert guidance end-to-end from architecture to planning</div>
+                                    <button class="cta-button" style="font-size: 13px; padding: 8px 16px;">Our Services</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="annotation">
+                            <div class="annotation-title">💡 Desktop Interactions:</div>
+                            <ul class="annotation-list">
+                                <li><strong>Hover Effect:</strong> Card lifts (translateY -10px), shadow increases, icon scales 1.1x</li>
+                                <li><strong>Animation In:</strong> Cards fade in with stagger (0.15s delay between each)</li>
+                                <li><strong>Grid:</strong> Equal height cards, 30px gap between columns</li>
+                                <li><strong>Icons:</strong> 60x60px circular backgrounds with custom SVG icons</li>
+                                <li><strong>Color Coding:</strong> Each division has unique accent color (from org chart)</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Mobile Layout -->
+                    <div class="layout-col">
+                        <div class="device-label">📱 MOBILE (375px)</div>
+                        <div class="wireframe-box mobile" style="padding: 40px 20px; background: white;">
+                            <div style="text-align: center; margin-bottom: 40px;">
+                                <div style="font-size: 28px; font-weight: 700; color: #1A2B4A; margin-bottom: 12px;">
+                                    Our Business<br>Divisions
+                                </div>
+                                <div style="font-size: 14px; color: #666;">
+                                    Integrated property solutions
+                                </div>
+                            </div>
+
+                            <div style="display: flex; flex-direction: column; gap: 20px;">
+                                <!-- Mobile Card -->
+                                <div class="card-demo" style="min-height: 180px;">
+                                    <div class="card-icon" style="background: #8BC34A; width: 50px; height: 50px;"></div>
+                                    <div class="card-title" style="font-size: 20px;">Land & Development</div>
+                                    <div class="card-text" style="font-size: 13px;">From concept to completion across residential and commercial</div>
+                                    <button class="cta-button" style="font-size: 13px; padding: 8px 16px;">View Projects</button>
+                                </div>
+
+                                <div class="card-demo" style="min-height: 180px;">
+                                    <div class="card-icon" style="background: #FF9800; width: 50px; height: 50px;"></div>
+                                    <div class="card-title" style="font-size: 20px;">Master Developer</div>
+                                    <div class="card-text" style="font-size: 13px;">Creating sustainable communities</div>
+                                    <button class="cta-button" style="font-size: 13px; padding: 8px 16px;">View Projects</button>
+                                </div>
+
+                                <div style="text-align: center; padding: 15px; background: #f9f9f9; border-radius: 8px;">
+                                    <span style="font-size: 13px; color: #666;">+ 2 more divisions</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="annotation">
+                            <div class="annotation-title">💡 Mobile Interactions:</div>
+                            <ul class="annotation-list">
+                                <li><strong>Stack:</strong> Single column, full-width cards</li>
+                                <li><strong>Tap State:</strong> Card scales to 0.98x on tap, background color shift</li>
+                                <li><strong>Initial Load:</strong> Show first 2 divisions, "Show More" expandable</li>
+                                <li><strong>Spacing:</strong> 20px gap between cards, 40px section padding</li>
+                                <li><strong>Icons:</strong> Reduced to 50x50px</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <table class="specs-table">
+                    <tr>
+                        <td>Section Padding</td>
+                        <td>Desktop: 60px vertical, 80px horizontal | Mobile: 40px vertical, 20px horizontal</td>
+                    </tr>
+                    <tr>
+                        <td>Card Dimensions</td>
+                        <td>Desktop: Equal height ~240px | Mobile: Auto height minimum 180px</td>
+                    </tr>
+                    <tr>
+                        <td>Division Colors</td>
+                        <td>Land: #8BC34A | Master Dev: #FF9800 | Asset Mgmt: #2196F3 | Consultancy: #00BCD4</td>
+                    </tr>
+                    <tr>
+                        <td>Hover Animation</td>
+                        <td>Transform: translateY(-10px) | Transition: 0.3s ease-out | Box-shadow: 0 8px 25px rgba(0,0,0,0.15)</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        <!-- SECTION 3: BY THE NUMBERS -->
+        <div class="wireframe-section" id="section-3">
+            <div class="section-header">
+                <h2>Section 3: By The Numbers</h2>
+                <p>Animated counters | Horizontal layout | Scroll-triggered animation</p>
+            </div>
+            <div class="wireframe-content">
+                <div class="layout-row">
+                    <!-- Desktop Layout -->
+                    <div class="layout-col">
+                        <div class="device-label">🖥️ DESKTOP (1920px)</div>
+                        <div class="wireframe-box" style="padding: 80px; background: linear-gradient(135deg, #1A2B4A 0%, #2c3e5c 100%);">
+                            <div style="text-align: center; color: white; margin-bottom: 50px;">
+                                <div style="font-size: 42px; font-weight: 700; margin-bottom: 15px;">
+                                    Our Track Record
+                                </div>
+                                <div style="font-size: 18px; opacity: 0.9;">
+                                    Delivering results across the property development lifecycle
+                                </div>
+                            </div>
+
+                            <div class="grid-demo" style="grid-template-columns: repeat(5, 1fr); gap: 30px;">
+                                <div class="stat-box" style="border-color: white;">
+                                    <div class="stat-number">500+</div>
+                                    <div class="stat-label">Projects<br>Delivered</div>
+                                </div>
+                                <div class="stat-box" style="border-color: white;">
+                                    <div class="stat-number">£2.5B+</div>
+                                    <div class="stat-label">Total Dev<br>Value</div>
+                                </div>
+                                <div class="stat-box" style="border-color: white;">
+                                    <div class="stat-number">20+</div>
+                                    <div class="stat-label">Years<br>Experience</div>
+                                </div>
+                                <div class="stat-box" style="border-color: white;">
+                                    <div class="stat-number">5,000+</div>
+                                    <div class="stat-label">Homes<br>Built</div>
+                                </div>
+                                <div class="stat-box" style="border-color: white;">
+                                    <div class="stat-number">50+</div>
+                                    <div class="stat-label">Consultancy<br>Clients</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="annotation">
+                            <div class="annotation-title">💡 Desktop Animation:</div>
+                            <ul class="annotation-list">
+                                <li><strong>Counter Animation:</strong> Numbers count up from 0 when section enters viewport (ScrollTrigger)</li>
+                                <li><strong>Duration:</strong> 2 seconds with easing (ease-out)</li>
+                                <li><strong>Stagger:</strong> Each stat starts 0.1s after previous</li>
+                                <li><strong>Library:</strong> CountUp.js or custom GSAP number animation</li>
+                                <li><strong>Background:</strong> Dark gradient provides contrast for white text</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Mobile Layout -->
+                    <div class="layout-col">
+                        <div class="device-label">📱 MOBILE (375px)</div>
+                        <div class="wireframe-box mobile" style="padding: 40px 20px; background: linear-gradient(135deg, #1A2B4A 0%, #2c3e5c 100%);">
+                            <div style="text-align: center; color: white; margin-bottom: 30px;">
+                                <div style="font-size: 28px; font-weight: 700; margin-bottom: 10px;">
+                                    Our Track Record
+                                </div>
+                            </div>
+
+                            <div class="grid-demo grid-2" style="gap: 15px;">
+                                <div class="stat-box" style="border-color: white; padding: 15px;">
+                                    <div class="stat-number" style="font-size: 28px;">500+</div>
+                                    <div class="stat-label" style="font-size: 12px;">Projects</div>
+                                </div>
+                                <div class="stat-box" style="border-color: white; padding: 15px;">
+                                    <div class="stat-number" style="font-size: 28px;">£2.5B+</div>
+                                    <div class="stat-label" style="font-size: 12px;">Dev Value</div>
+                                </div>
+                                <div class="stat-box" style="border-color: white; padding: 15px;">
+                                    <div class="stat-number" style="font-size: 28px;">20+</div>
+                                    <div class="stat-label" style="font-size: 12px;">Years Exp</div>
+                                </div>
+                                <div class="stat-box" style="border-color: white; padding: 15px;">
+                                    <div class="stat-number" style="font-size: 28px;">5,000+</div>
+                                    <div class="stat-label" style="font-size: 12px;">Homes</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="annotation">
+                            <div class="annotation-title">💡 Mobile Optimization:</div>
+                            <ul class="annotation-list">
+                                <li><strong>Grid:</strong> 2 columns instead of 5 for better readability</li>
+                                <li><strong>Show 4 stats:</strong> Most important ones (hide 5th or show in expandable)</li>
+                                <li><strong>Font Sizes:</strong> Reduced numbers (36px → 28px)</li>
+                                <li><strong>Same Animation:</strong> Counter animation preserved on mobile</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SECTION 4: FEATURED PROJECTS -->
+        <div class="wireframe-section" id="section-4">
+            <div class="section-header">
+                <h2>Section 4: Featured Projects</h2>
+                <p>Masonry grid | Filter tabs | Hover overlays</p>
+            </div>
+            <div class="wireframe-content">
+                <div class="layout-row">
+                    <div class="layout-col">
+                        <div class="device-label">🖥️ DESKTOP (1920px)</div>
+                        <div class="wireframe-box" style="padding: 60px 80px; background: white;">
+                            <div style="text-align: center; margin-bottom: 40px;">
+                                <div style="font-size: 42px; font-weight: 700; color: #1A2B4A; margin-bottom: 20px;">
+                                    Featured Projects
+                                </div>
+                                <div style="margin-bottom: 30px;">
+                                    <span class="filter-tab active">All Projects</span>
+                                    <span class="filter-tab">Residential</span>
+                                    <span class="filter-tab">Commercial</span>
+                                    <span class="filter-tab">Infrastructure</span>
+                                    <span class="filter-tab">Urban Regeneration</span>
+                                </div>
+                            </div>
+
+                            <div class="grid-demo grid-3" style="gap: 20px;">
+                                <div class="project-card">
+                                    <div class="project-image"></div>
+                                    <div class="project-info">
+                                        <div class="project-title">Walsall Road Development</div>
+                                        <div class="project-meta">Residential • £1M • Completed</div>
+                                    </div>
+                                </div>
+                                <div class="project-card">
+                                    <div class="project-image"></div>
+                                    <div class="project-info">
+                                        <div class="project-title">New Town Infrastructure</div>
+                                        <div class="project-meta">Master Developer • £15M • In Progress</div>
+                                    </div>
+                                </div>
+                                <div class="project-card">
+                                    <div class="project-image"></div>
+                                    <div class="project-info">
+                                        <div class="project-title">Commercial Office Complex</div>
+                                        <div class="project-meta">Commercial • £8M • Completed</div>
+                                    </div>
+                                </div>
+                                <div class="project-card">
+                                    <div class="project-image"></div>
+                                    <div class="project-info">
+                                        <div class="project-title">BTR Portfolio Birmingham</div>
+                                        <div class="project-meta">Asset Management • £25M • Pipeline</div>
+                                    </div>
+                                </div>
+                                <div class="project-card">
+                                    <div class="project-image"></div>
+                                    <div class="project-info">
+                                        <div class="project-title">Urban Regeneration Zone</div>
+                                        <div class="project-meta">Mixed Use • £40M • In Progress</div>
+                                    </div>
+                                </div>
+                                <div class="project-card">
+                                    <div class="project-image"></div>
+                                    <div class="project-info">
+                                        <div class="project-title">GNG Willenhall Temple</div>
+                                        <div class="project-meta">Consultancy • £2M • Completed</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div style="text-align: center; margin-top: 40px;">
+                                <button class="cta-button" style="padding: 15px 35px; font-size: 16px;">View All Projects →</button>
+                            </div>
+                        </div>
+
+                        <div class="annotation">
+                            <div class="annotation-title">💡 Desktop Interactions:</div>
+                            <ul class="annotation-list">
+                                <li><strong>Filter:</strong> Click tab → fade out non-matching cards, fade in matching (0.4s transition)</li>
+                                <li><strong>Hover:</strong> Image zooms 1.05x, dark overlay appears, "View Project" button fades in</li>
+                                <li><strong>Masonry:</strong> Use CSS Grid with auto-flow dense or Masonry.js for varied heights</li>
+                                <li><strong>Load More:</strong> Initially show 6 projects, button loads 6 more (infinite scroll alternative)</li>
+                                <li><strong>Image Lazy Load:</strong> IntersectionObserver, load images as they enter viewport</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="layout-col">
+                        <div class="device-label">📱 MOBILE (375px)</div>
+                        <div class="wireframe-box mobile" style="padding: 40px 20px; background: white;">
+                            <div style="margin-bottom: 30px;">
+                                <div style="font-size: 28px; font-weight: 700; color: #1A2B4A; margin-bottom: 20px; text-align: center;">
+                                    Featured Projects
+                                </div>
+                                <div style="overflow-x: auto; white-space: nowrap; margin: 0 -20px; padding: 0 20px;">
+                                    <span class="filter-tab active" style="display: inline-block;">All</span>
+                                    <span class="filter-tab" style="display: inline-block;">Residential</span>
+                                    <span class="filter-tab" style="display: inline-block;">Commercial</span>
+                                    <span class="filter-tab" style="display: inline-block;">Infrastructure</span>
+                                </div>
+                            </div>
+
+                            <div style="display: flex; flex-direction: column; gap: 20px;">
+                                <div class="project-card" style="height: 280px;">
+                                    <div class="project-image" style="height: 180px;"></div>
+                                    <div class="project-info">
+                                        <div class="project-title" style="font-size: 16px;">Walsall Road Development</div>
+                                        <div class="project-meta" style="font-size: 12px;">Residential • £1M</div>
+                                    </div>
+                                </div>
+                                <div class="project-card" style="height: 280px;">
+                                    <div class="project-image" style="height: 180px;"></div>
+                                    <div class="project-info">
+                                        <div class="project-title" style="font-size: 16px;">New Town Infrastructure</div>
+                                        <div class="project-meta" style="font-size: 12px;">Master Dev • £15M</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div style="text-align: center; margin-top: 30px;">
+                                <button class="cta-button" style="width: 100%; padding: 14px;">View All Projects</button>
+                            </div>
+                        </div>
+
+                        <div class="annotation">
+                            <div class="annotation-title">💡 Mobile Optimizations:</div>
+                            <ul class="annotation-list">
+                                <li><strong>Filter Scroll:</strong> Horizontal swipe for filter tabs (overflow-x: auto)</li>
+                                <li><strong>Single Column:</strong> Stack cards vertically, show 2-3 initially</li>
+                                <li><strong>Touch Tap:</strong> Entire card is tappable, no hover overlay needed</li>
+                                <li><strong>Load More:</strong> Show 3, load 3 more on button tap</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SECTION 5: DEVELOPMENT PIPELINE -->
+        <div class="wireframe-section" id="section-5">
+            <div class="section-header">
+                <h2>Section 5: Development Pipeline</h2>
+                <p>Interactive UK map | Project markers | Regional breakdown</p>
+            </div>
+            <div class="wireframe-content">
+                <div class="element">
+                    <div class="device-label">🖥️ DESKTOP - Interactive Map View</div>
+                    <div class="wireframe-box" style="min-height: 500px; background: #f0f4f8; position: relative;">
+                        <div style="position: absolute; top: 30px; left: 30px; right: 30px;">
+                            <div style="font-size: 36px; font-weight: 700; color: #1A2B4A; margin-bottom: 10px;">
+                                Development Pipeline
+                            </div>
+                            <div style="font-size: 16px; color: #666;">
+                                Active projects across the UK • Total pipeline value: £450M+
+                            </div>
+                        </div>
+
+                        <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 400px; height: 500px; background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%); border: 3px solid #1A2B4A; border-radius: 8px; display: flex; align-items: center; justify-content: center;">
+                            <div style="text-align: center; color: #1A2B4A;">
+                                <div style="font-size: 18px; font-weight: 600; margin-bottom: 10px;">UK MAP</div>
+                                <div style="font-size: 14px;">Interactive Markers:</div>
+                                <div style="font-size: 12px; margin-top: 15px;">
+                                    • Birmingham (8 projects)<br>
+                                    • London (5 projects)<br>
+                                    • Manchester (3 projects)<br>
+                                    • Glasgow (2 projects)
+                                </div>
+                            </div>
+                        </div>
+
+                        <div style="position: absolute; right: 30px; top: 150px; width: 300px; background: white; border-radius: 8px; padding: 20px; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
+                            <div style="font-weight: 700; font-size: 16px; color: #1A2B4A; margin-bottom: 15px;">
+                                West Midlands Region
+                            </div>
+                            <div style="font-size: 13px; color: #666; margin-bottom: 10px;">8 Active Projects</div>
+                            <div style="font-size: 13px; color: #666; margin-bottom: 10px;">Total Value: £125M</div>
+                            <div style="border-top: 1px solid #eee; padding-top: 10px; margin-top: 10px;">
+                                <div style="font-size: 12px; color: #666; margin-bottom: 5px;">• Walsall Road (Residential)</div>
+                                <div style="font-size: 12px; color: #666; margin-bottom: 5px;">• Birmingham BTR (Asset Mgmt)</div>
+                                <div style="font-size: 12px; color: #666; margin-bottom: 5px;">• Wolverhampton Mixed Use</div>
+                            </div>
+                            <button class="cta-button" style="width: 100%; margin-top: 15px; padding: 10px; font-size: 13px;">View All →</button>
+                        </div>
+                    </div>
+
+                    <div class="annotation">
+                        <div class="annotation-title">💡 Desktop Map Implementation:</div>
+                        <ul class="annotation-list">
+                            <li><strong>Library:</strong> Mapbox GL JS or Google Maps API with custom styling</li>
+                            <li><strong>Markers:</strong> Custom SVG pins with W13 logo, color-coded by division</li>
+                            <li><strong>Interactions:</strong> Click marker → show project popup, hover → highlight region</li>
+                            <li><strong>Sidebar:</strong> Sticky sidebar showing selected region details</li>
+                            <li><strong>Alternative:</strong> Static SVG UK map with clickable regions if map API not viable</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="element" style="margin-top: 40px;">
+                    <div class="device-label">📱 MOBILE - List View</div>
+                    <div class="wireframe-box mobile" style="padding: 40px 20px; background: white;">
+                        <div style="margin-bottom: 30px;">
+                            <div style="font-size: 28px; font-weight: 700; color: #1A2B4A; margin-bottom: 10px;">
+                                Development Pipeline
+                            </div>
+                            <div style="font-size: 14px; color: #666;">
+                                £450M+ total value across UK
+                            </div>
+                        </div>
+
+                        <div style="display: flex; flex-direction: column; gap: 15px;">
+                            <div style="border: 1px solid #ddd; border-radius: 8px; padding: 15px;">
+                                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                                    <div style="font-weight: 700; color: #1A2B4A;">West Midlands</div>
+                                    <div style="font-size: 12px; color: #666;">8 projects</div>
+                                </div>
+                                <div style="font-size: 13px; color: #666; margin-bottom: 5px;">Total: £125M</div>
+                                <button class="cta-button" style="font-size: 12px; padding: 6px 12px; margin-top: 10px;">View Projects</button>
+                            </div>
+
+                            <div style="border: 1px solid #ddd; border-radius: 8px; padding: 15px;">
+                                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                                    <div style="font-weight: 700; color: #1A2B4A;">London</div>
+                                    <div style="font-size: 12px; color: #666;">5 projects</div>
+                                </div>
+                                <div style="font-size: 13px; color: #666; margin-bottom: 5px;">Total: £180M</div>
+                                <button class="cta-button" style="font-size: 12px; padding: 6px 12px; margin-top: 10px;">View Projects</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="annotation">
+                        <div class="annotation-title">💡 Mobile Simplification:</div>
+                        <ul class="annotation-list">
+                            <li><strong>No Map:</strong> Replace interactive map with collapsible list by region</li>
+                            <li><strong>Accordion:</strong> Tap region to expand and show project list</li>
+                            <li><strong>Performance:</strong> Much lighter without map library</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Continue with remaining sections... -->
+        <!-- For brevity, I'll create abbreviated versions of the remaining sections -->
+
+        <!-- SECTION 6: INVESTOR RELATIONS (Abbreviated) -->
+        <div class="wireframe-section" id="section-6">
+            <div class="section-header">
+                <h2>Section 6: Investor Relations</h2>
+                <p>2-column split | Performance data | Investment CTA</p>
+            </div>
+            <div class="wireframe-content">
+                <div class="annotation">
+                    <div class="annotation-title">📋 Section Overview:</div>
+                    <ul class="annotation-list">
+                        <li><strong>Desktop:</strong> 60/40 split - Left: Content (heading, description, stats), Right: Investment performance chart/visual</li>
+                        <li><strong>Content:</strong> "Partner With W13 Group" heading, investment opportunities description, average returns, track record</li>
+                        <li><strong>CTA:</strong> Dual buttons - "Investment Enquiries" (primary) + "Download Prospectus" (secondary PDF link)</li>
+                        <li><strong>Visual:</strong> Chart showing historical returns or portfolio breakdown by division</li>
+                        <li><strong>Mobile:</strong> Stack content above visual, full-width CTAs</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- SECTION 7: WHAT SETS US APART (Abbreviated) -->
+        <div class="wireframe-section" id="section-7">
+            <div class="section-header">
+                <h2>Section 7: What Sets Us Apart</h2>
+                <p>3-column grid | Icon + Title + Description | Value propositions</p>
+            </div>
+            <div class="wireframe-content">
+                <div class="annotation">
+                    <div class="annotation-title">📋 Content Structure:</div>
+                    <ul class="annotation-list">
+                        <li><strong>Column 1:</strong> Integrated Approach - "Full development lifecycle under one roof, from land acquisition to asset management"</li>
+                        <li><strong>Column 2:</strong> Proven Track Record - "500+ projects delivered, £2.5B+ development value, 20+ years experience"</li>
+                        <li><strong>Column 3:</strong> Sustainable Development - "Commitment to ESG principles and community-focused developments"</li>
+                        <li><strong>Icons:</strong> Custom line-art icons for each value (80x80px)</li>
+                        <li><strong>Mobile:</strong> Stack into accordion, expand on tap to show full description</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- SECTION 8: LATEST INSIGHTS (Abbreviated) -->
+        <div class="wireframe-section" id="section-8">
+            <div class="section-header">
+                <h2>Section 8: Latest Insights</h2>
+                <p>3-column blog cards | Thumbnail + Meta + Title | Link to insights hub</p>
+            </div>
+            <div class="wireframe-content">
+                <div class="annotation">
+                    <div class="annotation-title">📋 Blog Card Specs:</div>
+                    <ul class="annotation-list">
+                        <li><strong>Image:</strong> 16:9 ratio thumbnail (400x225px), lazy loaded</li>
+                        <li><strong>Meta:</strong> Date + Category tag (e.g., "Market Report", "Case Study")</li>
+                        <li><strong>Title:</strong> Article headline (2-line max with ellipsis)</li>
+                        <li><strong>Excerpt:</strong> 2-3 sentence preview (optional on desktop only)</li>
+                        <li><strong>CTA:</strong> "Read More →" link with arrow icon</li>
+                        <li><strong>Hover:</strong> Image scales 1.05x, card shadow increases</li>
+                        <li><strong>Mobile:</strong> Horizontal scroll cards or show 1, load more button</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- SECTION 9: WORKING WITH W13 (Abbreviated) -->
+        <div class="wireframe-section" id="section-9">
+            <div class="section-header">
+                <h2>Section 9: Working With W13</h2>
+                <p>2-column layout | Target audiences + Services | Contact CTA</p>
+            </div>
+            <div class="wireframe-content">
+                <div class="annotation">
+                    <div class="annotation-title">📋 Layout Structure:</div>
+                    <ul class="annotation-list">
+                        <li><strong>Left Column:</strong> "Are you a..." checklist - Landowner?, Local authority?, Investor?, Housing association?, Developer?</li>
+                        <li><strong>Right Column:</strong> "We can help you with..." - Site appraisal, Planning & development, Investment opportunities, Partnership models</li>
+                        <li><strong>Each Item:</strong> Icon + Title + 1-line description</li>
+                        <li><strong>CTA:</strong> Central prominent button "Start a Conversation" linking to contact form</li>
+                        <li><strong>Mobile:</strong> Stack left then right, maintain checkmark styling</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- FOOTER -->
+        <div class="wireframe-section" id="footer">
+            <div class="section-header">
+                <h2>Footer</h2>
+                <p>5-column mega footer | Comprehensive navigation | Social links</p>
+            </div>
+            <div class="wireframe-content">
+                <div class="wireframe-box" style="background: #1A2B4A; color: white; padding: 60px 80px;">
+                    <div class="grid-demo" style="grid-template-columns: repeat(5, 1fr); gap: 40px; margin-bottom: 40px;">
+                        <div>
+                            <div style="font-weight: 700; font-size: 18px; margin-bottom: 20px;">W13 Group</div>
+                            <div style="font-size: 13px; line-height: 1.8; opacity: 0.8;">
+                                Building communities, creating value, delivering excellence across property development.
+                            </div>
+                        </div>
+                        <div>
+                            <div style="font-weight: 700; font-size: 14px; margin-bottom: 15px;">Divisions</div>
+                            <div style="font-size: 13px; line-height: 2; opacity: 0.8;">
+                                Land & Development<br>
+                                Master Developer<br>
+                                Asset Management<br>
+                                Consultancy Services
+                            </div>
+                        </div>
+                        <div>
+                            <div style="font-weight: 700; font-size: 14px; margin-bottom: 15px;">Services</div>
+                            <div style="font-size: 13px; line-height: 2; opacity: 0.8;">
+                                Architecture<br>
+                                Engineering<br>
+                                Planning<br>
+                                Quantity Surveying<br>
+                                Project Management
+                            </div>
+                        </div>
+                        <div>
+                            <div style="font-weight: 700; font-size: 14px; margin-bottom: 15px;">Company</div>
+                            <div style="font-size: 13px; line-height: 2; opacity: 0.8;">
+                                About Us<br>
+                                Projects<br>
+                                Investors<br>
+                                Insights<br>
+                                Careers
+                            </div>
+                        </div>
+                        <div>
+                            <div style="font-weight: 700; font-size: 14px; margin-bottom: 15px;">Contact</div>
+                            <div style="font-size: 13px; line-height: 1.8; opacity: 0.8;">
+                                Birmingham Office<br>
+                                Beech House<br>
+                                Birmingham, B15 3BE<br><br>
+                                020 3150 1401<br>
+                                info@w13uk.com
+                            </div>
+                        </div>
+                    </div>
+
+                    <div style="border-top: 1px solid rgba(255,255,255,0.2); padding-top: 30px; display: flex; justify-content: space-between; align-items: center;">
+                        <div style="font-size: 13px; opacity: 0.7;">
+                            © 2026 W13 Group Ltd. All rights reserved.
+                        </div>
+                        <div style="display: flex; gap: 20px; font-size: 13px; opacity: 0.7;">
+                            <span>Privacy Policy</span>
+                            <span>Terms of Service</span>
+                            <span>Cookies</span>
+                        </div>
+                        <div style="display: flex; gap: 15px;">
+                            <div style="width: 36px; height: 36px; border: 1px solid rgba(255,255,255,0.3); border-radius: 50%; display: flex; align-items: center; justify-content: center;">in</div>
+                            <div style="width: 36px; height: 36px; border: 1px solid rgba(255,255,255,0.3); border-radius: 50%; display: flex; align-items: center; justify-content: center;">X</div>
+                            <div style="width: 36px; height: 36px; border: 1px solid rgba(255,255,255,0.3); border-radius: 50%; display: flex; align-items: center; justify-content: center;">IG</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="annotation">
+                    <div class="annotation-title">💡 Footer Implementation:</div>
+                    <ul class="annotation-list">
+                        <li><strong>Desktop:</strong> 5 equal columns with comprehensive site navigation</li>
+                        <li><strong>Mobile:</strong> Accordion-style - tap heading to expand/collapse each section</li>
+                        <li><strong>Social Icons:</strong> LinkedIn, X (Twitter), Instagram - circular outline style</li>
+                        <li><strong>Copyright Bar:</strong> Sticky to bottom, includes legal links</li>
+                        <li><strong>Logo:</strong> Monochrome white W13 logo top-left of footer</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- DESIGN SPECIFICATIONS -->
+        <div class="wireframe-section" id="specs">
+            <div class="section-header">
+                <h2>Design Specifications Reference</h2>
+                <p>Colors, typography, spacing, animations</p>
+            </div>
+            <div class="wireframe-content">
+                <div style="margin-bottom: 40px;">
+                    <h3 style="color: #1A2B4A; margin-bottom: 20px;">Color Palette</h3>
+                    <div style="display: flex; gap: 20px; flex-wrap: wrap;">
+                        <div>
+                            <div class="color-swatch" style="background: #FFD700;"></div>
+                            <div style="font-size: 13px; font-weight: 600;">#FFD700</div>
+                            <div style="font-size: 12px; color: #666;">W13 Gold</div>
+                        </div>
+                        <div>
+                            <div class="color-swatch" style="background: #1A2B4A;"></div>
+                            <div style="font-size: 13px; font-weight: 600;">#1A2B4A</div>
+                            <div style="font-size: 12px; color: #666;">Navy Primary</div>
+                        </div>
+                        <div>
+                            <div class="color-swatch" style="background: #8BC34A;"></div>
+                            <div style="font-size: 13px; font-weight: 600;">#8BC34A</div>
+                            <div style="font-size: 12px; color: #666;">Land Green</div>
+                        </div>
+                        <div>
+                            <div class="color-swatch" style="background: #FF9800;"></div>
+                            <div style="font-size: 13px; font-weight: 600;">#FF9800</div>
+                            <div style="font-size: 12px; color: #666;">Master Orange</div>
+                        </div>
+                        <div>
+                            <div class="color-swatch" style="background: #2196F3;"></div>
+                            <div style="font-size: 13px; font-weight: 600;">#2196F3</div>
+                            <div style="font-size: 12px; color: #666;">Investment Blue</div>
+                        </div>
+                        <div>
+                            <div class="color-swatch" style="background: #00BCD4;"></div>
+                            <div style="font-size: 13px; font-weight: 600;">#00BCD4</div>
+                            <div style="font-size: 12px; color: #666;">Consultancy Teal</div>
+                        </div>
+                        <div>
+                            <div class="color-swatch" style="background: #B2E1FD;"></div>
+                            <div style="font-size: 13px; font-weight: 600;">#B2E1FD</div>
+                            <div style="font-size: 12px; color: #666;">Light Blue Accent</div>
+                        </div>
+                        <div>
+                            <div class="color-swatch" style="background: #F1BD9E;"></div>
+                            <div style="font-size: 13px; font-weight: 600;">#F1BD9E</div>
+                            <div style="font-size: 12px; color: #666;">Peach Accent</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="margin-bottom: 40px;">
+                    <h3 style="color: #1A2B4A; margin-bottom: 20px;">Typography Scale</h3>
+                    <table class="specs-table">
+                        <tr>
+                            <td><strong>Hero Heading</strong></td>
+                            <td>64px / 700 weight / Inter or Montserrat (Desktop)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Section Heading</strong></td>
+                            <td>42px / 700 weight (Desktop) | 28px (Mobile)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Card Title</strong></td>
+                            <td>18-20px / 700 weight</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Body Text</strong></td>
+                            <td>16px / 400 weight / 1.6 line-height (Desktop) | 14px (Mobile)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Button Text</strong></td>
+                            <td>14-16px / 600 weight / Uppercase optional</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Small Text</strong></td>
+                            <td>12-13px / 400 weight (metadata, labels)</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div style="margin-bottom: 40px;">
+                    <h3 style="color: #1A2B4A; margin-bottom: 20px;">Spacing System</h3>
+                    <table class="specs-table">
+                        <tr>
+                            <td><strong>Section Padding</strong></td>
+                            <td>Desktop: 60-80px vertical | Mobile: 40px vertical</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Container Width</strong></td>
+                            <td>Max 1440px with 80px horizontal padding (Desktop)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Grid Gaps</strong></td>
+                            <td>30px (large), 20px (medium), 15px (small)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Card Padding</strong></td>
+                            <td>20-30px internal padding</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Button Padding</strong></td>
+                            <td>15px vertical, 35px horizontal (primary)</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div>
+                    <h3 style="color: #1A2B4A; margin-bottom: 20px;">Animation Timings</h3>
+                    <table class="specs-table">
+                        <tr>
+                            <td><strong>Fade In</strong></td>
+                            <td>0.8s ease-out</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Hover Transitions</strong></td>
+                            <td>0.3s ease-out (scale, shadow, color)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Scroll Animations</strong></td>
+                            <td>Trigger: Element at 80% viewport | Duration: 0.6-1s</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Stagger Delay</strong></td>
+                            <td>0.1-0.15s between elements in sequence</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Counter Animation</strong></td>
+                            <td>2s ease-out for number count-ups</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        // Smooth scroll for TOC links
+        document.querySelectorAll('.toc-list a').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            });
+        });
+    </script>
+</body>
+</html>

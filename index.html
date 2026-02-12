@@ -1,0 +1,1229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>W13 Group | Building Communities. Creating Value.</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        /* ===== RESET ===== */
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        html { overflow-x: hidden; }
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            background: #0C233F;
+            color: #EAEAEA;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        a { text-decoration: none; color: inherit; }
+        button { cursor: pointer; border: none; font-family: inherit; background: none; color: inherit; }
+        img { max-width: 100%; display: block; }
+        ul { list-style: none; }
+        ::selection { background: rgba(68,192,192,0.3); }
+
+        /* ===== PRELOADER ===== */
+        .preloader {
+            position: fixed; inset: 0; background: #0C233F; z-index: 100000;
+            display: flex; align-items: center; justify-content: center; flex-direction: column;
+        }
+        .preloader-dots { display: flex; gap: 8px; }
+        .preloader-dot {
+            width: 8px; height: 8px; background: #44C0C0; border-radius: 50%;
+            animation: preloaderPulse 1.4s infinite ease-in-out;
+        }
+        .preloader-dot:nth-child(2) { animation-delay: 0.2s; }
+        .preloader-dot:nth-child(3) { animation-delay: 0.4s; }
+        @keyframes preloaderPulse {
+            0%, 80%, 100% { opacity: 0.2; transform: scale(0.8); }
+            40% { opacity: 1; transform: scale(1); }
+        }
+
+        /* ===== NAVBAR ===== */
+        .navbar {
+            position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+            padding: 30px 50px; display: flex; justify-content: space-between; align-items: center;
+            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+            mix-blend-mode: difference;
+        }
+        .nav-logo {
+            display: flex; align-items: center;
+        }
+        .nav-logo img {
+            height: 40px; width: auto;
+        }
+        .nav-right { display: flex; align-items: center; gap: 30px; }
+        .menu-btn {
+            font-size: 15px; font-weight: 500; color: #EAEAEA; letter-spacing: 2px;
+            text-transform: uppercase; cursor: pointer; display: flex; align-items: center; gap: 12px;
+        }
+        .menu-btn-lines { display: flex; flex-direction: column; gap: 5px; width: 24px; }
+        .menu-btn-lines span {
+            height: 1.5px; background: #EAEAEA; transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .menu-btn-lines span:first-child { width: 24px; }
+        .menu-btn-lines span:last-child { width: 16px; }
+
+        /* ===== FULLSCREEN MENU ===== */
+        .fullscreen-menu {
+            position: fixed; inset: 0; background: #0C233F; z-index: 9999;
+            display: flex; opacity: 0; pointer-events: none;
+            transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .fullscreen-menu.active { opacity: 1; pointer-events: all; }
+        .menu-close {
+            position: absolute; top: 30px; right: 50px; font-size: 15px; font-weight: 500;
+            color: #EAEAEA; letter-spacing: 2px; text-transform: uppercase; cursor: pointer;
+            display: flex; align-items: center; gap: 12px; z-index: 10;
+        }
+        .menu-close-x { font-size: 28px; font-weight: 300; line-height: 1; }
+        .menu-left {
+            flex: 1; display: flex; flex-direction: column; justify-content: center;
+            padding: 100px 80px;
+        }
+        .menu-nav-link {
+            display: block; font-family: 'Playfair Display', serif;
+            font-size: clamp(36px, 5vw, 60px); font-weight: 600; color: #EAEAEA;
+            padding: 12px 0; opacity: 0.4; transition: all 0.4s; position: relative;
+            transform: translateX(-20px); line-height: 1.2;
+        }
+        .fullscreen-menu.active .menu-nav-link {
+            transform: translateX(0);
+            transition-delay: calc(var(--i) * 0.08s);
+        }
+        .menu-nav-link:hover { opacity: 1; padding-left: 30px; }
+        .menu-nav-link::before {
+            content: ''; position: absolute; left: 0; top: 50%; width: 0; height: 1px;
+            background: #44C0C0; transition: width 0.3s;
+        }
+        .menu-nav-link:hover::before { width: 20px; }
+        .menu-right {
+            width: 45%; position: relative; overflow: hidden;
+            display: flex; align-items: flex-end; padding: 60px;
+        }
+        .menu-right-img {
+            position: absolute; inset: 0;
+        }
+        .menu-right-img img { width: 100%; height: 100%; object-fit: cover; opacity: 0.4; }
+        .menu-right-info { position: relative; z-index: 2; }
+        .menu-right-info h4 {
+            font-size: 13px; font-weight: 600; letter-spacing: 3px;
+            text-transform: uppercase; color: #44C0C0; margin-bottom: 16px;
+        }
+        .menu-right-info p {
+            font-size: 15px; color: rgba(234,234,234,0.6); line-height: 1.7;
+        }
+        .menu-right-info a {
+            display: inline-block; margin-top: 16px; font-size: 14px; color: #44C0C0;
+            font-weight: 500; border-bottom: 1px solid rgba(68,192,192,0.4);
+            padding-bottom: 2px; transition: border-color 0.3s;
+        }
+        .menu-right-info a:hover { border-color: #44C0C0; }
+
+        /* ===== HERO ===== */
+        .hero {
+            position: relative; height: 100vh; min-height: 700px;
+            overflow: hidden; background: #0C233F;
+        }
+        .hero-slides { position: absolute; inset: 0; }
+        .hero-slide {
+            position: absolute; inset: 0; opacity: 0;
+            transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .hero-slide.active { opacity: 1; }
+        .hero-slide img {
+            width: 100%; height: 100%; object-fit: cover;
+            transform: scale(1.05);
+            transition: transform 8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .hero-slide.active img { transform: scale(1); }
+        .hero-slide-overlay {
+            position: absolute; inset: 0;
+            background: linear-gradient(to bottom, rgba(12,35,63,0.3) 0%, rgba(12,35,63,0.65) 100%);
+        }
+
+        .hero-bottom {
+            position: absolute; bottom: 0; left: 0; right: 0; z-index: 10;
+            padding: 0 50px 50px;
+            display: flex; justify-content: space-between; align-items: flex-end;
+        }
+        .hero-project-names {
+            display: flex; gap: 0;
+        }
+        .hero-project-name {
+            font-size: 14px; font-weight: 500; color: rgba(234,234,234,0.35);
+            padding: 16px 24px; cursor: pointer; transition: all 0.4s;
+            border-bottom: 1px solid transparent; letter-spacing: 0.5px;
+        }
+        .hero-project-name.active {
+            color: #44C0C0; border-bottom-color: #44C0C0;
+        }
+        .hero-project-name:hover { color: rgba(234,234,234,0.7); }
+        .hero-nav {
+            display: flex; align-items: center; gap: 20px;
+        }
+        .hero-nav-btn {
+            width: 48px; height: 48px; border: 1px solid rgba(68,192,192,0.3);
+            border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            cursor: pointer; transition: all 0.3s; background: none; color: #EAEAEA;
+        }
+        .hero-nav-btn:hover { border-color: #44C0C0; background: rgba(68,192,192,0.15); }
+
+        .hero-center-content {
+            position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+            z-index: 10; text-align: center; width: 100%; padding: 0 50px;
+        }
+        .hero-center-content h1 {
+            font-family: 'Playfair Display', serif; font-size: clamp(42px, 7vw, 90px);
+            font-weight: 700; line-height: 1.05; letter-spacing: -1px;
+        }
+
+        /* ===== ABOUT ===== */
+        .about-section {
+            padding: 160px 50px; position: relative;
+            background: #0C233F;
+        }
+        .about-inner {
+            max-width: 1400px; margin: 0 auto;
+            display: grid; grid-template-columns: 1fr 1fr; gap: 100px; align-items: center;
+        }
+        .about-label {
+            font-size: 13px; font-weight: 600; letter-spacing: 4px;
+            text-transform: uppercase; color: #44C0C0; margin-bottom: 30px;
+        }
+        .about-title {
+            font-family: 'Playfair Display', serif; font-size: clamp(36px, 4vw, 56px);
+            font-weight: 700; line-height: 1.15; margin-bottom: 30px; color: #EAEAEA;
+        }
+        .about-text {
+            font-size: 17px; color: rgba(234,234,234,0.6); line-height: 1.8;
+            margin-bottom: 40px;
+        }
+        .about-btns { display: flex; gap: 16px; flex-wrap: wrap; }
+        .btn-outline {
+            display: inline-block; padding: 16px 36px; border: 1px solid rgba(68,192,192,0.4);
+            border-radius: 0; font-size: 14px; font-weight: 500; color: #EAEAEA;
+            letter-spacing: 1px; transition: all 0.4s;
+        }
+        .btn-outline:hover { background: #44C0C0; color: #0C233F; }
+        .btn-filled {
+            display: inline-block; padding: 16px 36px; background: #44C0C0; color: #0C233F;
+            border: 1px solid #44C0C0; font-size: 14px; font-weight: 600;
+            letter-spacing: 1px; transition: all 0.4s;
+        }
+        .btn-filled:hover { background: transparent; color: #44C0C0; }
+
+        .about-right { position: relative; }
+        .about-img {
+            width: 100%; height: 600px; overflow: hidden; position: relative;
+        }
+        .about-img img { width: 100%; height: 100%; object-fit: cover; }
+        .about-img-badge {
+            position: absolute; bottom: 30px; left: 30px; background: rgba(12,35,63,0.9);
+            backdrop-filter: blur(10px); padding: 24px 30px;
+        }
+        .about-img-badge-num {
+            font-family: 'Playfair Display', serif; font-size: 42px; font-weight: 700; color: #44C0C0;
+        }
+        .about-img-badge-label {
+            font-size: 12px; color: rgba(234,234,234,0.5); letter-spacing: 2px;
+            text-transform: uppercase; margin-top: 4px;
+        }
+
+        /* ===== SERVICES CAROUSEL ===== */
+        .services-section {
+            padding: 160px 0; background: #0C233F;
+            border-top: 1px solid rgba(68,192,192,0.1);
+            overflow: hidden;
+        }
+        .services-header {
+            padding: 0 50px; margin-bottom: 80px;
+            display: flex; justify-content: space-between; align-items: flex-end;
+            max-width: 1400px; margin-left: auto; margin-right: auto; margin-bottom: 80px;
+        }
+        .services-header-right { display: flex; gap: 12px; }
+        .services-nav-btn {
+            width: 52px; height: 52px; border: 1px solid rgba(68,192,192,0.3);
+            display: flex; align-items: center; justify-content: center;
+            cursor: pointer; transition: all 0.3s; color: #EAEAEA; font-size: 18px;
+        }
+        .services-nav-btn:hover { background: #44C0C0; color: #0C233F; }
+
+        .services-slider-track {
+            display: flex; width: fit-content;
+            transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .service-slide {
+            min-width: 100vw; display: grid; grid-template-columns: 1fr 1fr;
+        }
+        .service-slide-img {
+            height: 650px; overflow: hidden; position: relative;
+        }
+        .service-slide-img img { width: 100%; height: 100%; object-fit: cover; }
+        .service-slide-content {
+            display: flex; flex-direction: column; justify-content: center;
+            padding: 80px 80px 80px 100px; position: relative;
+        }
+        .service-counter {
+            font-size: 14px; font-weight: 500; color: #44C0C0;
+            letter-spacing: 2px; margin-bottom: 20px;
+        }
+        .service-label {
+            font-size: 12px; font-weight: 600; letter-spacing: 4px;
+            text-transform: uppercase; color: #44C0C0; margin-bottom: 16px;
+        }
+        .service-title {
+            font-family: 'Playfair Display', serif; font-size: clamp(32px, 3.5vw, 48px);
+            font-weight: 700; margin-bottom: 28px; line-height: 1.2;
+        }
+        .service-desc {
+            font-size: 16px; color: rgba(234,234,234,0.55); line-height: 1.8;
+            margin-bottom: 40px; max-width: 480px;
+        }
+        .service-link {
+            display: inline-flex; align-items: center; gap: 10px;
+            font-size: 14px; font-weight: 600; color: #44C0C0; letter-spacing: 1px;
+            transition: gap 0.3s;
+        }
+        .service-link:hover { gap: 18px; }
+        .service-link i { font-size: 12px; }
+
+        /* ===== PROJECTS SLIDER ===== */
+        .projects-section {
+            padding: 160px 0; background: #0C233F;
+            border-top: 1px solid rgba(68,192,192,0.1);
+        }
+        .projects-header {
+            padding: 0 50px; max-width: 1400px; margin: 0 auto 80px;
+            display: flex; justify-content: space-between; align-items: flex-end;
+        }
+        .projects-slider-wrap {
+            position: relative; overflow: hidden; padding: 0 50px;
+        }
+        .projects-slider {
+            display: flex; gap: 30px;
+            transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .project-slide {
+            min-width: calc(50% - 15px); position: relative; overflow: hidden;
+            cursor: pointer;
+        }
+        .project-slide-img {
+            height: 500px; overflow: hidden; position: relative;
+        }
+        .project-slide-img img {
+            width: 100%; height: 100%; object-fit: cover;
+            transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .project-slide:hover .project-slide-img img { transform: scale(1.05); }
+        .project-slide-overlay {
+            position: absolute; inset: 0;
+            background: linear-gradient(to top, rgba(12,35,63,0.85) 0%, transparent 60%);
+        }
+        .project-slide-info {
+            position: absolute; bottom: 0; left: 0; right: 0; padding: 40px;
+        }
+        .project-slide-label {
+            font-size: 12px; font-weight: 600; letter-spacing: 3px;
+            text-transform: uppercase; color: #44C0C0; margin-bottom: 12px;
+        }
+        .project-slide-title {
+            font-family: 'Playfair Display', serif; font-size: 28px; font-weight: 700;
+            margin-bottom: 10px; line-height: 1.3;
+        }
+        .project-slide-desc {
+            font-size: 14px; color: rgba(234,234,234,0.6); line-height: 1.7;
+            margin-bottom: 20px; max-width: 400px;
+            display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;
+        }
+        .project-slide-links { display: flex; gap: 20px; }
+        .project-slide-link {
+            font-size: 13px; font-weight: 600; color: #44C0C0;
+            display: inline-flex; align-items: center; gap: 8px;
+            border-bottom: 1px solid rgba(68,192,192,0.4); padding-bottom: 4px;
+            transition: border-color 0.3s;
+        }
+        .project-slide-link:hover { border-color: #44C0C0; }
+        .project-slide-link.secondary { color: rgba(234,234,234,0.5); border-color: rgba(234,234,234,0.15); }
+        .project-counter-bottom {
+            padding: 30px 50px 0; font-size: 14px; color: #44C0C0;
+            letter-spacing: 3px;
+        }
+
+        /* ===== NEWS ===== */
+        .news-section {
+            padding: 160px 50px; background: #0C233F;
+            border-top: 1px solid rgba(68,192,192,0.1);
+        }
+        .news-inner { max-width: 1400px; margin: 0 auto; }
+        .news-header {
+            display: flex; justify-content: space-between; align-items: flex-end;
+            margin-bottom: 60px;
+        }
+        .news-tagline {
+            font-size: 13px; font-weight: 600; letter-spacing: 3px;
+            text-transform: uppercase; color: #44C0C0; margin-bottom: 8px;
+        }
+        .news-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; }
+        .news-card {
+            border: 1px solid rgba(68,192,192,0.12); overflow: hidden;
+            transition: all 0.4s; cursor: pointer; display: block;
+        }
+        .news-card:hover { border-color: rgba(68,192,192,0.35); }
+        .news-card-img { height: 240px; overflow: hidden; }
+        .news-card-img img {
+            width: 100%; height: 100%; object-fit: cover;
+            transition: transform 0.6s; filter: grayscale(30%);
+        }
+        .news-card:hover .news-card-img img { transform: scale(1.05); filter: grayscale(0%); }
+        .news-card-body { padding: 30px; }
+        .news-card-date {
+            font-size: 12px; color: #44C0C0; letter-spacing: 2px;
+            text-transform: uppercase; margin-bottom: 14px;
+        }
+        .news-card-title {
+            font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 600;
+            line-height: 1.4; margin-bottom: 16px; color: #EAEAEA;
+        }
+        .news-card-link {
+            font-size: 13px; font-weight: 600; color: rgba(234,234,234,0.5);
+            display: inline-flex; align-items: center; gap: 8px; transition: all 0.3s;
+        }
+        .news-card:hover .news-card-link { color: #44C0C0; gap: 14px; }
+
+        /* ===== CTA / LETS WORK TOGETHER ===== */
+        .cta-section {
+            padding: 180px 50px; position: relative; overflow: hidden;
+            background: #091c33;
+            border-top: 1px solid rgba(68,192,192,0.1);
+        }
+        .cta-inner {
+            max-width: 900px; margin: 0 auto; text-align: center;
+        }
+        .cta-title {
+            font-family: 'Playfair Display', serif; font-size: clamp(40px, 6vw, 72px);
+            font-weight: 700; line-height: 1.1; margin-bottom: 30px;
+        }
+        .cta-text {
+            font-size: 18px; color: rgba(234,234,234,0.55); line-height: 1.8;
+            margin-bottom: 50px; max-width: 600px; margin-left: auto; margin-right: auto;
+        }
+        .btn-cta {
+            display: inline-block; padding: 20px 50px; background: #44C0C0; color: #0C233F;
+            font-size: 15px; font-weight: 700; letter-spacing: 1px;
+            transition: all 0.4s; position: relative; overflow: hidden;
+        }
+        .btn-cta:hover { background: #3aadad; transform: translateY(-2px); }
+
+        /* ===== FOOTER ===== */
+        .footer {
+            background: #091c33; padding: 80px 50px 40px;
+            border-top: 1px solid rgba(68,192,192,0.1);
+        }
+        .footer-inner { max-width: 1400px; margin: 0 auto; }
+        .footer-top {
+            display: grid; grid-template-columns: 1fr 2fr 1fr; gap: 60px;
+            padding-bottom: 60px; border-bottom: 1px solid rgba(68,192,192,0.1);
+        }
+        .footer-logo {
+            margin-bottom: 20px;
+        }
+        .footer-logo img {
+            height: 48px; width: auto;
+        }
+        .footer-brand-text {
+            font-size: 14px; color: rgba(234,234,234,0.4); line-height: 1.7;
+        }
+        .footer-nav {
+            display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px;
+        }
+        .footer-nav-col h4 {
+            font-family: 'Playfair Display', serif; font-size: 20px; font-weight: 600;
+            margin-bottom: 10px; color: rgba(234,234,234,0.7);
+            transition: color 0.3s; cursor: pointer;
+        }
+        .footer-nav-col h4:hover { color: #44C0C0; }
+        .footer-contact-heading {
+            font-size: 13px; font-weight: 600; letter-spacing: 3px;
+            text-transform: uppercase; color: #44C0C0; margin-bottom: 20px;
+        }
+        .footer-contact-text {
+            font-size: 14px; color: rgba(234,234,234,0.4); line-height: 1.8;
+        }
+        .footer-contact-text a {
+            color: rgba(234,234,234,0.6); transition: color 0.3s;
+        }
+        .footer-contact-text a:hover { color: #44C0C0; }
+        .footer-social {
+            display: flex; gap: 12px; margin-top: 24px;
+        }
+        .footer-social a {
+            width: 40px; height: 40px; border: 1px solid rgba(68,192,192,0.2);
+            display: flex; align-items: center; justify-content: center;
+            color: rgba(234,234,234,0.4); font-size: 15px; transition: all 0.3s;
+        }
+        .footer-social a:hover { border-color: #44C0C0; color: #44C0C0; }
+        .footer-bottom {
+            padding-top: 30px; display: flex; justify-content: space-between;
+            align-items: center; flex-wrap: wrap; gap: 20px;
+        }
+        .footer-legal { display: flex; gap: 20px; }
+        .footer-legal a {
+            font-size: 12px; color: rgba(234,234,234,0.25); transition: color 0.3s;
+        }
+        .footer-legal a:hover { color: #44C0C0; }
+        .footer-copy {
+            font-size: 12px; color: rgba(234,234,234,0.25);
+        }
+
+        /* ===== STATS BAND ===== */
+        .stats-band {
+            padding: 100px 50px; background: #091c33;
+            border-top: 1px solid rgba(68,192,192,0.1);
+            border-bottom: 1px solid rgba(68,192,192,0.1);
+        }
+        .stats-band-inner {
+            max-width: 1400px; margin: 0 auto;
+            display: grid; grid-template-columns: repeat(4, 1fr); gap: 40px;
+        }
+        .stats-band-item { text-align: center; padding: 20px; }
+        .stats-band-num {
+            font-family: 'Playfair Display', serif; font-size: 52px; font-weight: 700; color: #44C0C0;
+        }
+        .stats-band-label {
+            font-size: 13px; color: rgba(234,234,234,0.45); letter-spacing: 2px;
+            text-transform: uppercase; margin-top: 10px;
+        }
+        .stats-band-text {
+            font-size: 14px; color: rgba(234,234,234,0.35); line-height: 1.6;
+            margin-top: 12px;
+        }
+
+        /* ===== VALUES MARQUEE ===== */
+        .values-marquee {
+            padding: 30px 0; overflow: hidden; white-space: nowrap;
+            border-top: 1px solid rgba(68,192,192,0.1);
+            border-bottom: 1px solid rgba(68,192,192,0.1);
+        }
+        .values-track { display: inline-flex; animation: valuesScroll 25s linear infinite; }
+        .values-item {
+            font-family: 'Playfair Display', serif; font-size: 18px; font-weight: 500;
+            color: rgba(68,192,192,0.25); padding: 0 50px; letter-spacing: 2px;
+        }
+        @keyframes valuesScroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+
+        /* ===== SCROLL REVEAL ===== */
+        .reveal-up {
+            opacity: 0; transform: translateY(60px);
+            transition: all 1s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .reveal-up.visible { opacity: 1; transform: translateY(0); }
+        .reveal-scale {
+            opacity: 0; transform: scale(0.92);
+            transition: all 1s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .reveal-scale.visible { opacity: 1; transform: scale(1); }
+        .reveal-right {
+            opacity: 0; transform: translateX(60px);
+            transition: all 1s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .reveal-right.visible { opacity: 1; transform: translateX(0); }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 1100px) {
+            .about-inner { grid-template-columns: 1fr; gap: 60px; }
+            .service-slide { grid-template-columns: 1fr; }
+            .service-slide-img { height: 400px; }
+            .service-slide-content { padding: 60px 50px; }
+            .project-slide { min-width: calc(100%); }
+            .stats-band-inner { grid-template-columns: repeat(2, 1fr); }
+            .footer-top { grid-template-columns: 1fr; gap: 40px; }
+            .footer-nav { grid-template-columns: repeat(3, 1fr); }
+            .menu-right { display: none; }
+        }
+        @media (max-width: 768px) {
+            .navbar { padding: 20px 24px; }
+            .about-section { padding: 100px 24px; }
+            .about-img { height: 400px; }
+            .services-header { padding: 0 24px; flex-direction: column; align-items: flex-start; gap: 30px; }
+            .service-slide-content { padding: 50px 24px; }
+            .projects-header { padding: 0 24px; flex-direction: column; align-items: flex-start; gap: 30px; }
+            .projects-slider-wrap { padding: 0 24px; }
+            .project-slide-img { height: 380px; }
+            .news-section { padding: 100px 24px; }
+            .news-grid { grid-template-columns: 1fr; }
+            .cta-section { padding: 120px 24px; }
+            .footer { padding: 60px 24px 30px; }
+            .footer-nav { grid-template-columns: 1fr 1fr; }
+            .stats-band { padding: 60px 24px; }
+            .stats-band-inner { grid-template-columns: 1fr 1fr; gap: 30px; }
+            .stats-band-num { font-size: 38px; }
+            .hero-bottom { padding: 0 24px 30px; flex-direction: column; gap: 20px; align-items: flex-start; }
+            .hero-project-names { flex-wrap: wrap; }
+            .project-counter-bottom { padding: 20px 24px 0; }
+            .menu-left { padding: 100px 30px; }
+            .menu-nav-link { font-size: 36px; }
+            .menu-close { right: 24px; }
+            .news-header { flex-direction: column; align-items: flex-start; gap: 20px; }
+            .footer-bottom { flex-direction: column; text-align: center; }
+            .services-section { padding: 100px 0; }
+            .projects-section { padding: 100px 0; }
+        }
+        @media (max-width: 480px) {
+            .hero-project-names { display: none; }
+            .about-btns { flex-direction: column; }
+            .btn-outline, .btn-filled { text-align: center; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- PRELOADER -->
+<div class="preloader" id="preloader">
+    <div class="preloader-dots">
+        <div class="preloader-dot"></div>
+        <div class="preloader-dot"></div>
+        <div class="preloader-dot"></div>
+    </div>
+</div>
+
+<!-- FULLSCREEN MENU -->
+<div class="fullscreen-menu" id="fullscreenMenu">
+    <div class="menu-close" onclick="toggleMenu()">
+        <span>Close</span>
+        <span class="menu-close-x">×</span>
+    </div>
+    <div class="menu-left">
+        <a href="#about" class="menu-nav-link" style="--i:1" onclick="toggleMenu()">About</a>
+        <a href="#services" class="menu-nav-link" style="--i:2" onclick="toggleMenu()">Divisions</a>
+        <a href="#services" class="menu-nav-link" style="--i:3" onclick="toggleMenu()">Services</a>
+        <a href="#projects" class="menu-nav-link" style="--i:4" onclick="toggleMenu()">Projects</a>
+        <a href="#investors" class="menu-nav-link" style="--i:5" onclick="toggleMenu()">Investors</a>
+        <a href="#news" class="menu-nav-link" style="--i:6" onclick="toggleMenu()">News</a>
+        <a href="#contact" class="menu-nav-link" style="--i:7" onclick="toggleMenu()">Contact</a>
+    </div>
+    <div class="menu-right">
+        <div class="menu-right-img">
+            <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=1000&q=80" alt="">
+        </div>
+        <div class="menu-right-info">
+            <h4>Head Office</h4>
+            <p>Beech House<br>Birmingham, B15 3BE<br><br>020 3150 1401<br>info@w13uk.com</p>
+            <a href="#">LinkedIn →</a>
+        </div>
+    </div>
+</div>
+
+<!-- NAVBAR -->
+<nav class="navbar" id="navbar">
+    <a href="#" class="nav-logo">
+        <img src="https://w13uk.com/wp-content/uploads/2022/09/W13_Logo_White.png" alt="W13 Group">
+    </a>
+    <div class="nav-right">
+        <div class="menu-btn" onclick="toggleMenu()">
+            <span>Menu</span>
+            <div class="menu-btn-lines">
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="hero">
+    <div class="hero-slides">
+        <div class="hero-slide active">
+            <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=1920&q=80" alt="W13 Development">
+            <div class="hero-slide-overlay"></div>
+        </div>
+        <div class="hero-slide">
+            <img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=1920&q=80" alt="Construction">
+            <div class="hero-slide-overlay"></div>
+        </div>
+        <div class="hero-slide">
+            <img src="https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=1920&q=80" alt="Residential">
+            <div class="hero-slide-overlay"></div>
+        </div>
+        <div class="hero-slide">
+            <img src="https://images.unsplash.com/photo-1449157291145-7efd050a4d0e?w=1920&q=80" alt="Urban Development">
+            <div class="hero-slide-overlay"></div>
+        </div>
+        <div class="hero-slide">
+            <img src="https://images.unsplash.com/photo-1460317442991-0ec209397118?w=1920&q=80" alt="Investment Property">
+            <div class="hero-slide-overlay"></div>
+        </div>
+    </div>
+
+    <div class="hero-center-content">
+        <h1 class="hero-main-title">Building Communities.<br>Creating Value.</h1>
+    </div>
+
+    <div class="hero-bottom">
+        <div class="hero-project-names">
+            <div class="hero-project-name active" data-slide="0">Walsall Road</div>
+            <div class="hero-project-name" data-slide="1">New Town Infrastructure</div>
+            <div class="hero-project-name" data-slide="2">Birmingham BTR</div>
+            <div class="hero-project-name" data-slide="3">Urban Regeneration</div>
+            <div class="hero-project-name" data-slide="4">Commercial Portfolio</div>
+        </div>
+        <div class="hero-nav">
+            <button class="hero-nav-btn" onclick="prevHeroSlide()"><i class="fas fa-arrow-left"></i></button>
+            <button class="hero-nav-btn" onclick="nextHeroSlide()"><i class="fas fa-arrow-right"></i></button>
+        </div>
+    </div>
+</section>
+
+<!-- ABOUT -->
+<section class="about-section" id="about">
+    <div class="about-inner">
+        <div class="about-left">
+            <div class="about-label reveal-up">20 Years of Excellence</div>
+            <h2 class="about-title reveal-up">Building success in Property Development &amp; Asset Management</h2>
+            <p class="about-text reveal-up">W13 Group, established with a commitment to safety, sustainability and excellence, has grown to become a trusted name in UK property development. Based in Birmingham, W13 continues to deliver high quality integrated solutions — from land acquisition and master planning through to construction, sales and asset management.</p>
+            <div class="about-btns reveal-up">
+                <a href="#" class="btn-filled">Our People</a>
+                <a href="#" class="btn-outline">Join the Team</a>
+            </div>
+        </div>
+        <div class="about-right reveal-scale">
+            <div class="about-img">
+                <img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=1000&q=80" alt="W13 Team">
+                <div class="about-img-badge">
+                    <div class="about-img-badge-num">20+</div>
+                    <div class="about-img-badge-label">Years in Business</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- STATS BAND -->
+<div class="stats-band" id="stats">
+    <div class="stats-band-inner">
+        <div class="stats-band-item reveal-up">
+            <div class="stats-band-num counter" data-target="20">0</div>
+            <div class="stats-band-label">Years In Business</div>
+            <div class="stats-band-text">Two decades of excellence in property development across the UK</div>
+        </div>
+        <div class="stats-band-item reveal-up">
+            <div class="stats-band-num">£2.5B+</div>
+            <div class="stats-band-label">Total Development Value</div>
+            <div class="stats-band-text">Delivering measurable results across the property lifecycle</div>
+        </div>
+        <div class="stats-band-item reveal-up">
+            <div class="stats-band-num counter" data-target="500">0</div>
+            <div class="stats-band-label">Projects Delivered</div>
+            <div class="stats-band-text">Residential, commercial, infrastructure and mixed-use developments</div>
+        </div>
+        <div class="stats-band-item reveal-up">
+            <div class="stats-band-num counter" data-target="5000">0</div>
+            <div class="stats-band-label">Homes Built</div>
+            <div class="stats-band-text">Creating sustainable communities where people want to live</div>
+        </div>
+    </div>
+</div>
+
+<!-- VALUES MARQUEE -->
+<div class="values-marquee">
+    <div class="values-track">
+        <span class="values-item">Integrated Approach</span>
+        <span class="values-item">Safety First</span>
+        <span class="values-item">Client Focus</span>
+        <span class="values-item">Sustainability</span>
+        <span class="values-item">Create Opportunity</span>
+        <span class="values-item">Integrity</span>
+        <span class="values-item">Integrated Approach</span>
+        <span class="values-item">Safety First</span>
+        <span class="values-item">Client Focus</span>
+        <span class="values-item">Sustainability</span>
+        <span class="values-item">Create Opportunity</span>
+        <span class="values-item">Integrity</span>
+    </div>
+</div>
+
+<!-- SERVICES CAROUSEL -->
+<section class="services-section" id="services">
+    <div class="services-header">
+        <div class="services-header-left">
+            <div class="about-label reveal-up">What We Do</div>
+            <h2 class="about-title reveal-up" style="margin-bottom:0;">Our Services</h2>
+        </div>
+        <div class="services-header-right">
+            <button class="services-nav-btn" onclick="prevService()"><i class="fas fa-arrow-left"></i></button>
+            <button class="services-nav-btn" onclick="nextService()"><i class="fas fa-arrow-right"></i></button>
+        </div>
+    </div>
+
+    <div class="services-slider-track" id="servicesSlider">
+        <div class="service-slide">
+            <div class="service-slide-img">
+                <img src="https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=1000&q=80" alt="Land & Development">
+            </div>
+            <div class="service-slide-content">
+                <div class="service-counter">01–04</div>
+                <div class="service-label">Our Services</div>
+                <h3 class="service-title">Land &amp; Development</h3>
+                <p class="service-desc">From concept to completion across residential and commercial projects. Strategic land acquisition and value creation through expert planning, design and construction management. We take a hands-on approach to every development, ensuring quality at every stage.</p>
+                <a href="#" class="service-link">Find Out More <i class="fas fa-arrow-right"></i></a>
+            </div>
+        </div>
+        <div class="service-slide">
+            <div class="service-slide-img">
+                <img src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=1000&q=80" alt="Master Developer">
+            </div>
+            <div class="service-slide-content">
+                <div class="service-counter">02–04</div>
+                <div class="service-label">Our Services</div>
+                <h3 class="service-title">Master Developer</h3>
+                <p class="service-desc">Creating sustainable communities and new town infrastructure. Large-scale planning and delivery of mixed-use developments that transform underutilised land into thriving places. Our approach integrates residential, commercial and public realm elements seamlessly.</p>
+                <a href="#" class="service-link">Find Out More <i class="fas fa-arrow-right"></i></a>
+            </div>
+        </div>
+        <div class="service-slide">
+            <div class="service-slide-img">
+                <img src="https://images.unsplash.com/photo-1460317442991-0ec209397118?w=1000&q=80" alt="Asset Management">
+            </div>
+            <div class="service-slide-content">
+                <div class="service-counter">03–04</div>
+                <div class="service-label">Our Services</div>
+                <h3 class="service-title">Asset Management</h3>
+                <p class="service-desc">Maximising investment returns across our diverse portfolio of BTR, commercial and mixed-use assets. Our dedicated team manages every aspect of asset performance, from tenant relations and maintenance to strategic repositioning and value enhancement.</p>
+                <a href="#" class="service-link">Find Out More <i class="fas fa-arrow-right"></i></a>
+            </div>
+        </div>
+        <div class="service-slide">
+            <div class="service-slide-img">
+                <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=1000&q=80" alt="Consultancy">
+            </div>
+            <div class="service-slide-content">
+                <div class="service-counter">04–04</div>
+                <div class="service-label">Our Services</div>
+                <h3 class="service-title">Consultancy Services</h3>
+                <p class="service-desc">Expert guidance end-to-end from architecture and engineering to planning and quantity surveying. Our multi-disciplinary consultancy team brings together specialists who collaborate to deliver innovative solutions tailored to each project's unique requirements.</p>
+                <a href="#" class="service-link">Find Out More <i class="fas fa-arrow-right"></i></a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- PROJECTS -->
+<section class="projects-section" id="projects">
+    <div class="projects-header">
+        <div>
+            <div class="about-label reveal-up">Portfolio</div>
+            <h2 class="about-title reveal-up" style="margin-bottom:0;">Latest Projects</h2>
+        </div>
+        <div class="services-header-right">
+            <button class="services-nav-btn" onclick="prevProject()"><i class="fas fa-arrow-left"></i></button>
+            <button class="services-nav-btn" onclick="nextProject()"><i class="fas fa-arrow-right"></i></button>
+        </div>
+    </div>
+    <div class="projects-slider-wrap">
+        <div class="projects-slider" id="projectsSlider">
+            <div class="project-slide">
+                <div class="project-slide-img">
+                    <img src="https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=1000&q=80" alt="Walsall Road">
+                    <div class="project-slide-overlay"></div>
+                    <div class="project-slide-info">
+                        <div class="project-slide-label">Latest Projects</div>
+                        <h3 class="project-slide-title">Walsall Road Development</h3>
+                        <p class="project-slide-desc">A landmark residential development delivering high-quality homes in the heart of the West Midlands. The project demonstrates our commitment to creating communities that enhance the local area.</p>
+                        <div class="project-slide-links">
+                            <a href="#" class="project-slide-link">View Project</a>
+                            <a href="#" class="project-slide-link secondary">All Projects</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="project-slide">
+                <div class="project-slide-img">
+                    <img src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=1000&q=80" alt="Infrastructure">
+                    <div class="project-slide-overlay"></div>
+                    <div class="project-slide-info">
+                        <div class="project-slide-label">Latest Projects</div>
+                        <h3 class="project-slide-title">New Town Infrastructure</h3>
+                        <p class="project-slide-desc">A £15M master-planned infrastructure programme delivering roads, utilities and public realm for a new sustainable community. Key disciplines included civil engineering, drainage and landscaping.</p>
+                        <div class="project-slide-links">
+                            <a href="#" class="project-slide-link">View Project</a>
+                            <a href="#" class="project-slide-link secondary">All Projects</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="project-slide">
+                <div class="project-slide-img">
+                    <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=1000&q=80" alt="Commercial">
+                    <div class="project-slide-overlay"></div>
+                    <div class="project-slide-info">
+                        <div class="project-slide-label">Latest Projects</div>
+                        <h3 class="project-slide-title">Commercial Office Complex</h3>
+                        <p class="project-slide-desc">An £8M commercial office development delivering Grade A workspace in a prime city centre location. The project integrated sustainable design principles throughout.</p>
+                        <div class="project-slide-links">
+                            <a href="#" class="project-slide-link">View Project</a>
+                            <a href="#" class="project-slide-link secondary">All Projects</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="project-slide">
+                <div class="project-slide-img">
+                    <img src="https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=1000&q=80" alt="BTR">
+                    <div class="project-slide-overlay"></div>
+                    <div class="project-slide-info">
+                        <div class="project-slide-label">Latest Projects</div>
+                        <h3 class="project-slide-title">BTR Portfolio Birmingham</h3>
+                        <p class="project-slide-desc">A £25M build-to-rent portfolio across multiple Birmingham locations, delivering institutional-grade rental accommodation with best-in-class amenities and resident experiences.</p>
+                        <div class="project-slide-links">
+                            <a href="#" class="project-slide-link">View Project</a>
+                            <a href="#" class="project-slide-link secondary">All Projects</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="project-counter-bottom" id="projectCounter">01 · 04</div>
+</section>
+
+<!-- NEWS -->
+<section class="news-section" id="news">
+    <div class="news-inner">
+        <div class="news-header">
+            <div>
+                <div class="news-tagline reveal-up">Where Vision Meets Reality</div>
+                <h2 class="about-title reveal-up" style="margin-bottom:0;">Latest News</h2>
+            </div>
+            <a href="#" class="btn-outline reveal-up" style="padding:12px 28px; font-size:13px;">Show More</a>
+        </div>
+        <div class="news-grid">
+            <a href="#" class="news-card reveal-up">
+                <div class="news-card-img">
+                    <img src="https://images.unsplash.com/photo-1560520653-9e0e4c89eb11?w=800&q=80" alt="News">
+                </div>
+                <div class="news-card-body">
+                    <div class="news-card-date">8 February 2026</div>
+                    <h3 class="news-card-title">UK Housing Market Outlook: Spring 2026 Forecast</h3>
+                    <span class="news-card-link">Read More <i class="fas fa-arrow-right"></i></span>
+                </div>
+            </a>
+            <a href="#" class="news-card reveal-up">
+                <div class="news-card-img">
+                    <img src="https://images.unsplash.com/photo-1590650153855-d9e808231d41?w=800&q=80" alt="News">
+                </div>
+                <div class="news-card-body">
+                    <div class="news-card-date">28 January 2026</div>
+                    <h3 class="news-card-title">Delivering Net Zero: Lessons From Our Latest Development</h3>
+                    <span class="news-card-link">Read More <i class="fas fa-arrow-right"></i></span>
+                </div>
+            </a>
+            <a href="#" class="news-card reveal-up">
+                <div class="news-card-img">
+                    <img src="https://images.unsplash.com/photo-1551836022-d5d88e9218df?w=800&q=80" alt="News">
+                </div>
+                <div class="news-card-body">
+                    <div class="news-card-date">15 January 2026</div>
+                    <h3 class="news-card-title">The Rise of BTR: Why Build-to-Rent Is Reshaping UK Property</h3>
+                    <span class="news-card-link">Read More <i class="fas fa-arrow-right"></i></span>
+                </div>
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section" id="contact">
+    <div class="cta-inner">
+        <h2 class="cta-title reveal-up">Let's work together</h2>
+        <p class="cta-text reveal-up">We believe the best results come from collaborating with passionate people. Whether you have a vision or need guidance, we're here to help transform challenges into opportunities. Let's start the conversation and bring your aspirations to life.</p>
+        <a href="#" class="btn-cta reveal-up">Let's talk</a>
+    </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+    <div class="footer-inner">
+        <div class="footer-top">
+            <div class="footer-brand">
+                <div class="footer-logo">
+                    <img src="https://w13uk.com/wp-content/uploads/2022/09/W13_Logo_White.png" alt="W13 Group">
+                </div>
+                <p class="footer-brand-text">Building communities, creating value, and delivering excellence across property development.</p>
+            </div>
+            <div class="footer-nav">
+                <div class="footer-nav-col"><h4><a href="#">About Us</a></h4></div>
+                <div class="footer-nav-col"><h4><a href="#">Divisions</a></h4></div>
+                <div class="footer-nav-col"><h4><a href="#">Services</a></h4></div>
+                <div class="footer-nav-col"><h4><a href="#">Projects</a></h4></div>
+                <div class="footer-nav-col"><h4><a href="#">Investors</a></h4></div>
+                <div class="footer-nav-col"><h4><a href="#">News</a></h4></div>
+            </div>
+            <div class="footer-contact">
+                <h4 class="footer-contact-heading">Head Office</h4>
+                <div class="footer-contact-text">
+                    <a href="#">Beech House<br>Birmingham, B15 3BE</a><br><br>
+                    <a href="tel:+442031501401">+44 (0)20 3150 1401</a><br>
+                    <a href="mailto:info@w13uk.com">info@w13uk.com</a>
+                </div>
+                <div class="footer-social">
+                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#"><i class="fab fa-x-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="footer-legal">
+                <a href="#">T&amp;C's</a>
+                <a href="#">Privacy Policy</a>
+            </div>
+            <div class="footer-copy">©2026 W13 Group Ltd. All rights reserved</div>
+        </div>
+    </div>
+</footer>
+
+<!-- GSAP -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+<script>
+/* ===== PRELOADER ===== */
+window.addEventListener('load', () => {
+    setTimeout(() => {
+        const preloader = document.getElementById('preloader');
+        gsap.to(preloader, {
+            opacity: 0, duration: 0.6, ease: 'power2.inOut',
+            onComplete: () => {
+                preloader.style.display = 'none';
+                initAll();
+            }
+        });
+    }, 1200);
+});
+
+/* ===== MENU ===== */
+function toggleMenu() {
+    const menu = document.getElementById('fullscreenMenu');
+    menu.classList.toggle('active');
+    document.body.style.overflow = menu.classList.contains('active') ? 'hidden' : '';
+}
+
+/* ===== HERO SLIDESHOW ===== */
+let heroIndex = 0;
+const heroSlides = document.querySelectorAll('.hero-slide');
+const heroNames = document.querySelectorAll('.hero-project-name');
+let heroInterval;
+
+function goToHeroSlide(index) {
+    heroSlides.forEach(s => s.classList.remove('active'));
+    heroNames.forEach(n => n.classList.remove('active'));
+    heroIndex = index;
+    heroSlides[heroIndex].classList.add('active');
+    if (heroNames[heroIndex]) heroNames[heroIndex].classList.add('active');
+}
+function nextHeroSlide() {
+    goToHeroSlide((heroIndex + 1) % heroSlides.length);
+    resetHeroInterval();
+}
+function prevHeroSlide() {
+    goToHeroSlide((heroIndex - 1 + heroSlides.length) % heroSlides.length);
+    resetHeroInterval();
+}
+function resetHeroInterval() {
+    clearInterval(heroInterval);
+    heroInterval = setInterval(nextHeroSlide, 6000);
+}
+heroNames.forEach((name, i) => {
+    name.addEventListener('click', () => { goToHeroSlide(i); resetHeroInterval(); });
+});
+heroInterval = setInterval(nextHeroSlide, 6000);
+
+/* ===== SERVICES CAROUSEL ===== */
+let serviceIndex = 0;
+const serviceSlides = document.querySelectorAll('.service-slide');
+const servicesSliderEl = document.getElementById('servicesSlider');
+
+function showService(index) {
+    serviceIndex = Math.max(0, Math.min(index, serviceSlides.length - 1));
+    servicesSliderEl.style.transform = `translateX(-${serviceIndex * 100}vw)`;
+}
+function nextService() { showService(serviceIndex + 1); }
+function prevService() { showService(serviceIndex - 1); }
+
+/* ===== PROJECTS CAROUSEL ===== */
+let projectIndex = 0;
+const projectSlides = document.querySelectorAll('.project-slide');
+const projectsSlider = document.getElementById('projectsSlider');
+const projectCounter = document.getElementById('projectCounter');
+
+function showProject(index) {
+    const isMobile = window.innerWidth <= 1100;
+    const maxIndex = isMobile ? projectSlides.length - 1 : projectSlides.length - 2;
+    projectIndex = Math.max(0, Math.min(index, maxIndex));
+
+    if (isMobile) {
+        projectsSlider.style.transform = `translateX(calc(-${projectIndex} * (100% + 30px)))`;
+    } else {
+        projectsSlider.style.transform = `translateX(calc(-${projectIndex} * (50% + 15px)))`;
+    }
+
+    const num = String(projectIndex + 1).padStart(2, '0');
+    const total = String(projectSlides.length).padStart(2, '0');
+    projectCounter.textContent = `${num} · ${total}`;
+}
+function nextProject() { showProject(projectIndex + 1); }
+function prevProject() { showProject(projectIndex - 1); }
+
+/* ===== COUNTER ANIMATION ===== */
+function animateCounters() {
+    document.querySelectorAll('.counter').forEach(el => {
+        const target = +el.getAttribute('data-target');
+        const duration = 2000;
+        const start = performance.now();
+        function tick(now) {
+            const elapsed = now - start;
+            const progress = Math.min(elapsed / duration, 1);
+            const ease = 1 - Math.pow(1 - progress, 3);
+            el.textContent = Math.floor(ease * target).toLocaleString() + '+';
+            if (progress < 1) requestAnimationFrame(tick);
+        }
+        requestAnimationFrame(tick);
+    });
+}
+
+/* ===== HERO TITLE TEXT REVEAL ===== */
+function animateHeroTitle() {
+    const title = document.querySelector('.hero-main-title');
+    if (!title) return;
+    const html = title.innerHTML;
+    const parts = html.split('<br>');
+    title.innerHTML = '';
+
+    parts.forEach((part, pi) => {
+        const words = part.trim().split(/\s+/);
+        words.forEach((word, wi) => {
+            const wrapper = document.createElement('span');
+            wrapper.style.display = 'inline-block';
+            wrapper.style.overflow = 'hidden';
+            wrapper.style.verticalAlign = 'top';
+            const inner = document.createElement('span');
+            inner.textContent = word;
+            inner.style.display = 'inline-block';
+            inner.style.transform = 'translateY(110%)';
+            inner.style.transition = `transform 0.9s cubic-bezier(0.16, 1, 0.3, 1) ${(pi * 3 + wi) * 0.1}s`;
+            wrapper.appendChild(inner);
+            title.appendChild(wrapper);
+            if (wi < words.length - 1) {
+                title.appendChild(document.createTextNode('\u00A0'));
+            }
+            setTimeout(() => { inner.style.transform = 'translateY(0)'; }, 50);
+        });
+        if (pi < parts.length - 1) {
+            title.appendChild(document.createElement('br'));
+        }
+    });
+}
+
+/* ===== INIT ===== */
+function initAll() {
+    gsap.registerPlugin(ScrollTrigger);
+
+    animateHeroTitle();
+
+    // Hero bottom fade in
+    gsap.from('.hero-bottom', { opacity: 0, y: 30, duration: 1, delay: 1, ease: 'power3.out' });
+
+    // Scroll reveals
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+                observer.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.15, rootMargin: '0px 0px -50px 0px' });
+    document.querySelectorAll('.reveal-up, .reveal-scale, .reveal-right').forEach(el => observer.observe(el));
+
+    // Counter trigger
+    ScrollTrigger.create({
+        trigger: '.stats-band',
+        start: 'top 75%',
+        onEnter: animateCounters,
+        once: true
+    });
+
+    // Parallax hero
+    gsap.to('.hero-slide img', {
+        y: 100, ease: 'none',
+        scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: 1 }
+    });
+
+    // About image parallax
+    gsap.to('.about-img img', {
+        y: -40, ease: 'none',
+        scrollTrigger: { trigger: '.about-section', start: 'top bottom', end: 'bottom top', scrub: 1 }
+    });
+
+    // Service images parallax
+    document.querySelectorAll('.service-slide-img img').forEach(img => {
+        gsap.to(img, {
+            y: -30, ease: 'none',
+            scrollTrigger: { trigger: img.closest('.service-slide'), start: 'top bottom', end: 'bottom top', scrub: 1 }
+        });
+    });
+
+    // Project images parallax
+    document.querySelectorAll('.project-slide-img img').forEach(img => {
+        gsap.to(img, {
+            y: -30, ease: 'none',
+            scrollTrigger: { trigger: img.closest('.project-slide'), start: 'top bottom', end: 'bottom top', scrub: 1 }
+        });
+    });
+
+    // News stagger
+    gsap.fromTo('.news-card', { opacity: 0, y: 50 }, {
+        opacity: 1, y: 0, duration: 0.8, stagger: 0.15, ease: 'power3.out',
+        scrollTrigger: { trigger: '.news-grid', start: 'top 80%' }
+    });
+
+    // Stats stagger
+    gsap.fromTo('.stats-band-item', { opacity: 0, y: 40 }, {
+        opacity: 1, y: 0, duration: 0.8, stagger: 0.12, ease: 'power3.out',
+        scrollTrigger: { trigger: '.stats-band', start: 'top 80%' }
+    });
+}
+
+/* ===== SMOOTH SCROLL ===== */
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', function(e) {
+        const href = this.getAttribute('href');
+        if (href === '#') return;
+        e.preventDefault();
+        const target = document.querySelector(href);
+        if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+});
+
+/* ===== TOUCH SWIPE ===== */
+let touchStartX = 0;
+const projectsWrap = document.querySelector('.projects-slider-wrap');
+if (projectsWrap) {
+    projectsWrap.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; }, { passive: true });
+    projectsWrap.addEventListener('touchend', e => {
+        const diff = touchStartX - e.changedTouches[0].clientX;
+        if (Math.abs(diff) > 50) { diff > 0 ? nextProject() : prevProject(); }
+    });
+}
+const servicesWrap = document.getElementById('servicesSlider');
+if (servicesWrap) {
+    servicesWrap.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; }, { passive: true });
+    servicesWrap.addEventListener('touchend', e => {
+        const diff = touchStartX - e.changedTouches[0].clientX;
+        if (Math.abs(diff) > 50) { diff > 0 ? nextService() : prevService(); }
+    });
+}
+</script>
+</body>
+</html>

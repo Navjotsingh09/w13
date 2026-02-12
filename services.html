@@ -1,0 +1,1111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Services | W13 Group</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        /* ===== RESET ===== */
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        html { overflow-x: hidden; }
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            background: #0C233F;
+            color: #EAEAEA;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        /* ===== CUSTOM DOT CURSOR ===== */
+        *, *::before, *::after { cursor: none !important; }
+        .dot-cursor {
+            position: fixed; top: 0; left: 0; z-index: 999999;
+            width: 10px; height: 10px; background: #44C0C0; border-radius: 50%;
+            pointer-events: none; transform: translate(-50%, -50%);
+            transition: transform 0.15s ease, background-color 0.2s ease;
+            mix-blend-mode: difference;
+        }
+        .dot-cursor.hovering {
+            transform: translate(-50%, -50%) scale(2.5);
+            background: #44C0C0;
+        }
+
+        a { text-decoration: none; color: inherit; }
+        button { border: none; font-family: inherit; background: none; color: inherit; }
+        img { max-width: 100%; display: block; }
+        ul { list-style: none; }
+        ::selection { background: rgba(68,192,192,0.3); }
+
+        /* ===== PRELOADER ===== */
+        .preloader {
+            position: fixed; inset: 0; background: #0C233F; z-index: 100000;
+            display: flex; align-items: center; justify-content: center; flex-direction: column;
+        }
+        .preloader-dots { display: flex; gap: 8px; }
+        .preloader-dot {
+            width: 8px; height: 8px; background: #44C0C0; border-radius: 50%;
+            animation: preloaderPulse 1.4s infinite ease-in-out;
+        }
+        .preloader-dot:nth-child(2) { animation-delay: 0.2s; }
+        .preloader-dot:nth-child(3) { animation-delay: 0.4s; }
+        @keyframes preloaderPulse {
+            0%, 80%, 100% { opacity: 0.2; transform: scale(0.8); }
+            40% { opacity: 1; transform: scale(1); }
+        }
+
+        /* ===== NAVBAR ===== */
+        .navbar {
+            position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+            padding: 30px 50px; display: flex; justify-content: space-between; align-items: center;
+            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+            mix-blend-mode: difference;
+        }
+        .nav-logo { display: flex; align-items: center; }
+        .nav-logo img { height: 40px; width: auto; }
+        .nav-right { display: flex; align-items: center; gap: 30px; }
+        .menu-btn {
+            font-size: 15px; font-weight: 500; color: #EAEAEA; letter-spacing: 2px;
+            text-transform: uppercase; cursor: pointer; display: flex; align-items: center; gap: 12px;
+        }
+        .menu-btn-lines { display: flex; flex-direction: column; gap: 5px; width: 24px; }
+        .menu-btn-lines span {
+            height: 1.5px; background: #EAEAEA; transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .menu-btn-lines span:first-child { width: 24px; }
+        .menu-btn-lines span:last-child { width: 16px; }
+
+        /* ===== FULLSCREEN MENU ===== */
+        .fullscreen-menu {
+            position: fixed; inset: 0; background: #0C233F; z-index: 9999;
+            display: flex; opacity: 0; pointer-events: none;
+            transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .fullscreen-menu.active { opacity: 1; pointer-events: all; }
+        .menu-close {
+            position: absolute; top: 30px; right: 50px; font-size: 15px; font-weight: 500;
+            color: #EAEAEA; letter-spacing: 2px; text-transform: uppercase; cursor: pointer;
+            display: flex; align-items: center; gap: 12px; z-index: 10;
+        }
+        .menu-close-x { font-size: 28px; font-weight: 300; line-height: 1; }
+        .menu-left {
+            flex: 1; display: flex; flex-direction: column; justify-content: center;
+            padding: 100px 80px;
+        }
+        .menu-nav-link {
+            display: block; font-family: 'Playfair Display', serif;
+            font-size: clamp(36px, 5vw, 60px); font-weight: 600; color: #EAEAEA;
+            padding: 12px 0; opacity: 0.4; transition: all 0.4s; position: relative;
+            transform: translateX(-20px); line-height: 1.2;
+        }
+        .fullscreen-menu.active .menu-nav-link {
+            transform: translateX(0);
+            transition-delay: calc(var(--i) * 0.08s);
+        }
+        .menu-nav-link:hover { opacity: 1; padding-left: 30px; }
+        .menu-nav-link::before {
+            content: ''; position: absolute; left: 0; top: 50%; width: 0; height: 1px;
+            background: #44C0C0; transition: width 0.3s;
+        }
+        .menu-nav-link:hover::before { width: 20px; }
+        .menu-right {
+            width: 45%; position: relative; overflow: hidden;
+            display: flex; align-items: flex-end; padding: 60px;
+        }
+        .menu-right-img { position: absolute; inset: 0; }
+        .menu-right-img img { width: 100%; height: 100%; object-fit: cover; opacity: 0.4; }
+        .menu-right-info { position: relative; z-index: 2; }
+        .menu-right-info h4 {
+            font-size: 13px; font-weight: 600; letter-spacing: 3px;
+            text-transform: uppercase; color: #44C0C0; margin-bottom: 16px;
+        }
+        .menu-right-info p {
+            font-size: 15px; color: rgba(234,234,234,0.6); line-height: 1.7;
+        }
+        .menu-right-info a {
+            display: inline-block; margin-top: 16px; font-size: 14px; color: #44C0C0;
+            font-weight: 500; border-bottom: 1px solid rgba(68,192,192,0.4);
+            padding-bottom: 2px; transition: border-color 0.3s;
+        }
+        .menu-right-info a:hover { border-color: #44C0C0; }
+
+        /* ===== PAGE HERO ===== */
+        .page-hero {
+            position: relative; min-height: 100vh; display: flex; flex-direction: column;
+            justify-content: center; background: #EAEAEA; overflow: hidden;
+            padding: 180px 50px 100px;
+        }
+        .page-hero::before {
+            content: ''; position: absolute; top: 0; left: 0; right: 0;
+            height: 4px; background: #0C233F; z-index: 10;
+        }
+        .page-hero-content {
+            max-width: 1400px; width: 100%; margin: 0 auto;
+        }
+        .page-hero-title {
+            font-family: 'Playfair Display', serif; font-size: clamp(38px, 5.5vw, 72px);
+            font-weight: 400; line-height: 1.15; color: #0C233F;
+            max-width: 950px; margin-bottom: 80px;
+        }
+        .page-hero-bottom {
+            display: flex; justify-content: flex-end; align-items: flex-start;
+            gap: 60px; max-width: 1400px; margin: 0 auto;
+        }
+        .page-hero-intro {
+            font-size: 16px; color: rgba(12,35,63,0.6); line-height: 1.85;
+            max-width: 520px;
+        }
+        .btn-hero-talk {
+            display: inline-flex; align-items: center; gap: 0;
+            padding: 6px 6px 6px 22px; background: transparent; color: #44C0C0;
+            font-size: 14px; font-weight: 500; letter-spacing: 0.3px;
+            border-radius: 100px; border: 1px solid #44C0C0;
+            transition: all 0.3s; white-space: nowrap;
+            margin-top: 30px; text-transform: capitalize;
+            position: relative; overflow: hidden;
+        }
+        .btn-hero-talk:hover { background: #44C0C0; color: #0C233F; }
+        .btn-hero-talk .btn-dot-icon {
+            width: 29px; height: 29px; background: #44C0C0; border-radius: 50%;
+            display: inline-flex; align-items: center; justify-content: center;
+            margin-left: 14px; flex-shrink: 0;
+        }
+        .btn-hero-talk .btn-dot-icon svg { width: 15px; height: 15px; }
+        .btn-hero-talk:hover .btn-dot-icon { background: #0C233F; }
+        .btn-hero-talk:hover .btn-dot-icon svg circle { fill: #0C233F; }
+        .btn-hero-talk:hover .btn-dot-icon svg path { fill: #44C0C0; }
+
+        /* ===== DOTS CANVAS ===== */
+        .hero-dots {
+            position: absolute; top: 0; right: 0;
+            width: 70%; height: 85%;
+            pointer-events: none; z-index: 1;
+        }
+        .hero-dots canvas {
+            width: 100%; height: 100%; display: block;
+            pointer-events: auto;
+        }
+        .page-hero-content, .page-hero-bottom {
+            position: relative; z-index: 2;
+        }
+
+        /* ===== TOP NAV BAR (services page) ===== */
+        .top-nav {
+            position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+            padding: 0 50px; background: rgba(234,234,234,0.95);
+            backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(12,35,63,0.06);
+            transition: all 0.5s;
+        }
+        .top-nav.scrolled {
+            background: rgba(234,234,234,0.98);
+            box-shadow: 0 2px 20px rgba(12,35,63,0.06);
+        }
+        .top-nav-inner {
+            max-width: 1400px; margin: 0 auto;
+            display: flex; justify-content: space-between; align-items: center;
+            height: 80px;
+        }
+        .top-nav-logo { display: flex; align-items: center; }
+        .top-nav-logo img { height: 36px; width: auto; }
+        .top-nav-links { display: flex; align-items: center; gap: 8px; }
+        .top-nav-link {
+            font-size: 15px; font-weight: 500; color: rgba(12,35,63,0.5);
+            padding: 8px 16px; transition: color 0.3s; letter-spacing: 0.3px;
+        }
+        .top-nav-link:hover { color: #0C233F; }
+        .top-nav-link.active {
+            color: #0C233F; text-decoration: underline;
+            text-underline-offset: 4px; text-decoration-thickness: 1.5px;
+        }
+        .top-nav-contact {
+            display: inline-flex; align-items: center; gap: 8px;
+            padding: 10px 24px; border: 1.5px solid #0C233F; border-radius: 100px;
+            font-size: 14px; font-weight: 500; color: #0C233F;
+            transition: all 0.3s; letter-spacing: 0.3px;
+        }
+        .top-nav-contact:hover { background: #0C233F; color: #EAEAEA; }
+        .top-nav-contact i { font-size: 11px; }
+
+        /* ===== SERVICES NAV BAR ===== */
+        .services-nav {
+            border-top: 1px solid rgba(68,192,192,0.1);
+            border-bottom: 1px solid rgba(68,192,192,0.1);
+            padding: 0 50px; background: #091c33;
+            position: sticky; top: 0; z-index: 100;
+        }
+        .services-nav-inner {
+            max-width: 1400px; margin: 0 auto;
+            display: flex; gap: 0; overflow-x: auto;
+        }
+        .services-nav-inner::-webkit-scrollbar { display: none; }
+        .services-nav-item {
+            padding: 22px 30px; font-size: 14px; font-weight: 500; color: rgba(234,234,234,0.4);
+            letter-spacing: 0.5px; white-space: nowrap; cursor: pointer;
+            border-bottom: 2px solid transparent; transition: all 0.4s;
+        }
+        .services-nav-item:hover { color: rgba(234,234,234,0.7); }
+        .services-nav-item.active {
+            color: #44C0C0; border-bottom-color: #44C0C0;
+        }
+
+        /* ===== SWIPER CARDS ===== */
+        .swiper-cards-section {
+            position: relative; background: #0C233F;
+            overflow: visible; color: #fff;
+        }
+        .swiper-cards-section .swiper-cards-outer {
+            position: relative; overflow: visible;
+            width: 100%; height: auto;
+        }
+        /* Dark pseudo-element behind bottom for smooth CTA transition */
+        .swiper-cards-section .swiper-cards-outer::after {
+            content: ''; position: absolute; left: 0; right: 0;
+            bottom: 0; height: 50vh; background: #091c33; z-index: 1;
+        }
+        .swiper-cards-wrapper {
+            position: relative; width: 100%; height: auto;
+            box-sizing: border-box; z-index: 2;
+        }
+        /* Desktop pinned mode */
+        .swiper-cards-wrapper.is-desktop {
+            height: 100vh; position: relative;
+        }
+        .swiper-cards-wrapper.is-desktop .swiper-slide {
+            position: absolute; top: 0; left: 0;
+            width: 100%; height: 100vh; z-index: 1;
+        }
+
+        .swiper-slide {
+            position: relative; height: 100vh;
+            overflow: visible; width: 100%;
+            transition: transform 0.8s ease;
+            will-change: transform;
+        }
+        .swiper-slide:last-child { margin-bottom: 0; }
+
+        /* Image wrapper — padding + border-radius create the floating card;
+           padding transitions to 0 on scroll = GROWING effect */
+        .slide-media {
+            height: 100vh; width: 100%;
+            padding: 20px; z-index: 1;
+            transition: padding 0.6s ease;
+            box-sizing: border-box;
+        }
+        .slide-media-inner {
+            position: relative; width: 100%; height: 100%;
+            overflow: hidden; border-radius: 20px;
+            transition: border-radius 0.6s ease;
+        }
+        .slide-media img {
+            width: 100%; height: 100%; object-fit: cover;
+            object-position: center; border-radius: 20px;
+            transition: border-radius 0.6s ease;
+        }
+        /* Dark overlay on the image for text legibility */
+        .slide-media-inner::after {
+            content: ''; position: absolute; inset: 0;
+            border-radius: 20px; opacity: 0.5;
+            background: rgba(12,35,63,0.45);
+            transition: border-radius 0.6s ease;
+        }
+        /* When grown, border-radius goes to 0 on the pseudo-element */
+        .swiper-cards-wrapper.is-grown .slide-media-inner::after {
+            border-radius: 0px;
+        }
+
+        /* Content absolutely overlaid on the image */
+        .slide-content {
+            position: absolute; top: 0; left: 0;
+            width: 100%; height: 100%;
+            display: flex; flex-direction: column;
+            justify-content: center;
+            text-align: left; z-index: 10;
+            overflow: hidden; pointer-events: none;
+            padding: 80px 0;
+        }
+        .slide-content .content-wrapper {
+            position: relative; z-index: 2;
+            margin-left: 4.5rem; padding: 4rem;
+            max-width: 600px;
+        }
+        .slide-content .buttons-container {
+            pointer-events: auto;
+        }
+        .slide-content .slide-heading,
+        .slide-content .slide-text,
+        .slide-content .slide-label,
+        .slide-content .slide-btn {
+            transition: opacity 0.4s cubic-bezier(.445,.05,.55,.95);
+        }
+
+        .slide-dot-accent {
+            position: absolute; top: 40px; right: 60px;
+            width: 10px; height: 10px; background: #44C0C0;
+            border-radius: 50%; z-index: 3;
+        }
+        .slide-label {
+            font-size: 12px; font-weight: 600; letter-spacing: 4px;
+            text-transform: uppercase; color: #44C0C0; margin-bottom: 20px;
+        }
+        .slide-heading {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(32px, 4vw, 56px); font-weight: 700;
+            line-height: 1.15; margin-bottom: 22px; color: #fff;
+        }
+        .slide-text {
+            font-size: 0.875rem; color: #fff; font-weight: 300;
+            line-height: 1.5rem; margin-bottom: 34px; max-width: 520px;
+        }
+        .slide-btn {
+            display: inline-flex; align-items: center; gap: 0;
+            padding: 6px 6px 6px 22px; background: transparent; color: #44C0C0;
+            font-size: 14px; font-weight: 500; letter-spacing: 0.3px;
+            border-radius: 100px; border: 1px solid #44C0C0;
+            transition: all 0.3s; white-space: nowrap; width: fit-content;
+            text-transform: capitalize; pointer-events: auto;
+        }
+        .slide-btn:hover { background: #44C0C0; color: #0C233F; }
+        .slide-btn .btn-dot-icon {
+            width: 29px; height: 29px; background: #44C0C0; border-radius: 50%;
+            display: inline-flex; align-items: center; justify-content: center;
+            margin-left: 14px; flex-shrink: 0;
+        }
+        .slide-btn .btn-dot-icon svg { width: 15px; height: 15px; }
+        .slide-btn:hover .btn-dot-icon { background: #0C233F; }
+        .slide-btn:hover .btn-dot-icon svg circle { fill: #0C233F; }
+        .slide-btn:hover .btn-dot-icon svg path { fill: #44C0C0; }
+        .slide-number {
+            position: absolute; bottom: 40px; left: 80px;
+            font-family: 'Playfair Display', serif;
+            font-size: 140px; font-weight: 700; line-height: 1;
+            color: rgba(234,234,234,0.04); z-index: 1;
+        }
+
+        /* Pagination — LEFT side, fixed, hidden until pinned */
+        .swiper-pagination {
+            opacity: 0; pointer-events: none;
+            transition: opacity 0.3s;
+            display: flex; flex-direction: column; gap: 20px;
+            position: fixed; left: 42px; top: 50%;
+            transform: translateY(-50%); z-index: 10;
+        }
+        .swiper-cards-wrapper.is-pinned .swiper-pagination {
+            opacity: 1; pointer-events: auto;
+        }
+        .swiper-pagination-bullet {
+            width: 10px; height: 10px; border-radius: 50%;
+            background-color: transparent;
+            border: 1px solid #fff; opacity: 0.7;
+            cursor: pointer; transition: all 0.3s ease;
+        }
+        .swiper-pagination-bullet.active {
+            background-color: #fff; opacity: 1;
+        }
+
+        /* ===== CTA ===== */
+        .cta-section {
+            padding: 180px 50px; position: relative; overflow: hidden;
+            background: #091c33;
+            border-top: 1px solid rgba(68,192,192,0.1);
+        }
+        .cta-inner { max-width: 900px; margin: 0 auto; text-align: center; }
+        .cta-title {
+            font-family: 'Playfair Display', serif; font-size: clamp(40px, 6vw, 72px);
+            font-weight: 700; line-height: 1.1; margin-bottom: 30px;
+        }
+        .cta-text {
+            font-size: 18px; color: rgba(234,234,234,0.55); line-height: 1.8;
+            margin-bottom: 50px; max-width: 600px; margin-left: auto; margin-right: auto;
+        }
+        .btn-cta {
+            display: inline-block; padding: 20px 50px; background: #44C0C0; color: #0C233F;
+            font-size: 15px; font-weight: 700; letter-spacing: 1px;
+            transition: all 0.4s; position: relative; overflow: hidden;
+        }
+        .btn-cta:hover { background: #3aadad; transform: translateY(-2px); }
+
+        /* ===== FOOTER ===== */
+        .footer {
+            background: #091c33; padding: 80px 50px 40px;
+            border-top: 1px solid rgba(68,192,192,0.1);
+        }
+        .footer-inner { max-width: 1400px; margin: 0 auto; }
+        .footer-top {
+            display: grid; grid-template-columns: 1fr 2fr 1fr; gap: 60px;
+            padding-bottom: 60px; border-bottom: 1px solid rgba(68,192,192,0.1);
+        }
+        .footer-logo { margin-bottom: 20px; }
+        .footer-logo img { height: 48px; width: auto; }
+        .footer-brand-text {
+            font-size: 14px; color: rgba(234,234,234,0.4); line-height: 1.7;
+        }
+        .footer-nav {
+            display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px;
+        }
+        .footer-nav-col h4 {
+            font-family: 'Playfair Display', serif; font-size: 20px; font-weight: 600;
+            margin-bottom: 10px; color: rgba(234,234,234,0.7);
+            transition: color 0.3s; cursor: pointer;
+        }
+        .footer-nav-col h4:hover { color: #44C0C0; }
+        .footer-contact-heading {
+            font-size: 13px; font-weight: 600; letter-spacing: 3px;
+            text-transform: uppercase; color: #44C0C0; margin-bottom: 20px;
+        }
+        .footer-contact-text {
+            font-size: 14px; color: rgba(234,234,234,0.4); line-height: 1.8;
+        }
+        .footer-contact-text a {
+            color: rgba(234,234,234,0.6); transition: color 0.3s;
+        }
+        .footer-contact-text a:hover { color: #44C0C0; }
+        .footer-social {
+            display: flex; gap: 12px; margin-top: 24px;
+        }
+        .footer-social a {
+            width: 40px; height: 40px; border: 1px solid rgba(68,192,192,0.2);
+            display: flex; align-items: center; justify-content: center;
+            color: rgba(234,234,234,0.4); font-size: 15px; transition: all 0.3s;
+        }
+        .footer-social a:hover { border-color: #44C0C0; color: #44C0C0; }
+        .footer-bottom {
+            padding-top: 30px; display: flex; justify-content: space-between;
+            align-items: center; flex-wrap: wrap; gap: 20px;
+        }
+        .footer-legal { display: flex; gap: 20px; }
+        .footer-legal a {
+            font-size: 12px; color: rgba(234,234,234,0.25); transition: color 0.3s;
+        }
+        .footer-legal a:hover { color: #44C0C0; }
+        .footer-copy { font-size: 12px; color: rgba(234,234,234,0.25); }
+
+        /* ===== SCROLL REVEAL ===== */
+        .reveal-up {
+            opacity: 0; transform: translateY(60px);
+            transition: all 1s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .reveal-up.visible { opacity: 1; transform: translateY(0); }
+        .reveal-scale {
+            opacity: 0; transform: scale(0.92);
+            transition: all 1s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .reveal-scale.visible { opacity: 1; transform: scale(1); }
+        .reveal-left {
+            opacity: 0; transform: translateX(-60px);
+            transition: all 1s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .reveal-left.visible { opacity: 1; transform: translateX(0); }
+        .reveal-right {
+            opacity: 0; transform: translateX(60px);
+            transition: all 1s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .reveal-right.visible { opacity: 1; transform: translateX(0); }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 1100px) {
+            .slide-content .content-wrapper { margin-left: 2rem; padding: 2rem; }
+            .slide-number { font-size: 80px; left: 30px; bottom: 20px; }
+            .footer-top { grid-template-columns: 1fr; gap: 40px; }
+            .footer-nav { grid-template-columns: repeat(3, 1fr); }
+            .menu-right { display: none; }
+            .top-nav-links { display: none; }
+            .page-hero-bottom { flex-direction: column; }
+        }
+        @media (max-width: 767px) {
+            /* Mobile: static vertical stack, no pinning */
+            .top-nav { padding: 0 24px; }
+            .top-nav-inner { height: 65px; }
+            .top-nav-contact { display: none; }
+            .page-hero { padding: 140px 24px 60px; min-height: auto; }
+            .page-hero-title { margin-bottom: 50px; }
+            .navbar { padding: 20px 24px; }
+            .services-nav { padding: 0 24px; }
+            .services-nav-item { padding: 18px 20px; font-size: 13px; }
+            .swiper-cards-wrapper {
+                height: auto !important; padding: 20px;
+            }
+            .swiper-slide {
+                position: relative !important; height: auto !important;
+                aspect-ratio: 1/1; margin-bottom: 20px;
+                transform: none !important;
+            }
+            .swiper-slide:last-child { margin-bottom: 0; }
+            .slide-media { padding: 0; height: 100%; }
+            .slide-media-inner, .slide-media img,
+            .slide-media-inner::after { border-radius: 20px; }
+            .slide-text { display: none; }
+            .slide-content .content-wrapper {
+                margin-left: 1rem; padding: 1.5rem;
+            }
+            .slide-heading { font-size: 28px; }
+            .slide-dot-accent { right: 24px; top: 20px; }
+            .swiper-pagination { display: none !important; }
+            .cta-section { padding: 120px 24px; }
+            .footer { padding: 60px 24px 30px; }
+            .footer-nav { grid-template-columns: 1fr 1fr; }
+            .menu-left { padding: 100px 30px; }
+            .menu-nav-link { font-size: 36px; }
+            .menu-close { right: 24px; }
+            .footer-bottom { flex-direction: column; text-align: center; }
+        }
+        @media (max-width: 480px) {
+            .services-nav-item { padding: 14px 14px; font-size: 12px; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- DOT CURSOR -->
+<div class="dot-cursor" id="dotCursor"></div>
+
+<!-- PRELOADER -->
+<div class="preloader" id="preloader">
+    <div class="preloader-dots">
+        <div class="preloader-dot"></div>
+        <div class="preloader-dot"></div>
+        <div class="preloader-dot"></div>
+    </div>
+</div>
+
+<!-- FULLSCREEN MENU -->
+<div class="fullscreen-menu" id="fullscreenMenu">
+    <div class="menu-close" onclick="toggleMenu()">
+        <span>Close</span>
+        <span class="menu-close-x">×</span>
+    </div>
+    <div class="menu-left">
+        <a href="index.html" class="menu-nav-link" style="--i:1" onclick="toggleMenu()">Home</a>
+        <a href="index.html#about" class="menu-nav-link" style="--i:2" onclick="toggleMenu()">About</a>
+        <a href="services.html" class="menu-nav-link" style="--i:3" onclick="toggleMenu()">Services</a>
+        <a href="index.html#projects" class="menu-nav-link" style="--i:4" onclick="toggleMenu()">Projects</a>
+        <a href="#" class="menu-nav-link" style="--i:5" onclick="toggleMenu()">Investors</a>
+        <a href="index.html#news" class="menu-nav-link" style="--i:6" onclick="toggleMenu()">News</a>
+        <a href="index.html#contact" class="menu-nav-link" style="--i:7" onclick="toggleMenu()">Contact</a>
+    </div>
+    <div class="menu-right">
+        <div class="menu-right-img">
+            <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=1000&q=80" alt="">
+        </div>
+        <div class="menu-right-info">
+            <h4>Head Office</h4>
+            <p>Beech House<br>Birmingham, B15 3BE<br><br>020 3150 1401<br>info@w13uk.com</p>
+            <a href="#">LinkedIn →</a>
+        </div>
+    </div>
+</div>
+
+<!-- TOP NAV BAR -->
+<div class="top-nav" id="topNav">
+    <div class="top-nav-inner">
+        <a href="index.html" class="top-nav-logo">
+            <img src="https://w13uk.com/wp-content/uploads/2022/09/W13_Logo-768x382.png" alt="W13 Group">
+        </a>
+        <div class="top-nav-links">
+            <a href="index.html#about" class="top-nav-link">About</a>
+            <a href="#" class="top-nav-link">Sectors</a>
+            <a href="services.html" class="top-nav-link active">Services</a>
+            <a href="index.html#projects" class="top-nav-link">Projects</a>
+            <a href="#" class="top-nav-link">Careers</a>
+            <a href="index.html#news" class="top-nav-link">News</a>
+        </div>
+        <a href="index.html#contact" class="top-nav-contact">Contact <i class="fas fa-arrow-up-right"></i></a>
+    </div>
+</div>
+
+<!-- NAVBAR (hamburger for mobile / overlay trigger) -->
+<nav class="navbar" id="navbar" style="display:none;">
+    <a href="index.html" class="nav-logo">
+        <img src="https://w13uk.com/wp-content/uploads/2022/09/W13_Logo_White.png" alt="W13 Group">
+    </a>
+    <div class="nav-right">
+        <div class="menu-btn" onclick="toggleMenu()">
+            <span>Menu</span>
+            <div class="menu-btn-lines">
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<!-- PAGE HERO -->
+<section class="page-hero">
+    <div class="hero-dots"><canvas id="dotsCanvas"></canvas></div>
+    <div class="page-hero-content">
+        <h1 class="page-hero-title">The majority of our projects are undertaken as principal contractor for our key clients.</h1>
+    </div>
+    <div class="page-hero-bottom">
+        <div>
+            <p class="page-hero-intro">Our service to the client is of paramount importance and we continue to achieve real success based on understanding the needs of our valued customers whilst continually exceeding expectations. Innovation remains at the core of our success which gives us an unrivalled ability to offer a fresh approach. Our core business values are always based on a focus towards strong ethical perspectives.</p>
+            <a href="index.html#contact" class="btn-hero-talk">Lets Talk <span class="btn-dot-icon"><svg xmlns="http://www.w3.org/2000/svg" width="29" height="29" viewBox="0 0 29 30" fill="none"><circle cx="14.5" cy="15" r="14" fill="#44C0C0"/><path fill="#fff" d="M14.4 9.1a1.3 1.3 0 1 0 0-2.6 1.3 1.3 0 0 0 0 2.6M17.9 12.6a1.3 1.3 0 1 0 0-2.6 1.3 1.3 0 0 0 0 2.6M21.3 15.9a1.3 1.3 0 1 0 0-2.6 1.3 1.3 0 0 0 0 2.6M15.2 15.9a1.3 1.3 0 1 0 0-2.6 1.3 1.3 0 0 0 0 2.6M10.6 15.9a1.3 1.3 0 1 0 0-2.6 1.3 1.3 0 0 0 0 2.6M5.9 15.9a1.3 1.3 0 1 0 0-2.6 1.3 1.3 0 0 0 0 2.6M17.9 19.5a1.3 1.3 0 1 0 0-2.6 1.3 1.3 0 0 0 0 2.6M14.4 23.1a1.3 1.3 0 1 0 0-2.6 1.3 1.3 0 0 0 0 2.6"/></svg></span></a>
+        </div>
+    </div>
+</section>
+
+<!-- SERVICES NAV -->
+<nav class="services-nav" id="servicesNav">
+    <div class="services-nav-inner">
+        <a href="#slide-0" class="services-nav-item active" data-slide="0">Land & Development</a>
+        <a href="#slide-1" class="services-nav-item" data-slide="1">Master Developer</a>
+        <a href="#slide-2" class="services-nav-item" data-slide="2">Asset Management</a>
+        <a href="#slide-3" class="services-nav-item" data-slide="3">Architecture</a>
+        <a href="#slide-4" class="services-nav-item" data-slide="4">Consultancy</a>
+    </div>
+</nav>
+
+<!-- SWIPER CARDS -->
+<section class="swiper-cards-section" id="swiperCards">
+    <div class="swiper-cards-outer">
+        <div class="swiper-cards-wrapper">
+            <!-- SLIDE 01 -->
+            <div class="swiper-slide" data-index="0">
+                <div class="slide-media"><div class="slide-media-inner">
+                    <img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=1400&q=80" alt="Land & Development" loading="lazy">
+                </div></div>
+                <div class="slide-content">
+                    <div class="content-wrapper">
+                        <div class="slide-label">Our Services</div>
+                        <h2 class="slide-heading">Land &amp; Development</h2>
+                        <p class="slide-text">W13 is renowned for its proficiency in end-to-end land and property development, from strategic land acquisition through to project completion. Our methodological approach ensures cooperation across every discipline, accelerates timelines, and simplifies communication — culminating in developments that create lasting value for communities and stakeholders.</p>
+                        <div class="buttons-container"><a href="#" class="slide-btn">Find out more <span class="btn-dot-icon"><svg xmlns="http://www.w3.org/2000/svg" width="29" height="29" viewBox="0 0 29 30" fill="none"><circle cx="14.5" cy="15" r="14" fill="#44C0C0"/><path fill="#fff" d="M14.4 9.1a1.3 1.3 0 1 0 0-2.6 1.3 1.3 0 0 0 0 2.6M17.9 12.6a1.3 1.3 0 1 0 0-2.6 1.3 1.3 0 0 0 0 2.6M21.3 15.9a1.3 1.3 0 1 0 0-2.6 1.3 1.3 0 0 0 0 2.6M15.2 15.9a1.3 1.3 0 1 0 0-2.6 1.3 1.3 0 0 0 0 2.6M10.6 15.9a1.3 1.3 0 1 0 0-2.6 1.3 1.3 0 0 0 0 2.6M5.9 15.9a1.3 1.3 0 1 0 0-2.6 1.3 1.3 0 0 0 0 2.6M17.9 19.5a1.3 1.3 0 1 0 0-2.6 1.3 1.3 0 0 0 0 2.6M14.4 23.1a1.3 1.3 0 1 0 0-2.6 1.3 1.3 0 0 0 0 2.6"/></svg></span></a></div>
+                    </div>
+                </div>
+            </div>
+            <!-- SLIDE 02 -->
+            <div class="swiper-slide" data-index="1">
+                <div class="slide-media"><div class="slide-media-inner">
+                    <img src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=1400&q=80" alt="Master Developer" loading="lazy">
+                </div></div>
+                <div class="slide-content">
+                    <div class="content-wrapper">
+                        <div class="slide-label">Our Services</div>
+                        <h2 class="slide-heading">Master Developer</h2>
+                        <p class="slide-text">At W13, we specialise in transforming large-scale land holdings into thriving, master-planned communities. Our expertise extends from new town infrastructure and utilities delivery to the creation of public realm, green spaces and community facilities. Our team is committed to ensuring that every development not only meets but surpasses contemporary standards.</p>
+                        <div class="buttons-container"><a href="#" class="slide-btn">Find out more <span class="btn-dot-icon"><svg xmlns="http://www.w3.org/2000/svg" width="29" height="29" viewBox="0 0 29 30" fill="none"><circle cx="14.5" cy="15" r="14" fill="#44C0C0"/><path fill="#fff" d="M14.4 9.1a1.3 1.3 0 1 0 0-2.6 1.3 1.3 0 0 0 0 2.6M17.9 12.6a1.3 1.3 0 1 0 0-2.6 1.3 1.3 0 0 0 0 2.6M21.3 15.9a1.3 1.3 0 1 0 0-2.6 1.3 1.3 0 0 0 0 2.6M15.2 15.9a1.3 1.3 0 1 0 0-2.6 1.3 1.3 0 0 0 0 2.6M10.6 15.9a1.3 1.3 0 1 0 0-2.6 1.3 1.3 0 0 0 0 2.6M5.9 15.9a1.3 1.3 0 1 0 0-2.6 1.3 1.3 0 0 0 0 2.6M17.9 19.5a1.3 1.3 0 1 0 0-2.6 1.3 1.3 0 0 0 0 2.6M14.4 23.1a1.3 1.3 0 1 0 0-2.6 1.3 1.3 0 0 0 0 2.6"/></svg></span></a></div>
+                    </div>
+                </div>
+            </div>
+            <!-- SLIDE 03 -->
+            <div class="swiper-slide" data-index="2">
+                <div class="slide-media"><div class="slide-media-inner">
+                    <img src="https://images.unsplash.com/photo-1460317442991-0ec209397118?w=1400&q=80" alt="Asset Management" loading="lazy">
+                </div></div>
+                <div class="slide-content">
+                    <div class="content-wrapper">
+                        <div class="slide-label">Our Services</div>
+                        <h2 class="slide-heading">Asset Management</h2>
+                        <p class="slide-text">W13 brings a wealth of expertise to property asset management, offering cutting-edge solutions that maximise investment returns across our diverse portfolio. Our dedicated team is committed to precision at every stage — meticulously managing performance from acquisition through to ongoing operations and strategic repositioning.</p>
+                        <div class="buttons-container"><a href="#" class="slide-btn">Find out more <span class="btn-dot-icon"><svg xmlns="http://www.w3.org/2000/svg" width="29" height="29" viewBox="0 0 29 30" fill="none"><circle cx="14.5" cy="15" r="14" fill="#44C0C0"/><path fill="#fff" d="M14.4 9.1a1.3 1.3 0 1 0 0-2.6 1.3 1.3 0 0 0 0 2.6M17.9 12.6a1.3 1.3 0 1 0 0-2.6 1.3 1.3 0 0 0 0 2.6M21.3 15.9a1.3 1.3 0 1 0 0-2.6 1.3 1.3 0 0 0 0 2.6M15.2 15.9a1.3 1.3 0 1 0 0-2.6 1.3 1.3 0 0 0 0 2.6M10.6 15.9a1.3 1.3 0 1 0 0-2.6 1.3 1.3 0 0 0 0 2.6M5.9 15.9a1.3 1.3 0 1 0 0-2.6 1.3 1.3 0 0 0 0 2.6M17.9 19.5a1.3 1.3 0 1 0 0-2.6 1.3 1.3 0 0 0 0 2.6M14.4 23.1a1.3 1.3 0 1 0 0-2.6 1.3 1.3 0 0 0 0 2.6"/></svg></span></a></div>
+                    </div>
+                </div>
+            </div>
+            <!-- SLIDE 04 -->
+            <div class="swiper-slide" data-index="3">
+                <div class="slide-media"><div class="slide-media-inner">
+                    <img src="https://images.unsplash.com/photo-1487958449943-2429e8be8625?w=1400&q=80" alt="Architecture" loading="lazy">
+                </div></div>
+                <div class="slide-content">
+                    <div class="content-wrapper">
+                        <div class="slide-label">Our Services</div>
+                        <h2 class="slide-heading">Architecture &amp; Design</h2>
+                        <p class="slide-text">W13 leads in creating architectural designs across residential, commercial, education and healthcare sectors, renowned for our unwavering dedication to excellence. Our approach integrates advanced design technologies with a steadfast commitment to sustainability, ensuring that each project not only meets but exceeds the highest standards of quality.</p>
+                        <div class="buttons-container"><a href="#" class="slide-btn">Find out more <span class="btn-dot-icon"><svg xmlns="http://www.w3.org/2000/svg" width="29" height="29" viewBox="0 0 29 30" fill="none"><circle cx="14.5" cy="15" r="14" fill="#44C0C0"/><path fill="#fff" d="M14.4 9.1a1.3 1.3 0 1 0 0-2.6 1.3 1.3 0 0 0 0 2.6M17.9 12.6a1.3 1.3 0 1 0 0-2.6 1.3 1.3 0 0 0 0 2.6M21.3 15.9a1.3 1.3 0 1 0 0-2.6 1.3 1.3 0 0 0 0 2.6M15.2 15.9a1.3 1.3 0 1 0 0-2.6 1.3 1.3 0 0 0 0 2.6M10.6 15.9a1.3 1.3 0 1 0 0-2.6 1.3 1.3 0 0 0 0 2.6M5.9 15.9a1.3 1.3 0 1 0 0-2.6 1.3 1.3 0 0 0 0 2.6M17.9 19.5a1.3 1.3 0 1 0 0-2.6 1.3 1.3 0 0 0 0 2.6M14.4 23.1a1.3 1.3 0 1 0 0-2.6 1.3 1.3 0 0 0 0 2.6"/></svg></span></a></div>
+                    </div>
+                </div>
+            </div>
+            <!-- SLIDE 05 -->
+            <div class="swiper-slide" data-index="4">
+                <div class="slide-media"><div class="slide-media-inner">
+                    <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=1400&q=80" alt="Consultancy" loading="lazy">
+                </div></div>
+                <div class="slide-content">
+                    <div class="content-wrapper">
+                        <div class="slide-label">Our Services</div>
+                        <h2 class="slide-heading">Consultancy Services</h2>
+                        <p class="slide-text">W13's multi-disciplinary consultancy team brings together specialists in structural engineering, quantity surveying, project management and planning who collaborate to deliver innovative solutions tailored to each project's unique requirements. Our methodical approach ensures rigorous preparation and seamless execution.</p>
+                        <div class="buttons-container"><a href="#" class="slide-btn">Find out more <span class="btn-dot-icon"><svg xmlns="http://www.w3.org/2000/svg" width="29" height="29" viewBox="0 0 29 30" fill="none"><circle cx="14.5" cy="15" r="14" fill="#44C0C0"/><path fill="#fff" d="M14.4 9.1a1.3 1.3 0 1 0 0-2.6 1.3 1.3 0 0 0 0 2.6M17.9 12.6a1.3 1.3 0 1 0 0-2.6 1.3 1.3 0 0 0 0 2.6M21.3 15.9a1.3 1.3 0 1 0 0-2.6 1.3 1.3 0 0 0 0 2.6M15.2 15.9a1.3 1.3 0 1 0 0-2.6 1.3 1.3 0 0 0 0 2.6M10.6 15.9a1.3 1.3 0 1 0 0-2.6 1.3 1.3 0 0 0 0 2.6M5.9 15.9a1.3 1.3 0 1 0 0-2.6 1.3 1.3 0 0 0 0 2.6M17.9 19.5a1.3 1.3 0 1 0 0-2.6 1.3 1.3 0 0 0 0 2.6M14.4 23.1a1.3 1.3 0 1 0 0-2.6 1.3 1.3 0 0 0 0 2.6"/></svg></span></a></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pagination -->
+            <div class="swiper-pagination" id="swiperPagination">
+                <span class="swiper-pagination-bullet active" data-index="0"></span>
+                <span class="swiper-pagination-bullet" data-index="1"></span>
+                <span class="swiper-pagination-bullet" data-index="2"></span>
+                <span class="swiper-pagination-bullet" data-index="3"></span>
+                <span class="swiper-pagination-bullet" data-index="4"></span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section" id="contact">
+    <div class="cta-inner">
+        <h2 class="cta-title reveal-up">Let's work together</h2>
+        <p class="cta-text reveal-up">We believe the best results come from collaborating with passionate people. Whether you have a vision or need guidance, we're here to help transform challenges into opportunities. Let's start the conversation and bring your aspirations to life.</p>
+        <a href="#" class="btn-cta reveal-up">Let's talk</a>
+    </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+    <div class="footer-inner">
+        <div class="footer-top">
+            <div class="footer-brand">
+                <div class="footer-logo">
+                    <img src="https://w13uk.com/wp-content/uploads/2022/09/W13_Logo_White.png" alt="W13 Group">
+                </div>
+                <p class="footer-brand-text">Building communities, creating value, and delivering excellence across property development.</p>
+            </div>
+            <div class="footer-nav">
+                <div class="footer-nav-col"><h4><a href="index.html#about">About Us</a></h4></div>
+                <div class="footer-nav-col"><h4><a href="#">Divisions</a></h4></div>
+                <div class="footer-nav-col"><h4><a href="services.html">Services</a></h4></div>
+                <div class="footer-nav-col"><h4><a href="index.html#projects">Projects</a></h4></div>
+                <div class="footer-nav-col"><h4><a href="#">Investors</a></h4></div>
+                <div class="footer-nav-col"><h4><a href="index.html#news">News</a></h4></div>
+            </div>
+            <div class="footer-contact">
+                <h4 class="footer-contact-heading">Head Office</h4>
+                <div class="footer-contact-text">
+                    <a href="#">Beech House<br>Birmingham, B15 3BE</a><br><br>
+                    <a href="tel:+442031501401">+44 (0)20 3150 1401</a><br>
+                    <a href="mailto:info@w13uk.com">info@w13uk.com</a>
+                </div>
+                <div class="footer-social">
+                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#"><i class="fab fa-x-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="footer-legal">
+                <a href="#">T&amp;C's</a>
+                <a href="#">Privacy Policy</a>
+            </div>
+            <div class="footer-copy">©2026 W13 Group Ltd. All rights reserved</div>
+        </div>
+    </div>
+</footer>
+
+<!-- GSAP -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+<script>
+/* ===== PRELOADER ===== */
+window.addEventListener('load', () => {
+    setTimeout(() => {
+        const preloader = document.getElementById('preloader');
+        gsap.to(preloader, {
+            opacity: 0, duration: 0.6, ease: 'power2.inOut',
+            onComplete: () => {
+                preloader.style.display = 'none';
+                initAll();
+            }
+        });
+    }, 800);
+});
+
+/* ===== MENU ===== */
+function toggleMenu() {
+    const menu = document.getElementById('fullscreenMenu');
+    menu.classList.toggle('active');
+    document.body.style.overflow = menu.classList.contains('active') ? 'hidden' : '';
+}
+
+/* ===== SERVICES NAV ===== */
+const navItems = document.querySelectorAll('.services-nav-item');
+
+/* ===== INIT ===== */
+function initAll() {
+    gsap.registerPlugin(ScrollTrigger);
+
+    // Hero content reveal
+    gsap.from('.page-hero-title', { opacity: 0, y: 50, duration: 1.2, delay: 0.3, ease: 'power3.out' });
+    gsap.from('.page-hero-bottom', { opacity: 0, y: 40, duration: 1, delay: 0.7, ease: 'power3.out' });
+
+    // Top nav scroll state
+    ScrollTrigger.create({
+        trigger: '.page-hero',
+        start: 'top top',
+        end: '+=100',
+        onLeave: () => document.getElementById('topNav').classList.add('scrolled'),
+        onEnterBack: () => document.getElementById('topNav').classList.remove('scrolled')
+    });
+
+    // Scroll reveals
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+                observer.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.15, rootMargin: '0px 0px -50px 0px' });
+    document.querySelectorAll('.reveal-up, .reveal-scale, .reveal-left, .reveal-right').forEach(el => observer.observe(el));
+
+    // ===== SWIPER CARDS - GSAP ScrollTrigger Pin & Stack =====
+    const slides = gsap.utils.toArray('.swiper-slide');
+    const totalSlides = slides.length;
+    const outer = document.querySelector('.swiper-cards-outer');
+    const bullets = document.querySelectorAll('.swiper-pagination-bullet');
+
+    const isDesktop = window.innerWidth >= 768;
+    const wrapper = document.querySelector('.swiper-cards-wrapper');
+    const mediaEls = document.querySelectorAll('.slide-media');
+    const mediaInners = document.querySelectorAll('.slide-media-inner');
+    const mediaImgs = document.querySelectorAll('.slide-media img');
+    const overlays = document.querySelectorAll('.slide-media-inner::after');
+
+    // Helper: set grow state (padding/radius → 0 = full bleed)
+    function setGrown() {
+        mediaEls.forEach(el => { el.style.padding = '0px'; });
+        document.querySelectorAll('.slide-media-inner, .slide-media img').forEach(el => {
+            el.style.borderRadius = '0px';
+        });
+        // ::after pseudo can't be styled directly, use a class
+        wrapper.classList.add('is-grown');
+    }
+    // Helper: set shrink state (padding/radius → 20px = floating card)
+    function setShrunk() {
+        mediaEls.forEach(el => { el.style.padding = '20px'; });
+        document.querySelectorAll('.slide-media-inner, .slide-media img').forEach(el => {
+            el.style.borderRadius = '20px';
+        });
+        wrapper.classList.remove('is-grown');
+    }
+
+    if (outer && totalSlides > 0 && isDesktop) {
+        // Desktop: GSAP timeline with pin, slides slide up, card grows
+        wrapper.classList.add('is-desktop');
+        wrapper.style.height = '100vh';
+
+        // Set scroll height on outer
+        const scrollDistance = window.innerHeight * Math.max(totalSlides - 1, 1);
+        const totalHeight = window.innerHeight + scrollDistance + 20;
+        outer.style.height = totalHeight + 'px';
+
+        // Stack slides: first visible, rest start below at y:100vh
+        slides.forEach((slide, i) => {
+            slide.style.height = '100vh';
+            slide.style.marginBottom = '0';
+            if (i > 0) gsap.set(slide, { y: '100vh' });
+        });
+
+        // Start in shrunk state (padded, rounded)
+        setShrunk();
+
+        // Build GSAP timeline — each slide after first slides UP
+        const tl = gsap.timeline({
+            defaults: { ease: 'none' },
+            scrollTrigger: {
+                trigger: wrapper,
+                start: 'top top',
+                end: '+=' + scrollDistance + 'px',
+                scrub: true,
+                pin: true,
+                invalidateOnRefresh: true,
+                onEnter: () => {
+                    setGrown();
+                    wrapper.classList.add('is-pinned');
+                },
+                onLeave: () => {
+                    setShrunk();
+                    wrapper.classList.remove('is-pinned');
+                },
+                onLeaveBack: () => {
+                    setShrunk();
+                    wrapper.classList.remove('is-pinned');
+                },
+                onEnterBack: () => {
+                    setGrown();
+                    wrapper.classList.add('is-pinned');
+                },
+                onUpdate: (self) => {
+                    // Track active slide for pagination + services nav
+                    const progress = self.progress;
+                    const slideProgress = progress * (totalSlides - 1);
+                    const activeIdx = Math.round(slideProgress);
+                    bullets.forEach((b, i) => b.classList.toggle('active', i === activeIdx));
+                    navItems.forEach((item, i) => item.classList.toggle('active', i === activeIdx));
+                }
+            }
+        });
+
+        // Animate each slide (after the first) sliding up into view
+        slides.forEach((slide, i) => {
+            if (i !== 0) {
+                tl.to(slide, { y: '0vh', duration: 0.8 }, i);
+            }
+        });
+
+        // Nav item click → scroll to corresponding card position
+        navItems.forEach((item, i) => {
+            item.addEventListener('click', function(e) {
+                e.preventDefault();
+                const outerRect = outer.getBoundingClientRect();
+                const outerTop = window.pageYOffset + outerRect.top;
+                const scrollPerSlide = scrollDistance / (totalSlides - 1);
+                const targetScroll = outerTop + (i * scrollPerSlide);
+                window.scrollTo({ top: targetScroll, behavior: 'smooth' });
+            });
+        });
+
+        // Pagination bullet click
+        bullets.forEach((bullet, i) => {
+            bullet.addEventListener('click', function() {
+                const outerRect = outer.getBoundingClientRect();
+                const outerTop = window.pageYOffset + outerRect.top;
+                const scrollPerSlide = scrollDistance / (totalSlides - 1);
+                const targetScroll = outerTop + (i * scrollPerSlide);
+                window.scrollTo({ top: targetScroll, behavior: 'smooth' });
+            });
+        });
+    } else if (outer && totalSlides > 0) {
+        // Mobile: static stack, all visible, no pinning, stays padded+rounded
+        slides.forEach(slide => { slide.style.transform = 'none'; });
+    }
+}
+
+/* ===== DOTS ANIMATION ===== */
+(function() {
+    const canvas = document.getElementById('dotsCanvas');
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    const dotColor = 'rgba(12,35,63,0.35)';
+    const dotColorActive = '#44C0C0';
+    const dotRadius = 1.5;
+    const spacing = 38;
+    let dots = [];
+    let mouse = { x: -1000, y: -1000 };
+    const influenceRadius = 140;
+    const maxScale = 3.5;
+    let w = 0, h = 0;
+
+    function resize() {
+        const rect = canvas.parentElement.getBoundingClientRect();
+        const dpr = window.devicePixelRatio || 1;
+        w = rect.width;
+        h = rect.height;
+        canvas.width = w * dpr;
+        canvas.height = h * dpr;
+        canvas.style.width = w + 'px';
+        canvas.style.height = h + 'px';
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+        buildDots();
+    }
+
+    function buildDots() {
+        dots = [];
+        const cols = Math.ceil(w / spacing) + 1;
+        const rows = Math.ceil(h / spacing) + 1;
+        const offsetX = (w - (cols - 1) * spacing) / 2;
+        const offsetY = (h - (rows - 1) * spacing) / 2;
+        for (let r = 0; r < rows; r++) {
+            for (let c = 0; c < cols; c++) {
+                dots.push({
+                    x: offsetX + c * spacing,
+                    y: offsetY + r * spacing,
+                    scale: 1,
+                    targetScale: 1
+                });
+            }
+        }
+    }
+
+    function draw() {
+        ctx.clearRect(0, 0, w, h);
+
+        for (let i = 0; i < dots.length; i++) {
+            const d = dots[i];
+            const dx = d.x - mouse.x;
+            const dy = d.y - mouse.y;
+            const dist = Math.sqrt(dx * dx + dy * dy);
+
+            if (dist < influenceRadius) {
+                const t = 1 - dist / influenceRadius;
+                d.targetScale = 1 + (maxScale - 1) * t;
+            } else {
+                d.targetScale = 1;
+            }
+
+            // Smooth interpolation
+            d.scale += (d.targetScale - d.scale) * 0.15;
+
+            const r = dotRadius * d.scale;
+            const t = d.scale > 1.05 ? (d.scale - 1) / (maxScale - 1) : 0;
+            const alpha = t > 0 ? 0.3 + 0.7 * t : 0.3;
+
+            ctx.beginPath();
+            ctx.arc(d.x, d.y, r, 0, Math.PI * 2);
+            // Blend from base color to orange accent near cursor
+            if (t > 0.5) {
+                ctx.fillStyle = dotColorActive;
+                ctx.globalAlpha = alpha * t;
+            } else {
+                ctx.fillStyle = dotColor;
+                ctx.globalAlpha = alpha;
+            }
+            ctx.fill();
+        }
+        ctx.globalAlpha = 1;
+        requestAnimationFrame(draw);
+    }
+
+    // Track mouse relative to the canvas parent
+    canvas.addEventListener('mousemove', function(e) {
+        const rect = canvas.getBoundingClientRect();
+        mouse.x = e.clientX - rect.left;
+        mouse.y = e.clientY - rect.top;
+    });
+    canvas.addEventListener('mouseleave', function() {
+        mouse.x = -1000;
+        mouse.y = -1000;
+    });
+
+    window.addEventListener('resize', resize);
+    resize();
+    draw();
+})();
+
+/* ===== DOT CURSOR ===== */
+(function() {
+    const cursor = document.getElementById('dotCursor');
+    if (!cursor) return;
+    let cx = -100, cy = -100;
+    document.addEventListener('mousemove', function(e) {
+        cx = e.clientX; cy = e.clientY;
+        cursor.style.left = cx + 'px';
+        cursor.style.top = cy + 'px';
+    });
+    document.addEventListener('mouseleave', function() {
+        cursor.style.left = '-100px';
+        cursor.style.top = '-100px';
+    });
+    // Grow on hover over interactive elements
+    document.querySelectorAll('a, button, .menu-btn, .menu-close, .services-nav-item, .top-nav-link, .top-nav-contact, .btn-hero-talk, .service-block-link, .btn-cta, .footer-social a, .footer-legal a, .footer-nav-col h4').forEach(function(el) {
+        el.addEventListener('mouseenter', function() { cursor.classList.add('hovering'); });
+        el.addEventListener('mouseleave', function() { cursor.classList.remove('hovering'); });
+    });
+})();
+
+/* ===== SMOOTH SCROLL GENERAL ===== */
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+    if (a.classList.contains('services-nav-item')) return;
+    a.addEventListener('click', function(e) {
+        const href = this.getAttribute('href');
+        if (href === '#') return;
+        e.preventDefault();
+        const target = document.querySelector(href);
+        if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+});
+</script>
+</body>
+</html>
