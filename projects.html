@@ -1,0 +1,926 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projects | W13 Group</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        /* ===== RESET ===== */
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        html { overflow-x: hidden; scroll-behavior: smooth; }
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            background: #0C233F;
+            color: #EAEAEA;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        a { text-decoration: none; color: inherit; }
+        button { cursor: pointer; border: none; font-family: inherit; background: none; color: inherit; }
+        img { max-width: 100%; display: block; }
+        ul { list-style: none; }
+        ::selection { background: rgba(68,192,192,0.3); }
+
+        /* ===== PRELOADER ===== */
+        .preloader {
+            position: fixed; inset: 0; background: #0C233F; z-index: 100000;
+            display: flex; align-items: center; justify-content: center; flex-direction: column;
+        }
+        .preloader-dots { display: flex; gap: 8px; }
+        .preloader-dot {
+            width: 8px; height: 8px; background: #44C0C0; border-radius: 50%;
+            animation: preloaderPulse 1.4s infinite ease-in-out;
+        }
+        .preloader-dot:nth-child(2) { animation-delay: 0.2s; }
+        .preloader-dot:nth-child(3) { animation-delay: 0.4s; }
+        @keyframes preloaderPulse {
+            0%, 80%, 100% { opacity: 0.2; transform: scale(0.8); }
+            40% { opacity: 1; transform: scale(1); }
+        }
+
+        /* ===== NAVBAR ===== */
+        .navbar {
+            position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+            padding: 30px 50px; display: flex; justify-content: space-between; align-items: center;
+            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+            background: linear-gradient(to bottom, rgba(12,35,63,0.95) 0%, transparent 100%);
+        }
+        .navbar.scrolled {
+            background: rgba(12,35,63,0.98);
+            padding: 20px 50px;
+            backdrop-filter: blur(10px);
+        }
+        .nav-logo {
+            display: flex; align-items: center;
+        }
+        .nav-logo img {
+            height: 40px; width: auto;
+        }
+        .nav-right { display: flex; align-items: center; gap: 30px; }
+        .menu-btn {
+            font-size: 15px; font-weight: 500; color: #EAEAEA; letter-spacing: 2px;
+            text-transform: uppercase; cursor: pointer; display: flex; align-items: center; gap: 12px;
+        }
+        .menu-btn-lines { display: flex; flex-direction: column; gap: 5px; width: 24px; }
+        .menu-btn-lines span {
+            height: 1.5px; background: #EAEAEA; transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .menu-btn-lines span:first-child { width: 24px; }
+        .menu-btn-lines span:last-child { width: 16px; }
+
+        /* ===== FULLSCREEN MENU ===== */
+        .fullscreen-menu {
+            position: fixed; inset: 0; background: #0C233F; z-index: 9999;
+            display: flex; opacity: 0; pointer-events: none;
+            transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .fullscreen-menu.active { opacity: 1; pointer-events: all; }
+        .menu-close {
+            position: absolute; top: 30px; right: 50px; font-size: 15px; font-weight: 500;
+            color: #EAEAEA; letter-spacing: 2px; text-transform: uppercase; cursor: pointer;
+            display: flex; align-items: center; gap: 12px; z-index: 10;
+        }
+        .menu-close-x { font-size: 28px; font-weight: 300; line-height: 1; }
+        .menu-left {
+            flex: 1; display: flex; flex-direction: column; justify-content: center;
+            padding: 100px 80px;
+        }
+        .menu-nav-link {
+            display: block; font-family: 'Playfair Display', serif;
+            font-size: clamp(36px, 5vw, 60px); font-weight: 600; color: #EAEAEA;
+            padding: 12px 0; opacity: 0.4; transition: all 0.4s; position: relative;
+            transform: translateX(-20px); line-height: 1.2;
+        }
+        .fullscreen-menu.active .menu-nav-link {
+            transform: translateX(0);
+            transition-delay: calc(var(--i) * 0.08s);
+        }
+        .menu-nav-link:hover { opacity: 1; padding-left: 30px; }
+        .menu-nav-link::before {
+            content: ''; position: absolute; left: 0; top: 50%; width: 0; height: 1px;
+            background: #44C0C0; transition: width 0.3s;
+        }
+        .menu-nav-link:hover::before { width: 20px; }
+        .menu-right {
+            width: 45%; position: relative; overflow: hidden;
+            display: flex; align-items: flex-end; padding: 60px;
+        }
+        .menu-right-img {
+            position: absolute; inset: 0;
+        }
+        .menu-right-img img { width: 100%; height: 100%; object-fit: cover; opacity: 0.4; }
+        .menu-right-info { position: relative; z-index: 2; }
+        .menu-right-info h4 {
+            font-size: 13px; font-weight: 600; letter-spacing: 3px;
+            text-transform: uppercase; color: #44C0C0; margin-bottom: 16px;
+        }
+        .menu-right-info p {
+            font-size: 15px; color: rgba(234,234,234,0.6); line-height: 1.7;
+        }
+        .menu-right-info a {
+            display: inline-block; margin-top: 16px; font-size: 14px; color: #44C0C0;
+            font-weight: 500; border-bottom: 1px solid rgba(68,192,192,0.4);
+            padding-bottom: 2px; transition: border-color 0.3s;
+        }
+        .menu-right-info a:hover { border-color: #44C0C0; }
+
+        /* ===== PAGE HERO ===== */
+        .page-hero {
+            position: relative; height: 50vh; min-height: 450px; max-height: 550px;
+            overflow: hidden; display: flex; align-items: center; justify-content: center;
+            background: #0C233F;
+        }
+        .page-hero-bg {
+            position: absolute; inset: 0; z-index: 0;
+        }
+        .page-hero-bg img {
+            width: 100%; height: 100%; object-fit: cover; opacity: 0.25;
+        }
+        .page-hero-overlay {
+            position: absolute; inset: 0; z-index: 1;
+            background: linear-gradient(to bottom, rgba(12,35,63,0.7) 0%, rgba(12,35,63,0.85) 100%);
+        }
+        .page-hero-content {
+            position: relative; z-index: 2; text-align: center; padding: 0 50px;
+        }
+        .page-hero-label {
+            font-size: 13px; font-weight: 600; letter-spacing: 4px;
+            text-transform: uppercase; color: #44C0C0; margin-bottom: 20px;
+        }
+        .page-hero-title {
+            font-family: 'Playfair Display', serif; font-size: clamp(48px, 7vw, 80px);
+            font-weight: 700; line-height: 1.1; color: #EAEAEA;
+        }
+
+        /* ===== PROJECTS GRID ===== */
+        .projects-grid-section {
+            padding: 120px 50px;
+            background: #0C233F;
+        }
+        .projects-grid-inner {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 40px;
+            margin-bottom: 80px;
+        }
+        .project-card {
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+            border: 1px solid rgba(68,192,192,0.08);
+            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+            background: rgba(9,28,51,0.4);
+        }
+        .project-card:hover {
+            border-color: rgba(68,192,192,0.3);
+            transform: translateY(-4px);
+        }
+        .project-card-img {
+            height: 450px;
+            overflow: hidden;
+            position: relative;
+        }
+        .project-card-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .project-card:hover .project-card-img img {
+            transform: scale(1.08);
+        }
+        .project-card-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(12,35,63,0.95) 0%, transparent 50%);
+        }
+        .project-card-content {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 40px;
+        }
+        .project-card-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 32px;
+            font-weight: 700;
+            line-height: 1.3;
+            margin-bottom: 12px;
+            color: #EAEAEA;
+        }
+        .project-card-desc {
+            font-size: 15px;
+            color: rgba(234,234,234,0.6);
+            line-height: 1.7;
+            margin-bottom: 24px;
+        }
+        .project-card-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 13px;
+            font-weight: 600;
+            color: #44C0C0;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            padding: 12px 24px;
+            border: 1px solid rgba(68,192,192,0.4);
+            transition: all 0.3s;
+        }
+        .project-card:hover .project-card-btn {
+            background: #44C0C0;
+            color: #0C233F;
+            gap: 16px;
+        }
+
+        /* ===== DESIGN PROCESS ===== */
+        .design-process-section {
+            padding: 120px 50px;
+            background: #091c33;
+            border-top: 1px solid rgba(68,192,192,0.1);
+        }
+        .design-process-inner {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        .design-process-header {
+            text-align: center;
+            margin-bottom: 80px;
+        }
+        .design-process-label {
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: #44C0C0;
+            margin-bottom: 20px;
+        }
+        .design-process-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(36px, 5vw, 56px);
+            font-weight: 700;
+            line-height: 1.2;
+            color: #EAEAEA;
+        }
+        .design-process-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+        }
+        .process-card {
+            text-align: center;
+            padding: 40px 30px;
+            border: 1px solid rgba(68,192,192,0.08);
+            transition: all 0.4s;
+            background: rgba(12,35,63,0.3);
+        }
+        .process-card:hover {
+            border-color: rgba(68,192,192,0.3);
+            background: rgba(12,35,63,0.5);
+        }
+        .process-card-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 30px;
+            border-radius: 50%;
+            overflow: hidden;
+        }
+        .process-card-icon img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .process-card-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 22px;
+            font-weight: 600;
+            margin-bottom: 16px;
+            color: #EAEAEA;
+        }
+        .process-card-desc {
+            font-size: 14px;
+            color: rgba(234,234,234,0.5);
+            line-height: 1.7;
+        }
+
+        /* ===== CTA ===== */
+        .cta-section {
+            padding: 180px 50px;
+            background: #0C233F;
+            border-top: 1px solid rgba(68,192,192,0.1);
+        }
+        .cta-inner {
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        .cta-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(40px, 6vw, 72px);
+            font-weight: 700;
+            line-height: 1.1;
+            margin-bottom: 30px;
+        }
+        .cta-text {
+            font-size: 18px;
+            color: rgba(234,234,234,0.55);
+            line-height: 1.8;
+            margin-bottom: 50px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .btn-cta {
+            display: inline-block;
+            padding: 20px 50px;
+            background: #44C0C0;
+            color: #0C233F;
+            font-size: 15px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            transition: all 0.4s;
+        }
+        .btn-cta:hover {
+            background: #3aadad;
+            transform: translateY(-2px);
+        }
+
+        /* ===== FOOTER ===== */
+        .footer {
+            background: #091c33;
+            padding: 80px 50px 40px;
+            border-top: 1px solid rgba(68,192,192,0.1);
+        }
+        .footer-inner {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        .footer-top {
+            display: grid;
+            grid-template-columns: 1fr 2fr 1fr;
+            gap: 60px;
+            padding-bottom: 60px;
+            border-bottom: 1px solid rgba(68,192,192,0.1);
+        }
+        .footer-logo {
+            margin-bottom: 20px;
+        }
+        .footer-logo img {
+            height: 48px;
+            width: auto;
+        }
+        .footer-brand-text {
+            font-size: 14px;
+            color: rgba(234,234,234,0.4);
+            line-height: 1.7;
+        }
+        .footer-nav {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+        .footer-nav-col h4 {
+            font-family: 'Playfair Display', serif;
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: #EAEAEA;
+        }
+        .footer-nav-col ul {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        .footer-nav-col a {
+            font-size: 14px;
+            color: rgba(234,234,234,0.5);
+            transition: color 0.3s;
+            display: block;
+        }
+        .footer-nav-col a:hover {
+            color: #44C0C0;
+        }
+        .footer-contact-heading {
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: #44C0C0;
+            margin-bottom: 20px;
+        }
+        .footer-contact-text {
+            font-size: 14px;
+            color: rgba(234,234,234,0.4);
+            line-height: 1.8;
+        }
+        .footer-contact-text a {
+            color: rgba(234,234,234,0.6);
+            transition: color 0.3s;
+        }
+        .footer-contact-text a:hover {
+            color: #44C0C0;
+        }
+        .footer-social {
+            display: flex;
+            gap: 12px;
+            margin-top: 24px;
+        }
+        .footer-social a {
+            width: 40px;
+            height: 40px;
+            border: 1px solid rgba(68,192,192,0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: rgba(234,234,234,0.4);
+            font-size: 15px;
+            transition: all 0.3s;
+        }
+        .footer-social a:hover {
+            border-color: #44C0C0;
+            color: #44C0C0;
+        }
+        .footer-bottom {
+            padding-top: 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        .footer-legal {
+            display: flex;
+            gap: 20px;
+        }
+        .footer-legal a {
+            font-size: 12px;
+            color: rgba(234,234,234,0.25);
+            transition: color 0.3s;
+        }
+        .footer-legal a:hover {
+            color: #44C0C0;
+        }
+        .footer-copy {
+            font-size: 12px;
+            color: rgba(234,234,234,0.25);
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 1024px) {
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+            .design-process-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .footer-top {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 20px 30px;
+            }
+            .page-hero {
+                height: 40vh;
+                min-height: 350px;
+            }
+            .projects-grid-section,
+            .design-process-section,
+            .cta-section {
+                padding: 80px 30px;
+            }
+            .design-process-grid {
+                grid-template-columns: 1fr;
+            }
+            .footer {
+                padding: 60px 30px 30px;
+            }
+            .footer-nav {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Preloader -->
+    <div class="preloader">
+        <div class="preloader-dots">
+            <div class="preloader-dot"></div>
+            <div class="preloader-dot"></div>
+            <div class="preloader-dot"></div>
+        </div>
+    </div>
+
+    <!-- Navbar -->
+    <nav class="navbar">
+        <a href="index.html" class="nav-logo">
+            <img src="https://w13uk.com/wp-content/uploads/2022/09/W13_Logo_White.png" alt="W13 Group">
+        </a>
+        <div class="nav-right">
+            <div class="menu-btn">
+                <span>Menu</span>
+                <div class="menu-btn-lines">
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Fullscreen Menu -->
+    <div class="fullscreen-menu">
+        <div class="menu-close">
+            <span>Close</span>
+            <span class="menu-close-x">×</span>
+        </div>
+        <div class="menu-left">
+            <a href="index.html" class="menu-nav-link" style="--i: 1;">Home</a>
+            <a href="index.html#about" class="menu-nav-link" style="--i: 2;">About</a>
+            <a href="services.html" class="menu-nav-link" style="--i: 3;">Services</a>
+            <a href="projects.html" class="menu-nav-link" style="--i: 4;">Projects</a>
+            <a href="index.html#news" class="menu-nav-link" style="--i: 5;">News</a>
+            <a href="index.html#contact" class="menu-nav-link" style="--i: 6;">Contact</a>
+        </div>
+        <div class="menu-right">
+            <div class="menu-right-img">
+                <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=2400&q=90" alt="Menu Visual">
+            </div>
+            <div class="menu-right-info">
+                <h4>Get in Touch</h4>
+                <p>Ready to discuss your next project? We're here to help bring your vision to life.</p>
+                <a href="index.html#contact">Contact Us</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Page Hero -->
+    <section class="page-hero">
+        <div class="page-hero-bg">
+            <img src="https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=2400&q=90" alt="Projects">
+        </div>
+        <div class="page-hero-overlay"></div>
+        <div class="page-hero-content">
+            <div class="page-hero-label">Our Work</div>
+            <h1 class="page-hero-title">Projects</h1>
+        </div>
+    </section>
+
+    <!-- Projects Grid -->
+    <section class="projects-grid-section">
+        <div class="projects-grid-inner">
+            <div class="projects-grid">
+                
+                <!-- Project 1: The Grange -->
+                <article class="project-card">
+                    <div class="project-card-img">
+                        <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=2400&q=90" alt="The Grange">
+                        <div class="project-card-overlay"></div>
+                        <div class="project-card-content">
+                            <h3 class="project-card-title">The Grange</h3>
+                            <p class="project-card-desc">34 no. new build 3-4 bed houses on a 1 ha. site in Coseley</p>
+                            <button class="project-card-btn">
+                                <span>More Info</span>
+                                <i class="fa-solid fa-arrow-right"></i>
+                            </button>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Project 2: Vox Living -->
+                <article class="project-card">
+                    <div class="project-card-img">
+                        <img src="https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=2400&q=90" alt="Vox Living">
+                        <div class="project-card-overlay"></div>
+                        <div class="project-card-content">
+                            <h3 class="project-card-title">Vox Living</h3>
+                            <p class="project-card-desc">Conversion of an office building into student living apartments</p>
+                            <button class="project-card-btn">
+                                <span>More Info</span>
+                                <i class="fa-solid fa-arrow-right"></i>
+                            </button>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Project 3: Showell Lane -->
+                <article class="project-card">
+                    <div class="project-card-img">
+                        <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=2400&q=90" alt="Showell Lane">
+                        <div class="project-card-overlay"></div>
+                        <div class="project-card-content">
+                            <h3 class="project-card-title">Showell Lane</h3>
+                            <p class="project-card-desc">High-end single-storey rear extension and internal refurbishment to a large house in Wolverhampton</p>
+                            <button class="project-card-btn">
+                                <span>More Info</span>
+                                <i class="fa-solid fa-arrow-right"></i>
+                            </button>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Project 4: Hilston Park -->
+                <article class="project-card">
+                    <div class="project-card-img">
+                        <img src="https://images.unsplash.com/photo-1613977257363-707ba9348227?w=2400&q=90" alt="Hilston Park">
+                        <div class="project-card-overlay"></div>
+                        <div class="project-card-content">
+                            <h3 class="project-card-title">Hilston Park</h3>
+                            <p class="project-card-desc">Extensive internal refurbishments to a Grade 2 listed building in Wales</p>
+                            <button class="project-card-btn">
+                                <span>More Info</span>
+                                <i class="fa-solid fa-arrow-right"></i>
+                            </button>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Project 5: Walsall Road -->
+                <article class="project-card">
+                    <div class="project-card-img">
+                        <img src="https://images.unsplash.com/photo-1628624747186-a941c476b7ef?w=2400&q=90" alt="Walsall Road">
+                        <div class="project-card-overlay"></div>
+                        <div class="project-card-content">
+                            <h3 class="project-card-title">Walsall Road</h3>
+                            <p class="project-card-desc">4 no. new build 3 bed houses adjacent Willenhall town centre</p>
+                            <button class="project-card-btn">
+                                <span>More Info</span>
+                                <i class="fa-solid fa-arrow-right"></i>
+                            </button>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Project 6: Additional Project -->
+                <article class="project-card">
+                    <div class="project-card-img">
+                        <img src="https://images.unsplash.com/photo-1622919505116-9d7ac0fc7d0c?w=2400&q=90" alt="Development Project">
+                        <div class="project-card-overlay"></div>
+                        <div class="project-card-content">
+                            <h3 class="project-card-title">Residential Development</h3>
+                            <p class="project-card-desc">Mixed-use development with commercial and residential units</p>
+                            <button class="project-card-btn">
+                                <span>More Info</span>
+                                <i class="fa-solid fa-arrow-right"></i>
+                            </button>
+                        </div>
+                    </div>
+                </article>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Design Process -->
+    <section class="design-process-section">
+        <div class="design-process-inner">
+            <header class="design-process-header">
+                <div class="design-process-label">How We Work</div>
+                <h2 class="design-process-title">Our Design Process</h2>
+            </header>
+
+            <div class="design-process-grid">
+                
+                <!-- Process 1 -->
+                <article class="process-card">
+                    <div class="process-card-icon">
+                        <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=300&q=90" alt="Measured Surveys">
+                    </div>
+                    <h3 class="process-card-title">Measured Surveys</h3>
+                    <p class="process-card-desc">We undertake measured surveys of existing buildings to enable the production of existing drawings.</p>
+                </article>
+
+                <!-- Process 2 -->
+                <article class="process-card">
+                    <div class="process-card-icon">
+                        <img src="https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=300&q=90" alt="Architecture">
+                    </div>
+                    <h3 class="process-card-title">Architecture</h3>
+                    <p class="process-card-desc">We complete site analysis/feasibility work to understand the site constraints and create proposed drawings.</p>
+                </article>
+
+                <!-- Process 3 -->
+                <article class="process-card">
+                    <div class="process-card-icon">
+                        <img src="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=300&q=90" alt="Interior Design">
+                    </div>
+                    <h3 class="process-card-title">Interior Design</h3>
+                    <p class="process-card-desc">We can help make your new extension feel like a home. With 3D modelling, we show you what it will look like.</p>
+                </article>
+
+                <!-- Process 4 -->
+                <article class="process-card">
+                    <div class="process-card-icon">
+                        <img src="https://images.unsplash.com/photo-1664575602276-acd073f104c1?w=300&q=90" alt="Multi-Disciplinary">
+                    </div>
+                    <h3 class="process-card-title">Multi-Disciplinary Service</h3>
+                    <p class="process-card-desc">Our in-house team of consultants can aid throughout the project with structural and civil engineering.</p>
+                </article>
+
+                <!-- Process 5 -->
+                <article class="process-card">
+                    <div class="process-card-icon">
+                        <img src="https://images.unsplash.com/photo-1507679799987-c73779587ccf?w=300&q=90" alt="Project Management">
+                    </div>
+                    <h3 class="process-card-title">Project Management</h3>
+                    <p class="process-card-desc">We provide Contract Administration services and inspect works when your project is on-site, right up until completion.</p>
+                </article>
+
+                <!-- Process 6 -->
+                <article class="process-card">
+                    <div class="process-card-icon">
+                        <img src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=300&q=90" alt="Planning">
+                    </div>
+                    <h3 class="process-card-title">Planning & Building Regulation</h3>
+                    <p class="process-card-desc">We navigate planning and building regulation compliance to ensure your project meets all requirements.</p>
+                </article>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="cta-inner">
+            <h2 class="cta-title">Let's Work Together</h2>
+            <p class="cta-text">Ready to start your next project? Get in touch with our team today to discuss how we can help bring your vision to life.</p>
+            <a href="index.html#contact" class="btn-cta">Book Your Free Consultation</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-inner">
+            <div class="footer-top">
+                <div class="footer-brand">
+                    <div class="footer-logo">
+                        <img src="https://w13uk.com/wp-content/uploads/2022/09/W13_Logo_White.png" alt="W13 Group">
+                    </div>
+                    <p class="footer-brand-text">Building communities. Creating value. Delivering excellence in property development and construction.</p>
+                </div>
+
+                <div class="footer-nav">
+                    <div class="footer-nav-col">
+                        <h4>Company</h4>
+                        <ul>
+                            <li><a href="index.html">Home</a></li>
+                            <li><a href="index.html#about">About Us</a></li>
+                            <li><a href="services.html">Services</a></li>
+                            <li><a href="projects.html">Projects</a></li>
+                            <li><a href="index.html#news">News</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="footer-nav-col">
+                        <h4>Services</h4>
+                        <ul>
+                            <li><a href="services.html" data-slide="0">Land & Development</a></li>
+                            <li><a href="services.html" data-slide="1">Master Developer</a></li>
+                            <li><a href="services.html" data-slide="2">Construction & Main Contracting</a></li>
+                            <li><a href="services.html" data-slide="3">Facilities Management</a></li>
+                            <li><a href="services.html" data-slide="4">Lettings & Property Management</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="footer-nav-col">
+                        <h4>Legal</h4>
+                        <ul>
+                            <li><a href="#">Privacy Policy</a></li>
+                            <li><a href="#">Terms & Conditions</a></li>
+                            <li><a href="#">Sitemap</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="footer-contact">
+                    <h4 class="footer-contact-heading">Contact</h4>
+                    <div class="footer-contact-text">
+                        <p>Beech House, Greenfield Crescent<br>Birmingham, B15 3BE</p>
+                        <p style="margin-top: 12px;">
+                            Tel: <a href="tel:+441216630006">+44 (0)121 663 0006</a><br>
+                            Email: <a href="mailto:info@w13uk.com">info@w13uk.com</a>
+                        </p>
+                    </div>
+                    <div class="footer-social">
+                        <a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+                        <a href="#" aria-label="Twitter"><i class="fa-brands fa-twitter"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="#" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <div class="footer-copy">© 2023 W13 Group. All rights reserved.</div>
+                <div class="footer-legal">
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms & Conditions</a>
+                    <a href="#">Sitemap</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- GSAP -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+
+    <script>
+        // ===== PRELOADER =====
+        if (typeof gsap !== 'undefined') {
+            gsap.to('.preloader', {
+                opacity: 0,
+                duration: 0.6,
+                delay: 0.5,
+                onComplete: () => {
+                    document.querySelector('.preloader').style.display = 'none';
+                }
+            });
+        } else {
+            setTimeout(() => {
+                const preloader = document.querySelector('.preloader');
+                if (preloader) {
+                    preloader.style.opacity = '0';
+                    setTimeout(() => { preloader.style.display = 'none'; }, 600);
+                }
+            }, 500);
+        }
+
+        // ===== MENU TOGGLE =====
+        const menuBtn = document.querySelector('.menu-btn');
+        const menuClose = document.querySelector('.menu-close');
+        const fullscreenMenu = document.querySelector('.fullscreen-menu');
+
+        menuBtn.addEventListener('click', () => {
+            fullscreenMenu.classList.add('active');
+        });
+
+        menuClose.addEventListener('click', () => {
+            fullscreenMenu.classList.remove('active');
+        });
+
+        // Close menu when clicking a link
+        document.querySelectorAll('.menu-nav-link').forEach(link => {
+            link.addEventListener('click', () => {
+                fullscreenMenu.classList.remove('active');
+            });
+        });
+
+        // ===== NAVBAR SCROLL =====
+        const navbar = document.querySelector('.navbar');
+        let lastScroll = 0;
+
+        window.addEventListener('scroll', () => {
+            const currentScroll = window.pageYOffset;
+            
+            if (currentScroll > 100) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+            
+            lastScroll = currentScroll;
+        });
+
+        // ===== PROJECT CARDS ANIMATION =====
+        if (typeof gsap !== 'undefined') {
+            gsap.from('.project-card', {
+                scrollTrigger: {
+                    trigger: '.projects-grid',
+                    start: 'top 80%',
+                },
+                opacity: 0,
+                y: 60,
+                duration: 0.8,
+                stagger: 0.15,
+                ease: 'power3.out'
+            });
+
+            gsap.from('.process-card', {
+                scrollTrigger: {
+                    trigger: '.design-process-grid',
+                    start: 'top 80%',
+                },
+                opacity: 0,
+                y: 40,
+                duration: 0.7,
+                stagger: 0.12,
+                ease: 'power3.out'
+            });
+        }
+    </script>
+
+    <!-- ScrollTrigger Plugin (optional, for advanced animations) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+</body>
+</html>
