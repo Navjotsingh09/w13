@@ -1,11 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="no-js">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Projects | W13 Group</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script>document.documentElement.className = document.documentElement.className.replace("no-js", "js");</script>
     <style>
         /* ===== RESET ===== */
         *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
@@ -28,7 +29,9 @@
         .preloader {
             position: fixed; inset: 0; background: #0C233F; z-index: 100000;
             display: flex; align-items: center; justify-content: center; flex-direction: column;
+            transition: opacity 0.6s ease, visibility 0.6s ease;
         }
+        .preloader.is-hidden { opacity: 0; visibility: hidden; pointer-events: none; }
         .preloader-dots { display: flex; gap: 8px; }
         .preloader-dot {
             width: 8px; height: 8px; background: #44C0C0; border-radius: 50%;
@@ -129,133 +132,14 @@
 
         /* ===== PAGE HERO ===== */
         .page-hero {
-            position: relative; height: 50vh; min-height: 450px; max-height: 550px;
-            overflow: hidden; display: flex; align-items: center; justify-content: center;
+            padding: 160px 50px 80px;
             background: #0C233F;
-        }
-        .page-hero-bg {
-            position: absolute; inset: 0; z-index: 0;
-        }
-        .page-hero-bg img {
-            width: 100%; height: 100%; object-fit: cover; opacity: 0.25;
-        }
-        .page-hero-overlay {
-            position: absolute; inset: 0; z-index: 1;
-            background: linear-gradient(to bottom, rgba(12,35,63,0.7) 0%, rgba(12,35,63,0.85) 100%);
         }
         .page-hero-content {
-            position: relative; z-index: 2; text-align: center; padding: 0 50px;
+            max-width: 1400px;
+            margin: 0 auto;
         }
         .page-hero-label {
-            font-size: 13px; font-weight: 600; letter-spacing: 4px;
-            text-transform: uppercase; color: #44C0C0; margin-bottom: 20px;
-        }
-        .page-hero-title {
-            font-family: 'Playfair Display', serif; font-size: clamp(48px, 7vw, 80px);
-            font-weight: 700; line-height: 1.1; color: #EAEAEA;
-        }
-
-        /* ===== PROJECTS GRID ===== */
-        .projects-grid-section {
-            padding: 120px 50px;
-            background: #0C233F;
-        }
-        .projects-grid-inner {
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-        .projects-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 40px;
-            margin-bottom: 80px;
-        }
-        .project-card {
-            position: relative;
-            overflow: hidden;
-            cursor: pointer;
-            border: 1px solid rgba(68,192,192,0.08);
-            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-            background: rgba(9,28,51,0.4);
-        }
-        .project-card:hover {
-            border-color: rgba(68,192,192,0.3);
-            transform: translateY(-4px);
-        }
-        .project-card-img {
-            height: 450px;
-            overflow: hidden;
-            position: relative;
-        }
-        .project-card-img img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-        .project-card:hover .project-card-img img {
-            transform: scale(1.08);
-        }
-        .project-card-overlay {
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(to top, rgba(12,35,63,0.95) 0%, transparent 50%);
-        }
-        .project-card-content {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            padding: 40px;
-        }
-        .project-card-title {
-            font-family: 'Playfair Display', serif;
-            font-size: 32px;
-            font-weight: 700;
-            line-height: 1.3;
-            margin-bottom: 12px;
-            color: #EAEAEA;
-        }
-        .project-card-desc {
-            font-size: 15px;
-            color: rgba(234,234,234,0.6);
-            line-height: 1.7;
-            margin-bottom: 24px;
-        }
-        .project-card-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            font-size: 13px;
-            font-weight: 600;
-            color: #44C0C0;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            padding: 12px 24px;
-            border: 1px solid rgba(68,192,192,0.4);
-            transition: all 0.3s;
-        }
-        .project-card:hover .project-card-btn {
-            background: #44C0C0;
-            color: #0C233F;
-            gap: 16px;
-        }
-
-        /* ===== DESIGN PROCESS ===== */
-        .design-process-section {
-            padding: 120px 50px;
-            background: #091c33;
-            border-top: 1px solid rgba(68,192,192,0.1);
-        }
-        .design-process-inner {
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-        .design-process-header {
-            text-align: center;
-            margin-bottom: 80px;
-        }
-        .design-process-label {
             font-size: 13px;
             font-weight: 600;
             letter-spacing: 4px;
@@ -263,58 +147,184 @@
             color: #44C0C0;
             margin-bottom: 20px;
         }
-        .design-process-title {
+        .page-hero-title {
             font-family: 'Playfair Display', serif;
-            font-size: clamp(36px, 5vw, 56px);
+            font-size: clamp(48px, 7vw, 90px);
             font-weight: 700;
-            line-height: 1.2;
+            line-height: 1.1;
             color: #EAEAEA;
+            margin-bottom: 0;
         }
-        .design-process-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 40px;
+
+        /* ===== PROJECTS GRID ===== */
+        .projects-grid-section {
+            padding: 60px 50px 120px;
+            background: #0C233F;
         }
-        .process-card {
-            text-align: center;
-            padding: 40px 30px;
-            border: 1px solid rgba(68,192,192,0.08);
-            transition: all 0.4s;
-            background: rgba(12,35,63,0.3);
+        .projects-grid-inner {
+            max-width: 1400px;
+            margin: 0 auto;
         }
-        .process-card:hover {
-            border-color: rgba(68,192,192,0.3);
-            background: rgba(12,35,63,0.5);
+
+        /* ===== FILTER MODAL ===== */
+        .filter-modal {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 60px;
+            padding: 20px 0;
+            border-bottom: 1px solid rgba(68,192,192,0.1);
         }
-        .process-card-icon {
-            width: 80px;
-            height: 80px;
-            margin: 0 auto 30px;
-            border-radius: 50%;
-            overflow: hidden;
+        .filters {
+            display: flex;
+            gap: 30px;
+            flex-wrap: wrap;
         }
-        .process-card-icon img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
+        .filters_group {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
         }
-        .process-card-title {
-            font-family: 'Playfair Display', serif;
-            font-size: 22px;
-            font-weight: 600;
-            margin-bottom: 16px;
-            color: #EAEAEA;
-        }
-        .process-card-desc {
+        .group_option {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
             font-size: 14px;
-            color: rgba(234,234,234,0.5);
-            line-height: 1.7;
+            font-weight: 500;
+            color: rgba(234,234,234,0.4);
+            transition: color 0.3s;
+            user-select: none;
+        }
+        .group_option input[type="radio"] {
+            display: none;
+        }
+        .group_option input[type="radio"]:checked + .option-label,
+        .group_option:has(input[type="radio"]:checked) {
+            color: #44C0C0;
+        }
+        .group_option:hover {
+            color: rgba(234,234,234,0.7);
+        }
+        .filter-toggle-btn {
+            font-size: 14px;
+            font-weight: 600;
+            color: #44C0C0;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            padding: 12px 24px;
+            border: 1px solid rgba(68,192,192,0.3);
+            transition: all 0.3s;
+        }
+        .filter-toggle-btn:hover {
+            background: rgba(68,192,192,0.1);
+        }
+
+        /* ===== MASONRY GRID ===== */
+        .projects-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            grid-auto-flow: dense;
+        }
+        
+        .project-item {
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+            display: block;
+            height: 400px;
+            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        
+        .project-item.size-large {
+            grid-row: span 2;
+            height: 820px;
+        }
+        
+        .project-item.size-wide {
+            grid-column: span 2;
+        }
+        
+        .project-item.hidden {
+            display: none;
+        }
+        
+        .item_image {
+            position: absolute;
+            inset: 0;
+            background-size: cover;
+            background-position: center;
+            transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        
+        .project-item:hover .item_image {
+            transform: scale(1.05);
+        }
+        
+        .item_content {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(12,35,63,0.95) 0%, transparent 50%);
+            display: flex;
+            align-items: flex-end;
+            padding: 30px;
+            opacity: 0;
+            transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        
+        .project-item:hover .item_content {
+            opacity: 1;
+        }
+        
+        .item_content_inner {
+            width: 100%;
+        }
+        
+        .item_title {
+            font-family: 'Playfair Display', serif;
+            font-size: 28px;
+            font-weight: 700;
+            line-height: 1.3;
+            color: #EAEAEA;
+            margin-bottom: 10px;
+        }
+        
+        .item_meta {
+            font-size: 13px;
+            color: #44C0C0;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* ===== LOAD MORE ===== */
+        .load-more-container {
+            text-align: center;
+            margin-top: 60px;
+        }
+        .load-more-btn {
+            display: inline-block;
+            padding: 16px 40px;
+            background: transparent;
+            border: 1px solid rgba(68,192,192,0.4);
+            color: #EAEAEA;
+            font-size: 14px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            transition: all 0.4s;
+        }
+        .load-more-btn:hover {
+            background: #44C0C0;
+            color: #0C233F;
+        }
+        .load-more-btn.hidden {
+            display: none;
         }
 
         /* ===== CTA ===== */
         .cta-section {
-            padding: 180px 50px;
-            background: #0C233F;
+            padding: 120px 50px;
+            background: #091c33;
             border-top: 1px solid rgba(68,192,192,0.1);
         }
         .cta-inner {
@@ -475,14 +485,17 @@
 
         /* ===== RESPONSIVE ===== */
         @media (max-width: 1024px) {
-            .projects-grid {
-                grid-template-columns: 1fr;
+            .projects-container {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
             }
-            .design-process-grid {
-                grid-template-columns: repeat(2, 1fr);
+            .project-item.size-wide {
+                grid-column: span 1;
             }
             .footer-top {
                 grid-template-columns: 1fr;
+            }
+            .menu-right {
+                display: none;
             }
         }
 
@@ -491,16 +504,20 @@
                 padding: 20px 30px;
             }
             .page-hero {
-                height: 40vh;
-                min-height: 350px;
+                padding: 120px 30px 60px;
             }
-            .projects-grid-section,
-            .design-process-section,
+            .projects-grid-section {
+                padding: 40px 30px 80px;
+            }
+            .projects-container {
+                grid-template-columns: 1fr;
+            }
+            .project-item.size-large {
+                height: 400px;
+                grid-row: span 1;
+            }
             .cta-section {
                 padding: 80px 30px;
-            }
-            .design-process-grid {
-                grid-template-columns: 1fr;
             }
             .footer {
                 padding: 60px 30px 30px;
@@ -514,7 +531,7 @@
 <body>
 
     <!-- Preloader -->
-    <div class="preloader">
+    <div class="preloader" id="preloader">
         <div class="preloader-dots">
             <div class="preloader-dot"></div>
             <div class="preloader-dot"></div>
@@ -523,12 +540,12 @@
     </div>
 
     <!-- Navbar -->
-    <nav class="navbar">
+    <nav class="navbar" id="navbar">
         <a href="index.html" class="nav-logo">
             <img src="https://w13uk.com/wp-content/uploads/2022/09/W13_Logo_White.png" alt="W13 Group">
         </a>
         <div class="nav-right">
-            <div class="menu-btn">
+            <div class="menu-btn" id="menuBtn">
                 <span>Menu</span>
                 <div class="menu-btn-lines">
                     <span></span>
@@ -539,8 +556,8 @@
     </nav>
 
     <!-- Fullscreen Menu -->
-    <div class="fullscreen-menu">
-        <div class="menu-close">
+    <div class="fullscreen-menu" id="fullscreenMenu">
+        <div class="menu-close" id="menuClose">
             <span>Close</span>
             <span class="menu-close-x">×</span>
         </div>
@@ -566,12 +583,8 @@
 
     <!-- Page Hero -->
     <section class="page-hero">
-        <div class="page-hero-bg">
-            <img src="https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=2400&q=90" alt="Projects">
-        </div>
-        <div class="page-hero-overlay"></div>
         <div class="page-hero-content">
-            <div class="page-hero-label">Our Work</div>
+            <div class="page-hero-label">Our Portfolio</div>
             <h1 class="page-hero-title">Projects</h1>
         </div>
     </section>
@@ -579,173 +592,173 @@
     <!-- Projects Grid -->
     <section class="projects-grid-section">
         <div class="projects-grid-inner">
-            <div class="projects-grid">
+            
+            <!-- Filter Modal -->
+            <div class="filter-modal">
+                <form class="filters" id="filtersForm">
+                    <div class="filters_group">
+                        <label class="group_option">
+                            <input type="radio" name="filter" value="all" checked>
+                            <span class="option-label">All</span>
+                        </label>
+                        <label class="group_option">
+                            <input type="radio" name="filter" value="residential">
+                            <span class="option-label">Residential</span>
+                        </label>
+                        <label class="group_option">
+                            <input type="radio" name="filter" value="commercial">
+                            <span class="option-label">Commercial</span>
+                        </label>
+                        <label class="group_option">
+                            <input type="radio" name="filter" value="infrastructure">
+                            <span class="option-label">Infrastructure</span>
+                        </label>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Projects Container (Masonry Grid) -->
+            <div class="projects-container" id="projectsContainer">
                 
-                <!-- Project 1: The Grange -->
-                <article class="project-card">
-                    <div class="project-card-img">
-                        <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=2400&q=90" alt="The Grange">
-                        <div class="project-card-overlay"></div>
-                        <div class="project-card-content">
-                            <h3 class="project-card-title">The Grange</h3>
-                            <p class="project-card-desc">34 no. new build 3-4 bed houses on a 1 ha. site in Coseley</p>
-                            <button class="project-card-btn">
-                                <span>More Info</span>
-                                <i class="fa-solid fa-arrow-right"></i>
-                            </button>
+                <!-- Project 1 - Large -->
+                <a href="#" class="project-item size-large residential" data-category="residential">
+                    <figure class="item_image" style="background-image: url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=2400&q=90');"></figure>
+                    <div class="item_content">
+                        <div class="item_content_inner">
+                            <h6 class="item_title">The Grange</h6>
+                            <div class="item_meta">Residential • Coseley</div>
                         </div>
                     </div>
-                </article>
+                </a>
 
-                <!-- Project 2: Vox Living -->
-                <article class="project-card">
-                    <div class="project-card-img">
-                        <img src="https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=2400&q=90" alt="Vox Living">
-                        <div class="project-card-overlay"></div>
-                        <div class="project-card-content">
-                            <h3 class="project-card-title">Vox Living</h3>
-                            <p class="project-card-desc">Conversion of an office building into student living apartments</p>
-                            <button class="project-card-btn">
-                                <span>More Info</span>
-                                <i class="fa-solid fa-arrow-right"></i>
-                            </button>
+                <!-- Project 2 -->
+                <a href="#" class="project-item commercial" data-category="commercial">
+                    <figure class="item_image" style="background-image: url('https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=2400&q=90');"></figure>
+                    <div class="item_content">
+                        <div class="item_content_inner">
+                            <h6 class="item_title">Vox Living</h6>
+                            <div class="item_meta">Commercial • Student Housing</div>
                         </div>
                     </div>
-                </article>
+                </a>
 
-                <!-- Project 3: Showell Lane -->
-                <article class="project-card">
-                    <div class="project-card-img">
-                        <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=2400&q=90" alt="Showell Lane">
-                        <div class="project-card-overlay"></div>
-                        <div class="project-card-content">
-                            <h3 class="project-card-title">Showell Lane</h3>
-                            <p class="project-card-desc">High-end single-storey rear extension and internal refurbishment to a large house in Wolverhampton</p>
-                            <button class="project-card-btn">
-                                <span>More Info</span>
-                                <i class="fa-solid fa-arrow-right"></i>
-                            </button>
+                <!-- Project 3 -->
+                <a href="#" class="project-item residential" data-category="residential">
+                    <figure class="item_image" style="background-image: url('https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=2400&q=90');"></figure>
+                    <div class="item_content">
+                        <div class="item_content_inner">
+                            <h6 class="item_title">Showell Lane</h6>
+                            <div class="item_meta">Residential • Wolverhampton</div>
                         </div>
                     </div>
-                </article>
+                </a>
 
-                <!-- Project 4: Hilston Park -->
-                <article class="project-card">
-                    <div class="project-card-img">
-                        <img src="https://images.unsplash.com/photo-1613977257363-707ba9348227?w=2400&q=90" alt="Hilston Park">
-                        <div class="project-card-overlay"></div>
-                        <div class="project-card-content">
-                            <h3 class="project-card-title">Hilston Park</h3>
-                            <p class="project-card-desc">Extensive internal refurbishments to a Grade 2 listed building in Wales</p>
-                            <button class="project-card-btn">
-                                <span>More Info</span>
-                                <i class="fa-solid fa-arrow-right"></i>
-                            </button>
+                <!-- Project 4 -->
+                <a href="#" class="project-item residential" data-category="residential">
+                    <figure class="item_image" style="background-image: url('https://images.unsplash.com/photo-1613977257363-707ba9348227?w=2400&q=90');"></figure>
+                    <div class="item_content">
+                        <div class="item_content_inner">
+                            <h6 class="item_title">Hilston Park</h6>
+                            <div class="item_meta">Residential • Grade 2 Listed</div>
                         </div>
                     </div>
-                </article>
+                </a>
 
-                <!-- Project 5: Walsall Road -->
-                <article class="project-card">
-                    <div class="project-card-img">
-                        <img src="https://images.unsplash.com/photo-1628624747186-a941c476b7ef?w=2400&q=90" alt="Walsall Road">
-                        <div class="project-card-overlay"></div>
-                        <div class="project-card-content">
-                            <h3 class="project-card-title">Walsall Road</h3>
-                            <p class="project-card-desc">4 no. new build 3 bed houses adjacent Willenhall town centre</p>
-                            <button class="project-card-btn">
-                                <span>More Info</span>
-                                <i class="fa-solid fa-arrow-right"></i>
-                            </button>
+                <!-- Project 5 - Wide -->
+                <a href="#" class="project-item size-wide infrastructure" data-category="infrastructure">
+                    <figure class="item_image" style="background-image: url('https://images.unsplash.com/photo-1628624747186-a941c476b7ef?w=2400&q=90');"></figure>
+                    <div class="item_content">
+                        <div class="item_content_inner">
+                            <h6 class="item_title">Walsall Road</h6>
+                            <div class="item_meta">Infrastructure • Willenhall</div>
                         </div>
                     </div>
-                </article>
+                </a>
 
-                <!-- Project 6: Additional Project -->
-                <article class="project-card">
-                    <div class="project-card-img">
-                        <img src="https://images.unsplash.com/photo-1622919505116-9d7ac0fc7d0c?w=2400&q=90" alt="Development Project">
-                        <div class="project-card-overlay"></div>
-                        <div class="project-card-content">
-                            <h3 class="project-card-title">Residential Development</h3>
-                            <p class="project-card-desc">Mixed-use development with commercial and residential units</p>
-                            <button class="project-card-btn">
-                                <span>More Info</span>
-                                <i class="fa-solid fa-arrow-right"></i>
-                            </button>
+                <!-- Project 6 -->
+                <a href="#" class="project-item commercial" data-category="commercial">
+                    <figure class="item_image" style="background-image: url('https://images.unsplash.com/photo-1622919505116-9d7ac0fc7d0c?w=2400&q=90');"></figure>
+                    <div class="item_content">
+                        <div class="item_content_inner">
+                            <h6 class="item_title">Commercial Development</h6>
+                            <div class="item_meta">Commercial • Mixed-Use</div>
                         </div>
                     </div>
-                </article>
+                </a>
+
+                <!-- Project 7 -->
+                <a href="#" class="project-item infrastructure" data-category="infrastructure">
+                    <figure class="item_image" style="background-image: url('https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=2400&q=90');"></figure>
+                    <div class="item_content">
+                        <div class="item_content_inner">
+                            <h6 class="item_title">Infrastructure Works</h6>
+                            <div class="item_meta">Infrastructure • Birmingham</div>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Project 8 - Large-->
+                <a href="#" class="project-item size-large commercial hidden" data-category="commercial">
+                    <figure class="item_image" style="background-image: url('https://images.unsplash.com/photo-1497366811353-6870744d04b2?w=2400&q=90');"></figure>
+                    <div class="item_content">
+                        <div class="item_content_inner">
+                            <h6 class="item_title">Office Complex</h6>
+                            <div class="item_meta">Commercial • City Centre</div>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Project 9 -->
+                <a href="#" class="project-item residential hidden" data-category="residential">
+                    <figure class="item_image" style="background-image: url('https://images.unsplash.com/photo-1600585154526-990dced4db0d?w=2400&q=90');"></figure>
+                    <div class="item_content">
+                        <div class="item_content_inner">
+                            <h6 class="item_title">BTR Portfolio</h6>
+                            <div class="item_meta">Residential • Birmingham</div>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Project 10 -->
+                <a href="#" class="project-item commercial hidden" data-category="commercial">
+                    <figure class="item_image" style="background-image: url('https://images.unsplash.com/photo-1460317442991-0ec209397118?w=2400&q=90');"></figure>
+                    <div class="item_content">
+                        <div class="item_content_inner">
+                            <h6 class="item_title">Retail Development</h6>
+                            <div class="item_meta">Commercial • Town Centre</div>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Project 11 - Wide -->
+                <a href="#" class="project-item size-wide infrastructure hidden" data-category="infrastructure">
+                    <figure class="item_image" style="background-image: url('https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=2400&q=90');"></figure>
+                    <div class="item_content">
+                        <div class="item_content_inner">
+                            <h6 class="item_title">Civil Engineering</h6>
+                            <div class="item_meta">Infrastructure • Regional</div>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Project 12 -->
+                <a href="#" class="project-item residential hidden" data-category="residential">
+                    <figure class="item_image" style="background-image: url('https://images.unsplash.com/photo-1594301284577-e3d3d159e847?w=2400&q=90');"></figure>
+                    <div class="item_content">
+                        <div class="item_content_inner">
+                            <h6 class="item_title">New Build Estate</h6>
+                            <div class="item_meta">Residential • West Midlands</div>
+                        </div>
+                    </div>
+                </a>
 
             </div>
-        </div>
-    </section>
 
-    <!-- Design Process -->
-    <section class="design-process-section">
-        <div class="design-process-inner">
-            <header class="design-process-header">
-                <div class="design-process-label">How We Work</div>
-                <h2 class="design-process-title">Our Design Process</h2>
-            </header>
-
-            <div class="design-process-grid">
-                
-                <!-- Process 1 -->
-                <article class="process-card">
-                    <div class="process-card-icon">
-                        <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=300&q=90" alt="Measured Surveys">
-                    </div>
-                    <h3 class="process-card-title">Measured Surveys</h3>
-                    <p class="process-card-desc">We undertake measured surveys of existing buildings to enable the production of existing drawings.</p>
-                </article>
-
-                <!-- Process 2 -->
-                <article class="process-card">
-                    <div class="process-card-icon">
-                        <img src="https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=300&q=90" alt="Architecture">
-                    </div>
-                    <h3 class="process-card-title">Architecture</h3>
-                    <p class="process-card-desc">We complete site analysis/feasibility work to understand the site constraints and create proposed drawings.</p>
-                </article>
-
-                <!-- Process 3 -->
-                <article class="process-card">
-                    <div class="process-card-icon">
-                        <img src="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=300&q=90" alt="Interior Design">
-                    </div>
-                    <h3 class="process-card-title">Interior Design</h3>
-                    <p class="process-card-desc">We can help make your new extension feel like a home. With 3D modelling, we show you what it will look like.</p>
-                </article>
-
-                <!-- Process 4 -->
-                <article class="process-card">
-                    <div class="process-card-icon">
-                        <img src="https://images.unsplash.com/photo-1664575602276-acd073f104c1?w=300&q=90" alt="Multi-Disciplinary">
-                    </div>
-                    <h3 class="process-card-title">Multi-Disciplinary Service</h3>
-                    <p class="process-card-desc">Our in-house team of consultants can aid throughout the project with structural and civil engineering.</p>
-                </article>
-
-                <!-- Process 5 -->
-                <article class="process-card">
-                    <div class="process-card-icon">
-                        <img src="https://images.unsplash.com/photo-1507679799987-c73779587ccf?w=300&q=90" alt="Project Management">
-                    </div>
-                    <h3 class="process-card-title">Project Management</h3>
-                    <p class="process-card-desc">We provide Contract Administration services and inspect works when your project is on-site, right up until completion.</p>
-                </article>
-
-                <!-- Process 6 -->
-                <article class="process-card">
-                    <div class="process-card-icon">
-                        <img src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=300&q=90" alt="Planning">
-                    </div>
-                    <h3 class="process-card-title">Planning & Building Regulation</h3>
-                    <p class="process-card-desc">We navigate planning and building regulation compliance to ensure your project meets all requirements.</p>
-                </article>
-
+            <!-- Load More -->
+            <div class="load-more-container">
+                <button class="load-more-btn" id="loadMoreBtn">Load More Projects</button>
             </div>
+
         </div>
     </section>
 
@@ -821,7 +834,7 @@
             </div>
 
             <div class="footer-bottom">
-                <div class="footer-copy">© 2023 W13 Group. All rights reserved.</div>
+                <div class="footer-copy">© 2026 W13 Group. All rights reserved.</div>
                 <div class="footer-legal">
                     <a href="#">Privacy Policy</a>
                     <a href="#">Terms & Conditions</a>
@@ -831,42 +844,33 @@
         </div>
     </footer>
 
-    <!-- GSAP -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-
     <script>
         // ===== PRELOADER =====
-        if (typeof gsap !== 'undefined') {
-            gsap.to('.preloader', {
-                opacity: 0,
-                duration: 0.6,
-                delay: 0.5,
-                onComplete: () => {
-                    document.querySelector('.preloader').style.display = 'none';
-                }
-            });
-        } else {
-            setTimeout(() => {
-                const preloader = document.querySelector('.preloader');
+        window.addEventListener('load', function() {
+            setTimeout(function() {
+                const preloader = document.getElementById('preloader');
                 if (preloader) {
-                    preloader.style.opacity = '0';
-                    setTimeout(() => { preloader.style.display = 'none'; }, 600);
+                    preloader.classList.add('is-hidden');
                 }
             }, 500);
-        }
+        });
 
         // ===== MENU TOGGLE =====
-        const menuBtn = document.querySelector('.menu-btn');
-        const menuClose = document.querySelector('.menu-close');
-        const fullscreenMenu = document.querySelector('.fullscreen-menu');
+        const menuBtn = document.getElementById('menuBtn');
+        const menuClose = document.getElementById('menuClose');
+        const fullscreenMenu = document.getElementById('fullscreenMenu');
 
-        menuBtn.addEventListener('click', () => {
-            fullscreenMenu.classList.add('active');
-        });
+        if (menuBtn) {
+            menuBtn.addEventListener('click', () => {
+                fullscreenMenu.classList.add('active');
+            });
+        }
 
-        menuClose.addEventListener('click', () => {
-            fullscreenMenu.classList.remove('active');
-        });
+        if (menuClose) {
+            menuClose.addEventListener('click', () => {
+                fullscreenMenu.classList.remove('active');
+            });
+        }
 
         // Close menu when clicking a link
         document.querySelectorAll('.menu-nav-link').forEach(link => {
@@ -876,7 +880,7 @@
         });
 
         // ===== NAVBAR SCROLL =====
-        const navbar = document.querySelector('.navbar');
+        const navbar = document.getElementById('navbar');
         let lastScroll = 0;
 
         window.addEventListener('scroll', () => {
@@ -891,36 +895,67 @@
             lastScroll = currentScroll;
         });
 
-        // ===== PROJECT CARDS ANIMATION =====
-        if (typeof gsap !== 'undefined') {
-            gsap.from('.project-card', {
-                scrollTrigger: {
-                    trigger: '.projects-grid',
-                    start: 'top 80%',
-                },
-                opacity: 0,
-                y: 60,
-                duration: 0.8,
-                stagger: 0.15,
-                ease: 'power3.out'
-            });
-
-            gsap.from('.process-card', {
-                scrollTrigger: {
-                    trigger: '.design-process-grid',
-                    start: 'top 80%',
-                },
-                opacity: 0,
-                y: 40,
-                duration: 0.7,
-                stagger: 0.12,
-                ease: 'power3.out'
+        // ===== FILTER PROJECTS =====
+        const filtersForm = document.getElementById('filtersForm');
+        const projectsContainer = document.getElementById('projectsContainer');
+        const loadMoreBtn = document.getElementById('loadMoreBtn');
+        
+        if (filtersForm) {
+            filtersForm.addEventListener('change', function(e) {
+                const selectedFilter = e.target.value;
+                const allProjects = projectsContainer.querySelectorAll('.project-item');
+                
+                allProjects.forEach(project => {
+                    if (selectedFilter === 'all') {
+                        project.style.display = 'block';
+                    } else {
+                        if (project.classList.contains(selectedFilter)) {
+                            project.style.display = 'block';
+                        } else {
+                            project.style.display = 'none';
+                        }
+                    }
+                });
             });
         }
-    </script>
 
-    <!-- ScrollTrigger Plugin (optional, for advanced animations) -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+        // ===== LOAD MORE =====
+        if (loadMoreBtn) {
+            loadMoreBtn.addEventListener('click', function() {
+                const hiddenProjects = projectsContainer.querySelectorAll('.project-item.hidden');
+                
+                if (hiddenProjects.length > 0) {
+                    // Show next 3-4 projects
+                    for (let i = 0; i < Math.min(4, hiddenProjects.length); i++) {
+                        hiddenProjects[i].classList.remove('hidden');
+                    }
+                    
+                    // Hide button if no more projects
+                    const remainingHidden = projectsContainer.querySelectorAll('.project-item.hidden');
+                    if (remainingHidden.length === 0) {
+                        loadMoreBtn.classList.add('hidden');
+                    }
+                }
+            });
+        }
+
+        // ===== SMOOTH SCROLL =====
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                const href = this.getAttribute('href');
+                if (href !== '#') {
+                    e.preventDefault();
+                    const target = document.querySelector(href);
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                }
+            });
+        });
+    </script>
 
 </body>
 </html>
