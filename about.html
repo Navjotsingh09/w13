@@ -1,0 +1,963 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About | W13 Group</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        @font-face { font-family: 'Graphie'; src: url('fonts/Graphie-Thin.otf'); font-weight: 100; }
+        @font-face { font-family: 'Graphie'; src: url('fonts/Graphie-ExtraLight.otf'); font-weight: 200; }
+        @font-face { font-family: 'Graphie'; src: url('fonts/Graphie-Light.otf'); font-weight: 300; }
+        @font-face { font-family: 'Graphie'; src: url('fonts/Graphie-Book.otf'); font-weight: 350; }
+        @font-face { font-family: 'Graphie'; src: url('fonts/Graphie-Regular.otf'); font-weight: 400; }
+        @font-face { font-family: 'Graphie'; src: url('fonts/Graphie-SemiBold.otf'); font-weight: 600; }
+        @font-face { font-family: 'Graphie'; src: url('fonts/Graphie-Bold.otf'); font-weight: 700; }
+        @font-face { font-family: 'Graphie'; src: url('fonts/Graphie-ExtraBold.otf'); font-weight: 800; }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Graphie', sans-serif; background: #0C233F; color: #EAEAEA; -webkit-font-smoothing: antialiased; }
+        a { text-decoration: none; color: inherit; }
+        button { cursor: pointer; border: none; font-family: inherit; background: none; color: inherit; }
+        img { max-width: 100%; display: block; }
+        ul { list-style: none; }
+        ::selection { background: rgba(68,192,192,0.3); }
+
+        /* ===== CUSTOM DOT CURSOR ===== */
+        @media (pointer: fine) {
+            *, *::before, *::after { cursor: none !important; }
+        }
+        .dot-cursor {
+            position: fixed; top: 0; left: 0; z-index: 999999;
+            width: 12px; height: 12px; background: #44C0C0; border-radius: 50%;
+            pointer-events: none; transform: translate(-50%, -50%);
+            transition: transform 0.18s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.2s ease, box-shadow 0.2s ease;
+            box-shadow: 0 0 0 2px rgba(68,192,192,0.3), 0 0 12px rgba(68,192,192,0.25);
+        }
+        .dot-cursor.hovering {
+            transform: translate(-50%, -50%) scale(1.5);
+            background: rgba(68,192,192,0.4);
+            box-shadow: 0 0 0 3px rgba(68,192,192,0.25), 0 0 10px rgba(68,192,192,0.2);
+        }
+
+        /* ===== PRELOADER ===== */
+        .preloader {
+            position: fixed; inset: 0; background: #0C233F; z-index: 100000;
+            display: flex; align-items: center; justify-content: center;
+        }
+        .preloader-dots { display: flex; gap: 8px; }
+        .preloader-dot {
+            width: 10px; height: 10px; background: #44C0C0; border-radius: 50%;
+            animation: preloaderBounce 1.4s ease-in-out infinite;
+        }
+        .preloader-dot:nth-child(2) { animation-delay: 0.2s; }
+        .preloader-dot:nth-child(3) { animation-delay: 0.4s; }
+        @keyframes preloaderBounce {
+            0%, 80%, 100% { transform: scale(0.6); opacity: 0.4; }
+            40% { transform: scale(1); opacity: 1; }
+        }
+
+        /* ===== NAVBAR ===== */
+        .navbar {
+            position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+            padding: 28px 50px; transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .navbar.scrolled {
+            background: rgba(12,35,63,0.98);
+            padding: 20px 50px;
+            backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+        }
+        .navbar:has(.nav-dropdown:hover) {
+            background: rgba(12,35,63,0.98);
+            backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+        }
+        .nav-inner {
+            max-width: 1400px; margin: 0 auto;
+            display: flex; align-items: center; justify-content: space-between;
+        }
+        .nav-logo { display: flex; align-items: center; }
+        .nav-logo img { height: 40px; width: auto; }
+        .nav-center { flex: 1; display: flex; align-items: center; justify-content: center; gap: 6px; }
+        .nav-link {
+            font-size: 16px; font-weight: 400; color: rgba(234,234,234,0.6);
+            padding: 8px 16px; transition: color 0.3s; letter-spacing: 0.2px;
+        }
+        .nav-link:hover { color: #EAEAEA; }
+        .nav-link.active { color: #EAEAEA; }
+        .nav-cta {
+            display: inline-flex; align-items: center; gap: 10px;
+            font-size: 16px; font-weight: 400; color: #EAEAEA;
+            padding: 10px 16px 10px 22px;
+            border: 1.5px solid rgba(68,192,192,0.9);
+            border-radius: 50px; transition: all 0.3s;
+            letter-spacing: 0.2px; white-space: nowrap;
+        }
+        .nav-cta:hover { background: rgba(68,192,192,0.12); }
+        .nav-cta-dot {
+            width: 32px; height: 32px; background: #44C0C0; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+        }
+        .nav-cta-dot svg { width: 16px; height: 16px; }
+        .mobile-menu-btn {
+            display: none; font-size: 15px; font-weight: 500; color: #EAEAEA;
+            letter-spacing: 2px; text-transform: uppercase; cursor: pointer;
+            align-items: center; gap: 12px;
+        }
+        .mobile-menu-lines { display: flex; flex-direction: column; gap: 5px; width: 24px; }
+        .mobile-menu-lines span {
+            height: 1.5px; background: #EAEAEA; transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .mobile-menu-lines span:first-child { width: 24px; }
+        .mobile-menu-lines span:last-child { width: 16px; }
+
+        /* ===== MEGA MENU ===== */
+        .nav-dropdown { position: static; }
+        .nav-dropdown > .nav-link { position: relative; cursor: pointer; }
+        .nav-dropdown:hover > .nav-link {
+            text-decoration: underline; text-underline-offset: 4px; text-decoration-thickness: 1.5px;
+        }
+        .nav-dropdown:hover > .nav-link::after {
+            content: ''; position: absolute; left: 4px; top: 50%; transform: translateY(-50%);
+            width: 8px; height: 8px; background: #44C0C0; border-radius: 50%;
+            animation: megaDotPop 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        @keyframes megaDotPop {
+            0% { transform: translateY(-50%) scale(0); }
+            100% { transform: translateY(-50%) scale(1); }
+        }
+        .mega-menu {
+            position: absolute; top: calc(100% - 40px); left: 50%; transform: translateX(-50%) translateY(-8px);
+            width: calc(100% - 80px); max-width: 1440px; padding-top: 40px;
+            opacity: 0; visibility: hidden; transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+            z-index: 1001; pointer-events: none;
+        }
+        .nav-dropdown:hover .mega-menu {
+            opacity: 1; visibility: visible; transform: translateX(-50%) translateY(0); pointer-events: auto;
+        }
+        .mega-menu-content {
+            display: grid; grid-template-columns: 1.1fr 0.9fr 1.4fr;
+            background: #fff; border-radius: 16px 16px 4px 4px; overflow: hidden;
+            border-bottom: 4px solid #44C0C0; box-shadow: 0 25px 60px rgba(12,35,63,0.18);
+        }
+        .mega-menu-intro { padding: 48px 40px; }
+        .mega-menu-title {
+            font-family: 'Graphie', sans-serif; font-weight: 400; font-size: 52px;
+            color: #0C233F; margin-bottom: 24px; line-height: 1.1;
+        }
+        .mega-menu-desc { font-size: 15px; line-height: 1.75; color: rgba(12,35,63,0.55); }
+        .mega-menu-links { padding: 48px 30px; display: flex; flex-direction: column; justify-content: center; }
+        .mega-menu-links a {
+            display: block; padding: 16px 0; font-size: 16px; color: #0C233F;
+            border-bottom: 1px dotted rgba(12,35,63,0.2); transition: color 0.25s;
+        }
+        .mega-menu-links a:last-child { border-bottom: none; }
+        .mega-menu-links a:hover { color: #44C0C0; }
+        .mega-menu-image { position: relative; overflow: hidden; min-height: 350px; }
+        .mega-menu-image img {
+            width: 100%; height: 100%; object-fit: cover; position: absolute; top: 0; left: 0;
+            transition: transform 0.6s ease;
+        }
+        .mega-menu-content:hover .mega-menu-image img { transform: scale(1.05); }
+
+        /* ===== FULLSCREEN MENU ===== */
+        .fullscreen-menu {
+            position: fixed; inset: 0; background: #0C233F; z-index: 9999;
+            display: flex; opacity: 0; pointer-events: none;
+            transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .fullscreen-menu.active { opacity: 1; pointer-events: all; }
+        .menu-close {
+            position: absolute; top: 30px; right: 50px; font-size: 15px; font-weight: 500;
+            color: #EAEAEA; letter-spacing: 2px; text-transform: uppercase; cursor: pointer;
+            display: flex; align-items: center; gap: 12px; z-index: 10;
+        }
+        .menu-close-x { font-size: 28px; font-weight: 300; line-height: 1; }
+        .menu-left {
+            flex: 1; display: flex; flex-direction: column; justify-content: center; padding: 100px 80px;
+        }
+        .menu-nav-link {
+            font-size: 48px; font-weight: 300; color: rgba(234,234,234,0.4);
+            padding: 12px 0; transition: all 0.4s; display: block;
+        }
+        .menu-nav-link:hover { color: #EAEAEA; padding-left: 20px; }
+        .menu-right { width: 40%; display: flex; flex-direction: column; }
+        .menu-right-img { flex: 1; overflow: hidden; }
+        .menu-right-img img { width: 100%; height: 100%; object-fit: cover; }
+        .menu-right-info { padding: 40px; background: #091c33; }
+        .menu-right-info h4 {
+            font-size: 13px; font-weight: 600; letter-spacing: 3px; text-transform: uppercase;
+            color: #44C0C0; margin-bottom: 16px;
+        }
+        .menu-right-info p { font-size: 14px; color: rgba(234,234,234,0.5); line-height: 1.8; margin-bottom: 16px; }
+        .menu-right-info a { font-size: 14px; color: rgba(234,234,234,0.6); transition: color 0.3s; }
+        .menu-right-info a:hover { color: #44C0C0; }
+
+        /* ===== HERO ===== */
+        .about-hero {
+            position: relative; height: 70vh; min-height: 500px; overflow: hidden;
+            display: flex; align-items: flex-end;
+        }
+        .about-hero-img { position: absolute; inset: 0; }
+        .about-hero-img img { width: 100%; height: 100%; object-fit: cover; }
+        .about-hero-overlay {
+            position: absolute; inset: 0;
+            background: linear-gradient(180deg, rgba(12,35,63,0.3) 0%, rgba(12,35,63,0.85) 100%);
+        }
+        .about-hero-content {
+            position: relative; z-index: 2; max-width: 1400px; width: 100%;
+            margin: 0 auto; padding: 0 50px 80px;
+        }
+        .about-hero-label {
+            font-size: 13px; font-weight: 600; letter-spacing: 4px; text-transform: uppercase;
+            color: #44C0C0; margin-bottom: 20px;
+        }
+        .about-hero-title {
+            font-family: 'Graphie', sans-serif; font-weight: 600;
+            font-size: clamp(36px, 5vw, 64px); line-height: 1.1;
+        }
+
+        /* ===== OUR STORY ===== */
+        .intro-section { padding: 120px 50px; }
+        .intro-inner {
+            max-width: 1400px; margin: 0 auto;
+            display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center;
+        }
+        .intro-label {
+            font-size: 13px; font-weight: 600; letter-spacing: 4px; text-transform: uppercase;
+            color: #44C0C0; margin-bottom: 20px;
+        }
+        .intro-title {
+            font-family: 'Graphie', sans-serif; font-weight: 600;
+            font-size: clamp(28px, 3.5vw, 44px); line-height: 1.15; margin-bottom: 30px;
+        }
+        .intro-text {
+            font-size: 17px; color: rgba(234,234,234,0.6); line-height: 1.85; margin-bottom: 20px;
+        }
+        .intro-img {
+            position: relative; border-radius: 8px; overflow: hidden; height: 500px;
+        }
+        .intro-img img { width: 100%; height: 100%; object-fit: cover; }
+        .intro-img-badge {
+            position: absolute; bottom: 24px; left: 24px;
+            background: rgba(12,35,63,0.85); backdrop-filter: blur(8px);
+            padding: 20px 28px; border-left: 3px solid #44C0C0;
+        }
+        .intro-img-badge-num {
+            font-family: 'Graphie', sans-serif; font-weight: 700; font-size: 36px; color: #44C0C0;
+        }
+        .intro-img-badge-label {
+            font-size: 12px; color: rgba(234,234,234,0.5); letter-spacing: 1px; text-transform: uppercase; margin-top: 4px;
+        }
+
+        /* ===== VALUES MARQUEE ===== */
+        .values-marquee {
+            padding: 30px 0; overflow: hidden; white-space: nowrap;
+            border-top: 1px solid rgba(68,192,192,0.1);
+            border-bottom: 1px solid rgba(68,192,192,0.1);
+        }
+        .values-track { display: inline-flex; animation: valuesScroll 25s linear infinite; }
+        .values-item {
+            font-family: 'Graphie', sans-serif; font-size: 18px; font-weight: 500;
+            color: rgba(68,192,192,0.25); padding: 0 50px; letter-spacing: 2px;
+        }
+        @keyframes valuesScroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+
+        /* ===== SECTION COMMON ===== */
+        .section-header {
+            display: flex; align-items: flex-end; justify-content: space-between;
+            margin-bottom: 60px; gap: 40px;
+        }
+        .section-label {
+            font-size: 13px; font-weight: 600; letter-spacing: 4px; text-transform: uppercase;
+            color: #44C0C0; margin-bottom: 16px;
+        }
+        .section-title {
+            font-family: 'Graphie', sans-serif; font-weight: 600;
+            font-size: clamp(28px, 3.5vw, 44px); line-height: 1.15;
+        }
+        .section-desc {
+            font-size: 16px; color: rgba(234,234,234,0.5); line-height: 1.7; max-width: 400px;
+        }
+
+        /* ===== PEOPLE ===== */
+        .people-section {
+            padding: 120px 50px; background: #091c33;
+            border-top: 1px solid rgba(68,192,192,0.1);
+        }
+        .people-inner { max-width: 1400px; margin: 0 auto; }
+        .people-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 30px; }
+        .person-card { position: relative; overflow: hidden; border-radius: 4px; }
+        .person-card-img { height: 380px; overflow: hidden; }
+        .person-card-img img {
+            width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s ease;
+        }
+        .person-card:hover .person-card-img img { transform: scale(1.05); }
+        .person-card-info { padding: 24px 0 8px; }
+        .person-card-name {
+            font-family: 'Graphie', sans-serif; font-weight: 600; font-size: 18px; margin-bottom: 4px;
+        }
+        .person-card-role { font-size: 13px; color: rgba(234,234,234,0.45); letter-spacing: 0.5px; }
+        .person-card-linkedin {
+            display: inline-flex; align-items: center; gap: 6px;
+            font-size: 13px; color: rgba(234,234,234,0.35); margin-top: 8px; transition: color 0.3s;
+        }
+        .person-card-linkedin:hover { color: #44C0C0; }
+
+        /* ===== HEALTH & SAFETY ===== */
+        .hs-section {
+            padding: 120px 50px;
+            border-top: 1px solid rgba(68,192,192,0.1);
+        }
+        .hs-inner {
+            max-width: 1400px; margin: 0 auto;
+            display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center;
+        }
+        .hs-img { border-radius: 8px; overflow: hidden; height: 480px; }
+        .hs-img img { width: 100%; height: 100%; object-fit: cover; }
+        .hs-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 40px; }
+        .hs-stat {
+            padding: 24px; border: 1px solid rgba(68,192,192,0.12); border-radius: 4px;
+        }
+        .hs-stat-num {
+            font-family: 'Graphie', sans-serif; font-weight: 700; font-size: 32px; color: #44C0C0;
+        }
+        .hs-stat-label { font-size: 13px; color: rgba(234,234,234,0.5); margin-top: 4px; }
+
+        /* ===== CERTIFICATIONS ===== */
+        .certs-section {
+            padding: 120px 50px; background: #091c33;
+            border-top: 1px solid rgba(68,192,192,0.1);
+        }
+        .certs-inner { max-width: 1400px; margin: 0 auto; }
+        .certs-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 30px; margin-top: 60px; }
+        .cert-card {
+            padding: 40px 30px; border: 1px solid rgba(68,192,192,0.1);
+            border-radius: 4px; transition: all 0.4s;
+        }
+        .cert-card:hover { border-color: rgba(68,192,192,0.3); background: rgba(68,192,192,0.04); }
+        .cert-icon {
+            width: 48px; height: 48px; margin-bottom: 24px;
+            display: flex; align-items: center; justify-content: center;
+            color: #44C0C0; font-size: 24px;
+        }
+        .cert-name {
+            font-family: 'Graphie', sans-serif; font-weight: 600; font-size: 18px; margin-bottom: 12px;
+        }
+        .cert-desc { font-size: 14px; color: rgba(234,234,234,0.45); line-height: 1.7; }
+
+        /* ===== CTA ===== */
+        .cta-section {
+            padding: 160px 50px; overflow: hidden;
+            border-top: 1px solid rgba(68,192,192,0.1);
+        }
+        .cta-inner { max-width: 900px; margin: 0 auto; text-align: center; }
+        .cta-title {
+            font-family: 'Graphie', sans-serif; font-weight: 700;
+            font-size: clamp(40px, 6vw, 72px); line-height: 1.1; margin-bottom: 30px;
+        }
+        .cta-text {
+            font-size: 18px; color: rgba(234,234,234,0.55); line-height: 1.8;
+            margin-bottom: 50px; max-width: 600px; margin-left: auto; margin-right: auto;
+        }
+        .btn-cta {
+            display: inline-block; padding: 20px 50px; background: #44C0C0; color: #0C233F;
+            font-size: 15px; font-weight: 700; letter-spacing: 1px;
+            transition: all 0.4s; overflow: hidden;
+        }
+        .btn-cta:hover { background: #3aadad; transform: translateY(-2px); }
+
+        /* ===== FOOTER ===== */
+        .footer {
+            background: #091c33; padding: 80px 50px 40px;
+            border-top: 1px solid rgba(68,192,192,0.1);
+        }
+        .footer-inner { max-width: 1400px; margin: 0 auto; }
+        .footer-top {
+            display: grid; grid-template-columns: 1fr 2fr 1fr; gap: 60px;
+            padding-bottom: 60px; border-bottom: 1px solid rgba(68,192,192,0.1);
+        }
+        .footer-logo { margin-bottom: 20px; }
+        .footer-logo img { height: 48px; width: auto; }
+        .footer-brand-text { font-size: 14px; color: rgba(234,234,234,0.4); line-height: 1.7; }
+        .footer-cert-badge { display: inline-block; margin-top: 8px; opacity: 0.7; transition: all 0.3s; cursor: pointer; }
+        .footer-nav { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; }
+        .footer-nav-col h4 {
+            font-family: 'Graphie', sans-serif; font-weight: 600; font-size: 20px;
+            margin-bottom: 10px; color: rgba(234,234,234,0.7); transition: color 0.3s; cursor: pointer;
+        }
+        .footer-nav-col h4:hover { color: #44C0C0; }
+        .footer-contact-heading {
+            font-size: 13px; font-weight: 600; letter-spacing: 3px;
+            text-transform: uppercase; color: #44C0C0; margin-bottom: 20px;
+        }
+        .footer-contact-text { font-size: 14px; color: rgba(234,234,234,0.4); line-height: 1.8; }
+        .footer-contact-text a { color: rgba(234,234,234,0.6); transition: color 0.3s; }
+        .footer-contact-text a:hover { color: #44C0C0; }
+        .footer-social { display: flex; gap: 12px; margin-top: 24px; }
+        .footer-social a {
+            width: 40px; height: 40px; border: 1px solid rgba(68,192,192,0.2);
+            display: flex; align-items: center; justify-content: center;
+            color: rgba(234,234,234,0.4); font-size: 15px; transition: all 0.3s;
+        }
+        .footer-social a:hover { border-color: #44C0C0; color: #44C0C0; }
+        .footer-bottom {
+            padding-top: 30px; display: flex; justify-content: space-between;
+            align-items: center; flex-wrap: wrap; gap: 20px;
+        }
+        .footer-legal { display: flex; gap: 20px; }
+        .footer-legal a { font-size: 12px; color: rgba(234,234,234,0.25); transition: color 0.3s; }
+        .footer-legal a:hover { color: #44C0C0; }
+        .footer-copy { font-size: 12px; color: rgba(234,234,234,0.25); }
+
+        /* ===== CERTIFICATE MODAL ===== */
+        .cert-modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 9999; }
+        .cert-modal.active { display: flex; }
+        .cert-modal-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(12,35,63,0.8); }
+        .cert-modal-content { position: relative; background: #fff; border-radius: 12px; width: 90%; max-width: 900px; height: 90vh; margin: auto; display: flex; flex-direction: column; box-shadow: 0 20px 60px rgba(0,0,0,0.3); }
+        .cert-modal-header { padding: 20px 30px; border-bottom: 2px solid #44C0C0; display: flex; justify-content: space-between; align-items: center; }
+        .cert-modal-header h2 { margin: 0; font-size: 24px; color: #0C233F; font-family: 'Playfair Display', serif; }
+        .cert-modal-close { background: none; border: none; font-size: 32px; color: #44C0C0; cursor: pointer; padding: 0; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 50%; transition: all 0.3s; }
+        .cert-modal-close:hover { background: #f0f0f0; color: #3aadad; }
+        .cert-modal-body { flex: 1; overflow: auto; padding: 20px; }
+        .cert-modal-body iframe { width: 100%; height: 100%; border: none; border-radius: 8px; }
+        .cert-modal-footer { padding: 15px 30px; border-top: 1px solid #eee; background: #f9f9f9; text-align: center; font-size: 13px; color: #666; border-radius: 0 0 12px 12px; }
+        .cert-modal-footer a { color: #44C0C0; text-decoration: none; font-weight: 500; }
+        .cert-modal-footer a:hover { text-decoration: underline; }
+
+        /* ===== SCROLL REVEAL ===== */
+        .reveal-up {
+            opacity: 0; transform: translateY(60px);
+            transition: all 1s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .reveal-up.visible { opacity: 1; transform: translateY(0); }
+        .reveal-scale {
+            opacity: 0; transform: scale(0.92);
+            transition: all 1s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .reveal-scale.visible { opacity: 1; transform: scale(1); }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 1100px) {
+            .intro-inner, .hs-inner { grid-template-columns: 1fr; gap: 50px; }
+            .people-grid { grid-template-columns: repeat(2, 1fr); }
+            .certs-grid { grid-template-columns: repeat(2, 1fr); }
+            .footer-top { grid-template-columns: 1fr; gap: 40px; }
+            .footer-nav { grid-template-columns: repeat(3, 1fr); }
+            .menu-right { display: none; }
+        }
+        @media (max-width: 768px) {
+            .navbar { padding: 20px 24px; }
+            .nav-center .nav-link { display: none; }
+            .nav-center .nav-dropdown { display: none; }
+            .nav-cta { display: none; }
+            .mobile-menu-btn { display: flex; }
+            .about-hero { height: 50vh; min-height: 380px; }
+            .about-hero-content { padding: 0 24px 50px; }
+            .intro-section, .hs-section, .certs-section, .people-section { padding: 80px 24px; }
+            .people-grid { grid-template-columns: 1fr; }
+            .certs-grid { grid-template-columns: 1fr; }
+            .hs-stats { grid-template-columns: 1fr; }
+            .cta-section { padding: 100px 24px; }
+            .footer { padding: 60px 24px 30px; }
+            .footer-nav { grid-template-columns: 1fr 1fr; }
+            .section-header { flex-direction: column; align-items: flex-start; }
+            .menu-left { padding: 100px 30px; }
+            .menu-nav-link { font-size: 36px; }
+            .menu-close { right: 24px; }
+            .footer-bottom { flex-direction: column; text-align: center; }
+        }
+    </style>
+</head>
+<body>
+<div class="dot-cursor" id="dotCursor"></div>
+
+<!-- PRELOADER -->
+<div class="preloader" id="preloader">
+    <div class="preloader-dots">
+        <div class="preloader-dot"></div>
+        <div class="preloader-dot"></div>
+        <div class="preloader-dot"></div>
+    </div>
+</div>
+
+<!-- FULLSCREEN MENU -->
+<div class="fullscreen-menu" id="fullscreenMenu">
+    <div class="menu-close" onclick="toggleMenu()">
+        <span>Close</span>
+        <span class="menu-close-x">&times;</span>
+    </div>
+    <div class="menu-left">
+        <a href="index.html" class="menu-nav-link" onclick="toggleMenu()">Home</a>
+        <a href="about.html" class="menu-nav-link" onclick="toggleMenu()">About</a>
+        <a href="services.html" class="menu-nav-link" onclick="toggleMenu()">Services</a>
+        <a href="projects.html" class="menu-nav-link" onclick="toggleMenu()">Projects</a>
+        <a href="news.html" class="menu-nav-link" onclick="toggleMenu()">News</a>
+        <a href="contact.html" class="menu-nav-link" onclick="toggleMenu()">Contact</a>
+    </div>
+    <div class="menu-right">
+        <div class="menu-right-img">
+            <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=2400&q=90" alt="">
+        </div>
+        <div class="menu-right-info">
+            <h4>Head Office</h4>
+            <p>Beech House<br>Birmingham, B15 3BE<br><br>020 3150 1401<br>info@w13uk.com</p>
+            <a href="#">LinkedIn &rarr;</a>
+        </div>
+    </div>
+</div>
+
+<!-- NAVBAR -->
+<nav class="navbar" id="navbar">
+    <div class="nav-inner">
+        <a href="index.html" class="nav-logo">
+            <img src="images/W13_Logo_White.png" alt="W13 Group">
+        </a>
+        <div class="nav-center">
+            <div class="nav-dropdown">
+                <a href="about.html" class="nav-link active">About</a>
+                <div class="mega-menu">
+                    <div class="mega-menu-content">
+                        <div class="mega-menu-intro">
+                            <h2 class="mega-menu-title">About</h2>
+                            <p class="mega-menu-desc">With over 20 years of experience, W13 Group has established itself as a leader in property development &amp; construction, delivering landmark projects across the UK.</p>
+                        </div>
+                        <div class="mega-menu-links">
+                            <a href="#story">Our Story</a>
+                            <a href="#people">People</a>
+                            <a href="#health-safety">Health &amp; Safety</a>
+                            <a href="#certifications">Certifications</a>
+                        </div>
+                        <div class="mega-menu-image">
+                            <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=2400&q=90" alt="About W13 Group">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="nav-dropdown">
+                <a href="services.html" class="nav-link">What We Do</a>
+                <div class="mega-menu">
+                    <div class="mega-menu-content">
+                        <div class="mega-menu-intro">
+                            <h2 class="mega-menu-title">What We Do</h2>
+                            <p class="mega-menu-desc">From residential developments to large-scale urban regeneration, our expertise spans the full spectrum of property development &amp; construction.</p>
+                        </div>
+                        <div class="mega-menu-links">
+                            <a href="sectors/residential.html">Residential</a>
+                            <a href="sectors/commercial.html">Commercial</a>
+                            <a href="sectors/architects-planning.html">Architects &amp; Planning</a>
+                            <a href="sectors/urban-regeneration.html">Urban Regeneration</a>
+                        </div>
+                        <div class="mega-menu-image">
+                            <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=2400&q=90" alt="W13 What We Do">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <a href="projects.html" class="nav-link">Projects</a>
+            <div class="mobile-menu-btn" onclick="toggleMenu()">
+                <span>Menu</span>
+                <div class="mobile-menu-lines">
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </div>
+        <a href="contact.html" class="nav-cta">Contact <span class="nav-cta-dot"><svg viewBox="0 0 16 16" fill="none"><circle cx="4" cy="4" r="1.5" fill="#fff"/><circle cx="8" cy="4" r="1.5" fill="#fff"/><circle cx="12" cy="4" r="1.5" fill="#fff"/><circle cx="4" cy="8" r="1.5" fill="#fff"/><circle cx="8" cy="8" r="1.5" fill="#fff"/><circle cx="12" cy="8" r="1.5" fill="#fff"/><circle cx="4" cy="12" r="1.5" fill="#fff"/><circle cx="8" cy="12" r="1.5" fill="#fff"/><circle cx="12" cy="12" r="1.5" fill="#fff"/></svg></span></a>
+    </div>
+</nav>
+
+<!-- HERO -->
+<section class="about-hero">
+    <div class="about-hero-img">
+        <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=2400&q=90" alt="W13 Group About">
+    </div>
+    <div class="about-hero-overlay"></div>
+    <div class="about-hero-content">
+        <div class="about-hero-label reveal-up">About W13 Group</div>
+        <h1 class="about-hero-title reveal-up">Building Communities.<br>Creating Value.</h1>
+    </div>
+</section>
+
+<!-- OUR STORY -->
+<section class="intro-section" id="story">
+    <div class="intro-inner">
+        <div>
+            <div class="intro-label reveal-up">Our Story</div>
+            <h2 class="intro-title reveal-up">Two decades of delivering landmark developments across the UK</h2>
+            <p class="intro-text reveal-up">Founded in 2004, W13 Group began with a clear vision: to transform underutilised land into thriving communities. From our first residential conversion in West London to managing multi-million pound mixed-use schemes, our trajectory has been defined by ambition grounded in meticulous execution.</p>
+            <p class="intro-text reveal-up">Today we operate across the full development lifecycle &mdash; from site acquisition and planning through to construction, asset management and disposal. Our integrated model means we control quality at every stage, delivering projects that stand the test of time.</p>
+            <p class="intro-text reveal-up">Headquartered in Birmingham with a project portfolio spanning London, the West Midlands and the North West, W13 Group has become a trusted partner for investors, local authorities and communities alike.</p>
+        </div>
+        <div class="intro-img reveal-scale">
+            <img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=2400&q=90" alt="W13 Group construction site">
+            <div class="intro-img-badge">
+                <div class="intro-img-badge-num">20+</div>
+                <div class="intro-img-badge-label">Years in Business</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- VALUES MARQUEE -->
+<div class="values-marquee">
+    <div class="values-track">
+        <span class="values-item">INTEGRITY</span>
+        <span class="values-item">EXCELLENCE</span>
+        <span class="values-item">COLLABORATION</span>
+        <span class="values-item">SUSTAINABILITY</span>
+        <span class="values-item">INNOVATION</span>
+        <span class="values-item">COMMUNITY</span>
+        <span class="values-item">INTEGRITY</span>
+        <span class="values-item">EXCELLENCE</span>
+        <span class="values-item">COLLABORATION</span>
+        <span class="values-item">SUSTAINABILITY</span>
+        <span class="values-item">INNOVATION</span>
+        <span class="values-item">COMMUNITY</span>
+    </div>
+</div>
+
+<!-- PEOPLE -->
+<section class="people-section" id="people">
+    <div class="people-inner">
+        <div class="section-header">
+            <div>
+                <div class="section-label reveal-up">People</div>
+                <h2 class="section-title reveal-up">The team behind<br>every project</h2>
+            </div>
+            <p class="section-desc reveal-up">Our leadership brings together decades of combined experience in development, construction, finance and asset management.</p>
+        </div>
+        <div class="people-grid">
+            <div class="person-card reveal-up">
+                <div class="person-card-img">
+                    <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=800&q=90" alt="Managing Director">
+                </div>
+                <div class="person-card-info">
+                    <div class="person-card-name">James Richardson</div>
+                    <div class="person-card-role">Managing Director</div>
+                    <a href="#" class="person-card-linkedin"><i class="fab fa-linkedin-in"></i> LinkedIn</a>
+                </div>
+            </div>
+            <div class="person-card reveal-up">
+                <div class="person-card-img">
+                    <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=800&q=90" alt="Development Director">
+                </div>
+                <div class="person-card-info">
+                    <div class="person-card-name">Sarah Mitchell</div>
+                    <div class="person-card-role">Development Director</div>
+                    <a href="#" class="person-card-linkedin"><i class="fab fa-linkedin-in"></i> LinkedIn</a>
+                </div>
+            </div>
+            <div class="person-card reveal-up">
+                <div class="person-card-img">
+                    <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=800&q=90" alt="Construction Director">
+                </div>
+                <div class="person-card-info">
+                    <div class="person-card-name">David Okonkwo</div>
+                    <div class="person-card-role">Construction Director</div>
+                    <a href="#" class="person-card-linkedin"><i class="fab fa-linkedin-in"></i> LinkedIn</a>
+                </div>
+            </div>
+            <div class="person-card reveal-up">
+                <div class="person-card-img">
+                    <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?w=800&q=90" alt="Finance Director">
+                </div>
+                <div class="person-card-info">
+                    <div class="person-card-name">Priya Sharma</div>
+                    <div class="person-card-role">Finance Director</div>
+                    <a href="#" class="person-card-linkedin"><i class="fab fa-linkedin-in"></i> LinkedIn</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- HEALTH & SAFETY -->
+<section class="hs-section" id="health-safety">
+    <div class="hs-inner">
+        <div class="hs-img reveal-scale">
+            <img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=2400&q=90" alt="W13 Health and Safety on site">
+        </div>
+        <div>
+            <div class="section-label reveal-up">Health &amp; Safety</div>
+            <h2 class="section-title reveal-up">Zero compromise on<br>safety standards</h2>
+            <p class="intro-text reveal-up">Health and safety is embedded in every stage of our operations &mdash; from initial site appraisals through to project completion and handover. We maintain a proactive safety culture where every team member, subcontractor and visitor is empowered to identify and address risk.</p>
+            <p class="intro-text reveal-up">Our dedicated H&amp;S team conducts regular audits, toolbox talks and site inspections to ensure compliance with CDM 2015 regulations and industry best practice. We hold an exemplary safety record with zero reportable incidents across our most recent projects.</p>
+            <div class="hs-stats reveal-up">
+                <div class="hs-stat">
+                    <div class="hs-stat-num">0</div>
+                    <div class="hs-stat-label">Reportable Incidents (2024&ndash;25)</div>
+                </div>
+                <div class="hs-stat">
+                    <div class="hs-stat-num">100%</div>
+                    <div class="hs-stat-label">CDM Compliance</div>
+                </div>
+                <div class="hs-stat">
+                    <div class="hs-stat-num">500+</div>
+                    <div class="hs-stat-label">Safety Audits Completed</div>
+                </div>
+                <div class="hs-stat">
+                    <div class="hs-stat-num">12</div>
+                    <div class="hs-stat-label">Qualified H&amp;S Professionals</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CERTIFICATIONS -->
+<section class="certs-section" id="certifications">
+    <div class="certs-inner">
+        <div class="section-header">
+            <div>
+                <div class="section-label reveal-up">Certifications</div>
+                <h2 class="section-title reveal-up">Accredited excellence</h2>
+            </div>
+            <p class="section-desc reveal-up">Our certifications reflect our commitment to quality, environmental responsibility and best-in-class project delivery.</p>
+        </div>
+        <div class="certs-grid">
+            <div class="cert-card reveal-up">
+                <div class="cert-icon"><i class="fas fa-award"></i></div>
+                <div class="cert-name">ISO 9001:2015</div>
+                <div class="cert-desc">Quality Management Systems certification, ensuring consistent delivery of projects that meet client and regulatory requirements.</div>
+            </div>
+            <div class="cert-card reveal-up">
+                <div class="cert-icon"><i class="fas fa-leaf"></i></div>
+                <div class="cert-name">ISO 14001:2015</div>
+                <div class="cert-desc">Environmental Management Systems certification, demonstrating our commitment to minimising environmental impact across all operations.</div>
+            </div>
+            <div class="cert-card reveal-up">
+                <div class="cert-icon"><i class="fas fa-hard-hat"></i></div>
+                <div class="cert-name">ISO 45001:2018</div>
+                <div class="cert-desc">Occupational Health &amp; Safety certification, providing a framework for managing risks and improving worker safety on every project.</div>
+            </div>
+            <div class="cert-card reveal-up">
+                <div class="cert-icon"><i class="fas fa-building"></i></div>
+                <div class="cert-name">Constructionline Gold</div>
+                <div class="cert-desc">Pre-qualification accreditation recognising our financial standing, capability and compliance with UK construction industry standards.</div>
+            </div>
+            <div class="cert-card reveal-up">
+                <div class="cert-icon"><i class="fas fa-check-double"></i></div>
+                <div class="cert-name">CHAS Premium Plus</div>
+                <div class="cert-desc">Contractors Health &amp; Safety Assessment Scheme accreditation, verified against the highest industry benchmarks for health and safety management.</div>
+            </div>
+            <div class="cert-card reveal-up">
+                <div class="cert-icon"><i class="fas fa-shield-alt"></i></div>
+                <div class="cert-name">SafeContractor</div>
+                <div class="cert-desc">Recognised health and safety accreditation demonstrating compliance with statutory regulations and industry-leading safety standards.</div>
+            </div>
+            <div class="cert-card reveal-up">
+                <div class="cert-icon"><i class="fas fa-home"></i></div>
+                <div class="cert-name">NHBC Registered</div>
+                <div class="cert-desc">Registered builder with the National House-Building Council, providing structural warranty and quality assurance for new-build residential projects.</div>
+            </div>
+            <div class="cert-card reveal-up">
+                <div class="cert-icon"><i class="fas fa-recycle"></i></div>
+                <div class="cert-name">BREEAM Assessor</div>
+                <div class="cert-desc">Qualified assessor capability for Building Research Establishment Environmental Assessment Method, guiding sustainable design and construction decisions.</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+    <div class="cta-inner">
+        <h2 class="cta-title reveal-up">Let's work together</h2>
+        <p class="cta-text reveal-up">Whether you're an investor, landowner, local authority or community stakeholder &mdash; we'd welcome the opportunity to explore how W13 Group can deliver for you.</p>
+        <a href="contact.html" class="btn-cta reveal-up">Get in touch</a>
+    </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+    <div class="footer-inner">
+        <div class="footer-top">
+            <div class="footer-brand">
+                <div class="footer-logo">
+                    <img src="images/W13_Logo_full_White.png" alt="W13 Group">
+                </div>
+                <a href="contact.html#" onclick="openCertModal(event)" class="footer-cert-badge" title="View Cyber Essentials Certificate">
+                    <img src="https://www.ncsc.gov.uk/sites/default/files/2026-02/300x75-ce.svg" alt="NCSC Cyber Essentials" height="50">
+                </a>
+                <p class="footer-brand-text">Building communities, creating value, and delivering excellence across property development.</p>
+            </div>
+            <div class="footer-nav">
+                <div class="footer-nav-col"><h4><a href="about.html">About Us</a></h4></div>
+                <div class="footer-nav-col"><h4><a href="services.html">Divisions</a></h4></div>
+                <div class="footer-nav-col"><h4><a href="services.html">Services</a></h4></div>
+                <div class="footer-nav-col"><h4><a href="projects.html">Projects</a></h4></div>
+                <div class="footer-nav-col"><h4><a href="#">Investors</a></h4></div>
+                <div class="footer-nav-col"><h4><a href="news.html">News</a></h4></div>
+            </div>
+            <div class="footer-contact">
+                <h4 class="footer-contact-heading">Head Office</h4>
+                <div class="footer-contact-text">
+                    <a href="#">Beech House<br>Birmingham, B15 3BE</a><br><br>
+                    <a href="tel:+442031501401">+44 (0)20 3150 1401</a><br>
+                    <a href="mailto:info@w13uk.com">info@w13uk.com</a>
+                </div>
+                <div class="footer-social">
+                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#"><i class="fab fa-x-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="footer-legal">
+                <a href="#">T&amp;C's</a>
+                <a href="#">Privacy Policy</a>
+            </div>
+            <div class="footer-copy">&copy;2026 W13 Group Ltd. All rights reserved</div>
+        </div>
+    </div>
+</footer>
+
+<!-- GSAP -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+<script>
+/* ===== PRELOADER ===== */
+window.addEventListener('load', () => {
+    setTimeout(() => {
+        const preloader = document.getElementById('preloader');
+        gsap.to(preloader, {
+            opacity: 0, duration: 0.6, ease: 'power2.inOut',
+            onComplete: () => {
+                preloader.style.display = 'none';
+                initAll();
+            }
+        });
+    }, 800);
+});
+
+/* ===== MENU ===== */
+function toggleMenu() {
+    const menu = document.getElementById('fullscreenMenu');
+    menu.classList.toggle('active');
+    document.body.style.overflow = menu.classList.contains('active') ? 'hidden' : '';
+}
+
+/* ===== INIT ===== */
+function initAll() {
+    gsap.registerPlugin(ScrollTrigger);
+
+    // Scroll reveals
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+                observer.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.15, rootMargin: '0px 0px -50px 0px' });
+    document.querySelectorAll('.reveal-up, .reveal-scale').forEach(el => observer.observe(el));
+
+    // Hero image parallax
+    gsap.to('.about-hero-img img', {
+        y: 80, ease: 'none',
+        scrollTrigger: { trigger: '.about-hero', start: 'top top', end: 'bottom top', scrub: 1 }
+    });
+
+    // Intro image parallax
+    gsap.to('.intro-img img', {
+        y: -40, ease: 'none',
+        scrollTrigger: { trigger: '.intro-section', start: 'top bottom', end: 'bottom top', scrub: 1 }
+    });
+
+    // People cards stagger
+    gsap.fromTo('.person-card', { opacity: 0, y: 50 }, {
+        opacity: 1, y: 0, duration: 0.8, stagger: 0.12, ease: 'power3.out',
+        scrollTrigger: { trigger: '.people-grid', start: 'top 80%' }
+    });
+
+    // Cert cards stagger
+    gsap.fromTo('.cert-card', { opacity: 0, y: 40 }, {
+        opacity: 1, y: 0, duration: 0.7, stagger: 0.1, ease: 'power3.out',
+        scrollTrigger: { trigger: '.certs-grid', start: 'top 80%' }
+    });
+}
+
+/* ===== SMOOTH SCROLL ===== */
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', function(e) {
+        const href = this.getAttribute('href');
+        if (href === '#') return;
+        e.preventDefault();
+        const target = document.querySelector(href);
+        if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+});
+
+/* ===== NAVBAR SCROLL ===== */
+(function() {
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', function() {
+        if (window.pageYOffset > 100) {
+            navbar.classList.add('scrolled');
+        } else {
+            navbar.classList.remove('scrolled');
+        }
+    });
+})();
+
+/* ===== DOT CURSOR ===== */
+(function() {
+    const cursor = document.getElementById('dotCursor');
+    if (!cursor) return;
+    let cx = -100, cy = -100;
+    document.addEventListener('mousemove', function(e) {
+        cx = e.clientX; cy = e.clientY;
+        cursor.style.left = cx + 'px';
+        cursor.style.top = cy + 'px';
+    });
+    document.addEventListener('mouseleave', function() {
+        cursor.style.left = '-100px';
+        cursor.style.top = '-100px';
+    });
+    document.querySelectorAll('a, button, .menu-btn, .menu-close, .nav-link, .nav-cta, .btn-cta, .person-card, .cert-card, .footer-social a, .footer-legal a, .footer-nav-col h4').forEach(function(el) {
+        el.addEventListener('mouseenter', function() { cursor.classList.add('hovering'); });
+        el.addEventListener('mouseleave', function() { cursor.classList.remove('hovering'); });
+    });
+})();
+</script>
+<!-- CERTIFICATE MODAL -->
+<div id="certModal" class="cert-modal">
+    <div class="cert-modal-overlay" onclick="closeCertModal()"></div>
+    <div class="cert-modal-content">
+        <div class="cert-modal-header">
+            <h2>Cyber Essentials Certificate</h2>
+            <button class="cert-modal-close" onclick="closeCertModal()">&times;</button>
+        </div>
+        <div class="cert-modal-body">
+            <iframe src="https://w13uk.com/wp-content/uploads/2025/04/w13-cyber-essentials-certificate.pdf" frameborder="0"></iframe>
+        </div>
+        <div class="cert-modal-footer">
+            <p>For more information about our security certifications, please contact us at <a href="mailto:info@w13uk.com">info@w13uk.com</a></p>
+        </div>
+    </div>
+</div>
+
+<script>
+/* Certificate Modal */
+function openCertModal(e) {
+    e.preventDefault();
+    document.getElementById('certModal').classList.add('active');
+    document.body.style.overflow = 'hidden';
+}
+
+function closeCertModal() {
+    document.getElementById('certModal').classList.remove('active');
+    document.body.style.overflow = '';
+}
+
+window.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape' && document.getElementById('certModal').classList.contains('active')) {
+        closeCertModal();
+    }
+});
+</script>
+
+</body>
+</html>

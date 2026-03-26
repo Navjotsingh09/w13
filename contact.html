@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact | W13 Group</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        @font-face { font-family: 'Graphie'; src: url('fonts/Graphie-Thin.otf'); font-weight: 100; }
+        @font-face { font-family: 'Graphie'; src: url('fonts/Graphie-ExtraLight.otf'); font-weight: 200; }
+        @font-face { font-family: 'Graphie'; src: url('fonts/Graphie-Light.otf'); font-weight: 300; }
+        @font-face { font-family: 'Graphie'; src: url('fonts/Graphie-Book.otf'); font-weight: 350; }
+        @font-face { font-family: 'Graphie'; src: url('fonts/Graphie-Regular.otf'); font-weight: 400; }
+        @font-face { font-family: 'Graphie'; src: url('fonts/Graphie-SemiBold.otf'); font-weight: 600; }
+        @font-face { font-family: 'Graphie'; src: url('fonts/Graphie-Bold.otf'); font-weight: 700; }
+        @font-face { font-family: 'Graphie'; src: url('fonts/Graphie-ExtraBold.otf'); font-weight: 800; }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Graphie', sans-serif; background: #0C233F; color: #EAEAEA; -webkit-font-smoothing: antialiased; }
+        a { text-decoration: none; color: inherit; }
+        button { cursor: pointer; border: none; font-family: inherit; background: none; color: inherit; }
+        img { max-width: 100%; display: block; }
+        ul { list-style: none; }
+        ::selection { background: rgba(68,192,192,0.3); }
+
+        @media (pointer: fine) { *, *::before, *::after { cursor: none !important; } }
+        .dot-cursor { position: fixed; top: 0; left: 0; z-index: 999999; width: 12px; height: 12px; background: #44C0C0; border-radius: 50%; pointer-events: none; transform: translate(-50%, -50%); transition: transform 0.18s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.2s ease, box-shadow 0.2s ease; box-shadow: 0 0 0 2px rgba(68,192,192,0.3), 0 0 12px rgba(68,192,192,0.25); }
+        .dot-cursor.hovering { transform: translate(-50%, -50%) scale(1.5); background: rgba(68,192,192,0.4); box-shadow: 0 0 0 3px rgba(68,192,192,0.25), 0 0 10px rgba(68,192,192,0.2); }
+
+        /* PRELOADER */
+        .preloader { position: fixed; inset: 0; background: #0C233F; z-index: 100000; display: flex; align-items: center; justify-content: center; }
+        .preloader-dots { display: flex; gap: 8px; }
+        .preloader-dot { width: 10px; height: 10px; background: #44C0C0; border-radius: 50%; animation: preloaderBounce 1.4s ease-in-out infinite; }
+        .preloader-dot:nth-child(2) { animation-delay: 0.2s; }
+        .preloader-dot:nth-child(3) { animation-delay: 0.4s; }
+        @keyframes preloaderBounce { 0%, 80%, 100% { transform: scale(0.6); opacity: 0.4; } 40% { transform: scale(1); opacity: 1; } }
+
+        /* NAVBAR */
+        .navbar { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; padding: 28px 50px; transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1); }
+        .navbar.scrolled { background: rgba(12,35,63,0.98); padding: 20px 50px; backdrop-filter: blur(10px); }
+        .navbar:has(.nav-dropdown:hover) { background: rgba(12,35,63,0.98); backdrop-filter: blur(10px); }
+        .nav-inner { max-width: 1400px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; }
+        .nav-logo { display: flex; align-items: center; }
+        .nav-logo img { height: 40px; width: auto; }
+        .nav-center { flex: 1; display: flex; align-items: center; justify-content: center; gap: 6px; }
+        .nav-link { font-size: 16px; font-weight: 400; color: rgba(234,234,234,0.6); padding: 8px 16px; transition: color 0.3s; letter-spacing: 0.2px; }
+        .nav-link:hover { color: #EAEAEA; }
+        .nav-link.active { color: #EAEAEA; }
+        .nav-cta { display: inline-flex; align-items: center; gap: 10px; font-size: 16px; font-weight: 400; color: #EAEAEA; padding: 10px 16px 10px 22px; border: 1.5px solid rgba(68,192,192,0.9); border-radius: 50px; transition: all 0.3s; white-space: nowrap; }
+        .nav-cta:hover { background: rgba(68,192,192,0.12); }
+        .nav-cta-dot { width: 32px; height: 32px; background: #44C0C0; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+        .nav-cta-dot svg { width: 16px; height: 16px; }
+        .mobile-menu-btn { display: none; font-size: 15px; font-weight: 500; color: #EAEAEA; letter-spacing: 2px; text-transform: uppercase; align-items: center; gap: 12px; }
+        .mobile-menu-lines { display: flex; flex-direction: column; gap: 5px; width: 24px; }
+        .mobile-menu-lines span { height: 1.5px; background: #EAEAEA; transition: all 0.4s; }
+        .mobile-menu-lines span:first-child { width: 24px; }
+        .mobile-menu-lines span:last-child { width: 16px; }
+
+        /* DROPDOWN */
+        .nav-dropdown { position: static; }
+        .nav-dropdown > .nav-link { position: relative; cursor: pointer; }
+        .nav-dropdown:hover > .nav-link { text-decoration: underline; text-underline-offset: 4px; text-decoration-thickness: 1.5px; }
+        .nav-dropdown:hover > .nav-link::after { content: ''; position: absolute; left: 4px; top: 50%; transform: translateY(-50%); width: 8px; height: 8px; background: #44C0C0; border-radius: 50%; animation: megaDotPop 0.25s cubic-bezier(0.34, 1.56, 0.64, 1); }
+        @keyframes megaDotPop { 0% { transform: translateY(-50%) scale(0); } 100% { transform: translateY(-50%) scale(1); } }
+        .mega-menu { position: absolute; top: calc(100% - 40px); left: 50%; transform: translateX(-50%) translateY(-8px); width: calc(100% - 80px); max-width: 1440px; padding-top: 40px; opacity: 0; visibility: hidden; transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1); z-index: 1001; pointer-events: none; }
+        .nav-dropdown:hover .mega-menu { opacity: 1; visibility: visible; transform: translateX(-50%) translateY(0); pointer-events: auto; }
+        .mega-menu-content { display: grid; grid-template-columns: 1.1fr 0.9fr 1.4fr; background: #fff; border-radius: 16px 16px 4px 4px; overflow: hidden; border-bottom: 4px solid #44C0C0; box-shadow: 0 25px 60px rgba(12,35,63,0.18); }
+        .mega-menu-intro { padding: 48px 40px; }
+        .mega-menu-title { font-family: 'Graphie', sans-serif; font-weight: 400; font-size: 52px; color: #0C233F; margin-bottom: 24px; line-height: 1.1; }
+        .mega-menu-desc { font-size: 15px; line-height: 1.75; color: rgba(12,35,63,0.55); }
+        .mega-menu-links { padding: 48px 30px; display: flex; flex-direction: column; justify-content: center; }
+        .mega-menu-links a { display: block; padding: 16px 0; font-size: 16px; color: #0C233F; border-bottom: 1px dotted rgba(12,35,63,0.2); transition: color 0.25s; }
+        .mega-menu-links a:last-child { border-bottom: none; }
+        .mega-menu-links a:hover { color: #44C0C0; }
+        .mega-menu-image { position: relative; overflow: hidden; min-height: 350px; }
+        .mega-menu-image img { width: 100%; height: 100%; object-fit: cover; position: absolute; top: 0; left: 0; transition: transform 0.6s ease; }
+        .mega-menu-content:hover .mega-menu-image img { transform: scale(1.05); }
+
+        /* FULLSCREEN MENU */
+        .fullscreen-menu { position: fixed; inset: 0; background: #0C233F; z-index: 9999; display: flex; opacity: 0; pointer-events: none; transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1); }
+        .fullscreen-menu.active { opacity: 1; pointer-events: all; }
+        .menu-close { position: absolute; top: 30px; right: 50px; font-size: 15px; font-weight: 500; color: #EAEAEA; letter-spacing: 2px; text-transform: uppercase; cursor: pointer; display: flex; align-items: center; gap: 12px; z-index: 10; }
+        .menu-close-x { font-size: 28px; font-weight: 300; line-height: 1; }
+        .menu-left { flex: 1; display: flex; flex-direction: column; justify-content: center; padding: 100px 80px; }
+        .menu-nav-link { font-size: 48px; font-weight: 300; color: rgba(234,234,234,0.4); padding: 12px 0; transition: all 0.4s; display: block; }
+        .menu-nav-link:hover { color: #EAEAEA; padding-left: 20px; }
+        .menu-right { width: 40%; display: flex; flex-direction: column; }
+        .menu-right-img { flex: 1; overflow: hidden; }
+        .menu-right-img img { width: 100%; height: 100%; object-fit: cover; }
+        .menu-right-info { padding: 40px; background: #091c33; }
+        .menu-right-info h4 { font-size: 13px; font-weight: 600; letter-spacing: 3px; text-transform: uppercase; color: #44C0C0; margin-bottom: 16px; }
+        .menu-right-info p { font-size: 14px; color: rgba(234,234,234,0.5); line-height: 1.8; margin-bottom: 16px; }
+        .menu-right-info a { font-size: 14px; color: rgba(234,234,234,0.6); transition: color 0.3s; }
+        .menu-right-info a:hover { color: #44C0C0; }
+
+        /* ===== CONTACT PAGE ===== */
+        .contact-hero { padding: 180px 50px 80px; }
+        .contact-hero-inner { max-width: 1400px; margin: 0 auto; }
+        .contact-hero-label { font-size: 13px; font-weight: 600; letter-spacing: 4px; text-transform: uppercase; color: #44C0C0; margin-bottom: 20px; }
+        .contact-hero-title { font-family: 'Graphie', sans-serif; font-weight: 600; font-size: clamp(40px, 6vw, 72px); line-height: 1.08; margin-bottom: 20px; }
+        .contact-hero-sub { font-size: 18px; color: rgba(234,234,234,0.5); max-width: 560px; line-height: 1.7; }
+
+        /* CONTACT GRID */
+        .contact-body { padding: 0 50px 120px; }
+        .contact-body-inner { max-width: 1400px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1.8fr; gap: 100px; }
+
+        /* LEFT COL */
+        .contact-info { padding-top: 10px; }
+        .contact-info-block { margin-bottom: 48px; }
+        .contact-info-heading { font-size: 13px; font-weight: 600; letter-spacing: 3px; text-transform: uppercase; color: #44C0C0; margin-bottom: 18px; }
+        .contact-info-text { font-size: 16px; color: rgba(234,234,234,0.6); line-height: 1.9; }
+        .contact-info-text a { color: rgba(234,234,234,0.75); transition: color 0.3s; }
+        .contact-info-text a:hover { color: #44C0C0; }
+        .contact-social { display: flex; gap: 12px; margin-top: 10px; }
+        .contact-social a { width: 44px; height: 44px; border: 1px solid rgba(68,192,192,0.2); display: flex; align-items: center; justify-content: center; color: rgba(234,234,234,0.45); font-size: 16px; transition: all 0.3s; }
+        .contact-social a:hover { border-color: #44C0C0; color: #44C0C0; }
+
+        /* RIGHT COL — FORM */
+        .contact-form-wrapper { border-left: 1px solid rgba(68,192,192,0.1); padding-left: 80px; }
+        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 24px; }
+        .form-row.full { grid-template-columns: 1fr; }
+        .form-group { display: flex; flex-direction: column; }
+        .form-group label { font-size: 13px; font-weight: 600; letter-spacing: 1px; color: rgba(234,234,234,0.5); margin-bottom: 10px; text-transform: uppercase; }
+        .form-group label .req { color: #44C0C0; }
+        .form-group input,
+        .form-group select,
+        .form-group textarea { width: 100%; background: transparent; border: none; border-bottom: 1px solid rgba(68,192,192,0.2); padding: 14px 0; font-family: 'Graphie', sans-serif; font-size: 16px; color: #EAEAEA; outline: none; transition: border-color 0.3s; -webkit-appearance: none; appearance: none; border-radius: 0; }
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus { border-bottom-color: #44C0C0; }
+        .form-group input::placeholder,
+        .form-group textarea::placeholder { color: rgba(234,234,234,0.25); }
+        .form-group select { color: rgba(234,234,234,0.5); background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='7' viewBox='0 0 12 7'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%2344C0C0' stroke-width='1.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 4px center; padding-right: 24px; }
+        .form-group select option { background: #0C233F; color: #EAEAEA; }
+        .form-group textarea { resize: vertical; min-height: 120px; line-height: 1.7; }
+
+        .form-consent { display: flex; align-items: flex-start; gap: 14px; margin: 32px 0 40px; }
+        .form-consent input[type="checkbox"] { width: 20px; height: 20px; min-width: 20px; accent-color: #44C0C0; margin-top: 2px; -webkit-appearance: auto; appearance: auto; cursor: pointer; }
+        .form-consent label { font-size: 13px; color: rgba(234,234,234,0.4); line-height: 1.7; cursor: pointer; }
+        .form-consent label a { color: #44C0C0; text-decoration: underline; text-underline-offset: 2px; }
+
+        .btn-submit { display: inline-flex; align-items: center; gap: 14px; padding: 18px 44px; background: #44C0C0; color: #0C233F; font-family: 'Graphie', sans-serif; font-size: 15px; font-weight: 700; letter-spacing: 0.5px; border: none; transition: all 0.4s; cursor: pointer; }
+        .btn-submit:hover { background: #3aadad; transform: translateY(-2px); }
+        .btn-submit svg { width: 18px; height: 18px; transition: transform 0.3s; }
+        .btn-submit:hover svg { transform: translateX(4px); }
+
+        /* SUCCESS */
+        .form-success { display: none; padding: 40px; text-align: center; }
+        .form-success.visible { display: block; }
+        .form-success-icon { font-size: 48px; color: #44C0C0; margin-bottom: 20px; }
+        .form-success h3 { font-family: 'Graphie', sans-serif; font-weight: 600; font-size: 28px; margin-bottom: 12px; }
+        .form-success p { font-size: 16px; color: rgba(234,234,234,0.5); line-height: 1.7; }
+
+        /* MAP */
+        .contact-map { padding: 0 50px 0; }
+        .contact-map-inner { max-width: 1400px; margin: 0 auto; border-top: 1px solid rgba(68,192,192,0.1); padding-top: 80px; }
+        .contact-map iframe { width: 100%; height: 450px; border: none; border-radius: 4px; filter: grayscale(0.6) brightness(0.85) contrast(1.1); transition: filter 0.4s; }
+        .contact-map iframe:hover { filter: grayscale(0.2) brightness(0.9) contrast(1.05); }
+
+        /* FOOTER */
+        .footer { background: #091c33; padding: 80px 50px 40px; border-top: 1px solid rgba(68,192,192,0.1); margin-top: 100px; }
+        .footer-inner { max-width: 1400px; margin: 0 auto; }
+        .footer-top { display: grid; grid-template-columns: 1fr 2fr 1fr; gap: 60px; padding-bottom: 60px; border-bottom: 1px solid rgba(68,192,192,0.1); }
+        .footer-logo { margin-bottom: 20px; }
+        .footer-logo img { height: 48px; width: auto; }
+        .footer-brand-text { font-size: 14px; color: rgba(234,234,234,0.4); line-height: 1.7; }
+        .footer-nav { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; }
+        .footer-nav-col h4 { font-family: 'Graphie', sans-serif; font-weight: 600; font-size: 20px; margin-bottom: 10px; color: rgba(234,234,234,0.7); transition: color 0.3s; cursor: pointer; }
+        .footer-nav-col h4:hover { color: #44C0C0; }
+        .footer-contact-heading { font-size: 13px; font-weight: 600; letter-spacing: 3px; text-transform: uppercase; color: #44C0C0; margin-bottom: 20px; }
+        .footer-contact-text { font-size: 14px; color: rgba(234,234,234,0.4); line-height: 1.8; }
+        .footer-contact-text a { color: rgba(234,234,234,0.6); transition: color 0.3s; }
+        .footer-contact-text a:hover { color: #44C0C0; }
+        .footer-social { display: flex; gap: 12px; margin-top: 24px; }
+        .footer-social a { width: 40px; height: 40px; border: 1px solid rgba(68,192,192,0.2); display: flex; align-items: center; justify-content: center; color: rgba(234,234,234,0.4); font-size: 15px; transition: all 0.3s; }
+        .footer-social a:hover { border-color: #44C0C0; color: #44C0C0; }
+        .footer-bottom { padding-top: 30px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; }
+        .footer-legal { display: flex; gap: 20px; }
+        .footer-legal a { font-size: 12px; color: rgba(234,234,234,0.25); transition: color 0.3s; }
+        .footer-legal a:hover { color: #44C0C0; }
+        .footer-copy { font-size: 12px; color: rgba(234,234,234,0.25); }
+        .footer-cert-badge { display: inline-block; margin-top: 8px; opacity: 0.7; transition: all 0.3s; cursor: pointer; }
+        /* Certificate Modal */
+        .cert-modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 9999; }
+        .cert-modal.active { display: flex; }
+        .cert-modal-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(12,35,63,0.8); }
+        .cert-modal-content { position: relative; background: #fff; border-radius: 12px; width: 90%; max-width: 900px; height: 90vh; margin: auto; display: flex; flex-direction: column; box-shadow: 0 20px 60px rgba(0,0,0,0.3); }
+        .cert-modal-header { padding: 20px 30px; border-bottom: 2px solid #44C0C0; display: flex; justify-content: space-between; align-items: center; }
+        .cert-modal-header h2 { margin: 0; font-size: 24px; color: #0C233F; font-family: 'Playfair Display', serif; }
+        .cert-modal-close { background: none; border: none; font-size: 32px; color: #44C0C0; cursor: pointer; padding: 0; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 50%; transition: all 0.3s; }
+        .cert-modal-close:hover { background: #f0f0f0; color: #3aadad; }
+        .cert-modal-body { flex: 1; overflow: auto; padding: 20px; }
+        .cert-modal-body iframe { width: 100%; height: 100%; border: none; border-radius: 8px; }
+        .cert-modal-footer { padding: 15px 30px; border-top: 1px solid #eee; background: #f9f9f9; text-align: center; font-size: 13px; color: #666; border-radius: 0 0 12px 12px; }
+        .cert-modal-footer a { color: #44C0C0; text-decoration: none; font-weight: 500; }
+        .cert-modal-footer a:hover { text-decoration: underline; }
+        /* REVEALS */
+        .reveal-up { opacity: 0; transform: translateY(60px); transition: all 1s cubic-bezier(0.16, 1, 0.3, 1); }
+        .reveal-up.visible { opacity: 1; transform: translateY(0); }
+
+        /* RESPONSIVE */
+        @media (max-width: 1100px) {
+            .contact-body-inner { grid-template-columns: 1fr; gap: 60px; }
+            .contact-form-wrapper { border-left: none; padding-left: 0; border-top: 1px solid rgba(68,192,192,0.1); padding-top: 60px; }
+            .footer-top { grid-template-columns: 1fr; gap: 40px; }
+            .menu-right { display: none; }
+        }
+        @media (max-width: 768px) {
+            .navbar { padding: 20px 24px; }
+            .nav-center .nav-link { display: none; }
+            .nav-center .nav-dropdown { display: none; }
+            .nav-cta { display: none; }
+            .mobile-menu-btn { display: flex; }
+            .contact-hero { padding: 140px 24px 50px; }
+            .contact-body { padding: 0 24px 80px; }
+            .contact-map { padding: 0 24px; }
+            .contact-map iframe { height: 300px; }
+            .form-row { grid-template-columns: 1fr; gap: 20px; }
+            .footer { padding: 60px 24px 30px; }
+            .footer-nav { grid-template-columns: 1fr 1fr; }
+            .menu-left { padding: 100px 30px; }
+            .menu-nav-link { font-size: 36px; }
+            .menu-close { right: 24px; }
+            .footer-bottom { flex-direction: column; text-align: center; }
+        }
+    </style>
+</head>
+<body>
+<div class="dot-cursor" id="dotCursor"></div>
+
+<div class="preloader" id="preloader">
+    <div class="preloader-dots"><div class="preloader-dot"></div><div class="preloader-dot"></div><div class="preloader-dot"></div></div>
+</div>
+
+<!-- FULLSCREEN MENU -->
+<div class="fullscreen-menu" id="fullscreenMenu">
+    <div class="menu-close" onclick="toggleMenu()"><span>Close</span><span class="menu-close-x">&times;</span></div>
+    <div class="menu-left">
+        <a href="index.html" class="menu-nav-link">Home</a>
+        <a href="about.html" class="menu-nav-link">About</a>
+        <a href="services.html" class="menu-nav-link">What We Do</a>
+        <a href="projects.html" class="menu-nav-link">Projects</a>
+        <a href="news.html" class="menu-nav-link">News</a>
+        <a href="contact.html" class="menu-nav-link">Contact</a>
+    </div>
+    <div class="menu-right">
+        <div class="menu-right-img"><img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=2400&q=90" alt=""></div>
+        <div class="menu-right-info">
+            <h4>Head Office</h4>
+            <p>Beech House<br>Birmingham, B15 3BE<br><br>020 3150 1401<br>info@w13uk.com</p>
+            <a href="#">LinkedIn &rarr;</a>
+        </div>
+    </div>
+</div>
+
+<!-- NAVBAR -->
+<nav class="navbar" id="navbar">
+    <div class="nav-inner">
+        <a href="index.html" class="nav-logo"><img src="images/W13_Logo_White.png" alt="W13 Group"></a>
+        <div class="nav-center">
+            <div class="nav-dropdown">
+                <a href="about.html" class="nav-link">About</a>
+                <div class="mega-menu">
+                    <div class="mega-menu-content">
+                        <div class="mega-menu-intro">
+                            <h2 class="mega-menu-title">About</h2>
+                            <p class="mega-menu-desc">With over 20 years of experience, W13 Group has established itself as a leader in property development &amp; construction across the UK.</p>
+                        </div>
+                        <div class="mega-menu-links">
+                            <a href="about.html#story">Our Story</a>
+                            <a href="about.html#people">People</a>
+                            <a href="about.html#health-safety">Health &amp; Safety</a>
+                            <a href="about.html#certifications">Certifications</a>
+                        </div>
+                        <div class="mega-menu-image"><img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=2400&q=90" alt="About W13 Group"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="nav-dropdown">
+                <a href="services.html" class="nav-link">What We Do</a>
+                <div class="mega-menu">
+                    <div class="mega-menu-content">
+                        <div class="mega-menu-intro">
+                            <h2 class="mega-menu-title">What We Do</h2>
+                            <p class="mega-menu-desc">From residential developments to large-scale urban regeneration, our expertise spans the full spectrum of property development &amp; construction.</p>
+                        </div>
+                        <div class="mega-menu-links">
+                            <a href="sectors/residential.html">Residential</a>
+                            <a href="sectors/commercial.html">Commercial</a>
+                            <a href="sectors/architects-planning.html">Architects &amp; Planning</a>
+                            <a href="sectors/urban-regeneration.html">Urban Regeneration</a>
+                        </div>
+                        <div class="mega-menu-image"><img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=2400&q=90" alt="W13 What We Do"></div>
+                    </div>
+                </div>
+            </div>
+            <a href="projects.html" class="nav-link">Projects</a>
+            <div class="mobile-menu-btn" onclick="toggleMenu()"><span>Menu</span><div class="mobile-menu-lines"><span></span><span></span></div></div>
+        </div>
+        <a href="contact.html" class="nav-cta active">Contact <span class="nav-cta-dot"><svg viewBox="0 0 16 16" fill="none"><circle cx="4" cy="4" r="1.5" fill="#fff"/><circle cx="8" cy="4" r="1.5" fill="#fff"/><circle cx="12" cy="4" r="1.5" fill="#fff"/><circle cx="4" cy="8" r="1.5" fill="#fff"/><circle cx="8" cy="8" r="1.5" fill="#fff"/><circle cx="12" cy="8" r="1.5" fill="#fff"/><circle cx="4" cy="12" r="1.5" fill="#fff"/><circle cx="8" cy="12" r="1.5" fill="#fff"/><circle cx="12" cy="12" r="1.5" fill="#fff"/></svg></span></a>
+    </div>
+</nav>
+
+<!-- HERO -->
+<section class="contact-hero">
+    <div class="contact-hero-inner">
+        <div class="contact-hero-label reveal-up">Contact</div>
+        <h1 class="contact-hero-title reveal-up">Get in touch.</h1>
+        <p class="contact-hero-sub reveal-up">Whether you have a site, a project or a partnership in mind &mdash; we&rsquo;d love to hear from you.</p>
+    </div>
+</section>
+
+<!-- CONTACT BODY: INFO + FORM -->
+<section class="contact-body">
+    <div class="contact-body-inner">
+
+        <!-- LEFT — OFFICE DETAILS -->
+        <div class="contact-info reveal-up">
+            <div class="contact-info-block">
+                <div class="contact-info-heading">London Office</div>
+                <div class="contact-info-text">
+                    <a href="https://maps.app.goo.gl/YOUR_MAP_LINK" target="_blank" rel="noopener">20-22 Wenlock Rd<br>London, N1 7GU</a>
+                </div>
+            </div>
+            <div class="contact-info-block">
+                <div class="contact-info-heading">Birmingham Office</div>
+                <div class="contact-info-text">
+                    <a href="https://maps.app.goo.gl/YOUR_MAP_LINK" target="_blank" rel="noopener">Beech House, Greenfield Cresent<br>Birmingham, B15 3BE</a>
+                </div>
+            </div>
+            <div class="contact-info-block">
+                <div class="contact-info-heading">Phone</div>
+                <div class="contact-info-text">
+                    <a href="tel:+442126630006">+44 (0)121 663 0006</a>
+                </div>
+            </div>
+            <div class="contact-info-block">
+                <div class="contact-info-heading">Email</div>
+                <div class="contact-info-text">
+                    <a href="mailto:info@w13uk.com">info@w13uk.com</a>
+                </div>
+            </div>
+            <div class="contact-info-block">
+                <div class="contact-info-heading">Follow Us</div>
+                <div class="contact-social">
+                    <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#" aria-label="X / Twitter"><i class="fab fa-x-twitter"></i></a>
+                    <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+        </div>
+
+        <!-- RIGHT — FORM -->
+        <div class="contact-form-wrapper reveal-up">
+            <form id="contactForm" action="https://api.web3forms.com/submit" method="POST">
+                <!-- Web3Forms access key — replace YOUR_ACCESS_KEY with your real key -->
+                <input type="hidden" name="access_key" value="bb31359f-701a-40bc-9d63-07a1ed99e455">
+                <input type="hidden" name="subject" value="New Enquiry from W13 Website">
+                <input type="hidden" name="from_name" value="W13 Website Contact Form">
+                <!-- Honeypot spam protection -->
+                <input type="checkbox" name="botcheck" style="display: none;">
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="firstName">Forename <span class="req">*</span></label>
+                        <input type="text" id="firstName" name="first_name" placeholder="John" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="lastName">Surname <span class="req">*</span></label>
+                        <input type="text" id="lastName" name="last_name" placeholder="Smith" required>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="company">Company Name <span class="req">*</span></label>
+                        <input type="text" id="company" name="company" placeholder="Acme Holdings Ltd" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email Address <span class="req">*</span></label>
+                        <input type="email" id="email" name="email" placeholder="john@example.co.uk" required>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="relationship">Relationship with W13</label>
+                        <select id="relationship" name="relationship">
+                            <option value="" disabled selected>Select&hellip;</option>
+                            <option value="Landowner / Vendor">Landowner / Vendor</option>
+                            <option value="Investor / Funder">Investor / Funder</option>
+                            <option value="Local Authority">Local Authority</option>
+                            <option value="Architect / Consultant">Architect / Consultant</option>
+                            <option value="Contractor / Supplier">Contractor / Supplier</option>
+                            <option value="Potential Buyer / Tenant">Potential Buyer / Tenant</option>
+                            <option value="Media / Press">Media / Press</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="sector">Sector / Service</label>
+                        <select id="sector" name="sector">
+                            <option value="" disabled selected>Select&hellip;</option>
+                            <option value="Residential">Residential</option>
+                            <option value="Commercial">Commercial</option>
+                            <option value="Architects & Planning">Architects &amp; Planning</option>
+                            <option value="Urban Regeneration">Urban Regeneration</option>
+                            <option value="Construction">Construction</option>
+                            <option value="General Enquiry">General Enquiry</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-row full">
+                    <div class="form-group">
+                        <label for="message">Tell us about your project <span class="req">*</span></label>
+                        <textarea id="message" name="message" placeholder="Briefly describe your project, site or enquiry&hellip;" rows="5" required></textarea>
+                    </div>
+                </div>
+
+                <div class="form-consent">
+                    <input type="checkbox" id="consent" name="consent" required>
+                    <label for="consent">I consent to W13 Group storing my submitted information so they can respond to my enquiry. See our <a href="#">privacy policy</a> to learn more about how we use data.</label>
+                </div>
+
+                <button type="submit" class="btn-submit">
+                    Submit
+                    <svg viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3.75 9h10.5M9.75 4.5L14.25 9l-4.5 4.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </button>
+            </form>
+
+            <!-- Success state -->
+            <div class="form-success" id="formSuccess">
+                <div class="form-success-icon"><i class="fas fa-check-circle"></i></div>
+                <h3>Thank you</h3>
+                <p>Your enquiry has been received. A member of the W13 team will be in touch shortly.</p>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<!-- MAP -->
+<section class="contact-map">
+    <div class="contact-map-inner reveal-up">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2432.1!2d-1.9237!3d52.4634!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zBirmingham+B15+3BE!5e0!3m2!1sen!2suk!4v1" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="W13 Group Head Office Location"></iframe>
+    </div>
+</section>
+
+<!-- CERTIFICATE MODAL -->
+<div id="certModal" class="cert-modal">
+    <div class="cert-modal-overlay" onclick="closeCertModal()"></div>
+    <div class="cert-modal-content">
+        <div class="cert-modal-header">
+            <h2>Cyber Essentials Certificate</h2>
+            <button class="cert-modal-close" onclick="closeCertModal()">&times;</button>
+        </div>
+        <div class="cert-modal-body">
+            <iframe src="https://w13uk.com/wp-content/uploads/2025/04/w13-cyber-essentials-certificate.pdf" frameborder="0"></iframe>
+        </div>
+        <div class="cert-modal-footer">
+            <p>For more information about our security certifications, please contact us at <a href="mailto:info@w13uk.com">info@w13uk.com</a></p>
+        </div>
+    </div>
+</div>
+
+<!-- FOOTER -->
+<footer class="footer">
+    <div class="footer-inner">
+        <div class="footer-top">
+            <div class="footer-brand">
+                <div class="footer-logo"><img src="images/W13_Logo_full_White.png" alt="W13 Group"></div>
+                <a href="#" onclick="openCertModal(event)" class="footer-cert-badge" title="View Cyber Essentials Certificate">
+                    <img src="https://www.ncsc.gov.uk/sites/default/files/2026-02/300x75-ce.svg" alt="NCSC Cyber Essentials" height="50">
+                </a>
+                <p class="footer-brand-text">Building communities, creating value, and delivering excellence across property development.</p>
+            </div>
+            <div class="footer-nav">
+                <div class="footer-nav-col"><h4><a href="about.html">About Us</a></h4></div>
+                <div class="footer-nav-col"><h4><a href="services.html">Divisions</a></h4></div>
+                <div class="footer-nav-col"><h4><a href="services.html">Services</a></h4></div>
+                <div class="footer-nav-col"><h4><a href="projects.html">Projects</a></h4></div>
+                <div class="footer-nav-col"><h4><a href="news.html">News</a></h4></div>
+                <div class="footer-nav-col"><h4><a href="contact.html">Contact</a></h4></div>
+            </div>
+            <div class="footer-contact">
+                <h4 class="footer-contact-heading">Birmingham Office</h4>
+                <div class="footer-contact-text">
+                    Beech House, Greenfield Cresent<br>Birmingham, B15 3BE<br><br>
+                    <a href="tel:+442126630006">+44 (0)121 663 0006</a><br>
+                    <a href="mailto:info@w13uk.com">info@w13uk.com</a>
+                </div>
+                <div class="footer-social">
+                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#"><i class="fab fa-x-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="footer-legal"><a href="#">T&amp;C's</a><a href="#">Privacy Policy</a></div>
+            <div class="footer-copy">&copy;2026 W13 Group Ltd. All rights reserved</div>
+        </div>
+    </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script>
+/* Preloader */
+window.addEventListener('load', () => { setTimeout(() => { const p = document.getElementById('preloader'); gsap.to(p, { opacity: 0, duration: 0.6, ease: 'power2.inOut', onComplete: () => { p.style.display = 'none'; initAll(); } }); }, 800); });
+
+function toggleMenu() { const m = document.getElementById('fullscreenMenu'); m.classList.toggle('active'); document.body.style.overflow = m.classList.contains('active') ? 'hidden' : ''; }
+
+function initAll() {
+    gsap.registerPlugin(ScrollTrigger);
+    const obs = new IntersectionObserver((entries) => { entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } }); }, { threshold: 0.15, rootMargin: '0px 0px -50px 0px' });
+    document.querySelectorAll('.reveal-up').forEach(el => obs.observe(el));
+}
+
+/* Navbar scroll */
+(function() { const n = document.getElementById('navbar'); window.addEventListener('scroll', function() { n.classList.toggle('scrolled', window.pageYOffset > 100); }); })();
+
+/* Web3Forms submission via fetch */
+const form = document.getElementById('contactForm');
+const successDiv = document.getElementById('formSuccess');
+
+form.addEventListener('submit', async function(e) {
+    e.preventDefault();
+    const btn = form.querySelector('.btn-submit');
+    const originalText = btn.innerHTML;
+    btn.innerHTML = 'Sending&hellip;';
+    btn.disabled = true;
+
+    try {
+        const formData = new FormData(form);
+        const res = await fetch('https://api.web3forms.com/submit', {
+            method: 'POST',
+            body: formData
+        });
+        const data = await res.json();
+        if (data.success) {
+            form.style.display = 'none';
+            successDiv.classList.add('visible');
+        } else {
+            btn.innerHTML = 'Error &mdash; try again';
+            btn.disabled = false;
+            setTimeout(() => { btn.innerHTML = originalText; }, 3000);
+        }
+    } catch (err) {
+        btn.innerHTML = 'Error &mdash; try again';
+        btn.disabled = false;
+        setTimeout(() => { btn.innerHTML = originalText; }, 3000);
+    }
+});
+
+/* Certificate Modal */
+function openCertModal(e) {
+    e.preventDefault();
+    document.getElementById('certModal').classList.add('active');
+    document.body.style.overflow = 'hidden';
+}
+
+function closeCertModal() {
+    document.getElementById('certModal').classList.remove('active');
+    document.body.style.overflow = '';
+}
+
+window.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape' && document.getElementById('certModal').classList.contains('active')) {
+        closeCertModal();
+    }
+});
+
+/* Dot cursor */
+(function() {
+    const c = document.getElementById('dotCursor'); if (!c) return;
+    document.addEventListener('mousemove', function(e) { c.style.left = e.clientX + 'px'; c.style.top = e.clientY + 'px'; });
+    document.addEventListener('mouseleave', function() { c.style.left = '-100px'; c.style.top = '-100px'; });
+    document.querySelectorAll('a, button, .menu-close, .nav-link, .nav-cta, .btn-submit, .contact-social a, .footer-social a, .footer-legal a, .footer-nav-col h4, select, label[for], input[type="checkbox"]').forEach(function(el) {
+        el.addEventListener('mouseenter', function() { c.classList.add('hovering'); });
+        el.addEventListener('mouseleave', function() { c.classList.remove('hovering'); });
+    });
+})();
+</script>
+</body>
+</html>

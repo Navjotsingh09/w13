@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Urban Regeneration | W13 Group</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        @font-face { font-family: 'Graphie'; src: url('../fonts/Graphie-Thin.otf'); font-weight: 100; }
+        @font-face { font-family: 'Graphie'; src: url('../fonts/Graphie-ExtraLight.otf'); font-weight: 200; }
+        @font-face { font-family: 'Graphie'; src: url('../fonts/Graphie-Light.otf'); font-weight: 300; }
+        @font-face { font-family: 'Graphie'; src: url('../fonts/Graphie-Book.otf'); font-weight: 350; }
+        @font-face { font-family: 'Graphie'; src: url('../fonts/Graphie-Regular.otf'); font-weight: 400; }
+        @font-face { font-family: 'Graphie'; src: url('../fonts/Graphie-SemiBold.otf'); font-weight: 600; }
+        @font-face { font-family: 'Graphie'; src: url('../fonts/Graphie-Bold.otf'); font-weight: 700; }
+        @font-face { font-family: 'Graphie'; src: url('../fonts/Graphie-ExtraBold.otf'); font-weight: 800; }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Graphie', sans-serif; background: #0C233F; color: #EAEAEA; -webkit-font-smoothing: antialiased; }
+        a { text-decoration: none; color: inherit; }
+        button { cursor: pointer; border: none; font-family: inherit; background: none; color: inherit; }
+        img { max-width: 100%; display: block; }
+        ul { list-style: none; }
+        ::selection { background: rgba(68,192,192,0.3); }
+
+        @media (pointer: fine) { *, *::before, *::after { cursor: none !important; } }
+        .dot-cursor { position: fixed; top: 0; left: 0; z-index: 999999; width: 12px; height: 12px; background: #44C0C0; border-radius: 50%; pointer-events: none; transform: translate(-50%, -50%); transition: transform 0.18s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.2s ease, box-shadow 0.2s ease; box-shadow: 0 0 0 2px rgba(68,192,192,0.3), 0 0 12px rgba(68,192,192,0.25); }
+        .dot-cursor.hovering { transform: translate(-50%, -50%) scale(1.5); background: rgba(68,192,192,0.4); box-shadow: 0 0 0 3px rgba(68,192,192,0.25), 0 0 10px rgba(68,192,192,0.2); }
+
+        .preloader { position: fixed; inset: 0; background: #0C233F; z-index: 100000; display: flex; align-items: center; justify-content: center; }
+        .preloader-dots { display: flex; gap: 8px; }
+        .preloader-dot { width: 10px; height: 10px; background: #44C0C0; border-radius: 50%; animation: preloaderBounce 1.4s ease-in-out infinite; }
+        .preloader-dot:nth-child(2) { animation-delay: 0.2s; }
+        .preloader-dot:nth-child(3) { animation-delay: 0.4s; }
+        @keyframes preloaderBounce { 0%, 80%, 100% { transform: scale(0.6); opacity: 0.4; } 40% { transform: scale(1); opacity: 1; } }
+
+        .navbar { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; padding: 28px 50px; transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1); }
+        .navbar.scrolled { background: rgba(12,35,63,0.98); padding: 20px 50px; backdrop-filter: blur(10px); }
+        .navbar:has(.nav-dropdown:hover) { background: rgba(12,35,63,0.98); backdrop-filter: blur(10px); }
+        .nav-inner { max-width: 1400px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; }
+        .nav-logo { display: flex; align-items: center; }
+        .nav-logo img { height: 40px; width: auto; }
+        .nav-center { flex: 1; display: flex; align-items: center; justify-content: center; gap: 6px; }
+        .nav-link { font-size: 16px; font-weight: 400; color: rgba(234,234,234,0.6); padding: 8px 16px; transition: color 0.3s; letter-spacing: 0.2px; }
+        .nav-link:hover { color: #EAEAEA; }
+        .nav-link.active { color: #EAEAEA; }
+        .nav-cta { display: inline-flex; align-items: center; gap: 10px; font-size: 16px; font-weight: 400; color: #EAEAEA; padding: 10px 16px 10px 22px; border: 1.5px solid rgba(68,192,192,0.9); border-radius: 50px; transition: all 0.3s; white-space: nowrap; }
+        .nav-cta:hover { background: rgba(68,192,192,0.12); }
+        .nav-cta-dot { width: 32px; height: 32px; background: #44C0C0; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+        .nav-cta-dot svg { width: 16px; height: 16px; }
+        .mobile-menu-btn { display: none; font-size: 15px; font-weight: 500; color: #EAEAEA; letter-spacing: 2px; text-transform: uppercase; align-items: center; gap: 12px; }
+        .mobile-menu-lines { display: flex; flex-direction: column; gap: 5px; width: 24px; }
+        .mobile-menu-lines span { height: 1.5px; background: #EAEAEA; transition: all 0.4s; }
+        .mobile-menu-lines span:first-child { width: 24px; }
+        .mobile-menu-lines span:last-child { width: 16px; }
+
+        .nav-dropdown { position: static; }
+        .nav-dropdown > .nav-link { position: relative; cursor: pointer; }
+        .nav-dropdown:hover > .nav-link { text-decoration: underline; text-underline-offset: 4px; text-decoration-thickness: 1.5px; }
+        .nav-dropdown:hover > .nav-link::after { content: ''; position: absolute; left: 4px; top: 50%; transform: translateY(-50%); width: 8px; height: 8px; background: #44C0C0; border-radius: 50%; animation: megaDotPop 0.25s cubic-bezier(0.34, 1.56, 0.64, 1); }
+        @keyframes megaDotPop { 0% { transform: translateY(-50%) scale(0); } 100% { transform: translateY(-50%) scale(1); } }
+        .mega-menu { position: absolute; top: calc(100% - 40px); left: 50%; transform: translateX(-50%) translateY(-8px); width: calc(100% - 80px); max-width: 1440px; padding-top: 40px; opacity: 0; visibility: hidden; transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1); z-index: 1001; pointer-events: none; }
+        .nav-dropdown:hover .mega-menu { opacity: 1; visibility: visible; transform: translateX(-50%) translateY(0); pointer-events: auto; }
+        .mega-menu-content { display: grid; grid-template-columns: 1.1fr 0.9fr 1.4fr; background: #fff; border-radius: 16px 16px 4px 4px; overflow: hidden; border-bottom: 4px solid #44C0C0; box-shadow: 0 25px 60px rgba(12,35,63,0.18); }
+        .mega-menu-intro { padding: 48px 40px; }
+        .mega-menu-title { font-family: 'Graphie', sans-serif; font-weight: 400; font-size: 52px; color: #0C233F; margin-bottom: 24px; line-height: 1.1; }
+        .mega-menu-desc { font-size: 15px; line-height: 1.75; color: rgba(12,35,63,0.55); }
+        .mega-menu-links { padding: 48px 30px; display: flex; flex-direction: column; justify-content: center; }
+        .mega-menu-links a { display: block; padding: 16px 0; font-size: 16px; color: #0C233F; border-bottom: 1px dotted rgba(12,35,63,0.2); transition: color 0.25s; }
+        .mega-menu-links a:last-child { border-bottom: none; }
+        .mega-menu-links a:hover { color: #44C0C0; }
+        .mega-menu-image { position: relative; overflow: hidden; min-height: 350px; }
+        .mega-menu-image img { width: 100%; height: 100%; object-fit: cover; position: absolute; top: 0; left: 0; transition: transform 0.6s ease; }
+        .mega-menu-content:hover .mega-menu-image img { transform: scale(1.05); }
+
+        .fullscreen-menu { position: fixed; inset: 0; background: #0C233F; z-index: 9999; display: flex; opacity: 0; pointer-events: none; transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1); }
+        .fullscreen-menu.active { opacity: 1; pointer-events: all; }
+        .menu-close { position: absolute; top: 30px; right: 50px; font-size: 15px; font-weight: 500; color: #EAEAEA; letter-spacing: 2px; text-transform: uppercase; cursor: pointer; display: flex; align-items: center; gap: 12px; z-index: 10; }
+        .menu-close-x { font-size: 28px; font-weight: 300; line-height: 1; }
+        .menu-left { flex: 1; display: flex; flex-direction: column; justify-content: center; padding: 100px 80px; }
+        .menu-nav-link { font-size: 48px; font-weight: 300; color: rgba(234,234,234,0.4); padding: 12px 0; transition: all 0.4s; display: block; }
+        .menu-nav-link:hover { color: #EAEAEA; padding-left: 20px; }
+        .menu-right { width: 40%; display: flex; flex-direction: column; }
+        .menu-right-img { flex: 1; overflow: hidden; }
+        .menu-right-img img { width: 100%; height: 100%; object-fit: cover; }
+        .menu-right-info { padding: 40px; background: #091c33; }
+        .menu-right-info h4 { font-size: 13px; font-weight: 600; letter-spacing: 3px; text-transform: uppercase; color: #44C0C0; margin-bottom: 16px; }
+        .menu-right-info p { font-size: 14px; color: rgba(234,234,234,0.5); line-height: 1.8; margin-bottom: 16px; }
+        .menu-right-info a { font-size: 14px; color: rgba(234,234,234,0.6); transition: color 0.3s; }
+        .menu-right-info a:hover { color: #44C0C0; }
+
+        .sector-hero { position: relative; height: 70vh; min-height: 500px; overflow: hidden; display: flex; align-items: flex-end; }
+        .sector-hero-img { position: absolute; inset: 0; }
+        .sector-hero-img img { width: 100%; height: 100%; object-fit: cover; }
+        .sector-hero-overlay { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(12,35,63,0.3) 0%, rgba(12,35,63,0.85) 100%); }
+        .sector-hero-content { position: relative; z-index: 2; max-width: 1400px; width: 100%; margin: 0 auto; padding: 0 50px 80px; }
+        .sector-hero-label { font-size: 13px; font-weight: 600; letter-spacing: 4px; text-transform: uppercase; color: #44C0C0; margin-bottom: 20px; }
+        .sector-hero-title { font-family: 'Graphie', sans-serif; font-weight: 600; font-size: clamp(36px, 5vw, 64px); line-height: 1.1; }
+        .sector-hero-sub { font-size: 18px; color: rgba(234,234,234,0.6); margin-top: 20px; max-width: 600px; line-height: 1.7; }
+
+        .intro-section { padding: 120px 50px; }
+        .intro-inner { max-width: 1400px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+        .intro-label { font-size: 13px; font-weight: 600; letter-spacing: 4px; text-transform: uppercase; color: #44C0C0; margin-bottom: 20px; }
+        .intro-title { font-family: 'Graphie', sans-serif; font-weight: 600; font-size: clamp(28px, 3.5vw, 44px); line-height: 1.15; margin-bottom: 30px; }
+        .intro-text { font-size: 17px; color: rgba(234,234,234,0.6); line-height: 1.85; margin-bottom: 20px; }
+        .intro-img { position: relative; border-radius: 8px; overflow: hidden; height: 500px; }
+        .intro-img img { width: 100%; height: 100%; object-fit: cover; }
+        .intro-img-badge { position: absolute; bottom: 24px; left: 24px; background: rgba(12,35,63,0.85); backdrop-filter: blur(8px); padding: 20px 28px; border-left: 3px solid #44C0C0; }
+        .intro-img-badge-num { font-family: 'Graphie', sans-serif; font-weight: 700; font-size: 36px; color: #44C0C0; }
+        .intro-img-badge-label { font-size: 12px; color: rgba(234,234,234,0.5); letter-spacing: 1px; text-transform: uppercase; margin-top: 4px; }
+
+        .stats-band { padding: 60px 50px; background: #091c33; border-top: 1px solid rgba(68,192,192,0.1); border-bottom: 1px solid rgba(68,192,192,0.1); }
+        .stats-inner { max-width: 1400px; margin: 0 auto; display: grid; grid-template-columns: repeat(4, 1fr); gap: 30px; text-align: center; }
+        .stat-num { font-family: 'Graphie', sans-serif; font-weight: 700; font-size: 42px; color: #44C0C0; }
+        .stat-label { font-size: 13px; color: rgba(234,234,234,0.45); letter-spacing: 1px; text-transform: uppercase; margin-top: 8px; }
+
+        .services-section { padding: 120px 50px; }
+        .services-inner { max-width: 1400px; margin: 0 auto; }
+        .section-label { font-size: 13px; font-weight: 600; letter-spacing: 4px; text-transform: uppercase; color: #44C0C0; margin-bottom: 16px; }
+        .section-title { font-family: 'Graphie', sans-serif; font-weight: 600; font-size: clamp(28px, 3.5vw, 44px); line-height: 1.15; margin-bottom: 60px; }
+        .services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; }
+        .service-card { padding: 40px 30px; border: 1px solid rgba(68,192,192,0.1); border-radius: 4px; transition: all 0.4s; }
+        .service-card:hover { border-color: rgba(68,192,192,0.3); background: rgba(68,192,192,0.04); }
+        .service-card-icon { width: 48px; height: 48px; display: flex; align-items: center; justify-content: center; color: #44C0C0; font-size: 24px; margin-bottom: 24px; }
+        .service-card-title { font-family: 'Graphie', sans-serif; font-weight: 600; font-size: 18px; margin-bottom: 12px; }
+        .service-card-text { font-size: 14px; color: rgba(234,234,234,0.45); line-height: 1.7; }
+
+        .projects-section { padding: 120px 50px; background: #091c33; border-top: 1px solid rgba(68,192,192,0.1); }
+        .projects-inner { max-width: 1400px; margin: 0 auto; }
+        .projects-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; }
+        .project-card { position: relative; overflow: hidden; border-radius: 4px; }
+        .project-card-img { height: 320px; overflow: hidden; }
+        .project-card-img img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s ease; }
+        .project-card:hover .project-card-img img { transform: scale(1.05); }
+        .project-card-info { padding: 24px 0 8px; }
+        .project-card-name { font-family: 'Graphie', sans-serif; font-weight: 600; font-size: 18px; margin-bottom: 4px; }
+        .project-card-location { font-size: 13px; color: rgba(234,234,234,0.45); }
+        .project-card-tag { display: inline-block; font-size: 11px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; color: #44C0C0; background: rgba(68,192,192,0.1); padding: 4px 10px; border-radius: 2px; margin-top: 8px; }
+
+        .cta-section { padding: 160px 50px; border-top: 1px solid rgba(68,192,192,0.1); }
+        .cta-inner { max-width: 900px; margin: 0 auto; text-align: center; }
+        .cta-title { font-family: 'Graphie', sans-serif; font-weight: 700; font-size: clamp(40px, 6vw, 72px); line-height: 1.1; margin-bottom: 30px; }
+        .cta-text { font-size: 18px; color: rgba(234,234,234,0.55); line-height: 1.8; margin-bottom: 50px; max-width: 600px; margin-left: auto; margin-right: auto; }
+        .btn-cta { display: inline-block; padding: 20px 50px; background: #44C0C0; color: #0C233F; font-size: 15px; font-weight: 700; letter-spacing: 1px; transition: all 0.4s; }
+        .btn-cta:hover { background: #3aadad; transform: translateY(-2px); }
+
+        .footer { background: #091c33; padding: 80px 50px 40px; border-top: 1px solid rgba(68,192,192,0.1); }
+        .footer-inner { max-width: 1400px; margin: 0 auto; }
+        .footer-top { display: grid; grid-template-columns: 1fr 2fr 1fr; gap: 60px; padding-bottom: 60px; border-bottom: 1px solid rgba(68,192,192,0.1); }
+        .footer-logo { margin-bottom: 20px; }
+        .footer-logo img { height: 48px; width: auto; }
+        .footer-brand-text { font-size: 14px; color: rgba(234,234,234,0.4); line-height: 1.7; }
+        .footer-nav { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; }
+        .footer-nav-col h4 { font-family: 'Graphie', sans-serif; font-weight: 600; font-size: 20px; margin-bottom: 10px; color: rgba(234,234,234,0.7); transition: color 0.3s; cursor: pointer; }
+        .footer-nav-col h4:hover { color: #44C0C0; }
+        .footer-contact-heading { font-size: 13px; font-weight: 600; letter-spacing: 3px; text-transform: uppercase; color: #44C0C0; margin-bottom: 20px; }
+        .footer-contact-text { font-size: 14px; color: rgba(234,234,234,0.4); line-height: 1.8; }
+        .footer-contact-text a { color: rgba(234,234,234,0.6); transition: color 0.3s; }
+        .footer-contact-text a:hover { color: #44C0C0; }
+        .footer-social { display: flex; gap: 12px; margin-top: 24px; }
+        .footer-social a { width: 40px; height: 40px; border: 1px solid rgba(68,192,192,0.2); display: flex; align-items: center; justify-content: center; color: rgba(234,234,234,0.4); font-size: 15px; transition: all 0.3s; }
+        .footer-social a:hover { border-color: #44C0C0; color: #44C0C0; }
+        .footer-bottom { padding-top: 30px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; }
+        .footer-legal { display: flex; gap: 20px; }
+        .footer-legal a { font-size: 12px; color: rgba(234,234,234,0.25); transition: color 0.3s; }
+        .footer-legal a:hover { color: #44C0C0; }
+        .footer-copy { font-size: 12px; color: rgba(234,234,234,0.25); }
+
+        .reveal-up { opacity: 0; transform: translateY(60px); transition: all 1s cubic-bezier(0.16, 1, 0.3, 1); }
+        .reveal-up.visible { opacity: 1; transform: translateY(0); }
+        .reveal-scale { opacity: 0; transform: scale(0.92); transition: all 1s cubic-bezier(0.16, 1, 0.3, 1); }
+        .reveal-scale.visible { opacity: 1; transform: scale(1); }
+
+        @media (max-width: 1100px) {
+            .intro-inner { grid-template-columns: 1fr; gap: 50px; }
+            .services-grid { grid-template-columns: repeat(2, 1fr); }
+            .projects-grid { grid-template-columns: repeat(2, 1fr); }
+            .stats-inner { grid-template-columns: repeat(2, 1fr); gap: 40px; }
+            .footer-top { grid-template-columns: 1fr; gap: 40px; }
+            .menu-right { display: none; }
+        }
+        @media (max-width: 768px) {
+            .navbar { padding: 20px 24px; }
+            .nav-center .nav-link { display: none; }
+            .nav-center .nav-dropdown { display: none; }
+            .nav-cta { display: none; }
+            .mobile-menu-btn { display: flex; }
+            .sector-hero { height: 50vh; min-height: 380px; }
+            .sector-hero-content { padding: 0 24px 50px; }
+            .intro-section, .services-section, .projects-section { padding: 80px 24px; }
+            .services-grid, .projects-grid { grid-template-columns: 1fr; }
+            .stats-inner { grid-template-columns: 1fr 1fr; }
+            .cta-section { padding: 100px 24px; }
+            .footer { padding: 60px 24px 30px; }
+            .footer-nav { grid-template-columns: 1fr 1fr; }
+            .menu-left { padding: 100px 30px; }
+            .menu-nav-link { font-size: 36px; }
+            .menu-close { right: 24px; }
+            .footer-bottom { flex-direction: column; text-align: center; }
+        }
+    </style>
+</head>
+<body>
+<div class="dot-cursor" id="dotCursor"></div>
+
+<div class="preloader" id="preloader">
+    <div class="preloader-dots"><div class="preloader-dot"></div><div class="preloader-dot"></div><div class="preloader-dot"></div></div>
+</div>
+
+<!-- FULLSCREEN MENU -->
+<div class="fullscreen-menu" id="fullscreenMenu">
+    <div class="menu-close" onclick="toggleMenu()"><span>Close</span><span class="menu-close-x">&times;</span></div>
+    <div class="menu-left">
+        <a href="../index.html" class="menu-nav-link">Home</a>
+        <a href="../about.html" class="menu-nav-link">About</a>
+        <a href="../services.html" class="menu-nav-link">What We Do</a>
+        <a href="../projects.html" class="menu-nav-link">Projects</a>
+        <a href="../news.html" class="menu-nav-link">News</a>
+        <a href="../contact.html" class="menu-nav-link">Contact</a>
+    </div>
+    <div class="menu-right">
+        <div class="menu-right-img"><img src="https://images.unsplash.com/photo-1517089596392-fb9a9033e05b?w=2400&q=90" alt=""></div>
+        <div class="menu-right-info">
+            <h4>Head Office</h4>
+            <p>Beech House<br>Birmingham, B15 3BE<br><br>020 3150 1401<br>info@w13uk.com</p>
+            <a href="#">LinkedIn &rarr;</a>
+        </div>
+    </div>
+</div>
+
+<!-- NAVBAR -->
+<nav class="navbar" id="navbar">
+    <div class="nav-inner">
+        <a href="../index.html" class="nav-logo"><img src="../images/W13_Logo_White.png" alt="W13 Group"></a>
+        <div class="nav-center">
+            <div class="nav-dropdown">
+                <a href="../about.html" class="nav-link">About</a>
+                <div class="mega-menu">
+                    <div class="mega-menu-content">
+                        <div class="mega-menu-intro">
+                            <h2 class="mega-menu-title">About</h2>
+                            <p class="mega-menu-desc">With over 20 years of experience, W13 Group has established itself as a leader in property development &amp; construction across the UK.</p>
+                        </div>
+                        <div class="mega-menu-links">
+                            <a href="../about.html#story">Our Story</a>
+                            <a href="../about.html#people">People</a>
+                            <a href="../about.html#health-safety">Health &amp; Safety</a>
+                            <a href="../about.html#certifications">Certifications</a>
+                        </div>
+                        <div class="mega-menu-image"><img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=2400&q=90" alt="About W13 Group"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="nav-dropdown">
+                <a href="../services.html" class="nav-link active">What We Do</a>
+                <div class="mega-menu">
+                    <div class="mega-menu-content">
+                        <div class="mega-menu-intro">
+                            <h2 class="mega-menu-title">What We Do</h2>
+                            <p class="mega-menu-desc">From residential developments to large-scale urban regeneration, our expertise spans the full spectrum of property development &amp; construction.</p>
+                        </div>
+                        <div class="mega-menu-links">
+                            <a href="residential.html">Residential</a>
+                            <a href="commercial.html">Commercial</a>
+                            <a href="architects-planning.html">Architects &amp; Planning</a>
+                            <a href="urban-regeneration.html">Urban Regeneration</a>
+                        </div>
+                        <div class="mega-menu-image"><img src="https://images.unsplash.com/photo-1517089596392-fb9a9033e05b?w=2400&q=90" alt="W13 What We Do"></div>
+                    </div>
+                </div>
+            </div>
+            <a href="../projects.html" class="nav-link">Projects</a>
+            <div class="mobile-menu-btn" onclick="toggleMenu()"><span>Menu</span><div class="mobile-menu-lines"><span></span><span></span></div></div>
+        </div>
+        <a href="../contact.html" class="nav-cta">Contact <span class="nav-cta-dot"><svg viewBox="0 0 16 16" fill="none"><circle cx="4" cy="4" r="1.5" fill="#fff"/><circle cx="8" cy="4" r="1.5" fill="#fff"/><circle cx="12" cy="4" r="1.5" fill="#fff"/><circle cx="4" cy="8" r="1.5" fill="#fff"/><circle cx="8" cy="8" r="1.5" fill="#fff"/><circle cx="12" cy="8" r="1.5" fill="#fff"/><circle cx="4" cy="12" r="1.5" fill="#fff"/><circle cx="8" cy="12" r="1.5" fill="#fff"/><circle cx="12" cy="12" r="1.5" fill="#fff"/></svg></span></a>
+    </div>
+</nav>
+
+<!-- HERO -->
+<section class="sector-hero">
+    <div class="sector-hero-img"><img src="https://images.unsplash.com/photo-1517089596392-fb9a9033e05b?w=2400&q=90" alt="Urban Regeneration"></div>
+    <div class="sector-hero-overlay"></div>
+    <div class="sector-hero-content">
+        <div class="sector-hero-label reveal-up">Urban Regeneration</div>
+        <h1 class="sector-hero-title reveal-up">Transforming places,<br>building futures.</h1>
+        <p class="sector-hero-sub reveal-up">We bring new life to underused sites, neglected neighbourhoods and former industrial land &mdash; creating thriving communities where people want to live and work.</p>
+    </div>
+</section>
+
+<!-- STATS -->
+<div class="stats-band">
+    <div class="stats-inner">
+        <div class="reveal-up"><div class="stat-num">12</div><div class="stat-label">Regeneration Schemes</div></div>
+        <div class="reveal-up"><div class="stat-num">85+</div><div class="stat-label">Acres Regenerated</div></div>
+        <div class="reveal-up"><div class="stat-num">£500m+</div><div class="stat-label">Total Investment</div></div>
+        <div class="reveal-up"><div class="stat-num">3,000+</div><div class="stat-label">Homes &amp; Jobs Created</div></div>
+    </div>
+</div>
+
+<!-- INTRO -->
+<section class="intro-section">
+    <div class="intro-inner">
+        <div>
+            <div class="intro-label reveal-up">Overview</div>
+            <h2 class="intro-title reveal-up">Regeneration rooted in place and community</h2>
+            <p class="intro-text reveal-up">Urban regeneration sits at the heart of W13 Group&rsquo;s mission. We specialise in the complex, long-term work of transforming brownfield land, former industrial sites and underperforming urban areas into vibrant mixed-use neighbourhoods. Our approach brings together development expertise, planning knowledge and genuine community engagement to deliver lasting change.</p>
+            <p class="intro-text reveal-up">We work closely with local authorities, Homes England, combined authorities and community stakeholders to align our schemes with local priorities. Whether supporting Levelling Up objectives, contributing to Local Plan housing targets or delivering biodiversity net gain, every project is shaped by the policy context and the needs of the people it will serve.</p>
+            <p class="intro-text reveal-up">From initial site assembly and remediation through to placemaking and long-term stewardship, W13 Group takes a whole-lifecycle approach to regeneration. We don&rsquo;t just build &mdash; we create places with identity, resilience and enduring value.</p>
+        </div>
+        <div class="intro-img reveal-scale">
+            <img src="https://images.unsplash.com/photo-1582407947092-50b6ef26d700?w=2400&q=90" alt="Urban regeneration site">
+            <div class="intro-img-badge">
+                <div class="intro-img-badge-num">85+</div>
+                <div class="intro-img-badge-label">Acres Regenerated</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- WHAT WE DELIVER -->
+<section class="services-section">
+    <div class="services-inner">
+        <div class="section-label reveal-up">What We Deliver</div>
+        <h2 class="section-title reveal-up">Comprehensive regeneration capability</h2>
+        <div class="services-grid">
+            <div class="service-card reveal-up">
+                <div class="service-card-icon"><i class="fas fa-industry"></i></div>
+                <div class="service-card-title">Brownfield Redevelopment</div>
+                <div class="service-card-text">Bringing previously developed land back into productive use. We manage remediation, abnormal costs and environmental risk to unlock sites that others consider too complex or unviable.</div>
+            </div>
+            <div class="service-card reveal-up">
+                <div class="service-card-icon"><i class="fas fa-city"></i></div>
+                <div class="service-card-title">Town Centre Renewal</div>
+                <div class="service-card-text">Revitalising high streets and town centres through mixed-use development, public realm improvements and repurposing of vacant commercial stock. Aligning with local authority regeneration frameworks.</div>
+            </div>
+            <div class="service-card reveal-up">
+                <div class="service-card-icon"><i class="fas fa-home"></i></div>
+                <div class="service-card-title">Estate Regeneration</div>
+                <div class="service-card-text">Sensitive estate renewal delivering improved homes, better public spaces and stronger community infrastructure. We engage residents from day one and prioritise right of return for existing tenants.</div>
+            </div>
+            <div class="service-card reveal-up">
+                <div class="service-card-icon"><i class="fas fa-train"></i></div>
+                <div class="service-card-title">Transport-Oriented Development</div>
+                <div class="service-card-text">High-density, mixed-use schemes at railway stations, metro stops and bus interchanges. Maximising the connectivity premium to deliver sustainable, car-lite communities with strong public transport links.</div>
+            </div>
+            <div class="service-card reveal-up">
+                <div class="service-card-icon"><i class="fas fa-seedling"></i></div>
+                <div class="service-card-title">Community &amp; Placemaking</div>
+                <div class="service-card-text">Embedding social value through community facilities, green infrastructure, meanwhile uses and public art. We create places with identity and a sense of belonging &mdash; not just housing numbers.</div>
+            </div>
+            <div class="service-card reveal-up">
+                <div class="service-card-icon"><i class="fas fa-handshake"></i></div>
+                <div class="service-card-title">Public Sector Partnerships</div>
+                <div class="service-card-text">Joint ventures and development agreements with local authorities, combined authorities and Homes England. We bring private investment and delivery capability to publicly-led regeneration priorities.</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- RELATED PROJECTS -->
+<section class="projects-section">
+    <div class="projects-inner">
+        <div class="section-label reveal-up">Related Projects</div>
+        <h2 class="section-title reveal-up">Regeneration in practice</h2>
+        <div class="projects-grid">
+            <div class="project-card reveal-up">
+                <div class="project-card-img"><img src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=800&q=90" alt="Walsall Road"></div>
+                <div class="project-card-info">
+                    <div class="project-card-name">Walsall Road</div>
+                    <div class="project-card-location">Great Barr, Birmingham</div>
+                    <span class="project-card-tag">Brownfield</span>
+                </div>
+            </div>
+            <div class="project-card reveal-up">
+                <div class="project-card-img"><img src="https://images.unsplash.com/photo-1517089596392-fb9a9033e05b?w=800&q=90" alt="Southall Waterside"></div>
+                <div class="project-card-info">
+                    <div class="project-card-name">Southall Waterside</div>
+                    <div class="project-card-location">West London</div>
+                    <span class="project-card-tag">Mixed-Use</span>
+                </div>
+            </div>
+            <div class="project-card reveal-up">
+                <div class="project-card-img"><img src="https://images.unsplash.com/photo-1582407947092-50b6ef26d700?w=800&q=90" alt="Former Industrial Site"></div>
+                <div class="project-card-info">
+                    <div class="project-card-name">Digbeth Quarter</div>
+                    <div class="project-card-location">Digbeth, Birmingham</div>
+                    <span class="project-card-tag">Town Centre</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+    <div class="cta-inner">
+        <h2 class="cta-title reveal-up">Let&rsquo;s regenerate.</h2>
+        <p class="cta-text reveal-up">We&rsquo;re seeking brownfield sites, partnership opportunities and regeneration-led development projects across the UK. If you have a site or an idea, we&rsquo;d like to hear from you.</p>
+        <a href="../contact.html" class="btn-cta reveal-up">Start the conversation</a>
+    </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+    <div class="footer-inner">
+        <div class="footer-top">
+            <div class="footer-brand">
+                <div class="footer-logo"><img src="../images/W13_Logo_full_White.png" alt="W13 Group"></div>
+                <p class="footer-brand-text">Building communities, creating value, and delivering excellence across property development.</p>
+            </div>
+            <div class="footer-nav">
+                <div class="footer-nav-col"><h4><a href="../about.html">About Us</a></h4></div>
+                <div class="footer-nav-col"><h4><a href="../services.html">Divisions</a></h4></div>
+                <div class="footer-nav-col"><h4><a href="../services.html">Services</a></h4></div>
+                <div class="footer-nav-col"><h4><a href="../projects.html">Projects</a></h4></div>
+                <div class="footer-nav-col"><h4><a href="../news.html">News</a></h4></div>
+                <div class="footer-nav-col"><h4><a href="../contact.html">Contact</a></h4></div>
+            </div>
+            <div class="footer-contact">
+                <h4 class="footer-contact-heading">Head Office</h4>
+                <div class="footer-contact-text">
+                    Beech House<br>Birmingham, B15 3BE<br><br>
+                    <a href="tel:+442031501401">+44 (0)20 3150 1401</a><br>
+                    <a href="mailto:info@w13uk.com">info@w13uk.com</a>
+                </div>
+                <div class="footer-social">
+                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#"><i class="fab fa-x-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="footer-legal"><a href="#">T&amp;C's</a><a href="#">Privacy Policy</a></div>
+            <div class="footer-copy">&copy;2026 W13 Group Ltd. All rights reserved</div>
+        </div>
+    </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script>
+window.addEventListener('load', () => { setTimeout(() => { const p = document.getElementById('preloader'); gsap.to(p, { opacity: 0, duration: 0.6, ease: 'power2.inOut', onComplete: () => { p.style.display = 'none'; initAll(); } }); }, 800); });
+function toggleMenu() { const m = document.getElementById('fullscreenMenu'); m.classList.toggle('active'); document.body.style.overflow = m.classList.contains('active') ? 'hidden' : ''; }
+function initAll() {
+    gsap.registerPlugin(ScrollTrigger);
+    const obs = new IntersectionObserver((entries) => { entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } }); }, { threshold: 0.15, rootMargin: '0px 0px -50px 0px' });
+    document.querySelectorAll('.reveal-up, .reveal-scale').forEach(el => obs.observe(el));
+    gsap.to('.sector-hero-img img', { y: 80, ease: 'none', scrollTrigger: { trigger: '.sector-hero', start: 'top top', end: 'bottom top', scrub: 1 } });
+    gsap.fromTo('.service-card', { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 0.7, stagger: 0.1, ease: 'power3.out', scrollTrigger: { trigger: '.services-grid', start: 'top 80%' } });
+    gsap.fromTo('.project-card', { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 0.7, stagger: 0.12, ease: 'power3.out', scrollTrigger: { trigger: '.projects-grid', start: 'top 80%' } });
+}
+(function() { const n = document.getElementById('navbar'); window.addEventListener('scroll', function() { n.classList.toggle('scrolled', window.pageYOffset > 100); }); })();
+(function() {
+    const c = document.getElementById('dotCursor'); if (!c) return;
+    document.addEventListener('mousemove', function(e) { c.style.left = e.clientX + 'px'; c.style.top = e.clientY + 'px'; });
+    document.addEventListener('mouseleave', function() { c.style.left = '-100px'; c.style.top = '-100px'; });
+    document.querySelectorAll('a, button, .menu-close, .nav-link, .nav-cta, .btn-cta, .service-card, .project-card, .footer-social a, .footer-legal a, .footer-nav-col h4').forEach(function(el) {
+        el.addEventListener('mouseenter', function() { c.classList.add('hovering'); });
+        el.addEventListener('mouseleave', function() { c.classList.remove('hovering'); });
+    });
+})();
+</script>
+</body>
+</html>
