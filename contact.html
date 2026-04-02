@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contact | W13 Group</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
     <style>
         @font-face { font-family: 'Graphie'; src: url('fonts/Graphie-Thin.otf'); font-weight: 100; }
         @font-face { font-family: 'Graphie'; src: url('fonts/Graphie-ExtraLight.otf'); font-weight: 200; }
@@ -45,9 +46,10 @@
         .nav-center { flex: 1; display: flex; align-items: center; justify-content: center; gap: 6px; }
         .nav-link { font-size: 16px; font-weight: 400; color: rgba(234,234,234,0.6); padding: 8px 16px; transition: color 0.3s; letter-spacing: 0.2px; }
         .nav-link:hover { color: #EAEAEA; }
-        .nav-link.active { color: #EAEAEA; }
+        .nav-link.active { color: #EAEAEA; text-decoration: underline; text-decoration-color: #44C0C0; text-underline-offset: 4px; text-decoration-thickness: 1.5px; }
         .nav-cta { display: inline-flex; align-items: center; gap: 10px; font-size: 16px; font-weight: 400; color: #EAEAEA; padding: 10px 16px 10px 22px; border: 1.5px solid rgba(68,192,192,0.9); border-radius: 50px; transition: all 0.3s; white-space: nowrap; }
         .nav-cta:hover { background: rgba(68,192,192,0.12); }
+        .nav-cta.active { background: rgba(68,192,192,0.12); border-color: #44C0C0; }
         .nav-cta-dot { width: 32px; height: 32px; background: #44C0C0; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
         .nav-cta-dot svg { width: 16px; height: 16px; }
         .mobile-menu-btn { display: none; font-size: 15px; font-weight: 500; color: #EAEAEA; letter-spacing: 2px; text-transform: uppercase; align-items: center; gap: 12px; }
@@ -154,8 +156,57 @@
         /* MAP */
         .contact-map { padding: 0 50px 0; }
         .contact-map-inner { max-width: 1400px; margin: 0 auto; border-top: 1px solid rgba(68,192,192,0.1); padding-top: 80px; }
-        .contact-map iframe { width: 100%; height: 450px; border: none; border-radius: 4px; filter: grayscale(0.6) brightness(0.85) contrast(1.1); transition: filter 0.4s; }
-        .contact-map iframe:hover { filter: grayscale(0.2) brightness(0.9) contrast(1.05); }
+
+        /* Map header + tabs */
+        .map-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 28px; flex-wrap: wrap; gap: 16px; }
+        .map-title { font-family: 'Graphie', sans-serif; font-weight: 600; font-size: 28px; color: #EAEAEA; }
+        .map-tabs { display: flex; gap: 8px; }
+        .map-tab { padding: 10px 24px; font-family: 'Graphie', sans-serif; font-size: 13px; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; color: rgba(234,234,234,0.45); border: 1px solid rgba(68,192,192,0.15); border-radius: 50px; background: transparent; transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1); cursor: pointer; }
+        .map-tab:hover { color: #EAEAEA; border-color: rgba(68,192,192,0.4); }
+        .map-tab.active { color: #0C233F; background: #44C0C0; border-color: #44C0C0; }
+
+        /* Map container */
+        .map-container { position: relative; width: 100%; height: 500px; border-radius: 12px; overflow: hidden; border: 1px solid rgba(68,192,192,0.12); box-shadow: 0 20px 60px rgba(0,0,0,0.25), 0 0 0 1px rgba(68,192,192,0.06); }
+        .map-container .leaflet-container { width: 100%; height: 100%; background: #0a1929; }
+        #officeMap { width: 100%; height: 100%; }
+
+        /* Custom marker pulse */
+        .marker-pin { width: 36px; height: 36px; position: relative; }
+        .marker-pin-inner { width: 16px; height: 16px; background: #44C0C0; border-radius: 50%; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); box-shadow: 0 0 12px rgba(68,192,192,0.6); z-index: 2; }
+        .marker-pin-ring { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 36px; height: 36px; border: 2px solid rgba(68,192,192,0.4); border-radius: 50%; animation: markerPulse 2s ease-out infinite; }
+        .marker-pin-ring-2 { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 36px; height: 36px; border: 2px solid rgba(68,192,192,0.2); border-radius: 50%; animation: markerPulse 2s ease-out infinite 0.6s; }
+        @keyframes markerPulse { 0% { width: 16px; height: 16px; opacity: 1; } 100% { width: 56px; height: 56px; opacity: 0; } }
+
+        /* Leaflet popup overrides */
+        .leaflet-popup-content-wrapper { background: #0C233F !important; color: #EAEAEA !important; border-radius: 12px !important; box-shadow: 0 12px 40px rgba(0,0,0,0.4), 0 0 0 1px rgba(68,192,192,0.15) !important; padding: 0 !important; overflow: hidden; }
+        .leaflet-popup-content { margin: 0 !important; width: 280px !important; }
+        .leaflet-popup-tip { background: #0C233F !important; }
+        .leaflet-popup-close-button { color: rgba(234,234,234,0.4) !important; font-size: 20px !important; top: 10px !important; right: 12px !important; }
+        .leaflet-popup-close-button:hover { color: #44C0C0 !important; }
+
+        .popup-content { padding: 24px; }
+        .popup-label { font-size: 11px; font-weight: 600; letter-spacing: 3px; text-transform: uppercase; color: #44C0C0; margin-bottom: 10px; }
+        .popup-name { font-family: 'Graphie', sans-serif; font-weight: 600; font-size: 20px; margin-bottom: 12px; color: #EAEAEA; }
+        .popup-address { font-size: 14px; color: rgba(234,234,234,0.5); line-height: 1.7; margin-bottom: 16px; }
+        .popup-phone { font-size: 14px; color: rgba(234,234,234,0.6); margin-bottom: 18px; display: block; }
+        .popup-phone:hover { color: #44C0C0; }
+        .popup-directions { display: inline-flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 600; letter-spacing: 0.5px; color: #44C0C0; padding: 10px 20px; border: 1px solid rgba(68,192,192,0.3); border-radius: 50px; transition: all 0.3s; text-decoration: none; }
+        .popup-directions:hover { background: rgba(68,192,192,0.12); border-color: #44C0C0; }
+
+        /* Leaflet controls restyle */
+        .leaflet-control-zoom { border: none !important; box-shadow: 0 4px 16px rgba(0,0,0,0.3) !important; border-radius: 8px !important; overflow: hidden; }
+        .leaflet-control-zoom a { background: #0C233F !important; color: #44C0C0 !important; border-color: rgba(68,192,192,0.15) !important; width: 36px !important; height: 36px !important; line-height: 36px !important; font-size: 18px !important; }
+        .leaflet-control-zoom a:hover { background: #122e4f !important; }
+        .leaflet-control-attribution { background: rgba(12,35,63,0.8) !important; color: rgba(234,234,234,0.3) !important; font-size: 10px !important; }
+        .leaflet-control-attribution a { color: rgba(68,192,192,0.5) !important; }
+
+        /* Map info cards at bottom */
+        .map-offices { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 20px; }
+        .map-office-card { background: rgba(68,192,192,0.04); border: 1px solid rgba(68,192,192,0.1); border-radius: 10px; padding: 24px 28px; display: flex; align-items: center; gap: 20px; transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1); cursor: pointer; }
+        .map-office-card:hover, .map-office-card.active { background: rgba(68,192,192,0.08); border-color: rgba(68,192,192,0.3); transform: translateY(-2px); }
+        .map-office-icon { width: 48px; height: 48px; min-width: 48px; background: rgba(68,192,192,0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #44C0C0; font-size: 18px; }
+        .map-office-details h4 { font-family: 'Graphie', sans-serif; font-weight: 600; font-size: 16px; color: #EAEAEA; margin-bottom: 4px; }
+        .map-office-details p { font-size: 13px; color: rgba(234,234,234,0.4); line-height: 1.6; }
 
         /* FOOTER */
         .footer { background: #091c33; padding: 80px 50px 40px; border-top: 1px solid rgba(68,192,192,0.1); margin-top: 100px; }
@@ -214,7 +265,9 @@
             .contact-hero { padding: 140px 24px 50px; }
             .contact-body { padding: 0 24px 80px; }
             .contact-map { padding: 0 24px; }
-            .contact-map iframe { height: 300px; }
+            .map-container { height: 350px; border-radius: 8px; }
+            .map-header { flex-direction: column; align-items: flex-start; }
+            .map-offices { grid-template-columns: 1fr; }
             .form-row { grid-template-columns: 1fr; gap: 20px; }
             .footer { padding: 60px 24px 30px; }
             .footer-nav { grid-template-columns: 1fr 1fr; }
@@ -443,7 +496,33 @@
 <!-- MAP -->
 <section class="contact-map">
     <div class="contact-map-inner reveal-up">
-        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2432.1!2d-1.9237!3d52.4634!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zBirmingham+B15+3BE!5e0!3m2!1sen!2suk!4v1" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="W13 Group Head Office Location"></iframe>
+        <div class="map-header">
+            <h2 class="map-title">Our Offices</h2>
+            <div class="map-tabs">
+                <button class="map-tab active" onclick="flyToOffice('all')">All</button>
+                <button class="map-tab" onclick="flyToOffice('london')">London</button>
+                <button class="map-tab" onclick="flyToOffice('birmingham')">Birmingham</button>
+            </div>
+        </div>
+        <div class="map-container">
+            <div id="officeMap"></div>
+        </div>
+        <div class="map-offices">
+            <div class="map-office-card active" onclick="flyToOffice('london')">
+                <div class="map-office-icon"><i class="fas fa-building"></i></div>
+                <div class="map-office-details">
+                    <h4>London Office</h4>
+                    <p>20-22 Wenlock Rd, London N1 7GU</p>
+                </div>
+            </div>
+            <div class="map-office-card active" onclick="flyToOffice('birmingham')">
+                <div class="map-office-icon"><i class="fas fa-city"></i></div>
+                <div class="map-office-details">
+                    <h4>Birmingham Office</h4>
+                    <p>Beech House, Greenfield Crescent, B15 3BE</p>
+                </div>
+            </div>
+        </div>
     </div>
 </section>
 
@@ -506,6 +585,7 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
 <script>
 /* Preloader */
 window.addEventListener('load', () => { setTimeout(() => { const p = document.getElementById('preloader'); gsap.to(p, { opacity: 0, duration: 0.6, ease: 'power2.inOut', onComplete: () => { p.style.display = 'none'; initAll(); } }); }, 800); });
@@ -577,10 +657,117 @@ window.addEventListener('keydown', function(e) {
     const c = document.getElementById('dotCursor'); if (!c) return;
     document.addEventListener('mousemove', function(e) { c.style.left = e.clientX + 'px'; c.style.top = e.clientY + 'px'; });
     document.addEventListener('mouseleave', function() { c.style.left = '-100px'; c.style.top = '-100px'; });
-    document.querySelectorAll('a, button, .menu-close, .nav-link, .nav-cta, .btn-submit, .contact-social a, .footer-social a, .footer-legal a, .footer-nav-col h4, select, label[for], input[type="checkbox"]').forEach(function(el) {
+    document.querySelectorAll('a, button, .menu-close, .nav-link, .nav-cta, .btn-submit, .contact-social a, .footer-social a, .footer-legal a, .footer-nav-col h4, select, label[for], input[type="checkbox"], .map-tab, .map-office-card').forEach(function(el) {
         el.addEventListener('mouseenter', function() { c.classList.add('hovering'); });
         el.addEventListener('mouseleave', function() { c.classList.remove('hovering'); });
     });
+})();
+
+/* ===== INTERACTIVE MAP ===== */
+(function() {
+    var offices = {
+        london: {
+            lat: 51.5305,
+            lng: -0.0940,
+            name: 'London Office',
+            label: 'London',
+            address: '20-22 Wenlock Rd<br>London, N1 7GU',
+            phone: '+44 (0)121 663 0006',
+            directions: 'https://www.google.com/maps/dir//20-22+Wenlock+Rd,+London+N1+7GU'
+        },
+        birmingham: {
+            lat: 52.4634,
+            lng: -1.9237,
+            name: 'Birmingham Office',
+            label: 'Birmingham',
+            address: 'Beech House, Greenfield Crescent<br>Birmingham, B15 3BE',
+            phone: '+44 (0)121 663 0006',
+            directions: 'https://www.google.com/maps/dir//Beech+House,+Greenfield+Crescent,+Birmingham+B15+3BE'
+        }
+    };
+
+    var map = L.map('officeMap', {
+        center: [52.2, -0.9],
+        zoom: 7,
+        zoomControl: false,
+        scrollWheelZoom: false
+    });
+
+    L.control.zoom({ position: 'topright' }).addTo(map);
+
+    // Dark tile layer (CartoDB Dark Matter)
+    L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/">CARTO</a>',
+        subdomains: 'abcd',
+        maxZoom: 19
+    }).addTo(map);
+
+    // Custom marker icon
+    var markerIcon = L.divIcon({
+        className: 'marker-pin',
+        html: '<div class="marker-pin-ring"></div><div class="marker-pin-ring-2"></div><div class="marker-pin-inner"></div>',
+        iconSize: [36, 36],
+        iconAnchor: [18, 18],
+        popupAnchor: [0, -22]
+    });
+
+    var markers = {};
+    Object.keys(offices).forEach(function(key) {
+        var o = offices[key];
+        var popupHtml = '<div class="popup-content">' +
+            '<div class="popup-label">' + o.label + '</div>' +
+            '<div class="popup-name">' + o.name + '</div>' +
+            '<div class="popup-address">' + o.address + '</div>' +
+            '<a href="tel:+442126630006" class="popup-phone"><i class="fas fa-phone" style="margin-right:6px;font-size:12px;"></i> ' + o.phone + '</a>' +
+            '<a href="' + o.directions + '" target="_blank" rel="noopener" class="popup-directions"><i class="fas fa-diamond-turn-right"></i> Get Directions</a>' +
+            '</div>';
+        markers[key] = L.marker([o.lat, o.lng], { icon: markerIcon })
+            .addTo(map)
+            .bindPopup(popupHtml, { maxWidth: 300, closeButton: true });
+    });
+
+    // Fit both markers
+    var group = L.featureGroup(Object.values(markers));
+    map.fitBounds(group.getBounds().pad(0.3));
+
+    // Enable scroll zoom on first click
+    map.once('click', function() { map.scrollWheelZoom.enable(); });
+    map.on('focus', function() { map.scrollWheelZoom.enable(); });
+    map.on('blur', function() { map.scrollWheelZoom.disable(); });
+
+    // Fly-to + tab management
+    window.flyToOffice = function(which) {
+        // Update tabs
+        document.querySelectorAll('.map-tab').forEach(function(t) { t.classList.remove('active'); });
+        document.querySelectorAll('.map-tab').forEach(function(t) {
+            if ((which === 'all' && t.textContent.trim() === 'All') ||
+                (which === 'london' && t.textContent.trim() === 'London') ||
+                (which === 'birmingham' && t.textContent.trim() === 'Birmingham')) {
+                t.classList.add('active');
+            }
+        });
+
+        // Update cards
+        var cards = document.querySelectorAll('.map-office-card');
+        if (which === 'all') {
+            cards.forEach(function(c) { c.classList.add('active'); });
+            map.flyToBounds(group.getBounds().pad(0.3), { duration: 1.2 });
+            // Close any open popups
+            Object.values(markers).forEach(function(m) { m.closePopup(); });
+        } else {
+            cards.forEach(function(c, i) {
+                if ((which === 'london' && i === 0) || (which === 'birmingham' && i === 1)) {
+                    c.classList.add('active');
+                } else {
+                    c.classList.remove('active');
+                }
+            });
+            var o = offices[which];
+            map.flyTo([o.lat, o.lng], 14, { duration: 1.2 });
+            // Open popup after fly animation
+            setTimeout(function() { markers[which].openPopup(); }, 1300);
+        }
+    };
 })();
 </script>
 </body>

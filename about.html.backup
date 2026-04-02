@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About | W13 Group</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Inter', sans-serif; background: #0C233F; color: #EAEAEA; }
+        .nav { position: sticky; top: 0; z-index: 10; background: #091c33; border-bottom: 1px solid rgba(68,192,192,0.2); }
+        .nav-inner { max-width: 1200px; margin: 0 auto; padding: 18px 24px; display: flex; align-items: center; gap: 20px; flex-wrap: wrap; }
+        .nav a { color: #EAEAEA; text-decoration: none; font-size: 14px; letter-spacing: 0.5px; }
+        .nav a.active { color: #44C0C0; }
+        .dropdown { position: relative; }
+        .dropdown-toggle { color: #EAEAEA; font-size: 14px; cursor: pointer; }
+        .dropdown-menu { display: none; position: absolute; top: 22px; left: 0; min-width: 210px; background: #091c33; border: 1px solid rgba(68,192,192,0.25); padding: 10px; }
+        .dropdown:hover .dropdown-menu { display: block; }
+        .dropdown-menu a { display: block; padding: 8px 10px; color: rgba(234,234,234,0.8); }
+        .dropdown-menu a:hover { color: #44C0C0; }
+        main { max-width: 1000px; margin: 0 auto; padding: 90px 24px; }
+        h1 { font-family: 'Playfair Display', serif; font-size: clamp(36px, 6vw, 64px); margin-bottom: 20px; }
+        p { color: rgba(234,234,234,0.75); line-height: 1.8; font-size: 17px; margin-bottom: 18px; }
+        /* ===== CUSTOM DOT CURSOR ===== */
+        @media (pointer: fine) {
+            *, *::before, *::after { cursor: none !important; }
+        }
+        .dot-cursor {
+            position: fixed; top: 0; left: 0; z-index: 999999;
+            width: 12px; height: 12px; background: #44C0C0; border-radius: 50%;
+            pointer-events: none; transform: translate(-50%, -50%);
+            transition: transform 0.18s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.2s ease, box-shadow 0.2s ease;
+            box-shadow: 0 0 0 2px rgba(68,192,192,0.3), 0 0 12px rgba(68,192,192,0.25);
+        }
+        .dot-cursor.hovering {
+            transform: translate(-50%, -50%) scale(1.5);
+            background: rgba(68,192,192,0.4);
+            box-shadow: 0 0 0 3px rgba(68,192,192,0.25), 0 0 10px rgba(68,192,192,0.2);
+        }
+    </style>
+</head>
+<body>
+<div class="dot-cursor" id="dotCursor"></div>
+    <nav class="nav">
+        <div class="nav-inner">
+            <a href="index.html">Home</a>
+            <a href="about.html" class="active">About</a>
+            <div class="dropdown">
+                <span class="dropdown-toggle">What We Do ▾</span>
+                <div class="dropdown-menu">
+                    <a href="sectors/residential.html">Residential</a>
+                    <a href="sectors/commercial.html">Commercial</a>
+                    <a href="sectors/urban-regeneration.html">Urban Regeneration</a>
+                </div>
+            </div>
+            <a href="projects.html">Projects</a>
+            <a href="news.html">News</a>
+            <a href="contact.html">Contact</a>
+        </div>
+    </nav>
+    <main>
+        <h1>About</h1>
+        <p>W13 Group delivers integrated property development with a focus on quality, sustainability, and long-term value creation.</p>
+        <p>This Stage 1 page includes the agreed structure: values and mission, our story, leadership and team, and a clear path to contact.</p>
+    </main>
+<script>
+(function() {
+    const cursor = document.getElementById('dotCursor');
+    if (!cursor) return;
+    document.addEventListener('mousemove', function(e) {
+        cursor.style.left = e.clientX + 'px';
+        cursor.style.top = e.clientY + 'px';
+    });
+    document.addEventListener('mouseleave', function() {
+        cursor.style.left = '-100px';
+        cursor.style.top = '-100px';
+    });
+    document.querySelectorAll('a, button, .dropdown-toggle').forEach(function(el) {
+        el.addEventListener('mouseenter', function() { cursor.classList.add('hovering'); });
+        el.addEventListener('mouseleave', function() { cursor.classList.remove('hovering'); });
+    });
+})();
+</script>
+</body>
+</html>

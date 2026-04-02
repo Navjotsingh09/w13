@@ -4,32 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>W13 Group | Building Communities. Creating Value.</title>
-    <!-- Graphie font loaded via @font-face below -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
-        /* ===== GRAPHIE FONT ===== */
-        @font-face { font-family: 'Graphie'; src: url('fonts/Graphie-Thin.otf') format('opentype'); font-weight: 100; font-style: normal; font-display: swap; }
-        @font-face { font-family: 'Graphie'; src: url('fonts/Graphie-ThinItalic.otf') format('opentype'); font-weight: 100; font-style: italic; font-display: swap; }
-        @font-face { font-family: 'Graphie'; src: url('fonts/Graphie-ExtraLight.otf') format('opentype'); font-weight: 200; font-style: normal; font-display: swap; }
-        @font-face { font-family: 'Graphie'; src: url('fonts/Graphie-ExtraLightItalic.otf') format('opentype'); font-weight: 200; font-style: italic; font-display: swap; }
-        @font-face { font-family: 'Graphie'; src: url('fonts/Graphie-Light.otf') format('opentype'); font-weight: 300; font-style: normal; font-display: swap; }
-        @font-face { font-family: 'Graphie'; src: url('fonts/Graphie-LightItalic.otf') format('opentype'); font-weight: 300; font-style: italic; font-display: swap; }
-        @font-face { font-family: 'Graphie'; src: url('fonts/Graphie-Book.otf') format('opentype'); font-weight: 350; font-style: normal; font-display: swap; }
-        @font-face { font-family: 'Graphie'; src: url('fonts/Graphie-BookItalic.otf') format('opentype'); font-weight: 350; font-style: italic; font-display: swap; }
-        @font-face { font-family: 'Graphie'; src: url('fonts/Graphie-Regular.otf') format('opentype'); font-weight: 400; font-style: normal; font-display: swap; }
-        @font-face { font-family: 'Graphie'; src: url('fonts/Graphie-Italic.otf') format('opentype'); font-weight: 400; font-style: italic; font-display: swap; }
-        @font-face { font-family: 'Graphie'; src: url('fonts/Graphie-SemiBold.otf') format('opentype'); font-weight: 600; font-style: normal; font-display: swap; }
-        @font-face { font-family: 'Graphie'; src: url('fonts/Graphie-SemiBoldItalic.otf') format('opentype'); font-weight: 600; font-style: italic; font-display: swap; }
-        @font-face { font-family: 'Graphie'; src: url('fonts/Graphie-Bold.otf') format('opentype'); font-weight: 700; font-style: normal; font-display: swap; }
-        @font-face { font-family: 'Graphie'; src: url('fonts/Graphie-BoldItalic.otf') format('opentype'); font-weight: 700; font-style: italic; font-display: swap; }
-        @font-face { font-family: 'Graphie'; src: url('fonts/Graphie-ExtraBold.otf') format('opentype'); font-weight: 800; font-style: normal; font-display: swap; }
-        @font-face { font-family: 'Graphie'; src: url('fonts/Graphie-ExtraBoldItalic.otf') format('opentype'); font-weight: 800; font-style: italic; font-display: swap; }
-
         /* ===== RESET ===== */
         *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
         html { overflow-x: hidden; }
         body {
-            font-family: 'Graphie', -apple-system, sans-serif;
+            font-family: 'Inter', -apple-system, sans-serif;
             background: #0C233F;
             color: #EAEAEA;
             overflow-x: hidden;
@@ -41,23 +23,6 @@
         img { max-width: 100%; display: block; }
         ul { list-style: none; }
         ::selection { background: rgba(68,192,192,0.3); }
-
-        /* ===== CUSTOM DOT CURSOR ===== */
-        @media (pointer: fine) {
-            *, *::before, *::after { cursor: none !important; }
-        }
-        .dot-cursor {
-            position: fixed; top: 0; left: 0; z-index: 999999;
-            width: 12px; height: 12px; background: #44C0C0; border-radius: 50%;
-            pointer-events: none; transform: translate(-50%, -50%);
-            transition: transform 0.18s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.2s ease, box-shadow 0.2s ease;
-            box-shadow: 0 0 0 2px rgba(68,192,192,0.3), 0 0 12px rgba(68,192,192,0.25);
-        }
-        .dot-cursor.hovering {
-            transform: translate(-50%, -50%) scale(1.5);
-            background: rgba(68,192,192,0.4);
-            box-shadow: 0 0 0 3px rgba(68,192,192,0.25), 0 0 10px rgba(68,192,192,0.2);
-        }
 
         /* ===== PRELOADER ===== */
         .preloader {
@@ -79,23 +44,9 @@
         /* ===== NAVBAR ===== */
         .navbar {
             position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
-            padding: 30px 50px;
+            padding: 30px 50px; display: flex; justify-content: space-between; align-items: center;
             transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-            background: linear-gradient(to bottom, rgba(12,35,63,0.85) 0%, transparent 100%);
-        }
-        .nav-inner {
-            max-width: 1440px; margin: 0 auto;
-            display: flex; align-items: center;
-        }
-        .navbar.scrolled {
-            background: rgba(12,35,63,0.98);
-            padding: 20px 50px;
-            backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
-        }
-        .navbar:has(.nav-dropdown:hover) {
-            background: rgba(12,35,63,0.98);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
+            mix-blend-mode: difference;
         }
         .nav-logo {
             display: flex; align-items: center;
@@ -103,142 +54,17 @@
         .nav-logo img {
             height: 40px; width: auto;
         }
-        .nav-center { flex: 1; display: flex; align-items: center; justify-content: center; gap: 6px; }
-        .nav-link {
-            font-size: 16px; font-weight: 400; color: rgba(234,234,234,0.6);
-            padding: 8px 16px; transition: color 0.3s; letter-spacing: 0.2px;
+        .nav-right { display: flex; align-items: center; gap: 30px; }
+        .menu-btn {
+            font-size: 15px; font-weight: 500; color: #EAEAEA; letter-spacing: 2px;
+            text-transform: uppercase; cursor: pointer; display: flex; align-items: center; gap: 12px;
         }
-        .nav-link:hover { color: #EAEAEA; }
-        .nav-link.active { color: #EAEAEA; text-decoration: underline; text-decoration-color: #44C0C0; text-underline-offset: 4px; text-decoration-thickness: 1.5px; }
-        .nav-cta {
-            display: inline-flex; align-items: center; gap: 10px;
-            font-size: 16px; font-weight: 400; color: #EAEAEA;
-            padding: 10px 16px 10px 22px;
-            border: 1.5px solid rgba(68,192,192,0.9);
-            border-radius: 50px; transition: all 0.3s;
-            letter-spacing: 0.2px; white-space: nowrap;
-        }
-        .nav-cta:hover { background: rgba(68,192,192,0.12); }
-        .nav-cta-dot {
-            width: 32px; height: 32px; background: #44C0C0; border-radius: 50%;
-            display: flex; align-items: center; justify-content: center; flex-shrink: 0;
-        }
-        .nav-cta-dot svg { width: 16px; height: 16px; }
-        .mobile-menu-btn {
-            display: none; font-size: 15px; font-weight: 500; color: #EAEAEA;
-            letter-spacing: 2px; text-transform: uppercase; cursor: pointer;
-            align-items: center; gap: 12px;
-        }
-        .mobile-menu-lines { display: flex; flex-direction: column; gap: 5px; width: 24px; }
-        .mobile-menu-lines span {
+        .menu-btn-lines { display: flex; flex-direction: column; gap: 5px; width: 24px; }
+        .menu-btn-lines span {
             height: 1.5px; background: #EAEAEA; transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
         }
-        .mobile-menu-lines span:first-child { width: 24px; }
-        .mobile-menu-lines span:last-child { width: 16px; }
-        /* ===== MEGA MENU ===== */
-        .nav-dropdown { position: static; }
-        .nav-dropdown > .nav-link,
-        .nav-dropdown > .top-nav-link { position: relative; cursor: pointer; }
-        .nav-dropdown:hover > .nav-link,
-        .nav-dropdown:hover > .top-nav-link {
-            text-decoration: underline;
-            text-underline-offset: 4px;
-            text-decoration-thickness: 1.5px;
-        }
-        .nav-dropdown:hover > .nav-link::after,
-        .nav-dropdown:hover > .top-nav-link::after {
-            content: '';
-            position: absolute;
-            left: 4px;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 8px;
-            height: 8px;
-            background: #44C0C0;
-            border-radius: 50%;
-            animation: megaDotPop 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
-        }
-        @keyframes megaDotPop {
-            0% { transform: translateY(-50%) scale(0); }
-            100% { transform: translateY(-50%) scale(1); }
-        }
-        .mega-menu {
-            position: absolute;
-            top: calc(100% - 40px);
-            left: 50%;
-            transform: translateX(-50%) translateY(-8px);
-            width: calc(100% - 80px);
-            max-width: 1440px;
-            padding-top: 40px;
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
-            z-index: 1001;
-            pointer-events: none;
-        }
-        .nav-dropdown:hover .mega-menu {
-            opacity: 1;
-            visibility: visible;
-            transform: translateX(-50%) translateY(0);
-            pointer-events: auto;
-        }
-        .mega-menu-content {
-            display: grid;
-            grid-template-columns: 1.1fr 0.9fr 1.4fr;
-            background: #fff;
-            border-radius: 16px 16px 4px 4px;
-            overflow: hidden;
-            border-bottom: 4px solid #44C0C0;
-            box-shadow: 0 25px 60px rgba(12,35,63,0.18);
-        }
-        .mega-menu-intro { padding: 48px 40px; }
-        .mega-menu-title {
-            font-family: 'Graphie', sans-serif; font-weight: 600;
-            font-size: 52px;
-            font-weight: 400;
-            color: #0C233F;
-            margin-bottom: 24px;
-            line-height: 1.1;
-        }
-        .mega-menu-desc {
-            font-size: 15px;
-            line-height: 1.75;
-            color: rgba(12,35,63,0.55);
-        }
-        .mega-menu-links {
-            padding: 48px 30px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
-        .mega-menu-links a {
-            display: block;
-            padding: 16px 0;
-            font-size: 16px;
-            color: #0C233F;
-            border-bottom: 1px dotted rgba(12,35,63,0.2);
-            transition: color 0.25s;
-            text-decoration: none;
-        }
-        .mega-menu-links a:last-child { border-bottom: none; }
-        .mega-menu-links a:hover { color: #44C0C0; }
-        .mega-menu-image {
-            position: relative;
-            overflow: hidden;
-            min-height: 350px;
-        }
-        .mega-menu-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            position: absolute;
-            top: 0;
-            left: 0;
-            transition: transform 0.6s ease;
-        }
-        .mega-menu-content:hover .mega-menu-image img {
-            transform: scale(1.05);
-        }
+        .menu-btn-lines span:first-child { width: 24px; }
+        .menu-btn-lines span:last-child { width: 16px; }
 
         /* ===== FULLSCREEN MENU ===== */
         .fullscreen-menu {
@@ -258,7 +84,7 @@
             padding: 100px 80px;
         }
         .menu-nav-link {
-            display: block; font-family: 'Graphie', sans-serif; font-weight: 600;
+            display: block; font-family: 'Playfair Display', serif;
             font-size: clamp(36px, 5vw, 60px); font-weight: 600; color: #EAEAEA;
             padding: 12px 0; opacity: 0.4; transition: all 0.4s; position: relative;
             transform: translateX(-20px); line-height: 1.2;
@@ -350,7 +176,7 @@
             z-index: 10; text-align: center; width: 100%; padding: 0 50px;
         }
         .hero-center-content h1 {
-            font-family: 'Graphie', sans-serif; font-weight: 600; font-size: clamp(42px, 7vw, 90px);
+            font-family: 'Playfair Display', serif; font-size: clamp(42px, 7vw, 90px);
             font-weight: 700; line-height: 1.05; letter-spacing: -1px;
         }
 
@@ -368,7 +194,7 @@
             text-transform: uppercase; color: #44C0C0; margin-bottom: 30px;
         }
         .about-title {
-            font-family: 'Graphie', sans-serif; font-weight: 600; font-size: clamp(36px, 4vw, 56px);
+            font-family: 'Playfair Display', serif; font-size: clamp(36px, 4vw, 56px);
             font-weight: 700; line-height: 1.15; margin-bottom: 30px; color: #EAEAEA;
         }
         .about-text {
@@ -399,7 +225,7 @@
             backdrop-filter: blur(10px); padding: 24px 30px;
         }
         .about-img-badge-num {
-            font-family: 'Graphie', sans-serif; font-weight: 600; font-size: 42px; font-weight: 700; color: #44C0C0;
+            font-family: 'Playfair Display', serif; font-size: 42px; font-weight: 700; color: #44C0C0;
         }
         .about-img-badge-label {
             font-size: 12px; color: rgba(234,234,234,0.5); letter-spacing: 2px;
@@ -449,7 +275,7 @@
             text-transform: uppercase; color: #44C0C0; margin-bottom: 16px;
         }
         .service-title {
-            font-family: 'Graphie', sans-serif; font-weight: 600; font-size: clamp(32px, 3.5vw, 48px);
+            font-family: 'Playfair Display', serif; font-size: clamp(32px, 3.5vw, 48px);
             font-weight: 700; margin-bottom: 28px; line-height: 1.2;
         }
         .service-desc {
@@ -504,7 +330,7 @@
             text-transform: uppercase; color: #44C0C0; margin-bottom: 12px;
         }
         .project-slide-title {
-            font-family: 'Graphie', sans-serif; font-weight: 600; font-size: 28px; font-weight: 700;
+            font-family: 'Playfair Display', serif; font-size: 28px; font-weight: 700;
             margin-bottom: 10px; line-height: 1.3;
         }
         .project-slide-desc {
@@ -558,7 +384,7 @@
             text-transform: uppercase; margin-bottom: 14px;
         }
         .news-card-title {
-            font-family: 'Graphie', sans-serif; font-weight: 600; font-size: 22px; font-weight: 600;
+            font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 600;
             line-height: 1.4; margin-bottom: 16px; color: #EAEAEA;
         }
         .news-card-link {
@@ -577,7 +403,7 @@
             max-width: 900px; margin: 0 auto; text-align: center;
         }
         .cta-title {
-            font-family: 'Graphie', sans-serif; font-weight: 600; font-size: clamp(40px, 6vw, 72px);
+            font-family: 'Playfair Display', serif; font-size: clamp(40px, 6vw, 72px);
             font-weight: 700; line-height: 1.1; margin-bottom: 30px;
         }
         .cta-text {
@@ -610,12 +436,11 @@
         .footer-brand-text {
             font-size: 14px; color: rgba(234,234,234,0.4); line-height: 1.7;
         }
-        .footer-cert-badge { display: inline-block; margin-top: 8px; opacity: 0.7; transition: all 0.3s; cursor: pointer; }
         .footer-nav {
             display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px;
         }
         .footer-nav-col h4 {
-            font-family: 'Graphie', sans-serif; font-weight: 600; font-size: 20px; font-weight: 600;
+            font-family: 'Playfair Display', serif; font-size: 20px; font-weight: 600;
             margin-bottom: 10px; color: rgba(234,234,234,0.7);
             transition: color 0.3s; cursor: pointer;
         }
@@ -665,7 +490,7 @@
         }
         .stats-band-item { text-align: center; padding: 20px; }
         .stats-band-num {
-            font-family: 'Graphie', sans-serif; font-weight: 600; font-size: 52px; font-weight: 700; color: #44C0C0;
+            font-family: 'Playfair Display', serif; font-size: 52px; font-weight: 700; color: #44C0C0;
         }
         .stats-band-label {
             font-size: 13px; color: rgba(234,234,234,0.45); letter-spacing: 2px;
@@ -684,25 +509,10 @@
         }
         .values-track { display: inline-flex; animation: valuesScroll 25s linear infinite; }
         .values-item {
-            font-family: 'Graphie', sans-serif; font-weight: 600; font-size: 18px; font-weight: 500;
+            font-family: 'Playfair Display', serif; font-size: 18px; font-weight: 500;
             color: rgba(68,192,192,0.25); padding: 0 50px; letter-spacing: 2px;
         }
         @keyframes valuesScroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
-
-        /* ===== CERTIFICATE MODAL ===== */
-        .cert-modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 9999; }
-        .cert-modal.active { display: flex; }
-        .cert-modal-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(12,35,63,0.8); }
-        .cert-modal-content { position: relative; background: #fff; border-radius: 12px; width: 90%; max-width: 900px; height: 90vh; margin: auto; display: flex; flex-direction: column; box-shadow: 0 20px 60px rgba(0,0,0,0.3); }
-        .cert-modal-header { padding: 20px 30px; border-bottom: 2px solid #44C0C0; display: flex; justify-content: space-between; align-items: center; }
-        .cert-modal-header h2 { margin: 0; font-size: 24px; color: #0C233F; font-family: 'Playfair Display', serif; }
-        .cert-modal-close { background: none; border: none; font-size: 32px; color: #44C0C0; cursor: pointer; padding: 0; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 50%; transition: all 0.3s; }
-        .cert-modal-close:hover { background: #f0f0f0; color: #3aadad; }
-        .cert-modal-body { flex: 1; overflow: auto; padding: 20px; }
-        .cert-modal-body iframe { width: 100%; height: 100%; border: none; border-radius: 8px; }
-        .cert-modal-footer { padding: 15px 30px; border-top: 1px solid #eee; background: #f9f9f9; text-align: center; font-size: 13px; color: #666; border-radius: 0 0 12px 12px; }
-        .cert-modal-footer a { color: #44C0C0; text-decoration: none; font-weight: 500; }
-        .cert-modal-footer a:hover { text-decoration: underline; }
 
         /* ===== SCROLL REVEAL ===== */
         .reveal-up {
@@ -735,11 +545,6 @@
         }
         @media (max-width: 768px) {
             .navbar { padding: 20px 24px; }
-            .nav-inner { max-width: 100%; }
-            .nav-center .nav-link { display: none; }
-            .nav-center .nav-dropdown { display: none; }
-            .nav-cta { display: none; }
-            .mobile-menu-btn { display: flex; }
             .about-section { padding: 100px 24px; }
             .about-img { height: 400px; }
             .services-header { padding: 0 24px; flex-direction: column; align-items: flex-start; gap: 30px; }
@@ -774,7 +579,6 @@
     </style>
 </head>
 <body>
-<div class="dot-cursor" id="dotCursor"></div>
 
 <!-- PRELOADER -->
 <div class="preloader" id="preloader">
@@ -792,11 +596,13 @@
         <span class="menu-close-x">×</span>
     </div>
     <div class="menu-left">
-        <a href="about.html" class="menu-nav-link" style="--i:1" onclick="toggleMenu()">About</a>
-        <a href="services.html" class="menu-nav-link" style="--i:2" onclick="toggleMenu()">What We Do</a>
-        <a href="projects.html" class="menu-nav-link" style="--i:3" onclick="toggleMenu()">Projects</a>
-        <a href="news.html" class="menu-nav-link" style="--i:4" onclick="toggleMenu()">News</a>
-        <a href="contact.html" class="menu-nav-link" style="--i:5" onclick="toggleMenu()">Contact</a>
+        <a href="index.html#about" class="menu-nav-link" style="--i:1" onclick="toggleMenu()">About</a>
+        <a href="index.html#services" class="menu-nav-link" style="--i:2" onclick="toggleMenu()">Divisions</a>
+        <a href="services.html" class="menu-nav-link" style="--i:3" onclick="toggleMenu()">Services</a>
+        <a href="projects.html" class="menu-nav-link" style="--i:4" onclick="toggleMenu()">Projects</a>
+        <a href="index.html#contact" class="menu-nav-link" style="--i:5" onclick="toggleMenu()">Investors</a>
+        <a href="index.html#news" class="menu-nav-link" style="--i:6" onclick="toggleMenu()">News</a>
+        <a href="index.html#contact" class="menu-nav-link" style="--i:7" onclick="toggleMenu()">Contact</a>
     </div>
     <div class="menu-right">
         <div class="menu-right-img">
@@ -812,61 +618,17 @@
 
 <!-- NAVBAR -->
 <nav class="navbar" id="navbar">
-    <div class="nav-inner">
     <a href="index.html" class="nav-logo">
-        <img src="images/W13_Logo_White.png" alt="W13 Group">
+        <img src="https://w13uk.com/wp-content/uploads/2022/09/W13_Logo_White.png" alt="W13 Group">
     </a>
-    <div class="nav-center">
-        <div class="nav-dropdown">
-            <a href="about.html" class="nav-link">About</a>
-            <div class="mega-menu">
-                <div class="mega-menu-content">
-                    <div class="mega-menu-intro">
-                        <h2 class="mega-menu-title">About</h2>
-                        <p class="mega-menu-desc">With over 20 years of experience, W13 Group has established itself as a leader in property development &amp; construction, delivering landmark projects across the UK.</p>
-                    </div>
-                    <div class="mega-menu-links">
-                        <a href="about.html#story">Our Story</a>
-                        <a href="about.html#people">People</a>
-                        <a href="about.html#health-safety">Health &amp; Safety</a>
-                        <a href="about.html#certifications">Certifications</a>
-                    </div>
-                    <div class="mega-menu-image">
-                        <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=2400&q=90" alt="About W13 Group">
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="nav-dropdown">
-            <a href="services.html" class="nav-link">What We Do</a>
-            <div class="mega-menu">
-                <div class="mega-menu-content">
-                    <div class="mega-menu-intro">
-                        <h2 class="mega-menu-title">What We Do</h2>
-                        <p class="mega-menu-desc">From residential developments to large-scale urban regeneration, our expertise spans the full spectrum of property development &amp; construction.</p>
-                    </div>
-                    <div class="mega-menu-links">
-                        <a href="sectors/residential.html">Residential</a>
-                        <a href="sectors/commercial.html">Commercial</a>
-                        <a href="sectors/architects-planning.html">Architects &amp; Planning</a>
-                        <a href="sectors/urban-regeneration.html">Urban Regeneration</a>
-                    </div>
-                    <div class="mega-menu-image">
-                        <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=2400&q=90" alt="W13 What We Do">
-                    </div>
-                </div>
-            </div>
-        </div>
-        <a href="projects.html" class="nav-link">Projects</a>
-        <div class="mobile-menu-btn" onclick="toggleMenu()">
+    <div class="nav-right">
+        <div class="menu-btn" onclick="toggleMenu()">
             <span>Menu</span>
-            <div class="mobile-menu-lines">
+            <div class="menu-btn-lines">
                 <span></span>
                 <span></span>
             </div>
         </div>
-    </div>
-    <a href="contact.html" class="nav-cta">Contact <span class="nav-cta-dot"><svg viewBox="0 0 16 16" fill="none"><circle cx="4" cy="4" r="1.5" fill="#fff"/><circle cx="8" cy="4" r="1.5" fill="#fff"/><circle cx="12" cy="4" r="1.5" fill="#fff"/><circle cx="4" cy="8" r="1.5" fill="#fff"/><circle cx="8" cy="8" r="1.5" fill="#fff"/><circle cx="12" cy="8" r="1.5" fill="#fff"/><circle cx="4" cy="12" r="1.5" fill="#fff"/><circle cx="8" cy="12" r="1.5" fill="#fff"/><circle cx="12" cy="12" r="1.5" fill="#fff"/></svg></span></a>
     </div>
 </nav>
 
@@ -922,8 +684,8 @@
             <h2 class="about-title reveal-up">Building success in Property Development &amp; Asset Management</h2>
             <p class="about-text reveal-up">W13 Group, established with a commitment to safety, sustainability and excellence, has grown to become a trusted name in UK property development. Based in Birmingham, W13 continues to deliver high quality integrated solutions — from land acquisition and master planning through to construction, sales and asset management.</p>
             <div class="about-btns reveal-up">
-                <a href="about.html#people" class="btn-filled">Our People</a>
-                <a href="contact.html" class="btn-outline">Join the Team</a>
+                <a href="#" class="btn-filled">Our People</a>
+                <a href="#" class="btn-outline">Join the Team</a>
             </div>
         </div>
         <div class="about-right reveal-scale">
@@ -1189,20 +951,17 @@
         <div class="footer-top">
             <div class="footer-brand">
                 <div class="footer-logo">
-                    <img src="images/W13_Logo_full_White.png" alt="W13 Group">
+                    <img src="https://w13uk.com/wp-content/uploads/2022/09/W13_Logo_White.png" alt="W13 Group">
                 </div>
-                <a href="contact.html#" onclick="openCertModal(event)" class="footer-cert-badge" title="View Cyber Essentials Certificate">
-                    <img src="https://www.ncsc.gov.uk/sites/default/files/2026-02/300x75-ce.svg" alt="NCSC Cyber Essentials" height="50">
-                </a>
                 <p class="footer-brand-text">Building communities, creating value, and delivering excellence across property development.</p>
             </div>
             <div class="footer-nav">
-                <div class="footer-nav-col"><h4><a href="about.html">About Us</a></h4></div>
-                <div class="footer-nav-col"><h4><a href="services.html">Divisions</a></h4></div>
+                <div class="footer-nav-col"><h4><a href="index.html#about">About Us</a></h4></div>
+                <div class="footer-nav-col"><h4><a href="index.html#services">Divisions</a></h4></div>
                 <div class="footer-nav-col"><h4><a href="services.html">Services</a></h4></div>
                 <div class="footer-nav-col"><h4><a href="projects.html">Projects</a></h4></div>
                 <div class="footer-nav-col"><h4><a href="#">Investors</a></h4></div>
-                <div class="footer-nav-col"><h4><a href="news.html">News</a></h4></div>
+                <div class="footer-nav-col"><h4><a href="index.html#news">News</a></h4></div>
             </div>
             <div class="footer-contact">
                 <h4 class="footer-contact-heading">Head Office</h4>
@@ -1468,75 +1227,6 @@ if (servicesWrap) {
         if (Math.abs(diff) > 50) { diff > 0 ? nextService() : prevService(); }
     });
 }
-
-// ===== NAVBAR SCROLL =====
-(function() {
-    const navbar = document.getElementById('navbar');
-    window.addEventListener('scroll', function() {
-        if (window.pageYOffset > 100) {
-            navbar.classList.add('scrolled');
-        } else {
-            navbar.classList.remove('scrolled');
-        }
-    });
-})();
-
-/* ===== DOT CURSOR ===== */
-(function() {
-    const cursor = document.getElementById('dotCursor');
-    if (!cursor) return;
-    let cx = -100, cy = -100;
-    document.addEventListener('mousemove', function(e) {
-        cx = e.clientX; cy = e.clientY;
-        cursor.style.left = cx + 'px';
-        cursor.style.top = cy + 'px';
-    });
-    document.addEventListener('mouseleave', function() {
-        cursor.style.left = '-100px';
-        cursor.style.top = '-100px';
-    });
-    document.querySelectorAll('a, button, .menu-btn, .menu-close, .nav-link, .cta-btn, .project-card, .footer-social a, .footer-legal a').forEach(function(el) {
-        el.addEventListener('mouseenter', function() { cursor.classList.add('hovering'); });
-        el.addEventListener('mouseleave', function() { cursor.classList.remove('hovering'); });
-    });
-})();
 </script>
-<!-- CERTIFICATE MODAL -->
-<div id="certModal" class="cert-modal">
-    <div class="cert-modal-overlay" onclick="closeCertModal()"></div>
-    <div class="cert-modal-content">
-        <div class="cert-modal-header">
-            <h2>Cyber Essentials Certificate</h2>
-            <button class="cert-modal-close" onclick="closeCertModal()">&times;</button>
-        </div>
-        <div class="cert-modal-body">
-            <iframe src="https://w13uk.com/wp-content/uploads/2025/04/w13-cyber-essentials-certificate.pdf" frameborder="0"></iframe>
-        </div>
-        <div class="cert-modal-footer">
-            <p>For more information about our security certifications, please contact us at <a href="mailto:info@w13uk.com">info@w13uk.com</a></p>
-        </div>
-    </div>
-</div>
-
-<script>
-/* Certificate Modal */
-function openCertModal(e) {
-    e.preventDefault();
-    document.getElementById('certModal').classList.add('active');
-    document.body.style.overflow = 'hidden';
-}
-
-function closeCertModal() {
-    document.getElementById('certModal').classList.remove('active');
-    document.body.style.overflow = '';
-}
-
-window.addEventListener('keydown', function(e) {
-    if (e.key === 'Escape' && document.getElementById('certModal').classList.contains('active')) {
-        closeCertModal();
-    }
-});
-</script>
-
 </body>
 </html>
