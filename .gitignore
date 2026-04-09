@@ -1,2 +1,6 @@
 .vercel
 images/projects/pear-tree-lane/videos/
+*.backup
+*.csv
+w13-homepage-wireframes.html
+

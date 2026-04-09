@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Consultancy Services | W13 Group</title>
+    <meta name="description" content="W13's multi-disciplinary consultancy team brings together specialists in structural engineering, quantity surveying, project management and planning who co">
+    <meta property="og:title" content="Consultancy Services | W13 Group">
+    <meta property="og:description" content="W13's multi-disciplinary consultancy team brings together specialists in structural engineering, quantity surveying, project management and planning who co">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="https://images.unsplash.com/photo-1449157291145-7efd050a4d0e?w=2400&q=90">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        @font-face { font-family: 'Graphie'; src: url('../fonts/Graphie-Regular.otf') format('opentype'); font-weight: 400; }
+        @font-face { font-family: 'Graphie'; src: url('../fonts/Graphie-SemiBold.otf') format('opentype'); font-weight: 600; }
+        @font-face { font-family: 'Graphie'; src: url('../fonts/Graphie-Bold.otf') format('opentype'); font-weight: 700; }
+        @font-face { font-family: 'Graphie'; src: url('../fonts/Graphie-Light.otf') format('opentype'); font-weight: 300; }
+
+        *:focus-visible { outline: 2px solid #44C0C0; outline-offset: 2px; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Graphie', sans-serif; background: #0C233F; color: #EAEAEA; line-height: 1.7; }
+        a { color: inherit; text-decoration: none; }
+
+        .navbar { position: fixed; top: 0; left: 0; width: 100%; z-index: 100; padding: 20px 40px;
+            display: flex; justify-content: space-between; align-items: center; background: rgba(12,35,63,0.95); backdrop-filter: blur(10px); }
+        .nav-logo img { height: 32px; }
+        .nav-links { display: flex; gap: 32px; align-items: center; }
+        .nav-links a { color: #EAEAEA; font-size: 13px; font-weight: 400; letter-spacing: 0.5px; }
+        .nav-links a:hover { color: #44C0C0; }
+        .nav-links .active { color: #44C0C0; }
+        .nav-cta { background: #44C0C0; color: #0C233F !important; padding: 10px 24px; border-radius: 100px; font-weight: 600; font-size: 13px; }
+        .nav-cta:hover { background: #38a8a8; }
+
+        .hero { position: relative; height: 60vh; min-height: 400px; overflow: hidden; display: flex; align-items: flex-end; }
+        .hero-bg { position: absolute; inset: 0; }
+        .hero-bg img { width: 100%; height: 100%; object-fit: cover; }
+        .hero-bg::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to top, #0C233F 0%, rgba(12,35,63,0.4) 60%, rgba(12,35,63,0.2) 100%); }
+        .hero-content { position: relative; z-index: 2; max-width: 1200px; margin: 0 auto; padding: 0 40px 60px; width: 100%; }
+        .hero-back { display: inline-flex; align-items: center; gap: 8px; font-size: 13px; color: rgba(234,234,234,0.5); margin-bottom: 24px; }
+        .hero-back:hover { color: #44C0C0; }
+        .hero-label { font-size: 11px; text-transform: uppercase; letter-spacing: 3px; color: #44C0C0; margin-bottom: 12px; font-weight: 600; }
+        .hero h1 { font-size: clamp(32px, 5vw, 52px); font-weight: 700; line-height: 1.15; }
+
+        .intro-section { max-width: 1200px; margin: 0 auto; padding: 80px 40px; display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
+        .intro-text p { font-size: 17px; color: rgba(234,234,234,0.7); line-height: 1.8; margin-bottom: 20px; }
+        .intro-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+        .stat { background: rgba(68,192,192,0.06); border: 1px solid rgba(68,192,192,0.12); border-radius: 8px; padding: 28px 24px; text-align: center; }
+        .stat-value { font-size: 32px; font-weight: 700; color: #44C0C0; display: block; margin-bottom: 4px; }
+        .stat-label { font-size: 12px; color: rgba(234,234,234,0.5); text-transform: uppercase; letter-spacing: 1px; }
+
+        .cap-section { background: #091c33; padding: 80px 40px; }
+        .cap-inner { max-width: 1200px; margin: 0 auto; }
+        .cap-section h2 { font-size: 28px; font-weight: 600; margin-bottom: 40px; text-align: center; }
+        .cap-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 24px; }
+        .cap-card { background: rgba(234,234,234,0.03); border-radius: 8px; padding: 32px 24px; transition: transform 0.3s, background 0.3s; }
+        .cap-card:hover { transform: translateY(-4px); background: rgba(234,234,234,0.06); }
+        .cap-icon { width: 48px; height: 48px; border-radius: 50%; background: rgba(68,192,192,0.1); display: flex; align-items: center; justify-content: center; margin-bottom: 20px; color: #44C0C0; font-size: 20px; }
+        .cap-card h3 { font-size: 17px; font-weight: 600; margin-bottom: 10px; color: #EAEAEA; }
+        .cap-card p { font-size: 14px; color: rgba(234,234,234,0.55); line-height: 1.7; }
+
+        .approach-section { max-width: 900px; margin: 0 auto; padding: 80px 40px; }
+        .approach-section h2 { font-size: 28px; font-weight: 600; margin-bottom: 32px; }
+        .approach-section p { font-size: 16px; color: rgba(234,234,234,0.7); line-height: 1.8; margin-bottom: 20px; }
+        .approach-section h3 { font-size: 19px; font-weight: 600; margin: 32px 0 12px; color: #44C0C0; }
+        .approach-section ul { margin: 0 0 20px 24px; }
+        .approach-section li { margin-bottom: 10px; color: rgba(234,234,234,0.7); font-size: 16px; }
+        .approach-section blockquote { border-left: 3px solid #44C0C0; padding: 20px 24px; margin: 30px 0; background: rgba(68,192,192,0.05); border-radius: 0 8px 8px 0; }
+        .approach-section blockquote p { color: rgba(234,234,234,0.9); font-style: italic; margin-bottom: 0; }
+
+        .proj-section { padding: 60px 40px 80px; max-width: 1200px; margin: 0 auto; }
+        .proj-section h2 { font-size: 24px; font-weight: 600; margin-bottom: 32px; text-align: center; }
+        .proj-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; }
+        .proj-card { position: relative; border-radius: 8px; overflow: hidden; height: 260px; display: block; }
+        .proj-card img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s; }
+        .proj-card:hover img { transform: scale(1.05); }
+        .proj-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(12,35,63,0.9) 0%, transparent 60%); display: flex; flex-direction: column; justify-content: flex-end; padding: 24px; }
+        .proj-label { font-size: 10px; text-transform: uppercase; letter-spacing: 2px; color: #44C0C0; margin-bottom: 4px; }
+        .proj-overlay h3 { font-size: 18px; font-weight: 600; }
+
+        .other-section { background: #091c33; padding: 60px 40px; }
+        .other-inner { max-width: 800px; margin: 0 auto; }
+        .other-section h2 { font-size: 22px; font-weight: 600; margin-bottom: 24px; text-align: center; }
+        .other-svc { display: flex; justify-content: space-between; align-items: center; padding: 20px 0; border-bottom: 1px solid rgba(234,234,234,0.08); color: #EAEAEA; transition: color 0.3s; }
+        .other-svc:hover { color: #44C0C0; }
+        .other-svc-name { font-size: 16px; font-weight: 500; }
+        .other-svc i { font-size: 14px; color: #44C0C0; }
+
+        .cta-section { max-width: 1200px; margin: 0 auto; padding: 60px 40px 80px; text-align: center; }
+        .cta-box { background: rgba(68,192,192,0.06); border: 1px solid rgba(68,192,192,0.15); border-radius: 12px; padding: 60px 40px; }
+        .cta-box h2 { font-size: 28px; font-weight: 600; margin-bottom: 12px; }
+        .cta-box p { color: rgba(234,234,234,0.6); max-width: 500px; margin: 0 auto 28px; font-size: 15px; }
+        .cta-btn { display: inline-block; background: #44C0C0; color: #0C233F; padding: 14px 36px; border-radius: 100px; font-weight: 600; font-size: 14px; }
+        .cta-btn:hover { background: #38a8a8; }
+
+        
+        
+                
+        
+        
+        
+        
+        
+        
+        
+        
+        
+
+        @media (max-width: 768px) {
+            .navbar { padding: 16px 20px; }
+            .nav-links { display: none; }
+            .hero { height: 50vh; min-height: 320px; }
+            .hero-content { padding: 0 20px 40px; }
+            .intro-section { grid-template-columns: 1fr; padding: 60px 20px; gap: 40px; }
+            .cap-section { padding: 60px 20px; }
+            .approach-section { padding: 60px 20px; }
+            .proj-section { padding: 40px 20px 60px; }
+            .other-section { padding: 40px 20px; }
+            .cta-section { padding: 40px 20px 60px; }
+            .cta-box { padding: 40px 24px; }
+            
+        }
+    
+        /* ===== WHATSAPP WIDGET ===== */
+        .whatsapp-widget {
+            position: fixed; bottom: 28px; right: 28px; z-index: 9999;
+            width: 60px; height: 60px; background: #0C233F; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            box-shadow: 0 8px 24px rgba(9,28,51,0.24); cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s; text-decoration: none;
+        }
+        .whatsapp-widget:hover { transform: translateY(-1px); box-shadow: 0 10px 26px rgba(9,28,51,0.28); }
+        .whatsapp-widget svg { width: 32px; height: 32px; fill: #fff; }
+        .whatsapp-tooltip {
+            position: absolute; right: 72px; top: 50%; transform: translateY(-50%);
+            background: #fff; color: #0C233F; padding: 8px 14px; border-radius: 8px;
+            font-family: 'Graphie', sans-serif; font-size: 13px; font-weight: 500;
+            white-space: nowrap; box-shadow: 0 2px 12px rgba(0,0,0,0.15);
+            opacity: 0; pointer-events: none; transition: opacity 0.3s;
+        }
+        .whatsapp-widget:hover .whatsapp-tooltip { opacity: 0; }
+        .mobile-cta-bar {
+            display: none; position: fixed; bottom: 0; left: 0; right: 0; z-index: 9998;
+            background: #0C233F; border-top: 1px solid rgba(68,192,192,0.3);
+            padding: 12px 16px; gap: 10px;
+        }
+        .mobile-cta-bar a {
+            flex: 1; text-align: center; padding: 14px 0; border-radius: 8px;
+            font-family: 'Graphie', sans-serif; font-weight: 600; font-size: 14px;
+            text-decoration: none; transition: background 0.3s;
+        }
+        .mobile-cta-call { background: rgba(255,255,255,0.08); color: #fff; border: 1px solid rgba(255,255,255,0.15); }
+        .mobile-cta-enquire { background: #44C0C0; color: #0C233F; }
+        @media (max-width: 768px) {
+            .mobile-cta-bar { display: flex; }
+            .whatsapp-widget { bottom: 24px; }
+            body { padding-bottom: 72px; }
+        }
+        .exit-popup-overlay {
+            display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(9,28,51,0.85); z-index: 10001; align-items: center; justify-content: center;
+        }
+        .exit-popup {
+            background: #0C233F; border: 1px solid rgba(68,192,192,0.2); border-radius: 12px;
+            padding: 40px; max-width: 420px; width: 90%; text-align: center; position: relative;
+        }
+        .exit-popup-close { position: absolute; top: 12px; right: 16px; background: none; border: none; color: rgba(234,234,234,0.4); font-size: 24px; cursor: pointer; }
+        .exit-popup h3 { font-size: 22px; margin-bottom: 8px; }
+        .exit-popup p { font-size: 14px; color: rgba(234,234,234,0.6); margin-bottom: 20px; }
+        .exit-popup-form { display: flex; gap: 8px; }
+        .exit-popup-form input { flex: 1; padding: 12px 16px; background: rgba(234,234,234,0.06); border: 1px solid rgba(234,234,234,0.1); border-radius: 8px; color: #EAEAEA; font-family: 'Graphie', sans-serif; font-size: 14px; }
+        .exit-popup-form button { background: #44C0C0; color: #0C233F; border: none; padding: 12px 20px; border-radius: 8px; font-weight: 600; cursor: pointer; font-family: 'Graphie', sans-serif; }
+        .exit-popup-skip { background: none; border: none; color: rgba(234,234,234,0.3); font-size: 12px; margin-top: 12px; cursor: pointer; font-family: 'Graphie', sans-serif; }
+
+    
+        
+        @media (max-width: 1024px) {
+            .footer-main { grid-template-columns: 1fr 1fr; gap: 40px; padding: 0 40px; }
+            .footer-office { grid-column: 1 / -1; }
+        }
+        @media (max-width: 768px) {
+            .footer-main { grid-template-columns: 1fr; gap: 40px; padding: 0 24px; }
+            
+            .footer-nav a { font-size: 17px; padding: 14px 0; }
+            
+        }
+
+    
+        /* ===== FOOTER ===== */
+        .site-footer { background: #091c33; padding: 80px 0 0; }
+        .footer-main { max-width: 1400px; margin: 0 auto; padding: 0 60px; display: grid; grid-template-columns: 260px 1fr 280px; gap: 60px; align-items: start; }
+        .footer-brand img { height: 48px; margin-bottom: 20px; }
+        .footer-cert { display: inline-block; margin-bottom: 20px; opacity: 0.7; transition: opacity 0.3s; }
+        .footer-cert:hover { opacity: 1; }
+        .footer-cert img { height: 44px; }
+        .footer-tagline { font-size: 14px; color: rgba(234,234,234,0.4); line-height: 1.6; }
+        .footer-nav { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; }
+        .footer-nav a { display: block; font-family: 'Graphie', sans-serif; font-size: 20px; font-weight: 600; color: rgba(234,234,234,0.7); padding: 18px 0; border-bottom: 1px solid rgba(234,234,234,0.06); transition: color 0.3s; text-decoration: none; }
+        .footer-nav a:hover { color: #44C0C0; }
+        .footer-office-label { font-size: 12px; font-weight: 600; letter-spacing: 3px; text-transform: uppercase; color: #44C0C0; margin-bottom: 24px; }
+        .footer-office-addr { font-size: 14px; color: rgba(234,234,234,0.45); line-height: 1.7; margin-bottom: 24px; }
+        .footer-office-contact { font-size: 14px; margin-bottom: 6px; }
+        .footer-office-contact a { color: rgba(234,234,234,0.6); text-decoration: none; transition: color 0.3s; }
+        .footer-office-contact a:hover { color: #44C0C0; }
+        .footer-social-row { display: flex; gap: 0; margin-top: 28px; }
+        .footer-social-icon { width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; border: 1px solid rgba(234,234,234,0.12); color: rgba(234,234,234,0.5); font-size: 15px; text-decoration: none; transition: all 0.3s; }
+        .footer-social-icon:hover { color: #44C0C0; border-color: #44C0C0; }
+        .footer-bottom-bar { max-width: 1400px; margin: 60px auto 0; padding: 24px 60px; border-top: 1px solid rgba(234,234,234,0.06); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
+        .footer-legal-links { display: flex; gap: 24px; }
+        .footer-legal-links a { font-size: 12px; color: rgba(234,234,234,0.35); text-decoration: none; transition: color 0.3s; }
+        .footer-legal-links a:hover { color: #44C0C0; }
+        .footer-copy { font-size: 12px; color: rgba(234,234,234,0.25); }
+        .footer-dot { text-align: center; padding: 40px 0 32px; }
+        .footer-dot span { display: inline-block; width: 10px; height: 10px; border-radius: 50%; background: #44C0C0; }
+        @media (max-width: 1024px) {
+            .footer-main { grid-template-columns: 1fr 1fr; gap: 40px; padding: 0 40px; }
+            .footer-office { grid-column: 1 / -1; }
+        }
+        @media (max-width: 768px) {
+            .footer-main { grid-template-columns: 1fr; gap: 40px; padding: 0 24px; }
+            .footer-nav { grid-template-columns: 1fr 1fr; }
+            .footer-nav a { font-size: 17px; padding: 14px 0; }
+            .footer-bottom-bar { padding: 20px 24px; flex-direction: column; align-items: flex-start; }
+        }
+
+    </style>
+</head>
+<body>
+
+<nav class="navbar">
+    <a href="../index.html" class="nav-logo"><img src="../images/W13_Logo_White.png" alt="W13 Group"></a>
+    <div class="nav-links">
+        <a href="../about.html">About</a>
+        <a href="../services.html" class="active">What We Do</a>
+        <a href="../projects.html">Projects</a>
+        <a href="../news.html">News</a>
+        <a href="../contact.html" class="nav-cta">Get In Touch</a>
+    </div>
+</nav>
+
+<div class="hero">
+    <div class="hero-bg"><img src="https://images.unsplash.com/photo-1449157291145-7efd050a4d0e?w=2400&q=90" alt="Consultancy Services"></div>
+    <div class="hero-content">
+        <a href="../services.html" class="hero-back"><i class="fas fa-arrow-left"></i> All Services</a>
+        <div class="hero-label">Our Services</div>
+        <h1>Consultancy Services</h1>
+    </div>
+</div>
+
+<div class="intro-section">
+    <div class="intro-text">
+        <p>W13's multi-disciplinary consultancy team brings together specialists in structural engineering, quantity surveying, project management and planning who collaborate to deliver innovative solutions tailored to each project's unique requirements. Our methodical approach ensures rigorous preparation and seamless execution. Whether supporting our own developments or working as trusted advisors to external clients, we bring the same rigour and commercial awareness to every engagement.</p>
+    </div>
+    <div class="intro-stats">
+        <div class="stat"><span class="stat-value">20+</span><span class="stat-label">Years Experience</span></div>
+        <div class="stat"><span class="stat-value">500+</span><span class="stat-label">Projects Delivered</span></div>
+        <div class="stat"><span class="stat-value">&pound;2.5B+</span><span class="stat-label">GDV</span></div>
+        <div class="stat"><span class="stat-value">5,000+</span><span class="stat-label">Homes Built</span></div>
+    </div>
+</div>
+
+<div class="cap-section">
+    <div class="cap-inner">
+        <h2>Key Capabilities</h2>
+        <div class="cap-grid">
+                <div class="cap-card">
+                    <div class="cap-icon"><i class="fas fa-helmet-safety"></i></div>
+                    <h3>Project Management</h3>
+                    <p>End-to-end project management from inception to completion — controlling programme, cost, quality, and risk across projects of all scales and complexities.</p>
+                </div>
+                <div class="cap-card">
+                    <div class="cap-icon"><i class="fas fa-calculator"></i></div>
+                    <h3>Quantity Surveying</h3>
+                    <p>Pre- and post-contract cost management including feasibility estimates, procurement strategies, valuations, and final account negotiation.</p>
+                </div>
+                <div class="cap-card">
+                    <div class="cap-icon"><i class="fas fa-bridge"></i></div>
+                    <h3>Structural Engineering</h3>
+                    <p>Structural design and analysis for new build and refurbishment projects, from initial concepts through to construction issue drawings and site inspections.</p>
+                </div>
+                <div class="cap-card">
+                    <div class="cap-icon"><i class="fas fa-map-location-dot"></i></div>
+                    <h3>Planning Consultancy</h3>
+                    <p>Strategic planning advice, local plan representations, planning application management, and appeal support drawing on extensive local authority relationships.</p>
+                </div>
+                <div class="cap-card">
+                    <div class="cap-icon"><i class="fas fa-clipboard-list"></i></div>
+                    <h3>Employer's Agent</h3>
+                    <p>Acting on behalf of funders and investors, administering building contracts, certifying valuations, and protecting client interests through construction.</p>
+                </div>
+                <div class="cap-card">
+                    <div class="cap-icon"><i class="fas fa-shield-halved"></i></div>
+                    <h3>CDM & H&S Advisory</h3>
+                    <p>Principal Designer and CDM advisory services ensuring full regulatory compliance and a culture of safety from design through to handover.</p>
+                </div>
+        </div>
+    </div>
+</div>
+
+<div class="approach-section">
+    <h2>Our Approach</h2>
+    <p>Our consultancy services have grown organically from the needs of our own development business. This means our advisors understand the commercial realities of property development — not just the technical requirements.</p>
+
+    <h3>Commercially aware advice</h3>
+    <p>Our consultants don't operate in silos. They understand how their discipline fits within the wider development equation — meaning advice is always practical, timely, and focused on project outcomes rather than professional fee-earning.</p>
+
+    <h3>Flexible engagement</h3>
+    <p>We offer our consultancy services to external clients on a project-specific or retained basis. Whether you need a full multi-disciplinary team or specialist support in a single area, we structure our engagement to suit your project needs.</p>
+
+    <h3>Local knowledge, national standards</h3>
+    <p>Our team has deep relationships across the West Midlands planning authorities, supply chain, and professional network. Combined with national-standard technical capability, this gives our clients a genuine competitive advantage.</p>
+
+    <p>For consultancy enquiries, <a href="../contact.html" style="color:#44C0C0;">contact our team</a> to discuss how we can support your next project.</p>
+</div>
+
+<div class="proj-section">
+    <h2>Related Projects</h2>
+    <div class="proj-grid">
+                <a href="../project-showell-lane.html" class="proj-card">
+                    <img loading="lazy" src="../images/projects/showell-lane/1.jpg" alt="Showell Lane">
+                    <div class="proj-overlay">
+                        <span class="proj-label">Residential</span>
+                        <h3>Showell Lane</h3>
+                    </div>
+                </a>
+                <a href="../project-thornley-street.html" class="proj-card">
+                    <img loading="lazy" src="../images/projects/thornley-street/1.jpg" alt="Thornley Street">
+                    <div class="proj-overlay">
+                        <span class="proj-label">Residential</span>
+                        <h3>Thornley Street</h3>
+                    </div>
+                </a>
+                <a href="../project-pear-tree-lane.html" class="proj-card">
+                    <img loading="lazy" src="../images/projects/pear-tree-lane/1.jpg" alt="Pear Tree Lane">
+                    <div class="proj-overlay">
+                        <span class="proj-label">Residential</span>
+                        <h3>Pear Tree Lane</h3>
+                    </div>
+                </a>
+    </div>
+    <div style="text-align:center; margin-top:28px;">
+        <a href="../projects.html" style="font-size:14px; color:#44C0C0;">View All Projects <i class="fas fa-arrow-right"></i></a>
+    </div>
+</div>
+
+<div class="other-section">
+    <div class="other-inner">
+        <h2>Other Services</h2>
+                <a href="land-development.html" class="other-svc">
+                    <span class="other-svc-name">Land & Development</span>
+                    <i class="fas fa-arrow-right"></i>
+                </a>
+                <a href="master-developer.html" class="other-svc">
+                    <span class="other-svc-name">Master Developer</span>
+                    <i class="fas fa-arrow-right"></i>
+                </a>
+                <a href="asset-management.html" class="other-svc">
+                    <span class="other-svc-name">Asset Management</span>
+                    <i class="fas fa-arrow-right"></i>
+                </a>
+                <a href="architecture-design.html" class="other-svc">
+                    <span class="other-svc-name">Architecture & Design</span>
+                    <i class="fas fa-arrow-right"></i>
+                </a>
+    </div>
+</div>
+
+<div class="cta-section">
+    <div class="cta-box">
+        <h2>Discuss your project</h2>
+        <p>Our team is ready to explore how W13 can add value to your next project.</p>
+        <a href="../contact.html" class="cta-btn">Get In Touch</a>
+    </div>
+</div>
+
+<footer class="site-footer">
+        <div class="footer-main">
+            <div class="footer-brand">
+                <img src="../images/W13_Logo_full_White.png" alt="W13 Group" loading="lazy">
+                <a href="../contact.html" class="footer-cert" title="Cyber Essentials Certified">
+                    <img src="https://www.ncsc.gov.uk/sites/default/files/2026-02/300x75-ce.svg" alt="NCSC Cyber Essentials" loading="lazy">
+                </a>
+                <p class="footer-tagline">Building communities, creating value, and delivering excellence across property development.</p>
+            </div>
+            <div class="footer-nav">
+                <a href="../about.html">About Us</a>
+                <a href="../services.html">Divisions</a>
+                <a href="../services.html">Services</a>
+                <a href="../projects.html">Projects</a>
+                <a href="../news.html">News</a>
+                <a href="../contact.html">Contact</a>
+            </div>
+            <div class="footer-office">
+                <div class="footer-office-label">Birmingham Office</div>
+                <div class="footer-office-addr">Beech House, Greenfield Crescent<br>Birmingham, B15 3BE</div>
+                <div class="footer-office-contact"><a href="tel:+441216630006">+44 (0)121 663 0006</a></div>
+                <div class="footer-office-contact"><a href="mailto:info@w13uk.com">info@w13uk.com</a></div>
+                <div class="footer-social-row">
+                    <a href="https://www.linkedin.com/company/w13-group/" target="_blank" rel="noopener" class="footer-social-icon"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="https://x.com/W13Group" target="_blank" rel="noopener" class="footer-social-icon"><i class="fab fa-x-twitter"></i></a>
+                    <a href="https://www.instagram.com/w13group/" target="_blank" rel="noopener" class="footer-social-icon"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom-bar">
+            <div class="footer-legal-links">
+                <a href="../terms.html">T&amp;C's</a>
+                <a href="../privacy-policy.html">Privacy Policy</a>
+            </div>
+            <span class="footer-copy">&copy;2026 W13 Group. All rights reserved</span>
+        </div>
+        <div class="footer-dot"><span></span></div>
+    </footer>
+
+
+<a href="https://wa.me/442031501401?text=Hi%20W13%20Group%2C%20I'd%20like%20to%20discuss%20a%20project." class="whatsapp-widget" target="_blank" rel="noopener" aria-label="Chat on WhatsApp">
+    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.654-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
+<div class="exit-popup-overlay" id="exitPopup">
+    <div class="exit-popup">
+        <button class="exit-popup-close" onclick="closeExitPopup()">&times;</button>
+        <h3>Don't miss out</h3>
+        <p>Get exclusive project updates and market insights delivered to your inbox.</p>
+        <form class="exit-popup-form" onsubmit="return handleExitSignup(event)">
+            <input type="email" placeholder="Your email address" required aria-label="Email for updates">
+            <button type="submit">Get Updates</button>
+        </form>
+        <button class="exit-popup-skip" onclick="closeExitPopup()">No thanks</button>
+    </div>
+</div>
+<script>
+let exitShown=false;
+function trackLead(formType, detail) {
+    var payload = Object.assign({
+        event: 'w13_form_submit',
+        form_type: formType,
+        page_title: document.title,
+        page_url: window.location.href,
+        source_path: window.location.pathname
+    }, detail || {});
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push(payload);
+
+    if (typeof window.gtag === 'function') {
+        window.gtag('event', 'generate_lead', {
+            send_to: window.W13_GOOGLE_ADS_ID || undefined,
+            form_type: formType,
+            page_path: window.location.pathname
+        });
+    }
+    if (typeof window.fbq === 'function') {
+        window.fbq('track', 'Lead', {
+            form_type: formType,
+            page_path: window.location.pathname
+        });
+    }
+}
+function closeExitPopup(){document.getElementById('exitPopup').style.display='none';}
+function handleExitSignup(e){e.preventDefault();const em=e.target.querySelector('input').value;if(em){fetch('https://api.web3forms.com/submit',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({access_key:'9cdae4fd-e5b5-48fd-975e-2ebf489e6fa8',form_type:'exit_popup_signup',email:em,subject:'W13 Lead: Exit Popup Signup',from_name:'W13 Website',page_title:document.title,page_url:window.location.href,source_path:window.location.pathname,replyto:em,lead_channel:'exit_popup',message:'Exit popup signup request'})}).then(function(){trackLead('exit_popup_signup',{email:em});closeExitPopup();});}return false;}
+document.addEventListener('mouseout',function(e){if(!exitShown&&e.clientY<10){exitShown=true;document.getElementById('exitPopup').style.display='flex';}});
+</script>
+
+</body>
+</html>

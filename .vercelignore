@@ -1,0 +1,12 @@
+*.backup
+*.csv
+w13-homepage-wireframes.html
+.git
+.gitignore
+.venv
+Privacy Notice v1.docx
+_bg.py
+check_*.js
+debug_*.js
+fix_*.py
+rebuild_footer.py

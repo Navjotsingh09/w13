@@ -4,9 +4,314 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pear Tree Lane | W13 Group</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <meta name="description" content="Pear Tree Lane — a W13 Group residential development creating modern, sustainable homes in a desirable location.">
+    <meta property="og:title" content="Pear Tree Lane | W13 Group">
+    <meta property="og:description" content="Pear Tree Lane — a W13 Group residential development creating modern, sustainable homes in a desirable location.">
+    <meta property="og:type" content="article">
+    <meta property="og:image" content="images/W13_Logo_full_White.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Pear Tree Lane | W13 Group">
+    <meta name="twitter:description" content="Pear Tree Lane — a W13 Group residential development creating modern, sustainable homes in a desirable location.">
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "W13 Group",
+        "url": "https://w13-two.vercel.app",
+        "logo": "https://w13-two.vercel.app/images/W13_Logo_full_White.png",
+        "description": "W13 Group is a Birmingham-based property developer building sustainable residential and commercial communities across the UK.",
+        "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "Beech House, Greenfield Crescent",
+            "addressLocality": "Birmingham",
+            "postalCode": "B15 3BE",
+            "addressCountry": "GB"
+        },
+        "telephone": "+442031501401",
+        "email": "info@w13uk.com",
+        "sameAs": [
+            "https://www.linkedin.com/company/w13group",
+            "https://www.instagram.com/w13group"
+        ],
+        "areaServed": "United Kingdom",
+        "knowsAbout": ["Property Development", "Residential Construction", "Commercial Development", "Urban Regeneration", "Architects and Planning"]
+    }
+    </script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <script>document.documentElement.className = document.documentElement.className.replace("no-js", "js");</script>
     <style>
+
+        /* ===== ACCESSIBILITY: Focus indicators ===== */
+        *:focus-visible {
+            outline: 2px solid #44C0C0;
+            outline-offset: 2px;
+        }
+        a:focus-visible, button:focus-visible, [role="button"]:focus-visible {
+            outline: 2px solid #44C0C0;
+            outline-offset: 2px;
+        }
+        /* ===== WHATSAPP WIDGET ===== */
+        .whatsapp-widget {
+            position: fixed;
+            bottom: 28px;
+            right: 28px;
+            z-index: 9999;
+            width: 60px;
+            height: 60px;
+            background: #0C233F;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 8px 24px rgba(9,28,51,0.24);
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+            text-decoration: none;
+        }
+        .whatsapp-widget:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 10px 26px rgba(9,28,51,0.28);
+        }
+        .whatsapp-widget svg {
+            width: 32px;
+            height: 32px;
+            fill: #fff;
+        }
+        .whatsapp-tooltip {
+            position: absolute;
+            right: 72px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: #fff;
+            color: #0C233F;
+            padding: 8px 14px;
+            border-radius: 8px;
+            font-family: 'Graphie', sans-serif;
+            font-size: 13px;
+            font-weight: 500;
+            white-space: nowrap;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.15);
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s;
+        }
+        .whatsapp-widget:hover .whatsapp-tooltip {
+            opacity: 1;
+        }
+
+        /* ===== STICKY MOBILE CTA BAR ===== */
+        .mobile-cta-bar {
+            display: none;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            z-index: 9998;
+            background: #0C233F;
+            border-top: 1px solid rgba(68,192,192,0.3);
+            padding: 12px 16px;
+            gap: 10px;
+        }
+        .mobile-cta-bar a {
+            flex: 1;
+            text-align: center;
+            padding: 14px 0;
+            border-radius: 8px;
+            font-family: 'Graphie', sans-serif;
+            font-weight: 600;
+            font-size: 14px;
+            text-decoration: none;
+            transition: background 0.3s;
+        }
+        .mobile-cta-call {
+            background: rgba(255,255,255,0.08);
+            color: #fff;
+            border: 1px solid rgba(255,255,255,0.15);
+        }
+        .mobile-cta-call:hover { background: rgba(255,255,255,0.15); }
+        .mobile-cta-enquire {
+            background: #44C0C0;
+            color: #0C233F;
+        }
+        .mobile-cta-enquire:hover { background: #5ad4d4; }
+        @media (max-width: 768px) {
+            .mobile-cta-bar { display: flex; }
+            .whatsapp-widget { bottom: 24px; }
+            body { padding-bottom: 72px; }
+        }
+        /* ===== EXIT-INTENT POPUP ===== */
+        .exit-popup-overlay {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(9,28,51,0.85);
+            z-index: 10001;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(4px);
+        }
+        .exit-popup-overlay.active { display: flex; }
+        .exit-popup {
+            background: #0C233F;
+            border: 1px solid rgba(68,192,192,0.2);
+            border-radius: 16px;
+            padding: 48px 40px;
+            max-width: 480px;
+            width: 90%;
+            text-align: center;
+            position: relative;
+            box-shadow: 0 24px 80px rgba(0,0,0,0.5);
+        }
+        .exit-popup-close {
+            position: absolute;
+            top: 16px; right: 20px;
+            background: none; border: none;
+            color: rgba(234,234,234,0.5);
+            font-size: 24px;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+        .exit-popup-close:hover { color: #fff; }
+        .exit-popup h3 {
+            font-family: 'Graphie', sans-serif;
+            font-size: 26px;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 12px;
+        }
+        .exit-popup p {
+            font-size: 15px;
+            color: rgba(234,234,234,0.7);
+            margin-bottom: 24px;
+            line-height: 1.6;
+        }
+        .exit-popup-form {
+            display: flex;
+            gap: 0;
+        }
+        .exit-popup-form input {
+            flex: 1;
+            padding: 14px 18px;
+            background: rgba(255,255,255,0.06);
+            border: 1px solid rgba(255,255,255,0.12);
+            border-right: none;
+            border-radius: 8px 0 0 8px;
+            color: #fff;
+            font-family: 'Graphie', sans-serif;
+            font-size: 14px;
+            outline: none;
+        }
+        .exit-popup-form input:focus { border-color: #44C0C0; }
+        .exit-popup-form input::placeholder { color: rgba(234,234,234,0.35); }
+        .exit-popup-form button {
+            padding: 14px 24px;
+            background: #44C0C0;
+            color: #0C233F;
+            border: none;
+            border-radius: 0 8px 8px 0;
+            font-family: 'Graphie', sans-serif;
+            font-weight: 600;
+            font-size: 14px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        .exit-popup-form button:hover { background: #5ad4d4; }
+        .exit-popup-skip {
+            display: inline-block;
+            margin-top: 16px;
+            color: rgba(234,234,234,0.4);
+            font-size: 13px;
+            cursor: pointer;
+            border: none;
+            background: none;
+            font-family: 'Graphie', sans-serif;
+        }
+        .exit-popup-skip:hover { color: rgba(234,234,234,0.7); }
+        /* ===== NEWSLETTER SIGNUP ===== */
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        .newsletter-success {
+            display: none;
+            color: #44C0C0;
+            font-size: 14px;
+            padding-top: 8px;
+        }
+        /* ===== REGISTER INTEREST ===== */
+        .register-interest {
+            background: #091c33;
+            padding: 80px 24px;
+        }
+        .register-interest-inner {
+            max-width: 680px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        .register-interest h2 {
+            font-family: 'Graphie', sans-serif;
+            font-size: clamp(28px, 4vw, 40px);
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 12px;
+        }
+        .register-interest p {
+            font-size: 16px;
+            color: rgba(234,234,234,0.6);
+            margin-bottom: 32px;
+            line-height: 1.6;
+        }
+        .register-form {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 14px;
+        }
+        .register-form input, .register-form select {
+            padding: 14px 18px;
+            background: rgba(255,255,255,0.06);
+            border: 1px solid rgba(255,255,255,0.12);
+            border-radius: 8px;
+            color: #fff;
+            font-family: 'Graphie', sans-serif;
+            font-size: 14px;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+        .register-form input:focus, .register-form select:focus { border-color: #44C0C0; }
+        .register-form input::placeholder { color: rgba(234,234,234,0.35); }
+        .register-form select { color: rgba(234,234,234,0.35); }
+        .register-form select option { background: #0C233F; color: #fff; }
+        .register-form .full-width { grid-column: 1 / -1; }
+        .register-form button {
+            grid-column: 1 / -1;
+            padding: 16px;
+            background: #44C0C0;
+            color: #0C233F;
+            border: none;
+            border-radius: 8px;
+            font-family: 'Graphie', sans-serif;
+            font-weight: 700;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        .register-form button:hover { background: #5ad4d4; }
+        .register-success {
+            display: none;
+            color: #44C0C0;
+            font-size: 16px;
+            padding-top: 16px;
+        }
+        @media (max-width: 600px) {
+            .register-form { grid-template-columns: 1fr; }
+        }
+
         /* ===== GRAPHIE FONT ===== */
         @font-face { font-family: 'Graphie'; src: url('fonts/Graphie-Thin.otf') format('opentype'); font-weight: 100; font-style: normal; font-display: swap; }
         @font-face { font-family: 'Graphie'; src: url('fonts/Graphie-ThinItalic.otf') format('opentype'); font-weight: 100; font-style: italic; font-display: swap; }
@@ -63,6 +368,7 @@
         .preloader {
             position: fixed; inset: 0; background: #0C233F; z-index: 100000;
             display: flex; align-items: center; justify-content: center; flex-direction: column;
+            animation: preloaderFailsafe 0s linear 4.5s forwards;
             transition: opacity 0.6s ease, visibility 0.6s ease;
         }
         .preloader.is-hidden { opacity: 0; visibility: hidden; pointer-events: none; }
@@ -81,6 +387,10 @@
         @keyframes preloaderLogoIn { 0% { opacity: 0; transform: translateY(12px) scale(0.98); } 100% { opacity: 1; transform: translateY(0) scale(1); } }
         @keyframes preloaderDotIn { 0% { opacity: 0; transform: scale(0.2) translateX(-4px); } 100% { opacity: 1; transform: scale(1) translateX(0); } }
         @keyframes preloaderDotPulse { 0%, 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(68,192,192,0.45); } 50% { transform: scale(1.12); box-shadow: 0 0 0 10px rgba(68,192,192,0); } }
+
+        @keyframes preloaderFailsafe {
+            to { opacity: 0; visibility: hidden; pointer-events: none; }
+        }
 
         /* ===== NAVBAR ===== */
         .navbar {
@@ -282,30 +592,7 @@
         .btn-cta { display: inline-block; padding: 20px 50px; background: #44C0C0; color: #0C233F; font-size: 15px; font-weight: 700; letter-spacing: 1px; transition: all 0.4s; }
         .btn-cta:hover { background: #3aadad; transform: translateY(-2px); }
 
-        /* ===== FOOTER ===== */
-        .footer { background: #091c33; padding: 80px 50px 40px; border-top: 1px solid rgba(68,192,192,0.1); }
-        .footer-inner { max-width: 1400px; margin: 0 auto; }
-        .footer-top { display: grid; grid-template-columns: 1fr 2fr 1fr; gap: 60px; padding-bottom: 60px; border-bottom: 1px solid rgba(68,192,192,0.1); }
-        .footer-logo { margin-bottom: 20px; }
-        .footer-logo img { height: 48px; width: auto; }
-        .footer-brand-text { font-size: 14px; color: rgba(234,234,234,0.4); line-height: 1.7; }
-        .footer-nav { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; }
-        .footer-nav-col h4 { font-family: 'Graphie', sans-serif; font-weight: 600; font-size: 20px; margin-bottom: 20px; color: #EAEAEA; }
-        .footer-nav-col ul { display: flex; flex-direction: column; gap: 12px; }
-        .footer-nav-col a { font-size: 14px; color: rgba(234,234,234,0.5); transition: color 0.3s; display: block; }
-        .footer-nav-col a:hover { color: #44C0C0; }
-        .footer-contact-heading { font-size: 13px; font-weight: 600; letter-spacing: 3px; text-transform: uppercase; color: #44C0C0; margin-bottom: 20px; }
-        .footer-contact-text { font-size: 14px; color: rgba(234,234,234,0.4); line-height: 1.8; }
-        .footer-contact-text a { color: rgba(234,234,234,0.6); transition: color 0.3s; }
-        .footer-contact-text a:hover { color: #44C0C0; }
-        .footer-social { display: flex; gap: 12px; margin-top: 24px; }
-        .footer-social a { width: 40px; height: 40px; border: 1px solid rgba(68,192,192,0.2); display: flex; align-items: center; justify-content: center; color: rgba(234,234,234,0.4); font-size: 15px; transition: all 0.3s; }
-        .footer-social a:hover { border-color: #44C0C0; color: #44C0C0; }
-        .footer-bottom { padding-top: 30px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; }
-        .footer-legal { display: flex; gap: 20px; }
-        .footer-legal a { font-size: 12px; color: rgba(234,234,234,0.25); transition: color 0.3s; }
-        .footer-legal a:hover { color: #44C0C0; }
-        .footer-copy { font-size: 12px; color: rgba(234,234,234,0.25); }
+        
 
         /* ===== VIDEO SECTION ===== */
         .video-section { padding: 120px 50px; background: #0C233F; }
@@ -329,22 +616,76 @@
             .gallery-item:nth-child(1) { grid-column: span 2; }
             .gallery-item:nth-child(3) { grid-row: span 1; }
             .video-grid { grid-template-columns: 1fr; }
-            .footer-top { grid-template-columns: 1fr; }
+            
             .menu-right { display: none; }
             .house-types-grid { grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); }
         }
         @media (max-width: 900px) {
             .menu-dropdown { width: 100%; display: block; }
-            .menu-submenu { position: static; transform: none; margin: 6px 0 0 28px; width: auto; max-width: none; padding: 0; border: 0; background: transparent; overflow: visible; clip-path: none; opacity: 1; visibility: visible; pointer-events: auto; }
-            .menu-sub-link { font-size: 16px; font-family: 'Graphie', sans-serif; font-weight: 500; color: rgba(234,234,234,0.6); padding-left: 0; white-space: normal; }
+            .menu-submenu {
+                position: static;
+                transform: none;
+                margin: 6px 0 0;
+                width: auto;
+                max-width: none;
+                max-height: 0;
+                padding: 0 0 0 14px;
+                border-left: 1px solid rgba(68,192,192,0.25);
+                background: transparent;
+                overflow: hidden;
+                clip-path: none;
+                opacity: 0;
+                visibility: hidden;
+                pointer-events: none;
+                transition: max-height 0.28s ease, opacity 0.2s ease;
+            }
+            .menu-dropdown.is-open .menu-submenu {
+                max-height: 320px;
+                opacity: 1;
+                visibility: visible;
+                pointer-events: auto;
+                margin-top: 10px;
+            }
+            .menu-dropdown > .menu-nav-link {
+                width: 100%;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                text-align: left;
+                border: 0;
+                background: transparent;
+                padding-right: 4px;
+            }
+            .menu-dropdown > .menu-nav-link::after {
+                content: '+';
+                font-size: 24px;
+                font-weight: 300;
+                line-height: 1;
+                color: rgba(234,234,234,0.72);
+                transition: transform 0.2s ease;
+            }
+            .menu-dropdown.is-open > .menu-nav-link::after {
+                transform: rotate(45deg);
+            }
+
+            .menu-sub-link {
+                display: block;
+                font-size: 15px;
+                font-weight: 500;
+                color: rgba(234,234,234,0.72);
+                padding: 10px 0;
+                white-space: normal;
+            }
         }
         @media (max-width: 768px) {
-            .navbar { padding: 20px 30px; }
-            .nav-inner { max-width: 100%; }
+            .navbar { padding: 14px 16px; }
+            .nav-inner { max-width: 100%; justify-content: space-between; }
+            .nav-logo img { height: 34px; }
+            .nav-center { flex: 1; justify-content: flex-end; gap: 0; }
             .nav-center .nav-link { display: none; }
             .nav-center .nav-dropdown { display: none; }
             .nav-cta { display: none; }
-            .mobile-menu-btn { display: flex; }
+            .mobile-menu-btn { display: flex; font-size: 12px; letter-spacing: 1px; gap: 8px; }
             .project-hero-content { padding: 0 30px 60px; }
             .stats-bar { padding: 50px 30px; }
             .stats-bar-inner { grid-template-columns: 1fr 1fr; gap: 30px; }
@@ -358,8 +699,46 @@
             .gallery-item:nth-child(3) { grid-row: span 1; }
             .cta-section { padding: 80px 30px; }
             .footer { padding: 60px 30px 30px; }
-            .footer-nav { grid-template-columns: 1fr; }
+            
         }
+    
+        /* ===== FOOTER ===== */
+        .site-footer { background: #091c33; padding: 80px 0 0; }
+        .footer-main { max-width: 1400px; margin: 0 auto; padding: 0 60px; display: grid; grid-template-columns: 260px 1fr 280px; gap: 60px; align-items: start; }
+        .footer-brand img { height: 48px; margin-bottom: 20px; }
+        .footer-cert { display: inline-block; margin-bottom: 20px; opacity: 0.7; transition: opacity 0.3s; }
+        .footer-cert:hover { opacity: 1; }
+        .footer-cert img { height: 44px; }
+        .footer-tagline { font-size: 14px; color: rgba(234,234,234,0.4); line-height: 1.6; }
+        .footer-nav { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; }
+        .footer-nav a { display: block; font-family: 'Graphie', sans-serif; font-size: 20px; font-weight: 600; color: rgba(234,234,234,0.7); padding: 18px 0; border-bottom: 1px solid rgba(234,234,234,0.06); transition: color 0.3s; text-decoration: none; }
+        .footer-nav a:hover { color: #44C0C0; }
+        .footer-office-label { font-size: 12px; font-weight: 600; letter-spacing: 3px; text-transform: uppercase; color: #44C0C0; margin-bottom: 24px; }
+        .footer-office-addr { font-size: 14px; color: rgba(234,234,234,0.45); line-height: 1.7; margin-bottom: 24px; }
+        .footer-office-contact { font-size: 14px; margin-bottom: 6px; }
+        .footer-office-contact a { color: rgba(234,234,234,0.6); text-decoration: none; transition: color 0.3s; }
+        .footer-office-contact a:hover { color: #44C0C0; }
+        .footer-social-row { display: flex; gap: 0; margin-top: 28px; }
+        .footer-social-icon { width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; border: 1px solid rgba(234,234,234,0.12); color: rgba(234,234,234,0.5); font-size: 15px; text-decoration: none; transition: all 0.3s; }
+        .footer-social-icon:hover { color: #44C0C0; border-color: #44C0C0; }
+        .footer-bottom-bar { max-width: 1400px; margin: 60px auto 0; padding: 24px 60px; border-top: 1px solid rgba(234,234,234,0.06); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
+        .footer-legal-links { display: flex; gap: 24px; }
+        .footer-legal-links a { font-size: 12px; color: rgba(234,234,234,0.35); text-decoration: none; transition: color 0.3s; }
+        .footer-legal-links a:hover { color: #44C0C0; }
+        .footer-copy { font-size: 12px; color: rgba(234,234,234,0.25); }
+        .footer-dot { text-align: center; padding: 40px 0 32px; }
+        .footer-dot span { display: inline-block; width: 10px; height: 10px; border-radius: 50%; background: #44C0C0; }
+        @media (max-width: 1024px) {
+            .footer-main { grid-template-columns: 1fr 1fr; gap: 40px; padding: 0 40px; }
+            .footer-office { grid-column: 1 / -1; }
+        }
+        @media (max-width: 768px) {
+            .footer-main { grid-template-columns: 1fr; gap: 40px; padding: 0 24px; }
+            .footer-nav { grid-template-columns: 1fr 1fr; }
+            .footer-nav a { font-size: 17px; padding: 14px 0; }
+            .footer-bottom-bar { padding: 20px 24px; flex-direction: column; align-items: flex-start; }
+        }
+
     </style>
 </head>
 <body>
@@ -374,10 +753,10 @@
     </div>
 
     <!-- Navbar -->
-    <nav class="navbar" id="navbar">
+    <nav class="navbar" id="navbar" aria-label="Main navigation">
         <div class="nav-inner">
         <a href="index.html" class="nav-logo">
-            <img src="images/W13_Logo_White.png" alt="W13 Group">
+            <img loading="lazy" src="images/W13_Logo_White.png" alt="W13 Group">
         </a>
         <div class="nav-center">
             <div class="nav-dropdown">
@@ -395,7 +774,7 @@
                             <a href="about.html#certifications">Certifications</a>
                         </div>
                         <div class="mega-menu-image">
-                            <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=2400&q=90" alt="About W13 Group">
+                            <img loading="lazy" src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=2400&q=90" alt="About W13 Group">
                         </div>
                     </div>
                 </div>
@@ -415,7 +794,7 @@
                             <a href="sectors/urban-regeneration.html">Urban Regeneration</a>
                         </div>
                         <div class="mega-menu-image">
-                            <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=2400&q=90" alt="W13 What We Do">
+                            <img loading="lazy" src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=2400&q=90" alt="W13 What We Do">
                         </div>
                     </div>
                 </div>
@@ -434,7 +813,7 @@
     </nav>
 
     <!-- Fullscreen Menu -->
-    <div class="fullscreen-menu" id="fullscreenMenu">
+    <div class="fullscreen-menu" id="fullscreenMenu" role="dialog" aria-label="Navigation menu" aria-hidden="true">
         <div class="menu-close" id="menuClose">
             <span>Close</span>
             <span class="menu-close-x">&times;</span>
@@ -443,8 +822,9 @@
             <a href="index.html" class="menu-nav-link" style="--i: 1;">Home</a>
             <a href="about.html" class="menu-nav-link" style="--i: 2;">About</a>
             <div class="menu-dropdown" style="--i: 3;">
-                <div class="menu-nav-link" onclick="if (window.matchMedia('(hover: hover)').matches) { window.location.href='services.html'; return false; }">What We Do</div>
+                <button type="button" class="menu-nav-link menu-nav-toggle" onclick="event.preventDefault(); var p = this.parentElement; var open = p.classList.toggle('is-open'); this.setAttribute('aria-expanded', open ? 'true' : 'false');" aria-expanded="false">What We Do</button>
                 <div class="menu-submenu">
+                    <a href="services.html" class="menu-sub-link">All Services</a>
                     <a href="sectors/residential.html" class="menu-sub-link">Residential</a>
                     <a href="sectors/commercial.html" class="menu-sub-link">Commercial</a>
                     <a href="sectors/architects-planning.html" class="menu-sub-link">Architects &amp; Planning</a>
@@ -457,7 +837,7 @@
         </div>
         <div class="menu-right">
             <div class="menu-right-img">
-                <img src="images/projects/pear-tree-lane/render-1.jpg" alt="Pear Tree Lane">
+                <img loading="lazy" src="images/projects/pear-tree-lane/render-1.jpg" alt="Pear Tree Lane">
             </div>
             <div class="menu-right-info">
                 <h4>Get in Touch</h4>
@@ -534,6 +914,14 @@
                     <div class="detail-label">Location</div>
                     <div class="detail-value">West Midlands</div>
                 </div>
+                <div class="detail-item">
+                    <div class="detail-label">Value</div>
+                    <div class="detail-value">£8.8M GDV</div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-label">Programme</div>
+                    <div class="detail-value">20 Months</div>
+                </div>
             </div>
         </div>
     </section>
@@ -609,7 +997,7 @@
                         <p class="step-text">Identified a prime residential site on Pear Tree Lane with strong development potential. Comprehensive feasibility studies, including topographical surveys, environmental assessments, and market analysis confirmed the site's viability for a premium residential scheme.</p>
                     </div>
                     <div class="step-image">
-                        <img src="images/projects/pear-tree-lane/render-2.jpg" alt="Site acquisition">
+                        <img loading="lazy" src="images/projects/pear-tree-lane/render-2.jpg" alt="Site acquisition">
                     </div>
                 </div>
 
@@ -621,7 +1009,7 @@
                         <p class="step-text">Our in-house architectural team developed a comprehensive masterplan with ten distinct house types. The SketchUp site model allowed us to test massing, street scene relationships, and solar orientation before committing to detailed design.</p>
                     </div>
                     <div class="step-image">
-                        <img src="images/projects/pear-tree-lane/render-3.jpg" alt="Masterplanning">
+                        <img loading="lazy" src="images/projects/pear-tree-lane/render-3.jpg" alt="Masterplanning">
                     </div>
                 </div>
 
@@ -633,7 +1021,7 @@
                         <p class="step-text">Full planning application submitted with detailed Design &amp; Access Statement, street scene elevations, and 3D renders. Pre-application consultation with the local authority and community engagement ensured a smooth planning process, achieving full approval.</p>
                     </div>
                     <div class="step-image">
-                        <img src="images/projects/pear-tree-lane/street-view-2.jpg" alt="Planning application">
+                        <img loading="lazy" src="images/projects/pear-tree-lane/street-view-2.jpg" alt="Planning application">
                     </div>
                 </div>
 
@@ -645,7 +1033,7 @@
                         <p class="step-text">Each of the ten house types was developed to full technical specification, with detailed floor plans, elevations, and construction drawings. Interior and exterior walkthroughs were produced to support marketing and sales efforts.</p>
                     </div>
                     <div class="step-image">
-                        <img src="images/projects/pear-tree-lane/render-4.jpg" alt="Detailed design">
+                        <img loading="lazy" src="images/projects/pear-tree-lane/render-4.jpg" alt="Detailed design">
                     </div>
                 </div>
 
@@ -657,7 +1045,7 @@
                         <p class="step-text">Phased construction programme managed entirely in-house. Each plot is built to the highest specification, with rigorous quality control at every stage. The development showcases W13's ability to deliver complex multi-unit schemes on time and to budget.</p>
                     </div>
                     <div class="step-image">
-                        <img src="images/projects/pear-tree-lane/street-view-3.jpg" alt="Construction">
+                        <img loading="lazy" src="images/projects/pear-tree-lane/street-view-3.jpg" alt="Construction">
                     </div>
                 </div>
             </div>
@@ -673,19 +1061,19 @@
             </div>
             <div class="gallery-grid" id="galleryGrid">
                 <div class="gallery-item">
-                    <img src="images/projects/pear-tree-lane/street-view-1.jpg" alt="Pear Tree Lane street view">
+                    <img loading="lazy" src="images/projects/pear-tree-lane/street-view-1.jpg" alt="Pear Tree Lane street view">
                 </div>
                 <div class="gallery-item">
-                    <img src="images/projects/pear-tree-lane/render-1.jpg" alt="Pear Tree Lane render">
+                    <img loading="lazy" src="images/projects/pear-tree-lane/render-1.jpg" alt="Pear Tree Lane render">
                 </div>
                 <div class="gallery-item">
-                    <img src="images/projects/pear-tree-lane/render-5.jpg" alt="Pear Tree Lane aerial">
+                    <img loading="lazy" src="images/projects/pear-tree-lane/render-5.jpg" alt="Pear Tree Lane aerial">
                 </div>
                 <div class="gallery-item">
-                    <img src="images/projects/pear-tree-lane/render-4.jpg" alt="Pear Tree Lane homes">
+                    <img loading="lazy" src="images/projects/pear-tree-lane/render-4.jpg" alt="Pear Tree Lane homes">
                 </div>
                 <div class="gallery-item">
-                    <img src="images/projects/pear-tree-lane/render-3.jpg" alt="Pear Tree Lane detail">
+                    <img loading="lazy" src="images/projects/pear-tree-lane/render-3.jpg" alt="Pear Tree Lane detail">
                 </div>
             </div>
         </div>
@@ -734,7 +1122,30 @@
         </div>
     </a>
 
-    <!-- CTA Section -->
+    
+<!-- REGISTER INTEREST -->
+<section class="register-interest">
+    <div class="register-interest-inner">
+        <h2>Interested in Pear Tree Lane?</h2>
+        <p>Register your interest and our team will keep you updated on availability, pricing, and key milestones.</p>
+        <form class="register-form" onsubmit="return handleRegister(event, 'Pear Tree Lane')">
+            <input type="text" name="name" placeholder="Full name" required>
+            <input type="email" name="email" placeholder="Email address" required>
+            <input type="tel" name="phone" placeholder="Phone number">
+            <select name="interest">
+                <option value="" disabled selected>I am a...</option>
+                <option value="Buyer">Potential Buyer</option>
+                <option value="Investor">Investor</option>
+                <option value="Agent">Estate Agent</option>
+                <option value="Other">Other</option>
+            </select>
+            <button type="submit">Register My Interest</button>
+        </form>
+        <p class="register-success" id="registerSuccess">Thanks! We'll be in touch with updates on Pear Tree Lane.</p>
+    </div>
+</section>
+
+<!-- CTA Section -->
     <section class="cta-section">
         <div class="cta-inner">
             <h2 class="cta-title">Let's Work Together</h2>
@@ -744,72 +1155,43 @@
     </section>
 
     <!-- Footer -->
-    <footer class="footer">
-        <div class="footer-inner">
-            <div class="footer-top">
-                <div class="footer-brand">
-                    <div class="footer-logo">
-                        <img src="images/W13_Logo_full_White.png" alt="W13 Group">
-                    </div>
-                    <p class="footer-brand-text">Building communities. Creating value. Delivering excellence in property development and construction.</p>
-                </div>
-                <div class="footer-nav">
-                    <div class="footer-nav-col">
-                        <h4>Company</h4>
-                        <ul>
-                            <li><a href="index.html">Home</a></li>
-                            <li><a href="about.html">About</a></li>
-                            <li><a href="services.html">What We Do</a></li>
-                            <li><a href="projects.html">Projects</a></li>
-                            <li><a href="news.html">News</a></li>
-                            <li><a href="contact.html">Contact</a></li>
-                        </ul>
-                    </div>
-                    <div class="footer-nav-col">
-                        <h4>Services</h4>
-                        <ul>
-                            <li><a href="services.html">Land &amp; Development</a></li>
-                            <li><a href="services.html">Master Developer</a></li>
-                            <li><a href="services.html">Construction &amp; Main Contracting</a></li>
-                            <li><a href="services.html">Facilities Management</a></li>
-                            <li><a href="services.html">Lettings &amp; Property Management</a></li>
-                        </ul>
-                    </div>
-                    <div class="footer-nav-col">
-                        <h4>Legal</h4>
-                        <ul>
-                            <li><a href="#">Privacy Policy</a></li>
-                            <li><a href="#">Terms &amp; Conditions</a></li>
-                            <li><a href="#">Sitemap</a></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="footer-contact">
-                    <h4 class="footer-contact-heading">Contact</h4>
-                    <div class="footer-contact-text">
-                        <p>Beech House, Greenfield Crescent<br>Birmingham, B15 3BE</p>
-                        <p style="margin-top: 12px;">
-                            Tel: <a href="tel:+441216630006">+44 (0)121 663 0006</a><br>
-                            Email: <a href="mailto:info@w13uk.com">info@w13uk.com</a>
-                        </p>
-                    </div>
-                    <div class="footer-social">
-                        <a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
-                        <a href="#" aria-label="Twitter"><i class="fa-brands fa-twitter"></i></a>
-                        <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
-                        <a href="#" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
-                    </div>
-                </div>
+    <footer class="site-footer">
+        <div class="footer-main">
+            <div class="footer-brand">
+                <img src="images/W13_Logo_full_White.png" alt="W13 Group" loading="lazy">
+                <a href="contact.html" class="footer-cert" title="Cyber Essentials Certified">
+                    <img src="https://www.ncsc.gov.uk/sites/default/files/2026-02/300x75-ce.svg" alt="NCSC Cyber Essentials" loading="lazy">
+                </a>
+                <p class="footer-tagline">Building communities, creating value, and delivering excellence across property development.</p>
             </div>
-            <div class="footer-bottom">
-                <div class="footer-copy">&copy; 2026 W13 Group. All rights reserved.</div>
-                <div class="footer-legal">
-                    <a href="#">Privacy Policy</a>
-                    <a href="#">Terms &amp; Conditions</a>
-                    <a href="#">Sitemap</a>
+            <div class="footer-nav">
+                <a href="about.html">About Us</a>
+                <a href="services.html">Divisions</a>
+                <a href="services.html">Services</a>
+                <a href="projects.html">Projects</a>
+                <a href="news.html">News</a>
+                <a href="contact.html">Contact</a>
+            </div>
+            <div class="footer-office">
+                <div class="footer-office-label">Birmingham Office</div>
+                <div class="footer-office-addr">Beech House, Greenfield Crescent<br>Birmingham, B15 3BE</div>
+                <div class="footer-office-contact"><a href="tel:+441216630006">+44 (0)121 663 0006</a></div>
+                <div class="footer-office-contact"><a href="mailto:info@w13uk.com">info@w13uk.com</a></div>
+                <div class="footer-social-row">
+                    <a href="https://www.linkedin.com/company/w13-group/" target="_blank" rel="noopener" class="footer-social-icon"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="https://x.com/W13Group" target="_blank" rel="noopener" class="footer-social-icon"><i class="fab fa-x-twitter"></i></a>
+                    <a href="https://www.instagram.com/w13group/" target="_blank" rel="noopener" class="footer-social-icon"><i class="fab fa-instagram"></i></a>
                 </div>
             </div>
         </div>
+        <div class="footer-bottom-bar">
+            <div class="footer-legal-links">
+                <a href="terms.html">T&amp;C's</a>
+                <a href="privacy-policy.html">Privacy Policy</a>
+            </div>
+            <span class="footer-copy">&copy;2026 W13 Group. All rights reserved</span>
+        </div>
+        <div class="footer-dot"><span></span></div>
     </footer>
 
     <!-- GSAP -->
@@ -903,16 +1285,157 @@
     <script>
     /* ===== DOT CURSOR ===== */
     (function() {
-        const cursor = document.getElementById('dotCursor');
-        if (!cursor) return;
-        let cx = -100, cy = -100;
-        document.addEventListener('mousemove', function(e) { cx = e.clientX; cy = e.clientY; cursor.style.left = cx + 'px'; cursor.style.top = cy + 'px'; });
-        document.addEventListener('mouseleave', function() { cursor.style.left = '-100px'; cursor.style.top = '-100px'; });
-        document.querySelectorAll('a, button, .menu-btn, .menu-close, .nav-link, .gallery-nav-btn, .gallery-dot, .stat-item, .footer-social a, .footer-legal a').forEach(function(el) {
-            el.addEventListener('mouseenter', function() { cursor.classList.add('hovering'); });
-            el.addEventListener('mouseleave', function() { cursor.classList.remove('hovering'); });
+    var c = document.getElementById('dotCursor'); if (!c) return;
+    document.addEventListener('mousemove', function(e) { c.style.left = e.clientX + 'px'; c.style.top = e.clientY + 'px'; });
+    document.addEventListener('mouseleave', function() { c.style.left = '-100px'; c.style.top = '-100px'; });
+    document.querySelectorAll('a, button, .menu-close, .nav-link, .cta-btn').forEach(function(el) {
+        el.addEventListener('mouseenter', function() { c.classList.add('hovering'); });
+        el.addEventListener('mouseleave', function() { c.classList.remove('hovering'); });
+    });
+})();
+function trackLead(formType, detail) {
+    var payload = Object.assign({
+        event: 'w13_form_submit',
+        form_type: formType,
+        page_title: document.title,
+        page_url: window.location.href,
+        source_path: window.location.pathname
+    }, detail || {});
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push(payload);
+
+    if (typeof window.gtag === 'function') {
+        window.gtag('event', 'generate_lead', {
+            send_to: window.W13_GOOGLE_ADS_ID || undefined,
+            form_type: formType,
+            page_path: window.location.pathname
         });
+    }
+    if (typeof window.fbq === 'function') {
+        window.fbq('track', 'Lead', {
+            form_type: formType,
+            page_path: window.location.pathname
+        });
+    }
+}
+function handleNewsletter(e) {
+    e.preventDefault();
+    var form = e.target;
+    var email = form.querySelector('input[type="email"]').value;
+    fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+            access_key: '9cdae4fd-e5b5-48fd-975e-2ebf489e6fa8',
+            form_type: 'newsletter_signup',
+            subject: 'W13 Lead: Newsletter Signup',
+            from_name: 'W13 Website',
+            email: email,
+            page_title: document.title,
+            page_url: window.location.href,
+            source_path: window.location.pathname,
+            replyto: email,
+            lead_channel: 'newsletter',
+            message: 'Newsletter signup request'
+        })
+    }).then(function() {
+        form.style.display = 'none';
+        document.getElementById('newsletterSuccess').style.display = 'block';
+        trackLead('newsletter_signup', { email: email });
+    });
+    return false;
+}
+    (function() {
+        var exitShown = sessionStorage.getItem('w13_exit_shown');
+        if (!exitShown) {
+            document.addEventListener('mouseout', function(e) {
+                if (e.clientY < 5 && !sessionStorage.getItem('w13_exit_shown')) {
+                    document.getElementById('exitPopup').classList.add('active');
+                    sessionStorage.setItem('w13_exit_shown', '1');
+                }
+            });
+        }
     })();
-    </script>
+    function closeExitPopup() {
+        document.getElementById('exitPopup').classList.remove('active');
+    }
+function handleExitSignup(e) {
+    e.preventDefault();
+    var email = e.target.querySelector('input').value;
+    fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+            access_key: '9cdae4fd-e5b5-48fd-975e-2ebf489e6fa8',
+            form_type: 'exit_popup_signup',
+            subject: 'W13 Lead: Exit Popup Signup',
+            from_name: 'W13 Website',
+            email: email,
+            page_title: document.title,
+            page_url: window.location.href,
+            source_path: window.location.pathname,
+            replyto: email,
+            lead_channel: 'exit_popup',
+            message: 'Exit popup signup request'
+        })
+    }).then(function() {
+        e.target.style.display = 'none';
+        document.getElementById('exitPopupSuccess').style.display = 'block';
+        trackLead('exit_popup_signup', { email: email });
+        setTimeout(closeExitPopup, 2000);
+    });
+    return false;
+}
+function handleRegister(e, projectName) {
+    e.preventDefault();
+    var form = e.target;
+    var data = {
+        access_key: '9cdae4fd-e5b5-48fd-975e-2ebf489e6fa8',
+        form_type: 'project_register_interest',
+        subject: 'W13 Lead: Project Interest - ' + projectName,
+        from_name: 'W13 Website',
+        project_name: projectName,
+        name: form.querySelector('[name="name"]').value,
+        email: form.querySelector('[name="email"]').value,
+        phone: form.querySelector('[name="phone"]').value || 'Not provided',
+        interest: form.querySelector('[name="interest"]').value || 'Not specified',
+        page_title: document.title,
+        page_url: window.location.href,
+        source_path: window.location.pathname,
+        replyto: form.querySelector('[name="email"]').value,
+        lead_channel: 'project_interest',
+        message: 'Register interest for ' + projectName
+    };
+    fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+    }).then(function() {
+        form.style.display = 'none';
+        document.getElementById('registerSuccess').style.display = 'block';
+        trackLead('project_register_interest', { project_name: projectName });
+    });
+    return false;
+}
+</script>
+
+<!-- WHATSAPP WIDGET -->
+<a href="https://wa.me/442031501401?text=Hi%20W13%20Group%2C%20I'd%20like%20to%20discuss%20a%20project." class="whatsapp-widget" target="_blank" rel="noopener" aria-label="Chat on WhatsApp">
+    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.654-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
+<!-- EXIT-INTENT POPUP -->
+<div class="exit-popup-overlay" id="exitPopup">
+    <div class="exit-popup">
+        <button class="exit-popup-close" onclick="closeExitPopup()">&times;</button>
+        <h3>Don't miss out</h3>
+        <p>Get exclusive project updates, new opportunities, and market insights delivered to your inbox.</p>
+        <form class="exit-popup-form" onsubmit="return handleExitSignup(event)">
+            <input type="email" placeholder="Your email address" required aria-label="Email for updates">
+            <button type="submit">Get Updates</button>
+        </form>
+        <button class="exit-popup-skip" onclick="closeExitPopup()">No thanks</button>
+        <p class="newsletter-success" id="exitPopupSuccess" style="display:none;color:#44C0C0;margin-top:12px;">You're subscribed! Check your inbox.</p>
+    </div>
+</div>
 </body>
 </html>

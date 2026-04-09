@@ -3,13 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>News | W13 Group</title>
-    <meta name="description" content="Stay up to date with the latest news, project updates, and industry insights from W13 Group, Birmingham's community-focused property developer.">
-    <meta property="og:title" content="News | W13 Group">
-    <meta property="og:description" content="Stay up to date with the latest news, project updates, and industry insights from W13 Group.">
-    <meta property="og:type" content="website">
-    <meta property="og:image" content="images/W13_Logo_full_White.png">
+    <title>Delivering Net Zero: Lessons From Our Latest Development | W13 Group</title>
+    <link rel="canonical" href="https://w13uk.com/news-delivering-net-zero.html">
+    <meta name="description" content="With the Future Homes Standard approaching and planning authorities demanding more, net zero has become a commercial imperative. Here is how W13 Group is delivering lower-carbon homes in practice.">
+    <meta property="og:title" content="Delivering Net Zero: Lessons From Our Latest Development | W13 Group">
+    <meta property="og:description" content="With the Future Homes Standard approaching and planning authorities demanding more, net zero has become a commercial imperative. Here is how W13 Group is delivering lower-carbon homes in practice.">
+    <meta property="og:type" content="article">
+    <meta property="og:image" content="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=2400&q=90">
+    <meta property="article:published_time" content="2026-01-28">
     <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Delivering Net Zero: Lessons From Our Latest Development">
+    <meta name="twitter:description" content="With the Future Homes Standard approaching and planning authorities demanding more, net zero has become a commercial imperative. Here is how W13 Group is delivering lower-carbon homes in practice.">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
         @font-face { font-family: 'Graphie'; src: url('fonts/Graphie-Regular.otf') format('opentype'); font-weight: 400; }
@@ -20,44 +24,56 @@
         *:focus-visible { outline: 2px solid #44C0C0; outline-offset: 2px; }
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: 'Graphie', sans-serif; background: #0C233F; color: #EAEAEA; line-height: 1.7; }
-        a { color: inherit; text-decoration: none; }
+        a { color: #44C0C0; text-decoration: none; }
+        a:hover { text-decoration: underline; }
 
-        .navbar { position: fixed; top: 0; left: 0; width: 100%; z-index: 100; padding: 20px 40px;
+        .navbar { position: fixed; top: 0; left: 0; width: 100%; z-index: 100; padding: 20px 40px; 
             display: flex; justify-content: space-between; align-items: center; background: rgba(12,35,63,0.95); backdrop-filter: blur(10px); }
         .nav-logo img { height: 32px; }
         .nav-links { display: flex; gap: 32px; align-items: center; }
-        .nav-links a { color: #EAEAEA; font-size: 13px; font-weight: 400; letter-spacing: 0.5px; }
+        .nav-links a { color: #EAEAEA; font-size: 13px; font-weight: 400; letter-spacing: 0.5px; text-decoration: none; }
         .nav-links a:hover { color: #44C0C0; }
-        .nav-links .active { color: #44C0C0; }
         .nav-cta { background: #44C0C0; color: #0C233F !important; padding: 10px 24px; border-radius: 100px; font-weight: 600; font-size: 13px; }
-        .nav-cta:hover { background: #38a8a8; }
+        .nav-cta:hover { background: #38a8a8; text-decoration: none; }
 
-        .page-hero { padding: 140px 40px 60px; max-width: 1200px; margin: 0 auto; }
-        .page-hero .label { font-size: 11px; text-transform: uppercase; letter-spacing: 3px; color: #44C0C0; margin-bottom: 16px; font-weight: 600; }
-        .page-hero h1 { font-size: clamp(36px, 5vw, 56px); font-weight: 700; line-height: 1.15; margin-bottom: 16px; }
-        .page-hero .subtitle { color: rgba(234,234,234,0.6); font-size: 17px; max-width: 600px; }
+        .article-hero { padding: 140px 40px 60px; max-width: 800px; margin: 0 auto; }
+        .article-back { display: inline-flex; align-items: center; gap: 8px; font-size: 13px; color: rgba(234,234,234,0.5); margin-bottom: 32px; text-decoration: none; }
+        .article-back:hover { color: #44C0C0; text-decoration: none; }
+        .article-meta { display: flex; gap: 20px; align-items: center; margin-bottom: 20px; flex-wrap: wrap; }
+        .article-category { font-size: 11px; text-transform: uppercase; letter-spacing: 3px; color: #44C0C0; font-weight: 600; }
+        .article-date { font-size: 13px; color: rgba(234,234,234,0.5); }
+        .article-read { font-size: 13px; color: rgba(234,234,234,0.4); }
+        .article-hero h1 { font-size: clamp(28px, 4vw, 44px); font-weight: 700; line-height: 1.2; margin-bottom: 20px; }
+        .article-intro { font-size: 18px; color: rgba(234,234,234,0.7); line-height: 1.6; }
 
-        .news-grid { max-width: 1200px; margin: 0 auto; padding: 0 40px 80px; display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 28px; }
+        .article-img { max-width: 1000px; margin: 0 auto 60px; padding: 0 40px; }
+        .article-img img { width: 100%; border-radius: 8px; }
 
-        .news-card { background: rgba(234,234,234,0.03); border-radius: 8px; overflow: hidden; transition: transform 0.3s, background 0.3s; }
-        .news-card:hover { transform: translateY(-6px); background: rgba(234,234,234,0.06); }
-        .news-card-img { height: 220px; overflow: hidden; }
-        .news-card-img img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s; }
-        .news-card:hover .news-card-img img { transform: scale(1.05); }
-        .news-card-body { padding: 24px; }
-        .news-card-meta { display: flex; gap: 16px; margin-bottom: 10px; }
-        .news-card-category { font-size: 11px; text-transform: uppercase; letter-spacing: 2px; color: #44C0C0; font-weight: 600; }
-        .news-card-date { font-size: 12px; color: rgba(234,234,234,0.4); }
-        .news-card-body h2 { font-size: 19px; font-weight: 600; line-height: 1.4; margin-bottom: 12px; color: #EAEAEA; }
-        .news-card-desc { font-size: 14px; color: rgba(234,234,234,0.55); line-height: 1.6; margin-bottom: 16px; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
-        .news-card-link { font-size: 13px; color: #44C0C0; font-weight: 500; display: inline-flex; align-items: center; gap: 6px; }
+        .article-body { max-width: 800px; margin: 0 auto; padding: 0 40px 80px; }
+        .article-body h2 { font-size: 24px; font-weight: 600; margin: 40px 0 16px; color: #fff; }
+        .article-body h3 { font-size: 19px; font-weight: 600; margin: 32px 0 12px; color: #44C0C0; }
+        .article-body p { margin-bottom: 20px; color: rgba(234,234,234,0.75); font-size: 16px; line-height: 1.8; }
+        .article-body ul { margin: 0 0 20px 24px; }
+        .article-body li { margin-bottom: 10px; color: rgba(234,234,234,0.75); font-size: 16px; }
+        .article-body blockquote { border-left: 3px solid #44C0C0; padding: 20px 24px; margin: 30px 0; background: rgba(68,192,192,0.05); border-radius: 0 8px 8px 0; }
+        .article-body blockquote p { color: rgba(234,234,234,0.9); font-style: italic; margin-bottom: 0; }
 
-        .cta-section { max-width: 1200px; margin: 0 auto; padding: 40px 40px 80px; text-align: center; }
-        .cta-box { background: rgba(68,192,192,0.06); border: 1px solid rgba(68,192,192,0.15); border-radius: 12px; padding: 60px 40px; }
-        .cta-box h2 { font-size: 28px; font-weight: 600; margin-bottom: 12px; }
-        .cta-box p { color: rgba(234,234,234,0.6); max-width: 500px; margin: 0 auto 28px; font-size: 15px; }
-        .cta-btn { display: inline-block; background: #44C0C0; color: #0C233F; padding: 14px 36px; border-radius: 100px; font-weight: 600; font-size: 14px; }
-        .cta-btn:hover { background: #38a8a8; }
+        .share-bar { max-width: 800px; margin: 0 auto; padding: 0 40px 60px; display: flex; align-items: center; gap: 16px; border-bottom: 1px solid rgba(234,234,234,0.1); padding-bottom: 40px; }
+        .share-label { font-size: 13px; color: rgba(234,234,234,0.5); font-weight: 600; letter-spacing: 1px; text-transform: uppercase; }
+        .share-btn { display: inline-flex; align-items: center; justify-content: center; width: 40px; height: 40px; border-radius: 50%; background: rgba(234,234,234,0.08); color: rgba(234,234,234,0.6); font-size: 16px; text-decoration: none; transition: all 0.3s; }
+        .share-btn:hover { background: #44C0C0; color: #0C233F; text-decoration: none; }
+
+        .related-section { max-width: 1000px; margin: 0 auto; padding: 60px 40px 80px; }
+        .related-section h2 { font-size: 22px; font-weight: 600; margin-bottom: 32px; }
+        .related-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; }
+        .related-card { background: rgba(234,234,234,0.03); border-radius: 8px; overflow: hidden; text-decoration: none; transition: transform 0.3s, background 0.3s; }
+        .related-card:hover { transform: translateY(-4px); background: rgba(234,234,234,0.06); text-decoration: none; }
+        .related-img { height: 180px; overflow: hidden; }
+        .related-img img { width: 100%; height: 100%; object-fit: cover; }
+        .related-body { padding: 20px; }
+        .related-date { font-size: 12px; color: rgba(234,234,234,0.4); }
+        .related-body h3 { font-size: 16px; font-weight: 600; color: #EAEAEA; margin: 8px 0 12px; line-height: 1.4; }
+        .related-link { font-size: 13px; color: #44C0C0; }
 
         
         
@@ -75,10 +91,11 @@
         @media (max-width: 768px) {
             .navbar { padding: 16px 20px; }
             .nav-links { display: none; }
-            .page-hero { padding: 110px 20px 40px; }
-            .news-grid { padding: 0 20px 60px; grid-template-columns: 1fr; }
-            .cta-section { padding: 20px 20px 60px; }
-            .cta-box { padding: 40px 24px; }
+            .article-hero { padding: 110px 20px 40px; }
+            .article-img { padding: 0 20px; }
+            .article-body { padding: 0 20px 60px; }
+            .share-bar { padding: 0 20px 40px; }
+            .related-section { padding: 40px 20px 60px; }
             
         }
     
@@ -194,71 +211,109 @@
         <a href="about.html">About</a>
         <a href="services.html">What We Do</a>
         <a href="projects.html">Projects</a>
-        <a href="news.html" class="active">News</a>
+        <a href="news.html" style="color:#44C0C0;">News</a>
         <a href="contact.html" class="nav-cta">Get In Touch</a>
     </div>
 </nav>
 
-<div class="page-hero">
-    <div class="label">Newsroom</div>
-    <h1>Latest News</h1>
-    <p class="subtitle">Market insights, project updates, and industry perspectives from the W13 Group team.</p>
+<div class="article-hero">
+    <a href="news.html" class="article-back"><i class="fas fa-arrow-left"></i> Back to News</a>
+    <div class="article-meta">
+        <span class="article-category">Sustainability</span>
+        <span class="article-date">28 January 2026</span>
+        <span class="article-read">6 min read</span>
+    </div>
+    <h1>Delivering Net Zero: Lessons From Our Latest Development</h1>
+    <p class="article-intro">With the Future Homes Standard approaching and planning authorities demanding more, net zero has become a commercial imperative. Here's how W13 Group is delivering sustainable homes across the West Midlands.</p>
 </div>
 
-<div class="news-grid">
+<div class="article-img">
+    <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=2400&q=90" alt="Delivering Net Zero: Lessons From Our Latest Development">
+</div>
 
-    <a href="news-housing-market-outlook.html" class="news-card">
-        <div class="news-card-img">
-            <img loading="lazy" src="https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?w=2400&q=90" alt="UK Housing Market">
-        </div>
-        <div class="news-card-body">
-            <div class="news-card-meta">
-                <span class="news-card-category">Market Insight</span>
-                <span class="news-card-date">8 February 2026</span>
-            </div>
-            <h2>UK Housing Market Outlook: Spring 2026 Forecast</h2>
-            <p class="news-card-desc">The UK housing market enters Spring 2026 with renewed optimism. Mortgage rates stabilising, regional growth outpacing London, and the West Midlands emerging as a key growth market.</p>
-            <span class="news-card-link">Read More <i class="fas fa-arrow-right"></i></span>
-        </div>
-    </a>
+<div class="article-body">
 
-    <a href="news-delivering-net-zero.html" class="news-card">
-        <div class="news-card-img">
-            <img loading="lazy" src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=2400&q=90" alt="Sustainable Construction">
-        </div>
-        <div class="news-card-body">
-            <div class="news-card-meta">
-                <span class="news-card-category">Sustainability</span>
-                <span class="news-card-date">28 January 2026</span>
-            </div>
-            <h2>Delivering Net Zero: Lessons From Our Latest Development</h2>
-            <p class="news-card-desc">With the Future Homes Standard approaching and planning authorities demanding more, net zero has become a commercial imperative. Here's how W13 Group is delivering sustainable homes.</p>
-            <span class="news-card-link">Read More <i class="fas fa-arrow-right"></i></span>
-        </div>
-    </a>
+    <h2>Beyond the Buzzword</h2>
+    <p>Sustainability in construction has moved far beyond a marketing exercise. With the Future Homes Standard set to come into full effect, and local planning authorities increasingly requiring demonstrable environmental commitments, net zero is now a practical, commercial imperative for every developer.</p>
+    <p>At W13 Group, we've been integrating sustainable practices across our developments for years. Here, we share the lessons and approaches that have proved most effective.</p>
 
-    <a href="news-rise-of-btr.html" class="news-card">
-        <div class="news-card-img">
-            <img loading="lazy" src="https://images.unsplash.com/photo-1549637642-90187f64f420?w=2400&q=90" alt="Build to Rent">
-        </div>
-        <div class="news-card-body">
-            <div class="news-card-meta">
-                <span class="news-card-category">Industry</span>
-                <span class="news-card-date">15 January 2026</span>
-            </div>
-            <h2>The Rise of BTR: Why Build-to-Rent Is Reshaping UK Property</h2>
-            <p class="news-card-desc">Build-to-Rent has transformed from niche to mainstream in under a decade, with UK BTR investment hitting record levels. Here's why Birmingham is at the heart of this shift.</p>
-            <span class="news-card-link">Read More <i class="fas fa-arrow-right"></i></span>
-        </div>
-    </a>
+    <h2>Fabric First: The Foundation</h2>
+    <p>The most cost-effective route to low-carbon homes starts with the building envelope. Our approach prioritises:</p>
+    <ul>
+        <li><strong>Enhanced insulation standards:</strong> Exceeding Part L requirements with U-values typically 15-20% better than minimum compliance</li>
+        <li><strong>Thermal bridging reduction:</strong> Detailed junction design to minimise heat loss at critical points</li>
+        <li><strong>Airtightness:</strong> Targeting results well below the regulatory maximum, reducing uncontrolled ventilation losses</li>
+        <li><strong>High-performance glazing:</strong> Triple glazing in exposed elevations, with solar control where appropriate</li>
+    </ul>
+    <p>Getting the fabric right reduces the demand for energy in the first place — making the building inherently more efficient regardless of which heating or ventilation system is installed.</p>
+
+    <h2>Low-Carbon Energy Systems</h2>
+    <h3>Air source heat pumps</h3>
+    <p>Our recent developments have transitioned from gas boilers to air source heat pumps (ASHPs) as the primary heating source. Combined with underfloor heating systems — which operate at lower flow temperatures — ASHPs deliver comfortable, efficient heating with significantly reduced carbon emissions.</p>
+
+    <h3>Solar PV integration</h3>
+    <p>Roof-mounted photovoltaic panels are now standard across our residential schemes. Typical installations generate 2.5-4kWp per dwelling, covering a substantial proportion of household electricity demand and reducing grid dependency.</p>
+
+    <h3>Battery storage and smart controls</h3>
+    <p>Where feasible, we're incorporating battery storage to maximise self-consumption of generated solar energy. Smart heating controls and home energy management systems give residents visibility and control over their energy use.</p>
+
+    <h2>Embodied Carbon: The Hidden Challenge</h2>
+    <p>Operational energy is only part of the picture. The carbon embedded in materials — from manufacturing, transport, and construction — can account for up to 50% of a building's whole-life carbon impact.</p>
+    <p>Our strategies for reducing embodied carbon include:</p>
+    <ul>
+        <li>Specifying lower-carbon concrete mixes where structural requirements allow</li>
+        <li>Using timber frame construction for appropriate building types</li>
+        <li>Sourcing materials locally where possible to reduce transport emissions</li>
+        <li>Designing for longevity and adaptability to extend building lifespan</li>
+        <li>Targeting 100% diversion of construction waste from landfill</li>
+    </ul>
+
+    <blockquote>
+        <p>"Net zero isn't a destination — it's a direction. Every project we deliver needs to be measurably better than the last. The technology and supply chain are evolving rapidly, and we're committed to evolving with them."</p>
+    </blockquote>
+
+    <h2>Biodiversity and Ecology</h2>
+    <p>The Environment Act 2021 requires a minimum 10% Biodiversity Net Gain (BNG) on all major developments. Our approach goes beyond minimum compliance, incorporating green roofs, native planting, wildlife corridors, and sustainable drainage systems (SuDS) that enhance the ecological value of our sites.</p>
+
+    <h2>The Commercial Case</h2>
+    <p>Sustainable homes aren't just better for the environment — they're better for business. Energy-efficient homes command premium values, attract ESG-conscious investors in the BTR sector, and face fewer obstacles through the planning process. They also future-proof our portfolio against tightening regulations.</p>
+    <p>As EPC requirements become more stringent and mortgage lenders begin differentiating rates based on energy performance, the commercial advantage of sustainable construction will only grow.</p>
+
+    <h2>What's Next</h2>
+    <p>We're currently exploring modular and modern methods of construction (MMC) to further reduce waste and improve build quality. We're also investigating whole-life carbon assessment tools to better measure and reduce the total environmental impact of our developments.</p>
+    <p>If you're interested in our approach to sustainable development, or have a site you'd like to discuss, <a href="contact.html">get in touch</a>.</p>
 
 </div>
 
-<div class="cta-section">
-    <div class="cta-box">
-        <h2>Let's work together</h2>
-        <p>Whether you have a vision or need guidance, we're here to help transform challenges into opportunities.</p>
-        <a href="contact.html" class="cta-btn">Get In Touch</a>
+<div class="share-bar">
+    <span class="share-label">Share</span>
+    <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://w13-two.vercel.app/news-delivering-net-zero.html" target="_blank" rel="noopener" class="share-btn"><i class="fab fa-linkedin-in"></i></a>
+    <a href="https://www.facebook.com/sharer/sharer.php?u=https://w13-two.vercel.app/news-delivering-net-zero.html" target="_blank" rel="noopener" class="share-btn"><i class="fab fa-facebook-f"></i></a>
+    <a href="https://twitter.com/intent/tweet?url=https://w13-two.vercel.app/news-delivering-net-zero.html" target="_blank" rel="noopener" class="share-btn"><i class="fab fa-x-twitter"></i></a>
+</div>
+
+<div class="related-section">
+    <h2>Related Articles</h2>
+    <div class="related-grid">
+            <a href="news-housing-market-outlook.html" class="related-card">
+                <div class="related-img"><img loading="lazy" src="https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?w=2400&q=90" alt="UK Housing Market Outlook: Spring 2026 Forecast"></div>
+                <div class="related-body">
+                    <span class="related-date">8 February 2026</span>
+                    <h3>UK Housing Market Outlook: Spring 2026 Forecast</h3>
+                    <span class="related-link">Read More <i class="fas fa-arrow-right"></i></span>
+                </div>
+            </a>
+            <a href="news-rise-of-btr.html" class="related-card">
+                <div class="related-img"><img loading="lazy" src="https://images.unsplash.com/photo-1549637642-90187f64f420?w=2400&q=90" alt="The Rise of BTR: Why Build-to-Rent Is Reshaping UK Property"></div>
+                <div class="related-body">
+                    <span class="related-date">15 January 2026</span>
+                    <h3>The Rise of BTR: Why Build-to-Rent Is Reshaping UK Property</h3>
+                    <span class="related-link">Read More <i class="fas fa-arrow-right"></i></span>
+                </div>
+            </a>
+    </div>
+    <div style="text-align:center; margin-top:32px;">
+        <a href="news.html" style="font-size:14px; color:#44C0C0;">View All News <i class="fas fa-arrow-right"></i></a>
     </div>
 </div>
 
