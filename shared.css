@@ -40,6 +40,12 @@ a:focus-visible, button:focus-visible, [role="button"]:focus-visible {
     outline-offset: 2px;
 }
 
+/* WhatsApp CTA is temporarily disabled until the live destination is confirmed. */
+.whatsapp-widget,
+.whatsapp-tooltip {
+    display: none !important;
+}
+
 /* Skip-to-content link */
 .skip-link {
     position: absolute;

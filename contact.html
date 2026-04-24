@@ -345,7 +345,7 @@
         .contact-hero-inner { max-width: 1400px; margin: 0 auto; }
         .contact-hero-label { font-size: 13px; font-weight: 600; letter-spacing: 4px; text-transform: uppercase; color: #44C0C0; margin-bottom: 20px; }
         .contact-hero-title { font-family: 'Graphie', sans-serif; font-weight: 600; font-size: clamp(40px, 6vw, 72px); line-height: 1.08; margin-bottom: 20px; }
-        .contact-hero-sub { font-size: 18px; color: rgba(234,234,234,0.5); max-width: 560px; line-height: 1.7; }
+        .contact-hero-sub { font-size: 18px; color: rgba(234,234,234,0.82); max-width: 560px; line-height: 1.7; }
 
         /* CONTACT GRID */
         .contact-body { padding: 0 50px 120px; }
@@ -367,7 +367,7 @@
         .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 24px; }
         .form-row.full { grid-template-columns: 1fr; }
         .form-group { display: flex; flex-direction: column; }
-        .form-group label { font-size: 13px; font-weight: 600; letter-spacing: 1px; color: rgba(234,234,234,0.5); margin-bottom: 10px; text-transform: uppercase; }
+        .form-group label { font-size: 13px; font-weight: 600; letter-spacing: 1px; color: rgba(234,234,234,0.84); margin-bottom: 10px; text-transform: uppercase; }
         .form-group label .req { color: #44C0C0; }
         .form-group input,
         .form-group select,
@@ -383,7 +383,7 @@
 
         .form-consent { display: flex; align-items: flex-start; gap: 14px; margin: 32px 0 40px; }
         .form-consent input[type="checkbox"] { width: 20px; height: 20px; min-width: 20px; accent-color: #44C0C0; margin-top: 2px; -webkit-appearance: auto; appearance: auto; cursor: pointer; }
-        .form-consent label { font-size: 13px; color: rgba(234,234,234,0.4); line-height: 1.7; cursor: pointer; }
+        .form-consent label { font-size: 13px; color: rgba(234,234,234,0.8); line-height: 1.7; cursor: pointer; }
         .form-consent label a { color: #44C0C0; text-decoration: underline; text-underline-offset: 2px; }
 
         .btn-submit { display: inline-flex; align-items: center; gap: 14px; padding: 18px 44px; background: #44C0C0; color: #0C233F; font-family: 'Graphie', sans-serif; font-size: 15px; font-weight: 700; letter-spacing: 0.5px; border: none; transition: all 0.4s; cursor: pointer; }
@@ -397,22 +397,8 @@
         .form-success-icon { font-size: 48px; color: #44C0C0; margin-bottom: 20px; }
         .form-success h3 { font-family: 'Graphie', sans-serif; font-weight: 600; font-size: 28px; margin-bottom: 12px; }
         .form-success p { font-size: 16px; color: rgba(234,234,234,0.5); line-height: 1.7; }
-
-        /* BOOK MEETING */
-        .book-meeting { padding: 120px 50px; background: #091c33; border-top: 1px solid rgba(68,192,192,0.1); }
-        .book-meeting-inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1.2fr; gap: 80px; align-items: center; }
-        .book-meeting-label { font-size: 13px; font-weight: 600; letter-spacing: 4px; text-transform: uppercase; color: #44C0C0; margin-bottom: 16px; }
-        .book-meeting-title { font-family: 'Graphie', sans-serif; font-weight: 700; font-size: clamp(28px, 3.5vw, 40px); line-height: 1.15; margin-bottom: 20px; }
-        .book-meeting-desc { font-size: 16px; color: rgba(234,234,234,0.55); line-height: 1.7; }
-        .calendly-placeholder { text-align: center; padding: 60px 40px; border: 2px dashed rgba(68,192,192,0.2); border-radius: 16px; cursor: pointer; transition: all 0.3s; }
-        .calendly-placeholder:hover { border-color: rgba(68,192,192,0.4); background: rgba(68,192,192,0.03); }
-        .calendly-placeholder-icon { font-size: 48px; color: #44C0C0; margin-bottom: 20px; }
-        .calendly-placeholder h3 { font-family: 'Graphie', sans-serif; font-size: 22px; font-weight: 600; margin-bottom: 8px; }
-        .calendly-placeholder p { font-size: 14px; color: rgba(234,234,234,0.5); margin-bottom: 20px; }
-        .calendly-load-btn { display: inline-block; padding: 14px 32px; background: #44C0C0; color: #0C233F; font-family: 'Graphie', sans-serif; font-weight: 700; font-size: 14px; border-radius: 8px; transition: background 0.3s; }
-        .calendly-load-btn:hover { background: #5ad4d4; }
-        @media (max-width: 1100px) { .book-meeting-inner { grid-template-columns: 1fr; gap: 40px; } }
-        @media (max-width: 768px) { .book-meeting { padding: 80px 24px; } }
+        .form-status { display: none; margin-top: 16px; font-size: 14px; line-height: 1.6; color: rgba(234,234,234,0.88); }
+        .form-status.visible { display: block; }
 
         /* MAP */
         .contact-map { padding: 0 50px 0; }
@@ -422,7 +408,7 @@
         .map-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 28px; flex-wrap: wrap; gap: 16px; }
         .map-title { font-family: 'Graphie', sans-serif; font-weight: 600; font-size: 28px; color: #EAEAEA; }
         .map-tabs { display: flex; gap: 8px; }
-        .map-tab { padding: 10px 24px; font-family: 'Graphie', sans-serif; font-size: 13px; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; color: rgba(234,234,234,0.45); border: 1px solid rgba(68,192,192,0.15); border-radius: 50px; background: transparent; transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1); cursor: pointer; }
+        .map-tab { padding: 10px 24px; font-family: 'Graphie', sans-serif; font-size: 13px; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; color: rgba(234,234,234,0.82); border: 1px solid rgba(68,192,192,0.25); border-radius: 50px; background: transparent; transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1); cursor: pointer; }
         .map-tab:hover { color: #EAEAEA; border-color: rgba(68,192,192,0.4); }
         .map-tab.active { color: #0C233F; background: #44C0C0; border-color: #44C0C0; }
 
@@ -466,8 +452,8 @@
         .map-office-card { background: rgba(68,192,192,0.04); border: 1px solid rgba(68,192,192,0.1); border-radius: 10px; padding: 24px 28px; display: flex; align-items: center; gap: 20px; transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1); cursor: pointer; }
         .map-office-card:hover, .map-office-card.active { background: rgba(68,192,192,0.08); border-color: rgba(68,192,192,0.3); transform: translateY(-2px); }
         .map-office-icon { width: 48px; height: 48px; min-width: 48px; background: rgba(68,192,192,0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #44C0C0; font-size: 18px; }
-        .map-office-details h4 { font-family: 'Graphie', sans-serif; font-weight: 600; font-size: 16px; color: #EAEAEA; margin-bottom: 4px; }
-        .map-office-details p { font-size: 13px; color: rgba(234,234,234,0.4); line-height: 1.6; }
+        .map-office-details h3 { font-family: 'Graphie', sans-serif; font-weight: 600; font-size: 16px; color: #EAEAEA; margin-bottom: 4px; }
+        .map-office-details p { font-size: 13px; color: rgba(234,234,234,0.74); line-height: 1.6; }
 
         /* FOOTER */
         .footer { background: #091c33; padding: 80px 50px 40px; border-top: 1px solid rgba(68,192,192,0.1); margin-top: 100px; }
@@ -549,12 +535,12 @@
         .footer-cert { display: inline-block; margin-bottom: 20px; opacity: 0.7; transition: opacity 0.3s; }
         .footer-cert:hover { opacity: 1; }
         .footer-cert img { height: 44px; }
-        .footer-tagline { font-size: 14px; color: rgba(234,234,234,0.4); line-height: 1.6; }
+        .footer-tagline { font-size: 14px; color: rgba(234,234,234,0.82); line-height: 1.6; }
         .footer-nav { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; }
         .footer-nav a { display: block; font-family: 'Graphie', sans-serif; font-size: 20px; font-weight: 600; color: rgba(234,234,234,0.7); padding: 18px 0; border-bottom: 1px solid rgba(234,234,234,0.06); transition: color 0.3s; text-decoration: none; }
         .footer-nav a:hover { color: #44C0C0; }
         .footer-office-label { font-size: 12px; font-weight: 600; letter-spacing: 3px; text-transform: uppercase; color: #44C0C0; margin-bottom: 24px; }
-        .footer-office-addr { font-size: 14px; color: rgba(234,234,234,0.45); line-height: 1.7; margin-bottom: 24px; }
+        .footer-office-addr { font-size: 14px; color: rgba(234,234,234,0.82); line-height: 1.7; margin-bottom: 24px; }
         .footer-office-contact { font-size: 14px; margin-bottom: 6px; }
         .footer-office-contact a { color: rgba(234,234,234,0.6); text-decoration: none; transition: color 0.3s; }
         .footer-office-contact a:hover { color: #44C0C0; }
@@ -563,9 +549,9 @@
         .footer-social-icon:hover { color: #44C0C0; border-color: #44C0C0; }
         .footer-bottom-bar { max-width: 1400px; margin: 60px auto 0; padding: 24px 60px; border-top: 1px solid rgba(234,234,234,0.06); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
         .footer-legal-links { display: flex; gap: 24px; }
-        .footer-legal-links a { font-size: 12px; color: rgba(234,234,234,0.35); text-decoration: none; transition: color 0.3s; }
+        .footer-legal-links a { font-size: 12px; color: rgba(234,234,234,0.8); text-decoration: none; transition: color 0.3s; }
         .footer-legal-links a:hover { color: #44C0C0; }
-        .footer-copy { font-size: 12px; color: rgba(234,234,234,0.25); }
+        .footer-copy { font-size: 12px; color: rgba(234,234,234,0.74); }
         .footer-dot { text-align: center; padding: 40px 0 32px; }
         .footer-dot span { display: inline-block; width: 10px; height: 10px; border-radius: 50%; background: #44C0C0; }
         @media (max-width: 1024px) {
@@ -615,18 +601,18 @@
 </div>
 
 <!-- FULLSCREEN MENU -->
-<div class="fullscreen-menu" id="fullscreenMenu" role="dialog" aria-label="Navigation menu" aria-hidden="true">
+<div class="fullscreen-menu" id="fullscreenMenu" role="dialog" aria-label="Navigation menu" aria-hidden="true" inert>
     <div class="menu-close" onclick="toggleMenu()">
         <span>Close</span>
         <span class="menu-close-x">×</span>
     </div>
     <div class="menu-left">
-        <a href="index.html" class="menu-nav-link" style="--i:0" onclick="toggleMenu()">Home</a>
-        <a href="about.html" class="menu-nav-link" style="--i:1" onclick="toggleMenu()">About</a>
-        <a href="services.html" class="menu-nav-link" style="--i:2" onclick="toggleMenu()">What We Do</a>
-        <a href="projects.html" class="menu-nav-link" style="--i:3" onclick="toggleMenu()">Projects</a>
-        <a href="news.html" class="menu-nav-link" style="--i:4" onclick="toggleMenu()">News</a>
-        <a href="contact.html" class="menu-nav-link" style="--i:5" onclick="toggleMenu()">Contact</a>
+        <a href="index.html" class="menu-nav-link menu-focusable" style="--i:0" tabindex="-1" onclick="toggleMenu()">Home</a>
+        <a href="about.html" class="menu-nav-link menu-focusable" style="--i:1" tabindex="-1" onclick="toggleMenu()">About</a>
+        <a href="services.html" class="menu-nav-link menu-focusable" style="--i:2" tabindex="-1" onclick="toggleMenu()">What We Do</a>
+        <a href="projects.html" class="menu-nav-link menu-focusable" style="--i:3" tabindex="-1" onclick="toggleMenu()">Projects</a>
+        <a href="news.html" class="menu-nav-link menu-focusable" style="--i:4" tabindex="-1" onclick="toggleMenu()">News</a>
+        <a href="contact.html" class="menu-nav-link menu-focusable" style="--i:5" tabindex="-1" onclick="toggleMenu()">Contact</a>
     </div>
     <div class="menu-right">
         <div class="menu-right-img">
@@ -635,7 +621,7 @@
         <div class="menu-right-info">
             <h4>Head Office</h4>
             <p>Beech House<br>Birmingham, B15 3BE<br><br>020 3150 1401<br>info@w13uk.com</p>
-            <a href="https://www.linkedin.com/company/w13-group/" target="_blank" rel="noopener">LinkedIn →</a>
+            <a href="https://www.linkedin.com/company/w13-group/" target="_blank" rel="noopener" class="menu-focusable" tabindex="-1">LinkedIn →</a>
         </div>
     </div>
 </div>
@@ -711,6 +697,7 @@
     </div>
 </nav>
 
+<main id="main">
 <!-- HERO -->
 <section class="contact-hero">
     <div class="contact-hero-inner">
@@ -837,6 +824,7 @@
                     Submit
                     <svg viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3.75 9h10.5M9.75 4.5L14.25 9l-4.5 4.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
                 </button>
+                <p id="contactFormStatus" class="form-status" role="status" aria-live="polite"></p>
             </form>
 
             <!-- Success state -->
@@ -847,26 +835,6 @@
             </div>
         </div>
 
-    </div>
-</section>
-
-<!-- BOOK A MEETING -->
-<section class="book-meeting" id="book-meeting">
-    <div class="book-meeting-inner">
-        <div class="book-meeting-text reveal-up">
-            <p class="book-meeting-label">Schedule a Call</p>
-            <h2 class="book-meeting-title">Prefer to book a meeting?</h2>
-            <p class="book-meeting-desc">Choose a time that works for you and speak directly with our team about your project, land, or investment opportunity.</p>
-        </div>
-        <div class="book-meeting-embed reveal-up">
-            <div class="calendly-placeholder" onclick="loadCalendly()">
-                <div class="calendly-placeholder-icon"><i class="fas fa-calendar-check"></i></div>
-                <h3>Book a 30-Minute Consultation</h3>
-                <p>Click to view available times</p>
-                <span class="calendly-load-btn">Open Calendar</span>
-            </div>
-            <div id="calendlyEmbed" style="display:none; min-height: 650px;"></div>
-        </div>
     </div>
 </section>
 
@@ -888,20 +856,21 @@
             <div class="map-office-card active" onclick="flyToOffice('london')">
                 <div class="map-office-icon"><i class="fas fa-building"></i></div>
                 <div class="map-office-details">
-                    <h4>London Office</h4>
+                    <h3>London Office</h3>
                     <p>20-22 Wenlock Rd, London N1 7GU</p>
                 </div>
             </div>
             <div class="map-office-card active" onclick="flyToOffice('birmingham')">
                 <div class="map-office-icon"><i class="fas fa-city"></i></div>
                 <div class="map-office-details">
-                    <h4>Birmingham Office</h4>
+                    <h3>Birmingham Office</h3>
                     <p>Beech House, Greenfield Crescent, B15 3BE</p>
                 </div>
             </div>
         </div>
     </div>
 </section>
+</main>
 
 <!-- CERTIFICATE MODAL -->
 <div id="certModal" class="cert-modal">
@@ -944,9 +913,9 @@
                 <div class="footer-office-contact"><a href="tel:+441216630006">+44 (0)121 663 0006</a></div>
                 <div class="footer-office-contact"><a href="mailto:info@w13uk.com">info@w13uk.com</a></div>
                 <div class="footer-social-row">
-                    <a href="https://www.linkedin.com/company/w13-group/" target="_blank" rel="noopener" class="footer-social-icon"><i class="fab fa-linkedin-in"></i></a>
-                    <a href="https://x.com/W13Group" target="_blank" rel="noopener" class="footer-social-icon"><i class="fab fa-x-twitter"></i></a>
-                    <a href="https://www.instagram.com/w13group/" target="_blank" rel="noopener" class="footer-social-icon"><i class="fab fa-instagram"></i></a>
+                    <a href="https://www.linkedin.com/company/w13-group/" target="_blank" rel="noopener" class="footer-social-icon" aria-label="Visit W13 Group on LinkedIn"><i class="fab fa-linkedin-in" aria-hidden="true"></i></a>
+                    <a href="https://x.com/W13Group" target="_blank" rel="noopener" class="footer-social-icon" aria-label="Visit W13 Group on X"><i class="fab fa-x-twitter" aria-hidden="true"></i></a>
+                    <a href="https://www.instagram.com/w13group/" target="_blank" rel="noopener" class="footer-social-icon" aria-label="Visit W13 Group on Instagram"><i class="fab fa-instagram" aria-hidden="true"></i></a>
                 </div>
             </div>
         </div>
@@ -967,7 +936,30 @@
 /* Preloader */
 window.addEventListener('load', () => { setTimeout(() => { const p = document.getElementById('preloader'); gsap.to(p, { opacity: 0, duration: 0.6, ease: 'power2.inOut', onComplete: () => { p.style.display = 'none'; initAll(); } }); }, 800); });
 
-function toggleMenu() { const m = document.getElementById('fullscreenMenu'); m.classList.toggle('active'); document.body.style.overflow = m.classList.contains('active') ? 'hidden' : ''; }
+function toggleMenu() {
+    const m = document.getElementById('fullscreenMenu');
+    const menuButton = document.querySelector('.mobile-menu-btn');
+    const menuFocusableItems = document.querySelectorAll('.menu-focusable');
+    m.classList.toggle('active');
+    const isOpen = m.classList.contains('active');
+    m.setAttribute('aria-hidden', isOpen ? 'false' : 'true');
+    if (isOpen) {
+        m.removeAttribute('inert');
+    } else {
+        m.setAttribute('inert', '');
+    }
+    if (menuButton) {
+        menuButton.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+    }
+    menuFocusableItems.forEach(function(item) {
+        if (isOpen) {
+            item.removeAttribute('tabindex');
+        } else {
+            item.setAttribute('tabindex', '-1');
+        }
+    });
+    document.body.style.overflow = isOpen ? 'hidden' : '';
+}
 
     // ===== MEGA-MENU SECTOR IMAGE SWAP =====
     document.querySelectorAll('.mega-menu-link').forEach(link => {
@@ -1018,13 +1010,20 @@ function trackLead(formType, detail) {
 
 const form = document.getElementById('contactForm');
 const successDiv = document.getElementById('formSuccess');
+const formStatus = document.getElementById('contactFormStatus');
 
 form.addEventListener('submit', async function(e) {
     e.preventDefault();
     const btn = form.querySelector('.btn-submit');
     const originalText = btn.innerHTML;
+    if (formStatus) {
+        formStatus.classList.remove('visible');
+        formStatus.textContent = '';
+    }
     btn.innerHTML = 'Sending&hellip;';
     btn.disabled = true;
+    const controller = new AbortController();
+    const timeoutId = setTimeout(function() { controller.abort(); }, 10000);
 
     try {
         const formData = new FormData(form);
@@ -1038,22 +1037,27 @@ form.addEventListener('submit', async function(e) {
         formData.set('replyto', formData.get('email') || '');
         const res = await fetch('https://api.web3forms.com/submit', {
             method: 'POST',
-            body: formData
+            body: formData,
+            signal: controller.signal
         });
-        const data = await res.json();
+        const data = await res.json().catch(function() { return { success: false }; });
         if (data.success) {
             form.style.display = 'none';
             successDiv.classList.add('visible');
             trackLead('contact_enquiry');
         } else {
-            btn.innerHTML = 'Error &mdash; try again';
-            btn.disabled = false;
-            setTimeout(() => { btn.innerHTML = originalText; }, 3000);
+            throw new Error('Contact form submission failed');
         }
     } catch (err) {
-        btn.innerHTML = 'Error &mdash; try again';
+        console.error('Contact form submission failed:', err);
+        if (formStatus) {
+            formStatus.textContent = 'We could not confirm your enquiry right now. Please email info@w13uk.com or call +44 (0)121 663 0006.';
+            formStatus.classList.add('visible');
+        }
+    } finally {
+        clearTimeout(timeoutId);
+        btn.innerHTML = originalText;
         btn.disabled = false;
-        setTimeout(() => { btn.innerHTML = originalText; }, 3000);
     }
 });
 
@@ -1173,10 +1177,27 @@ window.addEventListener('keydown', function(e) {
 function handleNewsletter(e) {
     e.preventDefault();
     var form = e.target;
-    var email = form.querySelector('input[type="email"]').value;
+    var emailInput = form.querySelector('input[type="email"]');
+    var email = emailInput ? emailInput.value.trim() : '';
+    if (!email) return false;
+
+    var successEl = document.getElementById('newsletterSuccess');
+    var submitBtn = form.querySelector('button[type="submit"], button');
+    var originalBtnText = submitBtn ? submitBtn.innerHTML : '';
+
+    if (successEl) successEl.style.display = 'none';
+    if (submitBtn) {
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = 'Sending...';
+    }
+
+    var controller = new AbortController();
+    var timeoutId = setTimeout(function() { controller.abort(); }, 10000);
+
     fetch('https://api.web3forms.com/submit', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
+        signal: controller.signal,
         body: JSON.stringify({
             access_key: '9cdae4fd-e5b5-48fd-975e-2ebf489e6fa8',
             form_type: 'newsletter_signup',
@@ -1190,22 +1211,42 @@ function handleNewsletter(e) {
             lead_channel: 'newsletter',
             message: 'Newsletter signup request'
         })
-    }).then(function() {
+    })
+    .then(function(res) {
+        return res.json().catch(function() { return { success: false }; });
+    })
+    .then(function(data) {
+        if (!data || !data.success) throw new Error('Newsletter submission failed');
+
         form.style.display = 'none';
-        document.getElementById('newsletterSuccess').style.display = 'block';
-        trackLead('newsletter_signup', { email: email });
+        if (successEl) {
+            successEl.textContent = 'Thanks, you are subscribed. Please check your inbox.';
+            successEl.style.display = 'block';
+        }
+        if (typeof trackLead === 'function') {
+            trackLead('newsletter_signup', { email: email });
+        }
+    })
+    .catch(function(err) {
+        console.error('Newsletter signup failed:', err);
+        if (successEl) {
+            successEl.textContent = 'We could not confirm your signup right now. Please email info@w13uk.com or call +44 (0)121 663 0006.';
+            successEl.style.display = 'block';
+        } else {
+            alert('We could not confirm your signup right now. Please email info@w13uk.com or call +44 (0)121 663 0006.');
+        }
+    })
+    .finally(function() {
+        clearTimeout(timeoutId);
+        if (submitBtn) {
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = originalBtnText;
+        }
     });
+
     return false;
 }
 
-    /* Calendly Loader */
-    function loadCalendly() {
-        var placeholder = document.querySelector('.calendly-placeholder');
-        var embed = document.getElementById('calendlyEmbed');
-        placeholder.style.display = 'none';
-        embed.style.display = 'block';
-        embed.innerHTML = '<iframe src="https://calendly.com/w13group/30min" style="width:100%;height:650px;border:none;border-radius:12px;" loading="lazy"></iframe>';
-    }
     (function() {
         var exitShown = sessionStorage.getItem('w13_exit_shown');
         if (!exitShown) {
@@ -1222,10 +1263,28 @@ function handleNewsletter(e) {
     }
 function handleExitSignup(e) {
     e.preventDefault();
-    var email = e.target.querySelector('input').value;
+    var form = e.target;
+    var emailInput = form.querySelector('input[type="email"], input');
+    var email = emailInput ? emailInput.value.trim() : '';
+    if (!email) return false;
+
+    var successEl = document.getElementById('exitPopupSuccess');
+    var submitBtn = form.querySelector('button[type="submit"], button');
+    var originalBtnText = submitBtn ? submitBtn.innerHTML : '';
+
+    if (successEl) successEl.style.display = 'none';
+    if (submitBtn) {
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = 'Sending...';
+    }
+
+    var controller = new AbortController();
+    var timeoutId = setTimeout(function() { controller.abort(); }, 10000);
+
     fetch('https://api.web3forms.com/submit', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
+        signal: controller.signal,
         body: JSON.stringify({
             access_key: '9cdae4fd-e5b5-48fd-975e-2ebf489e6fa8',
             form_type: 'exit_popup_signup',
@@ -1239,12 +1298,40 @@ function handleExitSignup(e) {
             lead_channel: 'exit_popup',
             message: 'Exit popup signup request'
         })
-    }).then(function() {
-        e.target.style.display = 'none';
-        document.getElementById('exitPopupSuccess').style.display = 'block';
-        trackLead('exit_popup_signup', { email: email });
+    })
+    .then(function(res) {
+        return res.json().catch(function() { return { success: false }; });
+    })
+    .then(function(data) {
+        if (!data || !data.success) throw new Error('Exit popup submission failed');
+
+        form.style.display = 'none';
+        if (successEl) {
+            successEl.textContent = "You're subscribed! Check your inbox.";
+            successEl.style.display = 'block';
+        }
+        if (typeof trackLead === 'function') {
+            trackLead('exit_popup_signup', { email: email });
+        }
         setTimeout(closeExitPopup, 2000);
+    })
+    .catch(function(err) {
+        console.error('Exit popup signup failed:', err);
+        if (successEl) {
+            successEl.textContent = 'We could not confirm your signup right now. Please email info@w13uk.com or call +44 (0)121 663 0006.';
+            successEl.style.display = 'block';
+        } else {
+            alert('We could not confirm your signup right now. Please email info@w13uk.com or call +44 (0)121 663 0006.');
+        }
+    })
+    .finally(function() {
+        clearTimeout(timeoutId);
+        if (submitBtn) {
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = originalBtnText;
+        }
     });
+
     return false;
 }
 </script>

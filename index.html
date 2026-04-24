@@ -143,7 +143,7 @@
         }
         /* ===== EXIT-INTENT POPUP ===== */
         .exit-popup-overlay {
-            display: none;
+            display: flex;
             position: fixed;
             top: 0; left: 0; right: 0; bottom: 0;
             background: rgba(9,28,51,0.85);
@@ -151,8 +151,17 @@
             align-items: center;
             justify-content: center;
             backdrop-filter: blur(4px);
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+            transition: opacity 0.3s ease, visibility 0s linear 0.3s;
         }
-        .exit-popup-overlay.active { display: flex; }
+        .exit-popup-overlay.active {
+            opacity: 1;
+            visibility: visible;
+            pointer-events: auto;
+            transition: opacity 0.3s ease;
+        }
         .exit-popup {
             background: #0C233F;
             border: 1px solid rgba(68,192,192,0.2);
@@ -221,14 +230,14 @@
         .exit-popup-skip {
             display: inline-block;
             margin-top: 16px;
-            color: rgba(234,234,234,0.4);
+            color: rgba(234,234,234,0.82);
             font-size: 13px;
             cursor: pointer;
             border: none;
             background: none;
             font-family: 'Graphie', sans-serif;
         }
-        .exit-popup-skip:hover { color: rgba(234,234,234,0.7); }
+        .exit-popup-skip:hover { color: #EAEAEA; }
         /* ===== NEWSLETTER SIGNUP ===== */
         
         
@@ -331,7 +340,7 @@
         }
         .testimonial-role {
             font-size: 12px;
-            color: rgba(234,234,234,0.5);
+            color: rgba(234,234,234,0.82);
         }
         @media (max-width: 900px) {
             .testimonials-grid { grid-template-columns: 1fr; max-width: 520px; margin: 0 auto; }
@@ -403,8 +412,8 @@
         .preloader-dot:nth-child(2) { animation-delay: 0.2s; }
         .preloader-dot:nth-child(3) { animation-delay: 0.4s; }
         @keyframes preloaderPulse {
-            0%, 80%, 100% { opacity: 0.2; transform: scale(0.8); }
-            40% { opacity: 1; transform: scale(1); }
+            0%, 80%, 100% { opacity: 0.2; }
+            40% { opacity: 1; }
         }
 
         @keyframes preloaderFailsafe {
@@ -908,7 +917,7 @@
             line-height: 1.4; margin-bottom: 16px; color: #EAEAEA;
         }
         .news-card-link {
-            font-size: 13px; font-weight: 600; color: rgba(234,234,234,0.5);
+            font-size: 13px; font-weight: 600; color: rgba(234,234,234,0.82);
             display: inline-flex; align-items: center; gap: 8px; transition: all 0.3s;
         }
         .news-card:hover .news-card-link { color: #44C0C0; gap: 14px; }
@@ -954,11 +963,11 @@
             font-family: 'Graphie', sans-serif; font-weight: 600; font-size: 52px; font-weight: 700; color: #44C0C0;
         }
         .stats-band-label {
-            font-size: 13px; color: rgba(234,234,234,0.45); letter-spacing: 2px;
+            font-size: 13px; color: rgba(234,234,234,0.84); letter-spacing: 2px;
             text-transform: uppercase; margin-top: 10px;
         }
         .stats-band-text {
-            font-size: 14px; color: rgba(234,234,234,0.35); line-height: 1.6;
+            font-size: 14px; color: rgba(234,234,234,0.8); line-height: 1.6;
             margin-top: 12px;
         }
 
@@ -971,7 +980,7 @@
         .values-track { display: inline-flex; animation: valuesScroll 25s linear infinite; }
         .values-item {
             font-family: 'Graphie', sans-serif; font-weight: 600; font-size: 18px; font-weight: 500;
-            color: rgba(68,192,192,0.25); padding: 0 50px; letter-spacing: 2px;
+            color: rgba(68,192,192,0.86); padding: 0 50px; letter-spacing: 2px;
         }
         @keyframes valuesScroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
 
@@ -1066,12 +1075,12 @@
         .footer-cert { display: inline-block; margin-bottom: 20px; opacity: 0.7; transition: opacity 0.3s; }
         .footer-cert:hover { opacity: 1; }
         .footer-cert img { height: 44px; }
-        .footer-tagline { font-size: 14px; color: rgba(234,234,234,0.4); line-height: 1.6; }
+        .footer-tagline { font-size: 14px; color: rgba(234,234,234,0.82); line-height: 1.6; }
         .footer-nav { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; }
         .footer-nav a { display: block; font-family: 'Graphie', sans-serif; font-size: 20px; font-weight: 600; color: rgba(234,234,234,0.7); padding: 18px 0; border-bottom: 1px solid rgba(234,234,234,0.06); transition: color 0.3s; text-decoration: none; }
         .footer-nav a:hover { color: #44C0C0; }
         .footer-office-label { font-size: 12px; font-weight: 600; letter-spacing: 3px; text-transform: uppercase; color: #44C0C0; margin-bottom: 24px; }
-        .footer-office-addr { font-size: 14px; color: rgba(234,234,234,0.45); line-height: 1.7; margin-bottom: 24px; }
+        .footer-office-addr { font-size: 14px; color: rgba(234,234,234,0.82); line-height: 1.7; margin-bottom: 24px; }
         .footer-office-contact { font-size: 14px; margin-bottom: 6px; }
         .footer-office-contact a { color: rgba(234,234,234,0.6); text-decoration: none; transition: color 0.3s; }
         .footer-office-contact a:hover { color: #44C0C0; }
@@ -1080,9 +1089,9 @@
         .footer-social-icon:hover { color: #44C0C0; border-color: #44C0C0; }
         .footer-bottom-bar { max-width: 1400px; margin: 60px auto 0; padding: 24px 60px; border-top: 1px solid rgba(234,234,234,0.06); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
         .footer-legal-links { display: flex; gap: 24px; }
-        .footer-legal-links a { font-size: 12px; color: rgba(234,234,234,0.35); text-decoration: none; transition: color 0.3s; }
+        .footer-legal-links a { font-size: 12px; color: rgba(234,234,234,0.8); text-decoration: none; transition: color 0.3s; }
         .footer-legal-links a:hover { color: #44C0C0; }
-        .footer-copy { font-size: 12px; color: rgba(234,234,234,0.25); }
+        .footer-copy { font-size: 12px; color: rgba(234,234,234,0.74); }
         .footer-dot { text-align: center; padding: 40px 0 32px; }
         .footer-dot span { display: inline-block; width: 10px; height: 10px; border-radius: 50%; background: #44C0C0; }
         @media (max-width: 1024px) {
@@ -1112,18 +1121,18 @@
 </div>
 
 <!-- FULLSCREEN MENU -->
-<div class="fullscreen-menu" id="fullscreenMenu" role="dialog" aria-label="Navigation menu" aria-hidden="true">
+<div class="fullscreen-menu" id="fullscreenMenu" role="dialog" aria-label="Navigation menu" aria-hidden="true" inert>
     <div class="menu-close" onclick="toggleMenu()">
         <span>Close</span>
         <span class="menu-close-x">×</span>
     </div>
     <div class="menu-left">
-        <a href="index.html" class="menu-nav-link" style="--i:0" onclick="toggleMenu()">Home</a>
-        <a href="about.html" class="menu-nav-link" style="--i:1" onclick="toggleMenu()">About</a>
-        <a href="services.html" class="menu-nav-link" style="--i:2" onclick="toggleMenu()">What We Do</a>
-        <a href="projects.html" class="menu-nav-link" style="--i:3" onclick="toggleMenu()">Projects</a>
-        <a href="news.html" class="menu-nav-link" style="--i:4" onclick="toggleMenu()">News</a>
-        <a href="contact.html" class="menu-nav-link" style="--i:5" onclick="toggleMenu()">Contact</a>
+        <a href="index.html" class="menu-nav-link menu-focusable" style="--i:0" tabindex="-1" onclick="toggleMenu()">Home</a>
+        <a href="about.html" class="menu-nav-link menu-focusable" style="--i:1" tabindex="-1" onclick="toggleMenu()">About</a>
+        <a href="services.html" class="menu-nav-link menu-focusable" style="--i:2" tabindex="-1" onclick="toggleMenu()">What We Do</a>
+        <a href="projects.html" class="menu-nav-link menu-focusable" style="--i:3" tabindex="-1" onclick="toggleMenu()">Projects</a>
+        <a href="news.html" class="menu-nav-link menu-focusable" style="--i:4" tabindex="-1" onclick="toggleMenu()">News</a>
+        <a href="contact.html" class="menu-nav-link menu-focusable" style="--i:5" tabindex="-1" onclick="toggleMenu()">Contact</a>
     </div>
     <div class="menu-right">
         <div class="menu-right-img">
@@ -1132,7 +1141,7 @@
         <div class="menu-right-info">
             <h4>Head Office</h4>
             <p>Beech House<br>Birmingham, B15 3BE<br><br>020 3150 1401<br>info@w13uk.com</p>
-            <a href="https://www.linkedin.com/company/w13-group/" target="_blank" rel="noopener">LinkedIn →</a>
+            <a href="https://www.linkedin.com/company/w13-group/" target="_blank" rel="noopener" class="menu-focusable" tabindex="-1">LinkedIn →</a>
         </div>
     </div>
 </div>
@@ -1209,6 +1218,7 @@
 </nav>
 
 <!-- HERO -->
+<main id="main">
 <section class="hero" id="hero">
     <div class="hero-slides">
         <div class="hero-slide active">
@@ -1246,8 +1256,8 @@
             <div class="hero-project-name" data-slide="4">Commercial Portfolio</div>
         </div>
         <div class="hero-nav">
-            <button class="hero-nav-btn" onclick="prevHeroSlide()"><i class="fas fa-arrow-left"></i></button>
-            <button class="hero-nav-btn" onclick="nextHeroSlide()"><i class="fas fa-arrow-right"></i></button>
+            <button class="hero-nav-btn" aria-label="Previous hero slide" onclick="prevHeroSlide()"><i class="fas fa-arrow-left" aria-hidden="true"></i></button>
+            <button class="hero-nav-btn" aria-label="Next hero slide" onclick="nextHeroSlide()"><i class="fas fa-arrow-right" aria-hidden="true"></i></button>
         </div>
     </div>
 </section>
@@ -1328,8 +1338,8 @@
             <h2 class="about-title reveal-up" style="margin-bottom:0;">Our Services</h2>
         </div>
         <div class="services-header-right">
-            <button class="services-nav-btn" onclick="prevService()"><i class="fas fa-arrow-left"></i></button>
-            <button class="services-nav-btn" onclick="nextService()"><i class="fas fa-arrow-right"></i></button>
+            <button class="services-nav-btn" aria-label="Previous service" onclick="prevService()"><i class="fas fa-arrow-left" aria-hidden="true"></i></button>
+            <button class="services-nav-btn" aria-label="Next service" onclick="nextService()"><i class="fas fa-arrow-right" aria-hidden="true"></i></button>
         </div>
     </div>
 
@@ -1395,8 +1405,8 @@
         <div class="services-header-right" style="gap: 20px;">
             <a href="projects.html" class="btn-outline" style="padding: 14px 28px; font-size: 13px;">View All Projects</a>
             <div style="display: flex; gap: 12px;">
-                <button class="services-nav-btn" onclick="prevProject()"><i class="fas fa-arrow-left"></i></button>
-                <button class="services-nav-btn" onclick="nextProject()"><i class="fas fa-arrow-right"></i></button>
+                <button class="services-nav-btn" aria-label="Previous project" onclick="prevProject()"><i class="fas fa-arrow-left" aria-hidden="true"></i></button>
+                <button class="services-nav-btn" aria-label="Next project" onclick="nextProject()"><i class="fas fa-arrow-right" aria-hidden="true"></i></button>
             </div>
         </div>
     </div>
@@ -1568,6 +1578,7 @@
 </section>
 
 <!-- FOOTER -->
+</main>
 <footer class="site-footer">
         <div class="footer-main">
             <div class="footer-brand">
@@ -1591,9 +1602,9 @@
                 <div class="footer-office-contact"><a href="tel:+441216630006">+44 (0)121 663 0006</a></div>
                 <div class="footer-office-contact"><a href="mailto:info@w13uk.com">info@w13uk.com</a></div>
                 <div class="footer-social-row">
-                    <a href="https://www.linkedin.com/company/w13-group/" target="_blank" rel="noopener" class="footer-social-icon"><i class="fab fa-linkedin-in"></i></a>
-                    <a href="https://x.com/W13Group" target="_blank" rel="noopener" class="footer-social-icon"><i class="fab fa-x-twitter"></i></a>
-                    <a href="https://www.instagram.com/w13group/" target="_blank" rel="noopener" class="footer-social-icon"><i class="fab fa-instagram"></i></a>
+                    <a href="https://www.linkedin.com/company/w13-group/" target="_blank" rel="noopener" class="footer-social-icon" aria-label="Visit W13 Group on LinkedIn"><i class="fab fa-linkedin-in" aria-hidden="true"></i></a>
+                    <a href="https://x.com/W13Group" target="_blank" rel="noopener" class="footer-social-icon" aria-label="Visit W13 Group on X"><i class="fab fa-x-twitter" aria-hidden="true"></i></a>
+                    <a href="https://www.instagram.com/w13group/" target="_blank" rel="noopener" class="footer-social-icon" aria-label="Visit W13 Group on Instagram"><i class="fab fa-instagram" aria-hidden="true"></i></a>
                 </div>
             </div>
         </div>
@@ -1623,14 +1634,33 @@ window.addEventListener('load', () => {
                 initAll();
             }
         });
-    }, 1200);
+    }, 400);
 });
 
 /* ===== MENU ===== */
 function toggleMenu() {
     const menu = document.getElementById('fullscreenMenu');
+    const menuButton = document.querySelector('.mobile-menu-btn');
+    const menuFocusableItems = document.querySelectorAll('.menu-focusable');
     menu.classList.toggle('active');
-    document.body.style.overflow = menu.classList.contains('active') ? 'hidden' : '';
+    const isOpen = menu.classList.contains('active');
+    menu.setAttribute('aria-hidden', isOpen ? 'false' : 'true');
+    if (isOpen) {
+        menu.removeAttribute('inert');
+    } else {
+        menu.setAttribute('inert', '');
+    }
+    if (menuButton) {
+        menuButton.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+    }
+    menuFocusableItems.forEach(function(item) {
+        if (isOpen) {
+            item.removeAttribute('tabindex');
+        } else {
+            item.setAttribute('tabindex', '-1');
+        }
+    });
+    document.body.style.overflow = isOpen ? 'hidden' : '';
 }
 
 /* ===== HERO SLIDESHOW ===== */
@@ -1948,10 +1978,27 @@ function trackLead(formType, detail) {
 function handleNewsletter(e) {
     e.preventDefault();
     var form = e.target;
-    var email = form.querySelector('input[type="email"]').value;
+    var emailInput = form.querySelector('input[type="email"]');
+    var email = emailInput ? emailInput.value.trim() : '';
+    if (!email) return false;
+
+    var successEl = document.getElementById('newsletterSuccess');
+    var submitBtn = form.querySelector('button[type="submit"], button');
+    var originalBtnText = submitBtn ? submitBtn.innerHTML : '';
+
+    if (successEl) successEl.style.display = 'none';
+    if (submitBtn) {
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = 'Sending...';
+    }
+
+    var controller = new AbortController();
+    var timeoutId = setTimeout(function() { controller.abort(); }, 10000);
+
     fetch('https://api.web3forms.com/submit', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
+        signal: controller.signal,
         body: JSON.stringify({
             access_key: '9cdae4fd-e5b5-48fd-975e-2ebf489e6fa8',
             form_type: 'newsletter_signup',
@@ -1965,11 +2012,39 @@ function handleNewsletter(e) {
             lead_channel: 'newsletter',
             message: 'Newsletter signup request'
         })
-    }).then(function() {
+    })
+    .then(function(res) {
+        return res.json().catch(function() { return { success: false }; });
+    })
+    .then(function(data) {
+        if (!data || !data.success) throw new Error('Newsletter submission failed');
+
         form.style.display = 'none';
-        document.getElementById('newsletterSuccess').style.display = 'block';
-        trackLead('newsletter_signup', { email: email });
+        if (successEl) {
+            successEl.textContent = 'Thanks, you are subscribed. Please check your inbox.';
+            successEl.style.display = 'block';
+        }
+        if (typeof trackLead === 'function') {
+            trackLead('newsletter_signup', { email: email });
+        }
+    })
+    .catch(function(err) {
+        console.error('Newsletter signup failed:', err);
+        if (successEl) {
+            successEl.textContent = 'We could not confirm your signup right now. Please email info@w13uk.com or call +44 (0)121 663 0006.';
+            successEl.style.display = 'block';
+        } else {
+            alert('We could not confirm your signup right now. Please email info@w13uk.com or call +44 (0)121 663 0006.');
+        }
+    })
+    .finally(function() {
+        clearTimeout(timeoutId);
+        if (submitBtn) {
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = originalBtnText;
+        }
     });
+
     return false;
 }
     (function() {
@@ -1977,21 +2052,48 @@ function handleNewsletter(e) {
         if (!exitShown) {
             document.addEventListener('mouseout', function(e) {
                 if (e.clientY < 5 && !sessionStorage.getItem('w13_exit_shown')) {
-                    document.getElementById('exitPopup').classList.add('active');
+                    openExitPopup();
                     sessionStorage.setItem('w13_exit_shown', '1');
                 }
             });
         }
     })();
+    function openExitPopup() {
+        var popup = document.getElementById('exitPopup');
+        popup.classList.add('active');
+        popup.setAttribute('aria-hidden', 'false');
+        popup.removeAttribute('inert');
+    }
     function closeExitPopup() {
-        document.getElementById('exitPopup').classList.remove('active');
+        var popup = document.getElementById('exitPopup');
+        popup.classList.remove('active');
+        popup.setAttribute('aria-hidden', 'true');
+        popup.setAttribute('inert', '');
     }
 function handleExitSignup(e) {
     e.preventDefault();
-    var email = e.target.querySelector('input').value;
+    var form = e.target;
+    var emailInput = form.querySelector('input[type="email"], input');
+    var email = emailInput ? emailInput.value.trim() : '';
+    if (!email) return false;
+
+    var successEl = document.getElementById('exitPopupSuccess');
+    var submitBtn = form.querySelector('button[type="submit"], button');
+    var originalBtnText = submitBtn ? submitBtn.innerHTML : '';
+
+    if (successEl) successEl.style.display = 'none';
+    if (submitBtn) {
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = 'Sending...';
+    }
+
+    var controller = new AbortController();
+    var timeoutId = setTimeout(function() { controller.abort(); }, 10000);
+
     fetch('https://api.web3forms.com/submit', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
+        signal: controller.signal,
         body: JSON.stringify({
             access_key: '9cdae4fd-e5b5-48fd-975e-2ebf489e6fa8',
             form_type: 'exit_popup_signup',
@@ -2005,12 +2107,40 @@ function handleExitSignup(e) {
             lead_channel: 'exit_popup',
             message: 'Exit popup signup request'
         })
-    }).then(function() {
-        e.target.style.display = 'none';
-        document.getElementById('exitPopupSuccess').style.display = 'block';
-        trackLead('exit_popup_signup', { email: email });
+    })
+    .then(function(res) {
+        return res.json().catch(function() { return { success: false }; });
+    })
+    .then(function(data) {
+        if (!data || !data.success) throw new Error('Exit popup submission failed');
+
+        form.style.display = 'none';
+        if (successEl) {
+            successEl.textContent = "You're subscribed! Check your inbox.";
+            successEl.style.display = 'block';
+        }
+        if (typeof trackLead === 'function') {
+            trackLead('exit_popup_signup', { email: email });
+        }
         setTimeout(closeExitPopup, 2000);
+    })
+    .catch(function(err) {
+        console.error('Exit popup signup failed:', err);
+        if (successEl) {
+            successEl.textContent = 'We could not confirm your signup right now. Please email info@w13uk.com or call +44 (0)121 663 0006.';
+            successEl.style.display = 'block';
+        } else {
+            alert('We could not confirm your signup right now. Please email info@w13uk.com or call +44 (0)121 663 0006.');
+        }
+    })
+    .finally(function() {
+        clearTimeout(timeoutId);
+        if (submitBtn) {
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = originalBtnText;
+        }
     });
+
     return false;
 }
 </script>
@@ -2021,7 +2151,7 @@ function handleExitSignup(e) {
     <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.654-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
 </a>
 <!-- EXIT-INTENT POPUP -->
-<div class="exit-popup-overlay" id="exitPopup">
+<div class="exit-popup-overlay" id="exitPopup" aria-hidden="true" inert>
     <div class="exit-popup">
         <button class="exit-popup-close" aria-label="Close popup" onclick="closeExitPopup()">&times;</button>
         <h3>Don't miss out</h3>

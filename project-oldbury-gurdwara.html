@@ -1057,10 +1057,27 @@ function trackLead(formType, detail) {
 function handleNewsletter(e) {
     e.preventDefault();
     var form = e.target;
-    var email = form.querySelector('input[type="email"]').value;
+    var emailInput = form.querySelector('input[type="email"]');
+    var email = emailInput ? emailInput.value.trim() : '';
+    if (!email) return false;
+
+    var successEl = document.getElementById('newsletterSuccess');
+    var submitBtn = form.querySelector('button[type="submit"], button');
+    var originalBtnText = submitBtn ? submitBtn.innerHTML : '';
+
+    if (successEl) successEl.style.display = 'none';
+    if (submitBtn) {
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = 'Sending...';
+    }
+
+    var controller = new AbortController();
+    var timeoutId = setTimeout(function() { controller.abort(); }, 10000);
+
     fetch('https://api.web3forms.com/submit', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
+        signal: controller.signal,
         body: JSON.stringify({
             access_key: '9cdae4fd-e5b5-48fd-975e-2ebf489e6fa8',
             form_type: 'newsletter_signup',
@@ -1074,11 +1091,39 @@ function handleNewsletter(e) {
             lead_channel: 'newsletter',
             message: 'Newsletter signup request'
         })
-    }).then(function() {
+    })
+    .then(function(res) {
+        return res.json().catch(function() { return { success: false }; });
+    })
+    .then(function(data) {
+        if (!data || !data.success) throw new Error('Newsletter submission failed');
+
         form.style.display = 'none';
-        document.getElementById('newsletterSuccess').style.display = 'block';
-        trackLead('newsletter_signup', { email: email });
+        if (successEl) {
+            successEl.textContent = 'Thanks, you are subscribed. Please check your inbox.';
+            successEl.style.display = 'block';
+        }
+        if (typeof trackLead === 'function') {
+            trackLead('newsletter_signup', { email: email });
+        }
+    })
+    .catch(function(err) {
+        console.error('Newsletter signup failed:', err);
+        if (successEl) {
+            successEl.textContent = 'We could not confirm your signup right now. Please email info@w13uk.com or call +44 (0)121 663 0006.';
+            successEl.style.display = 'block';
+        } else {
+            alert('We could not confirm your signup right now. Please email info@w13uk.com or call +44 (0)121 663 0006.');
+        }
+    })
+    .finally(function() {
+        clearTimeout(timeoutId);
+        if (submitBtn) {
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = originalBtnText;
+        }
     });
+
     return false;
 }
     (function() {
@@ -1097,10 +1142,28 @@ function handleNewsletter(e) {
     }
 function handleExitSignup(e) {
     e.preventDefault();
-    var email = e.target.querySelector('input').value;
+    var form = e.target;
+    var emailInput = form.querySelector('input[type="email"], input');
+    var email = emailInput ? emailInput.value.trim() : '';
+    if (!email) return false;
+
+    var successEl = document.getElementById('exitPopupSuccess');
+    var submitBtn = form.querySelector('button[type="submit"], button');
+    var originalBtnText = submitBtn ? submitBtn.innerHTML : '';
+
+    if (successEl) successEl.style.display = 'none';
+    if (submitBtn) {
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = 'Sending...';
+    }
+
+    var controller = new AbortController();
+    var timeoutId = setTimeout(function() { controller.abort(); }, 10000);
+
     fetch('https://api.web3forms.com/submit', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
+        signal: controller.signal,
         body: JSON.stringify({
             access_key: '9cdae4fd-e5b5-48fd-975e-2ebf489e6fa8',
             form_type: 'exit_popup_signup',
@@ -1114,12 +1177,40 @@ function handleExitSignup(e) {
             lead_channel: 'exit_popup',
             message: 'Exit popup signup request'
         })
-    }).then(function() {
-        e.target.style.display = 'none';
-        document.getElementById('exitPopupSuccess').style.display = 'block';
-        trackLead('exit_popup_signup', { email: email });
+    })
+    .then(function(res) {
+        return res.json().catch(function() { return { success: false }; });
+    })
+    .then(function(data) {
+        if (!data || !data.success) throw new Error('Exit popup submission failed');
+
+        form.style.display = 'none';
+        if (successEl) {
+            successEl.textContent = "You're subscribed! Check your inbox.";
+            successEl.style.display = 'block';
+        }
+        if (typeof trackLead === 'function') {
+            trackLead('exit_popup_signup', { email: email });
+        }
         setTimeout(closeExitPopup, 2000);
+    })
+    .catch(function(err) {
+        console.error('Exit popup signup failed:', err);
+        if (successEl) {
+            successEl.textContent = 'We could not confirm your signup right now. Please email info@w13uk.com or call +44 (0)121 663 0006.';
+            successEl.style.display = 'block';
+        } else {
+            alert('We could not confirm your signup right now. Please email info@w13uk.com or call +44 (0)121 663 0006.');
+        }
+    })
+    .finally(function() {
+        clearTimeout(timeoutId);
+        if (submitBtn) {
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = originalBtnText;
+        }
     });
+
     return false;
 }
 function handleRegister(e, projectName) {
