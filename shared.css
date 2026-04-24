@@ -67,7 +67,12 @@ a:focus-visible, button:focus-visible, [role="button"]:focus-visible {
 
 /* ===== CUSTOM DOT CURSOR ===== */
 @media (pointer: fine) {
-    *, *::before, *::after { cursor: none !important; }
+    body.use-dot-cursor,
+    body.use-dot-cursor *,
+    body.use-dot-cursor *::before,
+    body.use-dot-cursor *::after {
+        cursor: none !important;
+    }
 }
 .dot-cursor {
     position: fixed; top: 0; left: 0; z-index: 999999;
