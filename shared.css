@@ -4,14 +4,14 @@
    ========================================================================== */
 
 /* ===== GRAPHIE FONT (8 weights, no italics) ===== */
-@font-face { font-family: 'Graphie'; src: url('fonts/Graphie-Thin.otf') format('opentype'); font-weight: 100; font-style: normal; font-display: swap; }
-@font-face { font-family: 'Graphie'; src: url('fonts/Graphie-ExtraLight.otf') format('opentype'); font-weight: 200; font-style: normal; font-display: swap; }
-@font-face { font-family: 'Graphie'; src: url('fonts/Graphie-Light.otf') format('opentype'); font-weight: 300; font-style: normal; font-display: swap; }
-@font-face { font-family: 'Graphie'; src: url('fonts/Graphie-Book.otf') format('opentype'); font-weight: 350; font-style: normal; font-display: swap; }
-@font-face { font-family: 'Graphie'; src: url('fonts/Graphie-Regular.otf') format('opentype'); font-weight: 400; font-style: normal; font-display: swap; }
-@font-face { font-family: 'Graphie'; src: url('fonts/Graphie-SemiBold.otf') format('opentype'); font-weight: 600; font-style: normal; font-display: swap; }
-@font-face { font-family: 'Graphie'; src: url('fonts/Graphie-Bold.otf') format('opentype'); font-weight: 700; font-style: normal; font-display: swap; }
-@font-face { font-family: 'Graphie'; src: url('fonts/Graphie-ExtraBold.otf') format('opentype'); font-weight: 800; font-style: normal; font-display: swap; }
+@font-face { font-family: 'Graphie'; src: url('fonts/Graphie-Thin.woff2') format('woff2'); font-weight: 100; font-style: normal; font-display: swap; }
+@font-face { font-family: 'Graphie'; src: url('fonts/Graphie-ExtraLight.woff2') format('woff2'); font-weight: 200; font-style: normal; font-display: swap; }
+@font-face { font-family: 'Graphie'; src: url('fonts/Graphie-Light.woff2') format('woff2'); font-weight: 300; font-style: normal; font-display: swap; }
+@font-face { font-family: 'Graphie'; src: url('fonts/Graphie-Book.woff2') format('woff2'); font-weight: 350; font-style: normal; font-display: swap; }
+@font-face { font-family: 'Graphie'; src: url('fonts/Graphie-Regular.woff2') format('woff2'); font-weight: 400; font-style: normal; font-display: swap; }
+@font-face { font-family: 'Graphie'; src: url('fonts/Graphie-SemiBold.woff2') format('woff2'); font-weight: 600; font-style: normal; font-display: swap; }
+@font-face { font-family: 'Graphie'; src: url('fonts/Graphie-Bold.woff2') format('woff2'); font-weight: 700; font-style: normal; font-display: swap; }
+@font-face { font-family: 'Graphie'; src: url('fonts/Graphie-ExtraBold.woff2') format('woff2'); font-weight: 800; font-style: normal; font-display: swap; }
 
 /* ===== RESET ===== */
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
