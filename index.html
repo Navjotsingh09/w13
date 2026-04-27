@@ -557,14 +557,17 @@
 <script>
 /* ===== PRELOADER ===== */
 function _w13Init() {
-    var p = document.getElementById('preloader');
-    if (p) p.style.display = 'none';
-    if (typeof initAll === 'function') initAll();
+    if (typeof initAll !== 'function') return;
+    if ('requestIdleCallback' in window) {
+        requestIdleCallback(initAll, { timeout: 1500 });
+    } else {
+        setTimeout(initAll, 1);
+    }
 }
-if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', _w13Init);
-} else {
+if (document.readyState === 'complete') {
     _w13Init();
+} else {
+    window.addEventListener('load', _w13Init);
 }
 
 /* ===== MENU ===== */
