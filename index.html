@@ -51,13 +51,6 @@
 <div class="dot-cursor" id="dotCursor"></div>
 
 <!-- PRELOADER -->
-<div class="preloader" id="preloader">
-    <div class="preloader-dots">
-        <div class="preloader-dot"></div>
-        <div class="preloader-dot"></div>
-        <div class="preloader-dot"></div>
-    </div>
-</div>
 
 <!-- FULLSCREEN MENU -->
 <div class="fullscreen-menu" id="fullscreenMenu" role="dialog" aria-label="Navigation menu" aria-hidden="true" inert>
@@ -563,18 +556,16 @@
 
 <script>
 /* ===== PRELOADER ===== */
-window.addEventListener('load', () => {
-    setTimeout(() => {
-        const preloader = document.getElementById('preloader');
-        gsap.to(preloader, {
-            opacity: 0, duration: 0.6, ease: 'power2.inOut',
-            onComplete: () => {
-                preloader.style.display = 'none';
-                initAll();
-            }
-        });
-    }, 400);
-});
+function _w13Init() {
+    var p = document.getElementById('preloader');
+    if (p) p.style.display = 'none';
+    if (typeof initAll === 'function') initAll();
+}
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', _w13Init);
+} else {
+    _w13Init();
+}
 
 /* ===== MENU ===== */
 function toggleMenu() {
