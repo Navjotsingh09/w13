@@ -313,8 +313,7 @@
 <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 <script>
 /* ===== INIT TRIGGER ===== */
-function _w13Init(){if(typeof initAll==='function'){if('requestIdleCallback' in window){requestIdleCallback(initAll,{timeout:1500});}else{setTimeout(initAll,1);}}}
-if(document.readyState==='complete'){_w13Init();}else{window.addEventListener('load',_w13Init);}
+if(typeof initAll==='function'){if(document.readyState==='complete'){initAll();}else{window.addEventListener('load',initAll);}}
 function toggleMenu() { const m = document.getElementById('fullscreenMenu'); m.classList.toggle('active'); document.body.style.overflow = m.classList.contains('active') ? 'hidden' : ''; }
 
     // ===== MEGA-MENU SECTOR IMAGE SWAP =====
