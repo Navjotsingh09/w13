@@ -40,7 +40,7 @@
     }
     </script>
 <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'"><noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"></noscript>
-        <link rel="stylesheet" href="../shared.css">
+        <link rel="preload" href="../shared.min.css" as="style" onload="this.onload=null;this.rel=\'stylesheet\'"><noscript><link rel="stylesheet" href="../shared.min.css"></noscript>
     <style>
 
 
@@ -616,7 +616,7 @@
 
 <!-- HERO -->
 <section class="sector-hero">
-    <div class="sector-hero-img"><img loading="lazy" src="https://images.unsplash.com/photo-1517089596392-fb9a9033e05b?w=1200&q=60&auto=format" alt="Urban Regeneration"></div>
+    <div class="sector-hero-img"><img loading="lazy" src="https://images.unsplash.com/photo-1517089596392-fb9a9033e05b?w=800&q=55&auto=format" alt="Urban Regeneration"></div>
     <div class="sector-hero-overlay"></div>
     <div class="sector-hero-content">
         <div class="sector-hero-label reveal-up">Urban Regeneration</div>
@@ -646,7 +646,7 @@
             <p class="intro-text reveal-up">From initial site assembly and remediation through to placemaking and long-term stewardship, W13 Group takes a whole-lifecycle approach to regeneration. We don&rsquo;t just build &mdash; we create places with identity, resilience and enduring value.</p>
         </div>
         <div class="intro-img reveal-scale">
-            <img loading="lazy" src="https://images.unsplash.com/photo-1582407947092-50b6ef26d700?w=1200&q=60&auto=format" alt="Urban regeneration site">
+            <img loading="lazy" src="https://images.unsplash.com/photo-1582407947092-50b6ef26d700?w=800&q=55&auto=format" alt="Urban regeneration site">
             <div class="intro-img-badge">
                 <div class="intro-img-badge-num">85+</div>
                 <div class="intro-img-badge-label">Acres Regenerated</div>
@@ -778,8 +778,8 @@
         <div class="footer-dot"><span></span></div>
     </footer>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 <script>
 window.addEventListener('load', () => { setTimeout(() => { const p = document.getElementById('preloader'); gsap.to(p, { opacity: 0, duration: 0.6, ease: 'power2.inOut', onComplete: () => { p.style.display = 'none'; initAll(); } }); }, 800); });
 function toggleMenu() { const m = document.getElementById('fullscreenMenu'); m.classList.toggle('active'); document.body.style.overflow = m.classList.contains('active') ? 'hidden' : ''; }
