@@ -386,6 +386,8 @@
     <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
     <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
     <script>
+document.addEventListener('DOMContentLoaded', function() {
+
         window.addEventListener('load', function() { setTimeout(function() { const preloader = document.getElementById('preloader'); if (preloader) preloader.classList.add('is-hidden'); }, 1100); });
         const menuBtn = document.getElementById('menuBtn');
         const menuClose = document.getElementById('menuClose');
@@ -402,7 +404,8 @@
         if (timeline && timelineFill) { ScrollTrigger.create({ trigger: timeline, start: 'top 60%', end: 'bottom 40%', scrub: true, onUpdate: (self) => { timelineFill.style.height = (self.progress * 100) + '%'; } }); }
         const elevationItems = document.querySelectorAll('.elevation-item');
         if (elevationItems.length) { gsap.from(elevationItems, { y: 40, opacity: 0, duration: 0.8, stagger: 0.2, ease: 'power3.out', scrollTrigger: { trigger: '.elevations-grid', start: 'top 80%' } }); }
-    </script>
+});
+</script>
     <script>
     (function() {
     var c = document.getElementById('dotCursor'); if (!c) return;

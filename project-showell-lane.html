@@ -348,6 +348,8 @@
     <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
     <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
     <script>
+document.addEventListener('DOMContentLoaded', function() {
+
         window.addEventListener('load', function() { setTimeout(function() { document.getElementById('preloader').classList.add('is-hidden'); }, 1100); });
         const menuBtn = document.getElementById('menuBtn');
         const menuClose = document.getElementById('menuClose');
@@ -362,7 +364,8 @@
         if (galleryItems.length) { gsap.from(galleryItems, { y: 60, opacity: 0, duration: 0.8, stagger: 0.15, ease: 'power3.out', scrollTrigger: { trigger: '#galleryGrid', start: 'top 75%' } }); }
         const featureItems = document.querySelectorAll('.feature-image-item');
         if (featureItems.length) { gsap.from(featureItems, { y: 40, opacity: 0, duration: 0.8, stagger: 0.2, ease: 'power3.out', scrollTrigger: { trigger: '.feature-image-grid', start: 'top 80%' } }); }
-    </script>
+});
+</script>
     <script>
     (function() {
     var c = document.getElementById('dotCursor'); if (!c) return;
