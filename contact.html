@@ -383,7 +383,9 @@
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
 <script>
 /* Preloader */
-window.addEventListener('load', () => { setTimeout(() => { const p = document.getElementById('preloader'); gsap.to(p, { opacity: 0, duration: 0.6, ease: 'power2.inOut', onComplete: () => { p.style.display = 'none'; initAll(); } }); }, 800); });
+/* ===== INIT TRIGGER ===== */
+function _w13Init(){if(typeof initAll==='function'){if('requestIdleCallback' in window){requestIdleCallback(initAll,{timeout:1500});}else{setTimeout(initAll,1);}}}
+if(document.readyState==='complete'){_w13Init();}else{window.addEventListener('load',_w13Init);}
 
 function toggleMenu() {
     const m = document.getElementById('fullscreenMenu');

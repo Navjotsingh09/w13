@@ -378,13 +378,9 @@
     (function() {
         'use strict';
 
-        /* ===== PRELOADER ===== */
-        window.addEventListener('load', function() {
-            setTimeout(function() {
-                var pre = document.getElementById('preloader');
-                if (pre) pre.classList.add('is-hidden');
-            }, 1100);
-        });
+        /* ===== INIT TRIGGER ===== */
+function _w13Init(){if(typeof initAll==='function'){if('requestIdleCallback' in window){requestIdleCallback(initAll,{timeout:1500});}else{setTimeout(initAll,1);}}}
+if(document.readyState==='complete'){_w13Init();}else{window.addEventListener('load',_w13Init);}
 
         /* ===== MENU ===== */
         var menuBtn = document.getElementById('menuBtn');
