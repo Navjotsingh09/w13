@@ -633,8 +633,6 @@ a:focus-visible, button:focus-visible, [role="button"]:focus-visible {
 .footer-legal-links a { font-size: 12px; color: rgba(234,234,234,0.35); text-decoration: none; transition: color 0.3s; }
 .footer-legal-links a:hover { color: #44C0C0; }
 .footer-copy { font-size: 12px; color: rgba(234,234,234,0.25); }
-.footer-dot { text-align: center; padding: 40px 0 32px; }
-.footer-dot span { display: inline-block; width: 10px; height: 10px; border-radius: 50%; background: #44C0C0; }
 
 /* ===== SCROLL REVEAL ANIMATIONS ===== */
 .reveal-up {
