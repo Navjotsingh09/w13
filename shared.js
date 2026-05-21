@@ -52,6 +52,13 @@
             document.querySelectorAll('.reveal-up, .reveal-scale, .reveal-right').forEach(function (el) {
                 el.classList.add('visible');
             });
+
+            // 2d. Force GSAP-animated hero elements visible on BFCache restore
+            //     (handles pages like services.html that use gsap.to() with CSS-hidden start state)
+            document.querySelectorAll('.page-hero-title, .page-hero-bottom').forEach(function (el) {
+                el.style.opacity = '1';
+                el.style.transform = 'translateY(0)';
+            });
         });
     }());
 
