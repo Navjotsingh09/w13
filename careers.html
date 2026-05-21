@@ -536,8 +536,13 @@ document.getElementById('applyModalForm').addEventListener('submit', async funct
     status.className = 'form-status visible';
     status.textContent = 'Sending…';
     var formData = new FormData(form);
+    var payload = Object.fromEntries(formData.entries());
     try {
-        var res = await fetch('https://api.web3forms.com/submit', {method:'POST', body:formData});
+        var res = await fetch('/api/submit-form', {
+            method: 'POST',
+            headers: {'Content-Type':'application/json'},
+            body: JSON.stringify(payload)
+        });
         var data;
         try { data = await res.json(); } catch(e) { data = {}; }
         if(data.success){
@@ -545,10 +550,6 @@ document.getElementById('applyModalForm').addEventListener('submit', async funct
             status.className = 'form-status';
             document.getElementById('modalSuccessRole').textContent = role;
             success.style.display = 'block';
-        } else if(res.status === 429) {
-            status.className = 'form-status visible error';
-            status.textContent = 'Too many submissions right now. Please try again in a few minutes or email info@w13uk.com.';
-            btn.disabled = false;
         } else {
             status.className = 'form-status visible error';
             status.textContent = data.message || 'Something went wrong. Please try again or email info@w13uk.com.';
@@ -556,7 +557,7 @@ document.getElementById('applyModalForm').addEventListener('submit', async funct
         }
     } catch(err){
         status.className = 'form-status visible error';
-        status.textContent = 'Unable to send right now. Please try again in a few minutes or email info@w13uk.com.';
+        status.textContent = 'Unable to send. Please email info@w13uk.com directly.';
         btn.disabled = false;
     }
 });
@@ -571,8 +572,13 @@ if(gf) gf.addEventListener('submit', async function(e){
     status.className = 'form-status visible';
     status.textContent = 'Sending…';
     var formData = new FormData(form);
+    var payload = Object.fromEntries(formData.entries());
     try {
-        var res = await fetch('https://api.web3forms.com/submit', {method:'POST', body:formData});
+        var res = await fetch('/api/submit-form', {
+            method: 'POST',
+            headers: {'Content-Type':'application/json'},
+            body: JSON.stringify(payload)
+        });
         var data;
         try { data = await res.json(); } catch(e) { data = {}; }
         if(data.success){
@@ -580,16 +586,13 @@ if(gf) gf.addEventListener('submit', async function(e){
             status.classList.remove('visible');
             success.classList.add('visible');
             success.scrollIntoView({behavior:'smooth', block:'center'});
-        } else if(res.status === 429) {
-            status.className = 'form-status visible error';
-            status.textContent = 'Too many submissions right now. Please try again in a few minutes or email info@w13uk.com.';
         } else {
             status.className = 'form-status visible error';
             status.textContent = data.message || 'Something went wrong. Please try again or email info@w13uk.com.';
         }
     } catch(err){
         status.className = 'form-status visible error';
-        status.textContent = 'Unable to send right now. Please try again in a few minutes or email info@w13uk.com.';
+        status.textContent = 'Unable to send. Please email info@w13uk.com directly.';
     }
 });
 </script>

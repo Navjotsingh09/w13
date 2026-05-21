@@ -993,7 +993,7 @@ function handleNewsletter(e) {
     var controller = new AbortController();
     var timeoutId = setTimeout(function() { controller.abort(); }, 10000);
 
-    fetch('https://api.web3forms.com/submit', {
+    fetch('/api/submit-form', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         signal: controller.signal,
@@ -1088,7 +1088,7 @@ function handleExitSignup(e) {
     var controller = new AbortController();
     var timeoutId = setTimeout(function() { controller.abort(); }, 10000);
 
-    fetch('https://api.web3forms.com/submit', {
+    fetch('/api/submit-form', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         signal: controller.signal,

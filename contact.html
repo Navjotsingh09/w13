@@ -538,7 +538,7 @@ form.addEventListener('submit', async function(e) {
         formData.append('source_path', window.location.pathname);
         formData.append('lead_channel', 'contact_form');
         formData.set('replyto', formData.get('email') || '');
-        const res = await fetch('https://api.web3forms.com/submit', {
+        const res = await fetch('/api/submit-form', {
             method: 'POST',
             body: formData,
             signal: controller.signal
@@ -697,7 +697,7 @@ function handleNewsletter(e) {
     var controller = new AbortController();
     var timeoutId = setTimeout(function() { controller.abort(); }, 10000);
 
-    fetch('https://api.web3forms.com/submit', {
+    fetch('/api/submit-form', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         signal: controller.signal,
@@ -784,7 +784,7 @@ function handleExitSignup(e) {
     var controller = new AbortController();
     var timeoutId = setTimeout(function() { controller.abort(); }, 10000);
 
-    fetch('https://api.web3forms.com/submit', {
+    fetch('/api/submit-form', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         signal: controller.signal,
