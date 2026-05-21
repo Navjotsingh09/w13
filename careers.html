@@ -538,12 +538,17 @@ document.getElementById('applyModalForm').addEventListener('submit', async funct
     var formData = new FormData(form);
     try {
         var res = await fetch('https://api.web3forms.com/submit', {method:'POST', body:formData});
-        var data = await res.json();
+        var data;
+        try { data = await res.json(); } catch(e) { data = {}; }
         if(data.success){
             form.style.display = 'none';
             status.className = 'form-status';
             document.getElementById('modalSuccessRole').textContent = role;
             success.style.display = 'block';
+        } else if(res.status === 429) {
+            status.className = 'form-status visible error';
+            status.textContent = 'Too many submissions right now. Please try again in a few minutes or email info@w13uk.com.';
+            btn.disabled = false;
         } else {
             status.className = 'form-status visible error';
             status.textContent = data.message || 'Something went wrong. Please try again or email info@w13uk.com.';
@@ -551,7 +556,7 @@ document.getElementById('applyModalForm').addEventListener('submit', async funct
         }
     } catch(err){
         status.className = 'form-status visible error';
-        status.textContent = 'Network error. Please try again or email info@w13uk.com.';
+        status.textContent = 'Unable to send right now. Please try again in a few minutes or email info@w13uk.com.';
         btn.disabled = false;
     }
 });
@@ -568,19 +573,23 @@ if(gf) gf.addEventListener('submit', async function(e){
     var formData = new FormData(form);
     try {
         var res = await fetch('https://api.web3forms.com/submit', {method:'POST', body:formData});
-        var data = await res.json();
+        var data;
+        try { data = await res.json(); } catch(e) { data = {}; }
         if(data.success){
             form.style.display = 'none';
             status.classList.remove('visible');
             success.classList.add('visible');
             success.scrollIntoView({behavior:'smooth', block:'center'});
+        } else if(res.status === 429) {
+            status.className = 'form-status visible error';
+            status.textContent = 'Too many submissions right now. Please try again in a few minutes or email info@w13uk.com.';
         } else {
             status.className = 'form-status visible error';
             status.textContent = data.message || 'Something went wrong. Please try again or email info@w13uk.com.';
         }
     } catch(err){
         status.className = 'form-status visible error';
-        status.textContent = 'Network error. Please try again or email info@w13uk.com.';
+        status.textContent = 'Unable to send right now. Please try again in a few minutes or email info@w13uk.com.';
     }
 });
 </script>
