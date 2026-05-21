@@ -638,10 +638,10 @@ a.anchor-target { display: block; height: 0; }
 /* ===== FOOTER ===== */
 .site-footer { background: #091c33; padding: 80px 0 0; }
 .footer-main { max-width: 1400px; margin: 0 auto; padding: 0 60px; display: grid; grid-template-columns: 260px 1fr 280px; gap: 60px; align-items: start; }
-.footer-brand img { height: 48px; margin-bottom: 20px; }
+.footer-brand img { height: 48px; width: auto; margin-bottom: 20px; }
 .footer-cert { display: inline-block; margin-bottom: 20px; opacity: 0.7; transition: opacity 0.3s; }
 .footer-cert:hover { opacity: 1; }
-.footer-cert img { height: 44px; }
+.footer-cert img { height: 44px; width: auto; }
 .footer-tagline { font-size: 14px; color: rgba(234,234,234,0.4); line-height: 1.6; }
 .footer-nav { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; }
 .footer-nav a { display: block; font-family: 'Graphie', sans-serif; font-size: 20px; font-weight: 600; color: rgba(234,234,234,0.7); padding: 18px 0; border-bottom: 1px solid rgba(234,234,234,0.06); transition: color 0.3s; text-decoration: none; }
