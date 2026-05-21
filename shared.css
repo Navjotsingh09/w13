@@ -275,17 +275,15 @@ a:focus-visible, button:focus-visible, [role="button"]:focus-visible {
 }
 .mega-menu-links a {
     display: block;
-    padding: 16px 12px;
-    margin: 0 -12px;
-    border-radius: 4px;
+    padding: 16px 0;
     font-size: 16px;
     color: #0C233F;
     border-bottom: 1px dotted rgba(12,35,63,0.2);
-    transition: all 0.25s;
+    transition: color 0.25s;
     text-decoration: none;
 }
 .mega-menu-links a:last-child { border-bottom: none; }
-.mega-menu-links a:hover { color: #fff; background: #0C233F; border-bottom-color: transparent; }
+.mega-menu-links a:hover { color: #44C0C0; }
 .mega-menu-link { position: relative; cursor: pointer; }
 .mega-menu-image {
     position: relative;
