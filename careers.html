@@ -33,18 +33,23 @@
         .roles-intro{font-size:15px;color:rgba(234,234,234,0.6);line-height:1.8;max-width:720px;margin-bottom:36px}
         .roles-placeholder-banner{display:inline-flex;align-items:center;gap:10px;padding:8px 14px;background:rgba(255,200,80,0.08);border:1px solid rgba(255,200,80,0.25);border-radius:999px;font-size:12px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:#ffc850;margin-bottom:28px}
         .roles-placeholder-banner i{font-size:11px}
-        .roles-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:20px}
-        .role-card{background:rgba(68,192,192,0.04);border:1px solid rgba(68,192,192,0.14);border-radius:12px;padding:28px 26px;transition:all 0.3s;display:flex;flex-direction:column}
-        .role-card:hover{border-color:rgba(68,192,192,0.45);transform:translateY(-2px);background:rgba(68,192,192,0.06)}
-        .role-card-tag{display:inline-block;font-size:11px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:#44C0C0;margin-bottom:14px}
-        .role-card-title{font-weight:600;font-size:21px;color:#fff;margin-bottom:8px;line-height:1.3}
-        .role-card-meta{font-size:13px;color:rgba(234,234,234,0.55);margin-bottom:14px;display:flex;flex-wrap:wrap;gap:14px}
+        .roles-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:24px}
+        .role-card{background:rgba(68,192,192,0.04);border:1px solid rgba(68,192,192,0.14);border-radius:14px;transition:transform 0.35s ease,border-color 0.35s ease,background 0.35s ease,box-shadow 0.35s ease;display:flex;flex-direction:column;overflow:hidden;position:relative}
+        .role-card:hover{border-color:rgba(68,192,192,0.5);transform:translateY(-4px);background:rgba(68,192,192,0.07);box-shadow:0 18px 40px -20px rgba(0,0,0,0.55)}
+        .role-card-media{position:relative;width:100%;aspect-ratio:16/9;overflow:hidden;background:#0a1518}
+        .role-card-media img{width:100%;height:100%;object-fit:cover;display:block;transition:transform 0.6s ease;filter:saturate(0.95) brightness(0.85)}
+        .role-card:hover .role-card-media img{transform:scale(1.06)}
+        .role-card-media::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(8,18,21,0) 40%,rgba(8,18,21,0.85) 100%);pointer-events:none}
+        .role-card-tag{position:absolute;top:14px;left:14px;z-index:2;display:inline-block;font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#44C0C0;background:rgba(8,18,21,0.78);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);padding:7px 12px;border-radius:999px;border:1px solid rgba(68,192,192,0.35)}
+        .role-card-body{padding:24px 24px 26px;display:flex;flex-direction:column;flex-grow:1}
+        .role-card-title{font-weight:600;font-size:20px;color:#fff;margin-bottom:12px;line-height:1.3}
+        .role-card-meta{font-size:13px;color:rgba(234,234,234,0.6);margin-bottom:14px;display:flex;flex-wrap:wrap;gap:10px 16px}
         .role-card-meta span{display:inline-flex;align-items:center;gap:6px}
         .role-card-meta i{font-size:11px;color:#44C0C0}
-        .role-card-desc{font-size:14px;color:rgba(234,234,234,0.7);line-height:1.65;margin-bottom:18px;flex-grow:1}
-        .role-card-link{display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:#44C0C0;transition:gap 0.3s}
-        .role-card-link:hover{gap:12px}
-        .role-card-link svg{width:14px;height:14px;flex-shrink:0}
+        .role-card-desc{font-size:14px;color:rgba(234,234,234,0.72);line-height:1.65;margin-bottom:20px;flex-grow:1}
+        .role-card-link{display:inline-flex;align-items:center;gap:8px;font-size:12px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:#44C0C0;transition:gap 0.3s;align-self:flex-start;padding:10px 16px;border:1px solid rgba(68,192,192,0.35);border-radius:999px;background:transparent;cursor:pointer}
+        .role-card-link:hover{gap:12px;background:rgba(68,192,192,0.12);border-color:rgba(68,192,192,0.6)}
+        .role-card-link svg{width:13px;height:13px;flex-shrink:0}
         .section-label{font-size:13px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:#44C0C0;margin-bottom:18px}
         .section-title{font-weight:600;font-size:clamp(28px,4vw,40px);color:#fff;line-height:1.2;margin-bottom:14px}
         .form-row{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-bottom:22px}
@@ -272,44 +277,64 @@
         <p class="roles-intro">Below are indicative roles W13 Group is actively recruiting for. If your background fits any of these areas — or you'd like to be considered for a future opening — register your interest using the form below and a member of our team will be in touch.</p>
         <div class="roles-grid">
             <div class="role-card">
-                <span class="role-card-tag">Commercial</span>
-                <h3 class="role-card-title">Chartered Quantity Surveyor</h3>
-                <div class="role-card-meta">
-                    <span><i class="fas fa-map-marker-alt"></i> Birmingham, B15 3BE</span>
-                    <span><i class="fas fa-briefcase"></i> Permanent &middot; Full-time</span>
+                <div class="role-card-media">
+                    <span class="role-card-tag">Commercial</span>
+                    <img src="images/nav/consultancy.webp" alt="Commercial consultancy team reviewing plans" loading="lazy" width="640" height="360">
                 </div>
-                <p class="role-card-desc">Join our team to support cost management and contract administration across residential, development, and regeneration projects — from tender through to final account. RICS chartership (MRICS) desirable.</p>
-                <button type="button" class="role-card-link" onclick="openApplyModal('Chartered Quantity Surveyor')">Apply now <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 5l7 7-7 7"/></svg></button>
+                <div class="role-card-body">
+                    <h3 class="role-card-title">Chartered Quantity Surveyor</h3>
+                    <div class="role-card-meta">
+                        <span><i class="fas fa-map-marker-alt"></i> Birmingham, B15 3BE</span>
+                        <span><i class="fas fa-briefcase"></i> Permanent &middot; Full-time</span>
+                    </div>
+                    <p class="role-card-desc">Join our team to support cost management and contract administration across residential, development, and regeneration projects — from tender through to final account. RICS chartership (MRICS) desirable.</p>
+                    <button type="button" class="role-card-link" onclick="openApplyModal('Chartered Quantity Surveyor')">Apply now <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 5l7 7-7 7"/></svg></button>
+                </div>
             </div>
             <div class="role-card">
-                <span class="role-card-tag">Design</span>
-                <h3 class="role-card-title">Architect &ndash; Residential Developments</h3>
-                <div class="role-card-meta">
-                    <span><i class="fas fa-map-marker-alt"></i> Birmingham, B15 3BE</span>
-                    <span><i class="fas fa-briefcase"></i> Permanent &middot; Full-time</span>
+                <div class="role-card-media">
+                    <span class="role-card-tag">Design</span>
+                    <img src="images/nav/architecture-design.webp" alt="Architectural design and residential development" loading="lazy" width="640" height="360">
                 </div>
-                <p class="role-card-desc">Lead residential design proposals from early concept through to technical delivery. ARB-registered with experience on UK housing and mixed-use projects. Proficiency in AutoCAD and/or Revit required.</p>
-                <button type="button" class="role-card-link" onclick="openApplyModal('Architect – Residential Developments')">Apply now <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 5l7 7-7 7"/></svg></button>
+                <div class="role-card-body">
+                    <h3 class="role-card-title">Architect &ndash; Residential Developments</h3>
+                    <div class="role-card-meta">
+                        <span><i class="fas fa-map-marker-alt"></i> Birmingham, B15 3BE</span>
+                        <span><i class="fas fa-briefcase"></i> Permanent &middot; Full-time</span>
+                    </div>
+                    <p class="role-card-desc">Lead residential design proposals from early concept through to technical delivery. ARB-registered with experience on UK housing and mixed-use projects. Proficiency in AutoCAD and/or Revit required.</p>
+                    <button type="button" class="role-card-link" onclick="openApplyModal('Architect – Residential Developments')">Apply now <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 5l7 7-7 7"/></svg></button>
+                </div>
             </div>
             <div class="role-card">
-                <span class="role-card-tag">Design</span>
-                <h3 class="role-card-title">Part 2 Architectural Assistant</h3>
-                <div class="role-card-meta">
-                    <span><i class="fas fa-map-marker-alt"></i> Birmingham</span>
-                    <span><i class="fas fa-briefcase"></i> Full-time &middot; &pound;12.21&ndash;&pound;18.56/hr</span>
+                <div class="role-card-media">
+                    <span class="role-card-tag">Design</span>
+                    <img src="images/nav/projects-residential.webp" alt="Residential project plans and drawings" loading="lazy" width="640" height="360">
                 </div>
-                <p class="role-card-desc">Work across all RIBA stages on residential-led development projects — contributing to design development, technical documentation, and planning submissions. Revit proficiency preferred. Portfolio required.</p>
-                <button type="button" class="role-card-link" onclick="openApplyModal('Part 2 Architectural Assistant')">Apply now <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 5l7 7-7 7"/></svg></button>
+                <div class="role-card-body">
+                    <h3 class="role-card-title">Part 2 Architectural Assistant</h3>
+                    <div class="role-card-meta">
+                        <span><i class="fas fa-map-marker-alt"></i> Birmingham</span>
+                        <span><i class="fas fa-briefcase"></i> Full-time &middot; &pound;12.21&ndash;&pound;18.56/hr</span>
+                    </div>
+                    <p class="role-card-desc">Work across all RIBA stages on residential-led development projects — contributing to design development, technical documentation, and planning submissions. Revit proficiency preferred. Portfolio required.</p>
+                    <button type="button" class="role-card-link" onclick="openApplyModal('Part 2 Architectural Assistant')">Apply now <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 5l7 7-7 7"/></svg></button>
+                </div>
             </div>
             <div class="role-card">
-                <span class="role-card-tag">Commercial</span>
-                <h3 class="role-card-title">Quantity Surveyor</h3>
-                <div class="role-card-meta">
-                    <span><i class="fas fa-map-marker-alt"></i> Birmingham, West Midlands</span>
-                    <span><i class="fas fa-briefcase"></i> Full-time</span>
+                <div class="role-card-media">
+                    <span class="role-card-tag">Commercial</span>
+                    <img src="images/nav/projects-commercial.webp" alt="Commercial development site" loading="lazy" width="640" height="360">
                 </div>
-                <p class="role-card-desc">Manage costs and commercial performance across residential and commercial projects from inception to completion. Prepare cost estimates, support procurement, monitor budgets, and manage variations. Salary negotiable.</p>
-                <button type="button" class="role-card-link" onclick="openApplyModal('Quantity Surveyor')">Apply now <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 5l7 7-7 7"/></svg></button>
+                <div class="role-card-body">
+                    <h3 class="role-card-title">Quantity Surveyor</h3>
+                    <div class="role-card-meta">
+                        <span><i class="fas fa-map-marker-alt"></i> Birmingham, West Midlands</span>
+                        <span><i class="fas fa-briefcase"></i> Full-time</span>
+                    </div>
+                    <p class="role-card-desc">Manage costs and commercial performance across residential and commercial projects from inception to completion. Prepare cost estimates, support procurement, monitor budgets, and manage variations. Salary negotiable.</p>
+                    <button type="button" class="role-card-link" onclick="openApplyModal('Quantity Surveyor')">Apply now <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 5l7 7-7 7"/></svg></button>
+                </div>
             </div>
         </div>
     </section>
