@@ -47,11 +47,7 @@
         .role-card-link svg{width:14px;height:14px;flex-shrink:0}
         .section-label{font-size:13px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:#44C0C0;margin-bottom:18px}
         .section-title{font-weight:600;font-size:clamp(28px,4vw,40px);color:#fff;line-height:1.2;margin-bottom:14px}
-        .careers-apply{padding:80px 50px 120px;background:#091c33}
-        .careers-apply-inner{max-width:1400px;margin:0 auto}
-        .careers-apply-intro{font-size:16px;color:rgba(234,234,234,0.7);line-height:1.8;margin-bottom:40px;max-width:680px}
-        #careersForm{max-width:920px;background:rgba(68,192,192,0.025);border:1px solid rgba(68,192,192,0.1);border-radius:14px;padding:40px}
-        .form-row{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-bottom:22px}
+        .form-row{
         .form-row.full{grid-template-columns:1fr}
         .form-group{display:flex;flex-direction:column}
         .form-group label{font-size:12px;font-weight:600;letter-spacing:1.5px;color:rgba(234,234,234,0.7);margin-bottom:8px;text-transform:uppercase}
@@ -94,8 +90,6 @@
         @media (max-width:768px){
             .careers-hero{padding:140px 24px 40px}
             .careers-roles{padding:20px 24px 60px}
-            .careers-apply{padding:60px 24px 80px}
-            #careersForm{padding:28px 22px}
             .form-row{grid-template-columns:1fr;gap:18px}
         }
     /* ===NAV-CANONICAL-START=== */.navbar{position:fixed;top:0;left:0;right:0;z-index:1000;padding:30px 50px;transition:all 0.5s cubic-bezier(0.16,1,0.3,1)}.nav-inner{max-width:1440px;margin:0 auto;display:flex;align-items:center}.navbar.scrolled{background:rgba(12,35,63,0.98);padding:20px 50px;backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}.navbar:has(.nav-dropdown:hover){background:rgba(12,35,63,0.98);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}.nav-logo{display:flex;align-items:center}.nav-logo img{height:40px;width:auto}.nav-center{flex:1;display:flex;align-items:center;justify-content:center;gap:6px;min-height:40px}.nav-link{font-size:16px;font-weight:400;color:rgba(234,234,234,0.6);padding:8px 16px;transition:color 0.3s;letter-spacing:0.2px}.nav-link:hover{color:#EAEAEA}.nav-link.active{color:#EAEAEA;text-decoration:underline;text-decoration-color:#44C0C0;text-underline-offset:4px;text-decoration-thickness:1.5px}.nav-cta{display:inline-flex;align-items:center;gap:10px;font-size:16px;font-weight:400;color:#EAEAEA;padding:10px 16px 10px 22px;border:1.5px solid rgba(68,192,192,0.9);border-radius:50px;transition:all 0.3s;letter-spacing:0.2px;white-space:nowrap}.nav-cta:hover{background:rgba(68,192,192,0.12)}.nav-cta-dot{width:32px;height:32px;background:#44C0C0;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0}.nav-cta-dot svg{width:16px;height:16px}.nav-dropdown{position:static}.nav-dropdown>.nav-link,.nav-dropdown>.top-nav-link{position:relative;cursor:pointer}.nav-dropdown:hover>.nav-link,.nav-dropdown:hover>.top-nav-link{text-decoration:underline;text-underline-offset:4px;text-decoration-thickness:1.5px}.nav-dropdown:hover>.nav-link::after,.nav-dropdown:hover>.top-nav-link::after{content:'';position:absolute;left:4px;top:50%;transform:translateY(-50%);width:8px;height:8px;background:#44C0C0;border-radius:50%;animation:megaDotPop 0.25s cubic-bezier(0.34,1.56,0.64,1)}.mega-menu{position:absolute;top:calc(100% - 40px);left:50%;transform:translateX(-50%) translateY(-8px);width:calc(100% - 80px);max-width:1440px;padding-top:40px;opacity:0;visibility:hidden;transition:all 0.35s cubic-bezier(0.16,1,0.3,1);z-index:1001;pointer-events:none}.nav-dropdown:hover .mega-menu{opacity:1;visibility:visible;transform:translateX(-50%) translateY(0);pointer-events:auto}.mega-menu-content{display:grid;grid-template-columns:1.1fr 0.9fr 1.4fr;background:#fff;border-radius:16px 16px 4px 4px;overflow:hidden;border-bottom:4px solid #44C0C0;box-shadow:0 25px 60px rgba(12,35,63,0.18)}.mega-menu-intro{padding:48px 40px;min-height:320px}.mega-menu-title{font-family:'Graphie',sans-serif;font-weight:600;font-size:52px;font-weight:400;color:#0C233F;margin-bottom:24px;line-height:1.1}.mega-menu-desc{font-size:15px;line-height:1.75;color:rgba(12,35,63,0.55)}.mega-menu-links{padding:48px 30px;display:flex;flex-direction:column;justify-content:center}.mega-menu-links a{display:block;padding:16px 0;font-size:16px;color:#0C233F;border-bottom:1px dotted rgba(12,35,63,0.2);transition:color 0.25s;text-decoration:none}.mega-menu-links a:last-child{border-bottom:none}.mega-menu-links a:hover{color:#44C0C0}.mega-menu-link{position:relative;cursor:pointer}.mega-menu-image{position:relative;overflow:hidden;min-height:350px}.mega-menu-image-container{position:absolute;inset:0;opacity:0;z-index:1;transition:opacity 0.5s ease}.mega-menu-image-container.active{opacity:1;z-index:10}.mega-menu-image-container img{width:100%;height:100%;object-fit:cover;display:block}.mega-menu-content:hover .mega-menu-image-container img{transition:transform 0.6s ease}.mega-menu-content:hover .mega-menu-image-container.active img{transform:scale(1.05)}.menu-close{position:absolute;top:30px;right:50px;font-size:15px;font-weight:500;color:#EAEAEA;letter-spacing:2px;text-transform:uppercase;cursor:pointer;display:flex;align-items:center;gap:12px;z-index:10}.menu-close-x{font-size:28px;font-weight:300;line-height:1}.menu-left{flex:1;display:flex;flex-direction:column;justify-content:center;padding:100px 80px}.menu-nav-link{display:block;font-family:'Graphie',sans-serif;font-weight:600;font-size:clamp(36px,5vw,60px);font-weight:600;color:#EAEAEA;padding:12px 0;opacity:0.4;transition:all 0.4s;position:relative;transform:translateX(-20px);line-height:1.2}.menu-nav-link:hover{opacity:1;padding-left:30px}.menu-nav-link::before{content:'';position:absolute;left:0;top:50%;width:0;height:1px;background:#44C0C0;transition:width 0.3s}.menu-nav-link:hover::before{width:20px}.menu-right{width:45%;position:relative;overflow:hidden;display:flex;align-items:flex-end;padding:60px}.menu-right-img{position:absolute;inset:0}.menu-right-img img{width:100%;height:100%;object-fit:cover;opacity:0.4}.menu-right-info{position:relative;z-index:2}.menu-right-info h4{font-size:13px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:#44C0C0;margin-bottom:16px}.menu-right-info p{font-size:15px;color:rgba(234,234,234,0.6);line-height:1.7}.menu-right-info a{display:inline-block;margin-top:16px;font-size:14px;color:#44C0C0;font-weight:500;border-bottom:1px solid rgba(68,192,192,0.4);padding-bottom:2px;transition:border-color 0.3s}.menu-right-info a:hover{border-color:#44C0C0}@media (max-width:1100px){.menu-right{display:none}}@media (max-width:768px){.navbar{padding:20px 24px}.nav-inner{max-width:100%;justify-content:space-between}.nav-center{flex:1;justify-content:flex-end;gap:0}.nav-center .nav-link{display:none}.nav-center .nav-dropdown{display:none}.nav-cta{display:none}.menu-left{padding:100px 30px}.menu-nav-link{font-size:36px}.menu-close{right:24px}}/* ===NAV-CANONICAL-END=== */</style>
@@ -241,41 +235,7 @@
             <input type="hidden" id="modalSubjectField" name="subject" value="">
             <input type="checkbox" name="botcheck" style="display:none;">
 
-            <div class="form-row">
-                <div class="form-group">
-                    <label for="modal_first_name">First Name <span class="req">*</span></label>
-                    <input type="text" id="modal_first_name" name="first_name" placeholder="Jane" required>
-                </div>
-                <div class="form-group">
-                    <label for="modal_last_name">Last Name <span class="req">*</span></label>
-                    <input type="text" id="modal_last_name" name="last_name" placeholder="Smith" required>
-                </div>
-            </div>
-
-            <div class="form-row">
-                <div class="form-group">
-                    <label for="modal_email">Email <span class="req">*</span></label>
-                    <input type="email" id="modal_email" name="email" placeholder="jane@example.com" required>
-                </div>
-                <div class="form-group">
-                    <label for="modal_phone">Phone</label>
-                    <input type="tel" id="modal_phone" name="phone" placeholder="07000 000000">
-                </div>
-            </div>
-
-            <div class="form-row full">
-                <div class="form-group">
-                    <label for="modal_cv_link">CV or LinkedIn Link</label>
-                    <input type="url" id="modal_cv_link" name="cv_link" placeholder="https://www.linkedin.com/in/yourprofile">
-                </div>
-            </div>
-
-            <div class="form-row full">
-                <div class="form-group">
-                    <label for="modal_message">Cover Message <span class="req">*</span></label>
-                    <textarea id="modal_message" name="message" placeholder="Briefly describe your background and why you&#39;re a great fit for this role." required></textarea>
-                </div>
-            </div>
+            <div id="applyModalFormBody"></div>
 
             <div class="form-consent">
                 <input type="checkbox" id="modal_consent" name="consent" required>
@@ -354,100 +314,13 @@
         </div>
     </section>
 
-    <!-- APPLICATION FORM -->
-    <section class="careers-apply" id="apply">
-        <div class="careers-apply-inner">
-            <div class="section-label">Register Interest</div>
-            <h2 class="section-title">Tell us about yourself.</h2>
-            <p class="careers-apply-intro">Send us your details and a brief note about the type of role you're looking for. If you have a CV or LinkedIn profile to share, include the link in the message field.</p>
-
-            <form id="careersForm" action="https://api.web3forms.com/submit" method="POST">
-                <input type="hidden" name="access_key" value="9d1283e7-0b2b-4bb9-9c0c-9fdb29d069a5">
-                <input type="hidden" name="subject" value="New careers enquiry from W13 website">
-                <input type="hidden" name="from_name" value="W13 Careers Page">
-                <input type="checkbox" name="botcheck" style="display:none;">
-
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="first_name">First Name <span class="req">*</span></label>
-                        <input type="text" id="first_name" name="first_name" placeholder="Jane" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="last_name">Last Name <span class="req">*</span></label>
-                        <input type="text" id="last_name" name="last_name" placeholder="Smith" required>
-                    </div>
-                </div>
-
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="email">Email <span class="req">*</span></label>
-                        <input type="email" id="email" name="email" placeholder="jane@example.com" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="phone">Phone</label>
-                        <input type="tel" id="phone" name="phone" placeholder="07000 000000">
-                    </div>
-                </div>
-
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="role_interest">Role of Interest <span class="req">*</span></label>
-                        <select id="role_interest" name="role_interest" required>
-                            <option value="">Select an area</option>
-                            <option value="Consultancy">Consultancy</option>
-                            <option value="Land Acquisition">Land Acquisition</option>
-                            <option value="Planning">Planning</option>
-                            <option value="Architecture / Design">Architecture / Design</option>
-                            <option value="Project Management">Project Management</option>
-                            <option value="Construction / Site">Construction / Site</option>
-                            <option value="Asset Management">Asset Management</option>
-                            <option value="Operations / Administration">Operations / Administration</option>
-                            <option value="Other">Other</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="experience">Years of Experience</label>
-                        <select id="experience" name="experience">
-                            <option value="">Select</option>
-                            <option value="0-2 years">0 to 2 years</option>
-                            <option value="3-5 years">3 to 5 years</option>
-                            <option value="6-10 years">6 to 10 years</option>
-                            <option value="10+ years">10+ years</option>
-                        </select>
-                    </div>
-                </div>
-
-                <div class="form-row full">
-                    <div class="form-group">
-                        <label for="cv_link">CV or LinkedIn Link</label>
-                        <input type="url" id="cv_link" name="cv_link" placeholder="https://www.linkedin.com/in/yourprofile">
-                    </div>
-                </div>
-
-                <div class="form-row full">
-                    <div class="form-group">
-                        <label for="message">Tell us about yourself <span class="req">*</span></label>
-                        <textarea id="message" name="message" placeholder="Briefly describe your background and the type of role you're looking for." required></textarea>
-                    </div>
-                </div>
-
-                <div class="form-consent">
-                    <input type="checkbox" id="consent" name="consent" required>
-                    <label for="consent">I consent to W13 Group processing my information for recruitment purposes. See our <a href="privacy-policy.html">Privacy Policy</a>.</label>
-                </div>
-
-                <button type="submit" class="btn-submit">
-                    Submit Application
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
-                </button>
-                <div id="formStatus" class="form-status" role="status" aria-live="polite"></div>
-            </form>
-
-            <div id="formSuccess" class="form-success">
-                <div class="form-success-icon"><i class="fas fa-check-circle"></i></div>
-                <h3>Thank you for your interest.</h3>
-                <p>We've received your details and a member of our team will be in touch shortly.</p>
-            </div>
+    <!-- APPLICATION FORM PLACEHOLDER - replaced by CTA -->
+    <!-- SITE CTA -->
+    <section class="cta-section">
+        <div class="cta-inner">
+            <h2 class="cta-title">Have a project<br>in mind?</h2>
+            <p class="cta-text">Talk to our team about your next development, land opportunity, or construction challenge.</p>
+            <a href="contact.html" class="btn-cta">Get in touch</a>
         </div>
     </section>
 </main>
@@ -495,11 +368,101 @@
 function toggleMenu(){var m=document.getElementById('fullscreenMenu');if(m)m.classList.toggle('active');}
 (function(){var n=document.getElementById('navbar');if(!n)return;window.addEventListener('scroll',function(){n.classList.toggle('scrolled',window.pageYOffset>100);});})();
 
+// ── Role-specific form field configurations ──────────────────────────────────
+var ROLE_FORMS = {
+    'Chartered Quantity Surveyor': [
+        [{id:'modal_first_name',name:'first_name',label:'First Name',req:true,type:'text',ph:'Jane'},
+         {id:'modal_last_name',name:'last_name',label:'Last Name',req:true,type:'text',ph:'Smith'}],
+        [{id:'modal_email',name:'email',label:'Email',req:true,type:'email',ph:'jane@example.com'},
+         {id:'modal_phone',name:'phone',label:'Phone',type:'tel',ph:'07000 000000'}],
+        [{id:'modal_rics',name:'rics_status',label:'RICS Status',req:true,type:'select',opts:[
+            ['','Select status'],['MRICS','MRICS (Chartered)'],['Working towards MRICS','Working towards MRICS'],
+            ['AssocRICS','AssocRICS'],['Not yet affiliated','Not yet RICS affiliated']]},
+         {id:'modal_exp',name:'years_experience',label:'Years of QS Experience',type:'select',opts:[
+            ['','Select'],['0–2 years','0 to 2 years'],['3–5 years','3 to 5 years'],
+            ['6–10 years','6 to 10 years'],['10+ years','10+ years']]}],
+        [{id:'modal_cv',name:'cv_link',label:'CV or LinkedIn Link',type:'url',ph:'https://www.linkedin.com/in/yourprofile',full:true}],
+        [{id:'modal_message',name:'message',label:'Cover Message',req:true,type:'textarea',
+          ph:'Briefly describe your QS background and why you are a great fit for this role.',full:true}]
+    ],
+    'Architect \u2013 Residential Developments': [
+        [{id:'modal_first_name',name:'first_name',label:'First Name',req:true,type:'text',ph:'Jane'},
+         {id:'modal_last_name',name:'last_name',label:'Last Name',req:true,type:'text',ph:'Smith'}],
+        [{id:'modal_email',name:'email',label:'Email',req:true,type:'email',ph:'jane@example.com'},
+         {id:'modal_phone',name:'phone',label:'Phone',type:'tel',ph:'07000 000000'}],
+        [{id:'modal_arb',name:'arb_number',label:'ARB Registration Number',req:true,type:'text',ph:'e.g. 123456A'},
+         {id:'modal_software',name:'primary_software',label:'Primary Software',req:true,type:'select',opts:[
+            ['','Select'],['AutoCAD','AutoCAD'],['Revit','Revit'],
+            ['AutoCAD & Revit','AutoCAD & Revit'],['Other','Other']]}],
+        [{id:'modal_portfolio',name:'portfolio_link',label:'Portfolio Link',req:true,type:'url',ph:'https://',full:true}],
+        [{id:'modal_cv',name:'cv_link',label:'CV or LinkedIn Link',type:'url',ph:'https://www.linkedin.com/in/yourprofile',full:true}],
+        [{id:'modal_message',name:'message',label:'Cover Message',req:true,type:'textarea',
+          ph:'Briefly describe your residential design experience and what draws you to W13.',full:true}]
+    ],
+    'Part 2 Architectural Assistant': [
+        [{id:'modal_first_name',name:'first_name',label:'First Name',req:true,type:'text',ph:'Jane'},
+         {id:'modal_last_name',name:'last_name',label:'Last Name',req:true,type:'text',ph:'Smith'}],
+        [{id:'modal_email',name:'email',label:'Email',req:true,type:'email',ph:'jane@example.com'},
+         {id:'modal_phone',name:'phone',label:'Phone',type:'tel',ph:'07000 000000'}],
+        [{id:'modal_uni',name:'university',label:'Current University / School',req:true,type:'text',ph:'e.g. Birmingham City University'},
+         {id:'modal_grad',name:'graduation_year',label:'Expected Graduation',req:true,type:'select',opts:[
+            ['','Select year'],['2025','2025'],['2026','2026'],['2027','2027'],['2028','2028'],['2029','2029']]}],
+        [{id:'modal_revit',name:'revit_experience',label:'Revit Experience',type:'select',opts:[
+            ['','Select'],['None','None'],['Basic','Basic'],['Intermediate','Intermediate'],['Proficient','Proficient']]},
+         {id:'modal_portfolio',name:'portfolio_link',label:'Portfolio Link',req:true,type:'url',ph:'https://'}],
+        [{id:'modal_message',name:'message',label:'Tell us about yourself',req:true,type:'textarea',
+          ph:'Briefly describe your background and why you would like to work with W13.',full:true}]
+    ],
+    'Quantity Surveyor': [
+        [{id:'modal_first_name',name:'first_name',label:'First Name',req:true,type:'text',ph:'Jane'},
+         {id:'modal_last_name',name:'last_name',label:'Last Name',req:true,type:'text',ph:'Smith'}],
+        [{id:'modal_email',name:'email',label:'Email',req:true,type:'email',ph:'jane@example.com'},
+         {id:'modal_phone',name:'phone',label:'Phone',type:'tel',ph:'07000 000000'}],
+        [{id:'modal_membership',name:'professional_membership',label:'Professional Membership',type:'select',opts:[
+            ['','Select'],['MRICS','MRICS'],['AssocRICS','AssocRICS'],['CIOB','CIOB'],
+            ['Working towards chartership','Working towards chartership'],['None','None']]},
+         {id:'modal_exp',name:'years_experience',label:'Years of QS Experience',type:'select',opts:[
+            ['','Select'],['0–2 years','0 to 2 years'],['3–5 years','3 to 5 years'],
+            ['6–10 years','6 to 10 years'],['10+ years','10+ years']]}],
+        [{id:'modal_proj',name:'project_types',label:'Project Types Experience',type:'select',opts:[
+            ['','Select primary sector'],['Residential','Residential'],['Commercial','Commercial'],
+            ['Mixed-Use','Mixed-Use'],['Regeneration','Regeneration'],['Varied','Varied / All of the above']]},
+         {id:'modal_cv',name:'cv_link',label:'CV or LinkedIn Link',type:'url',ph:'https://www.linkedin.com/in/yourprofile'}],
+        [{id:'modal_message',name:'message',label:'Tell us about yourself',req:true,type:'textarea',
+          ph:'Briefly describe your QS experience and what you are looking for in your next role.',full:true}]
+    ]
+};
+
+function buildModalFields(role) {
+    var rows = ROLE_FORMS[role];
+    if (!rows) return '';
+    return rows.map(function(rowFields) {
+        var full = rowFields.length === 1 && rowFields[0].full;
+        var inner = rowFields.map(function(f) {
+            var req = f.req ? ' <span class="req">*</span>' : '';
+            var label = '<label for="' + f.id + '">' + f.label + req + '</label>';
+            var ctrl;
+            if (f.type === 'select') {
+                ctrl = '<select id="' + f.id + '" name="' + f.name + '"' + (f.req ? ' required' : '') + '>' +
+                    f.opts.map(function(o){ return '<option value="' + o[0] + '">' + o[1] + '</option>'; }).join('') +
+                    '</select>';
+            } else if (f.type === 'textarea') {
+                ctrl = '<textarea id="' + f.id + '" name="' + f.name + '" placeholder="' + (f.ph||'') + '"' + (f.req ? ' required' : '') + '></textarea>';
+            } else {
+                ctrl = '<input type="' + f.type + '" id="' + f.id + '" name="' + f.name + '"' + (f.ph ? ' placeholder="' + f.ph + '"' : '') + (f.req ? ' required' : '') + '>';
+            }
+            return '<div class="form-group">' + label + ctrl + '</div>';
+        }).join('');
+        return '<div class="form-row' + (full ? ' full' : '') + '">' + inner + '</div>';
+    }).join('');
+}
+
 // ── Apply Modal ──────────────────────────────────────────────────────────────
 function openApplyModal(role){
     document.getElementById('applyModalTitle').textContent = role;
     document.getElementById('modalRoleField').value = role;
     document.getElementById('modalSubjectField').value = 'New Application: ' + role;
+    document.getElementById('applyModalFormBody').innerHTML = buildModalFields(role);
     document.getElementById('applyModalOverlay').classList.add('open');
     document.body.style.overflow = 'hidden';
     // reset form state
@@ -510,7 +473,7 @@ function openApplyModal(role){
     success.style.display = 'none';
     status.className = 'form-status';
     status.textContent = '';
-    form.reset();
+    // re-stamp hidden fields after field injection
     document.getElementById('modalRoleField').value = role;
     document.getElementById('modalSubjectField').value = 'New Application: ' + role;
 }
@@ -562,39 +525,7 @@ document.getElementById('applyModalForm').addEventListener('submit', async funct
     }
 });
 
-// ── General interest form (still on page) ───────────────────────────────────
-var gf = document.getElementById('careersForm');
-if(gf) gf.addEventListener('submit', async function(e){
-    e.preventDefault();
-    var form = this;
-    var status = document.getElementById('formStatus');
-    var success = document.getElementById('formSuccess');
-    status.className = 'form-status visible';
-    status.textContent = 'Sending…';
-    var formData = new FormData(form);
-    var payload = Object.fromEntries(formData.entries());
-    try {
-        var res = await fetch('/api/submit-form', {
-            method: 'POST',
-            headers: {'Content-Type':'application/json'},
-            body: JSON.stringify(payload)
-        });
-        var data;
-        try { data = await res.json(); } catch(e) { data = {}; }
-        if(data.success){
-            form.style.display = 'none';
-            status.classList.remove('visible');
-            success.classList.add('visible');
-            success.scrollIntoView({behavior:'smooth', block:'center'});
-        } else {
-            status.className = 'form-status visible error';
-            status.textContent = data.message || 'Something went wrong. Please try again or email info@w13uk.com.';
-        }
-    } catch(err){
-        status.className = 'form-status visible error';
-        status.textContent = 'Unable to send. Please email info@w13uk.com directly.';
-    }
-});
+
 </script>
 <script src="shared.js" defer></script>
 </body>
