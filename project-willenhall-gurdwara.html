@@ -198,7 +198,7 @@
 </nav>
 
     <!-- Project Hero -->
-    <section class="project-hero">
+    <section class="project-hero" id="main" tabindex="-1">
         <div class="project-hero-bg"></div>
         <div class="project-hero-overlay"></div>
         <div class="project-hero-content">
@@ -415,10 +415,10 @@
         <h2>Interested in Willenhall Gurdwara?</h2>
         <p>Register your interest and our team will keep you updated on availability, pricing, and key milestones.</p>
         <form class="register-form" onsubmit="return handleRegister(event, 'Willenhall Gurdwara')">
-            <input type="text" name="name" placeholder="Full name" required>
-            <input type="email" name="email" placeholder="Email address" required>
-            <input type="tel" name="phone" placeholder="Phone number">
-            <select name="interest">
+            <input type="text" name="name" placeholder="Full name" required aria-label="Full name">
+            <input type="email" name="email" placeholder="Email address" required aria-label="Email address">
+            <input type="tel" name="phone" placeholder="Phone number" aria-label="Phone number">
+            <select name="interest" aria-label="Your interest">
                 <option value="" disabled selected>I am a...</option>
                 <option value="Buyer">Potential Buyer</option>
                 <option value="Investor">Investor</option>
