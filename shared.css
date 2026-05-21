@@ -314,6 +314,32 @@ a:focus-visible, button:focus-visible, [role="button"]:focus-visible {
     transform: scale(1.05);
 }
 
+/* ===== MEGA MENU — SHARED MODIFIERS ===== */
+.mega-menu-intro--services { display: flex; flex-direction: column; justify-content: center; }
+.mega-menu-intro--services .mega-menu-desc { margin-top: 4px; margin-bottom: 28px; }
+.lifecycle-mini { display: flex; align-items: center; gap: 0; position: relative; max-width: 340px; }
+.lifecycle-mini-step { display: flex; flex-direction: column; align-items: center; gap: 8px; flex: 0 0 auto; z-index: 1; }
+.lifecycle-mini-dot { width: 22px; height: 22px; border-radius: 50%; background: #0C233F; color: #fff; font-family: 'Graphie', sans-serif; font-weight: 700; font-size: 10px; display: flex; align-items: center; justify-content: center; box-shadow: 0 0 0 3px #fff; }
+.lifecycle-mini-label { font-size: 10px; font-weight: 600; letter-spacing: 0.5px; color: rgba(12,35,63,0.6); text-align: center; line-height: 1.2; max-width: 64px; }
+.lifecycle-mini-bar { flex: 0 1 56px; height: 2px; background: repeating-linear-gradient(90deg,rgba(68,192,192,0.45) 0 5px,transparent 5px 10px); margin: 0 6px 18px; align-self: center; }
+.mega-menu-links--compact a { padding: 11px 0; }
+.mega-menu-content--compact { grid-template-columns: 1fr 0.8fr 1.2fr; }
+.mega-menu-content--compact .mega-menu-intro,
+.mega-menu-content--compact .mega-menu-links,
+.mega-menu-content--compact .mega-menu-image { min-height: 260px; }
+.mega-menu-content--compact .mega-menu-links { padding: 32px 30px; justify-content: flex-start; gap: 0; }
+.mega-menu-content--compact .mega-menu-intro { padding: 32px 36px; min-height: 260px; }
+/* Force-close the dropdown briefly (overrides :hover) so anchor clicks don't keep panel open */
+.nav-dropdown--closing .mega-menu { opacity: 0 !important; visibility: hidden !important; pointer-events: none !important; }
+
+/* Scroll offset for in-page anchors so the fixed navbar doesn't cover headings */
+section[id], a.anchor-target { scroll-margin-top: 110px; }
+a.anchor-target { display: block; height: 0; }
+
+/* Alternate intro-section variant — image on the left, copy on the right */
+.intro-section--alt .intro-inner > div:first-child { order: 2; }
+.intro-section--alt .intro-inner > .intro-img { order: 1; }
+
 /* ===== FULLSCREEN MENU ===== */
 .fullscreen-menu {
     position: fixed; inset: 0; background: #0C233F; z-index: 9999;

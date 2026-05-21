@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Careers | W13 Group</title>
+    <link rel="canonical" href="https://w13uk.com/careers.html">
+    <meta name="description" content="Join W13 Group. We're actively hiring across consultancy, land, planning, and construction roles. Register your interest and a member of our team will be in touch.">
+    <meta property="og:title" content="Careers | W13 Group">
+    <meta property="og:description" content="Join W13 Group. We're actively hiring. Register your interest with our team.">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="images/W13_Logo_full_White.png">
+    <script>window.addEventListener('load',function(){var l=document.createElement('link');l.rel='stylesheet';l.href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css';document.head.appendChild(l);});</script>
+    <link rel="preload" href="shared.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'"><noscript><link rel="stylesheet" href="shared.min.css"></noscript>
+    <style>
+        @font-face{font-family:'Graphie';src:url('fonts/Graphie-Light.woff2');font-weight:300}
+        @font-face{font-family:'Graphie';src:url('fonts/Graphie-Regular.woff2');font-weight:400}
+        @font-face{font-family:'Graphie';src:url('fonts/Graphie-SemiBold.woff2');font-weight:600}
+        @font-face{font-family:'Graphie';src:url('fonts/Graphie-Bold.woff2');font-weight:700}
+        *{box-sizing:border-box;margin:0;padding:0}
+        body{font-family:'Graphie',sans-serif;background:#0C233F;color:#EAEAEA;-webkit-font-smoothing:antialiased}
+        a{text-decoration:none;color:inherit}
+        button{cursor:pointer;border:none;font-family:inherit;background:none;color:inherit}
+        img{max-width:100%;display:block}
+        ul{list-style:none}
+        .skip-link{position:absolute;top:-100%;left:16px;z-index:100001;padding:12px 24px;background:#44C0C0;color:#0C233F;font-weight:600;font-size:14px;border-radius:0 0 8px 8px;transition:top 0.3s}
+        .skip-link:focus{top:0}
+        .careers-hero{padding:180px 50px 60px;max-width:1400px;margin:0 auto}
+        .careers-hero-label{font-size:13px;font-weight:600;letter-spacing:4px;text-transform:uppercase;color:#44C0C0;margin-bottom:20px}
+        .careers-hero-title{font-weight:600;font-size:clamp(40px,6vw,72px);line-height:1.08;margin-bottom:20px}
+        .careers-hero-sub{font-size:18px;color:rgba(234,234,234,0.82);max-width:680px;line-height:1.7}
+        .careers-roles{padding:40px 50px 80px;max-width:1400px;margin:0 auto}
+        .roles-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:24px;margin-top:40px}
+        .role-card{background:rgba(68,192,192,0.04);border:1px solid rgba(68,192,192,0.12);border-radius:12px;padding:32px 28px;transition:all 0.3s}
+        .role-card:hover{border-color:rgba(68,192,192,0.4);transform:translateY(-2px)}
+        .role-card-tag{font-size:11px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:#44C0C0;margin-bottom:14px}
+        .role-card-title{font-weight:600;font-size:22px;color:#fff;margin-bottom:10px;line-height:1.25}
+        .role-card-meta{font-size:13px;color:rgba(234,234,234,0.55);margin-bottom:16px}
+        .role-card-desc{font-size:14px;color:rgba(234,234,234,0.7);line-height:1.7}
+        .roles-empty{font-size:15px;color:rgba(234,234,234,0.55);line-height:1.8;max-width:680px}
+        .section-label{font-size:13px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:#44C0C0;margin-bottom:18px}
+        .section-title{font-weight:600;font-size:clamp(28px,4vw,40px);color:#fff;line-height:1.2;margin-bottom:14px}
+        .careers-apply{padding:80px 50px 120px;background:#091c33}
+        .careers-apply-inner{max-width:900px;margin:0 auto}
+        .careers-apply-intro{font-size:16px;color:rgba(234,234,234,0.7);line-height:1.8;margin-bottom:48px;max-width:680px}
+        .form-row{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-bottom:24px}
+        .form-row.full{grid-template-columns:1fr}
+        .form-group{display:flex;flex-direction:column}
+        .form-group label{font-size:13px;font-weight:600;letter-spacing:1px;color:rgba(234,234,234,0.84);margin-bottom:10px;text-transform:uppercase}
+        .form-group label .req{color:#44C0C0}
+        .form-group input,.form-group select,.form-group textarea{width:100%;background:transparent;border:none;border-bottom:1px solid rgba(68,192,192,0.25);padding:14px 0;font-family:'Graphie',sans-serif;font-size:16px;color:#EAEAEA;outline:none;transition:border-color 0.3s;-webkit-appearance:none;appearance:none;border-radius:0}
+        .form-group input:focus,.form-group select:focus,.form-group textarea:focus{border-bottom-color:#44C0C0}
+        .form-group input::placeholder,.form-group textarea::placeholder{color:rgba(234,234,234,0.3)}
+        .form-group select{color:rgba(234,234,234,0.6);background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='7' viewBox='0 0 12 7'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%2344C0C0' stroke-width='1.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 4px center;padding-right:24px}
+        .form-group select option{background:#0C233F;color:#EAEAEA}
+        .form-group textarea{resize:vertical;min-height:120px;line-height:1.7}
+        .form-consent{display:flex;align-items:flex-start;gap:14px;margin:32px 0 40px}
+        .form-consent input[type="checkbox"]{width:20px;height:20px;min-width:20px;accent-color:#44C0C0;margin-top:2px;-webkit-appearance:auto;appearance:auto;cursor:pointer}
+        .form-consent label{font-size:13px;color:rgba(234,234,234,0.78);line-height:1.7;cursor:pointer}
+        .form-consent label a{color:#44C0C0;text-decoration:underline;text-underline-offset:2px}
+        .btn-submit{display:inline-flex;align-items:center;gap:14px;padding:18px 44px;background:#44C0C0;color:#0C233F;font-size:15px;font-weight:700;letter-spacing:0.5px;border:none;transition:all 0.4s;cursor:pointer;border-radius:0}
+        .btn-submit:hover{background:#3aadad;transform:translateY(-2px)}
+        .form-success{display:none;padding:40px;text-align:center;border:1px solid rgba(68,192,192,0.25);border-radius:12px}
+        .form-success.visible{display:block}
+        .form-success-icon{font-size:48px;color:#44C0C0;margin-bottom:20px}
+        .form-success h3{font-weight:600;font-size:28px;margin-bottom:12px;color:#fff}
+        .form-success p{font-size:16px;color:rgba(234,234,234,0.6);line-height:1.7}
+        .form-status{display:none;margin-top:16px;font-size:14px;line-height:1.6;color:rgba(234,234,234,0.88)}
+        .form-status.visible{display:block}
+        .form-status.error{color:#ff7676}
+        @media (max-width:768px){
+            .careers-hero{padding:140px 24px 40px}
+            .careers-roles{padding:20px 24px 60px}
+            .careers-apply{padding:60px 24px 80px}
+            .form-row{grid-template-columns:1fr;gap:20px}
+        }
+    </style>
+</head>
+<body>
+<a href="#main" class="skip-link">Skip to main content</a>
+
+<!-- NAVBAR -->
+<nav class="navbar" id="navbar" aria-label="Main navigation">
+    <div class="nav-inner">
+    <a href="index.html" class="nav-logo">
+        <img loading="eager" fetchpriority="high" width="180" height="40" src="images/W13_Logo_White.webp" alt="W13 Group">
+    </a>
+    <div class="nav-center">
+        <!-- ABOUT US -->
+        <div class="nav-dropdown">
+            <a href="about.html" class="nav-link">About Us</a>
+            <div class="mega-menu">
+                <div class="mega-menu-content">
+                    <div class="mega-menu-intro">
+                        <h2 class="mega-menu-title">About Us</h2>
+                        <p class="mega-menu-desc">With over 20 years of experience, W13 Group has established itself as a leader in property development &amp; construction, delivering landmark projects across the UK.</p>
+                    </div>
+                    <div class="mega-menu-links mega-menu-links--compact">
+                        <a href="about.html#history" class="mega-menu-link" data-sector="about-history">Company History</a>
+                        <a href="about.html#mission" class="mega-menu-link" data-sector="about-mission">Mission &amp; Ethos</a>
+                        <a href="about.html#sustainability" class="mega-menu-link" data-sector="about-sustain">Sustainability</a>
+                        <a href="about.html#csr" class="mega-menu-link" data-sector="about-csr">Corporate Social Responsibility</a>
+                        <a href="about.html#partners" class="mega-menu-link" data-sector="about-partners">Who We Work With</a>
+                        <a href="careers.html" class="mega-menu-link" data-sector="about-careers">Careers</a>
+                    </div>
+                    <div class="mega-menu-image">
+                        <div class="mega-menu-image-container active" data-sector="about-history"><img loading="lazy" src="images/W13 - Pictures/about-us-our-story.webp" alt="Company History"></div>
+                        <div class="mega-menu-image-container" data-sector="about-mission"><img loading="lazy" src="images/hero/1504307651254-35680f356dfd.webp" alt="Mission and Ethos"></div>
+                        <div class="mega-menu-image-container" data-sector="about-sustain"><img loading="lazy" src="images/hero/1565610222536-ef125c59da2e.webp" alt="Sustainability"></div>
+                        <div class="mega-menu-image-container" data-sector="about-csr"><img loading="lazy" src="images/hero/1449157291145-7efd050a4d0e.webp" alt="Corporate Social Responsibility"></div>
+                        <div class="mega-menu-image-container" data-sector="about-partners"><img loading="lazy" src="images/hero/1486406146926-c627a92ad1ab.webp" alt="Who We Work With"></div>
+                        <div class="mega-menu-image-container" data-sector="about-careers"><img loading="lazy" src="images/hero/1517089596392-fb9a9033e05b.webp" alt="Careers"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- SERVICES -->
+        <div class="nav-dropdown">
+            <a href="services.html" class="nav-link">Services</a>
+            <div class="mega-menu">
+                <div class="mega-menu-content">
+                    <div class="mega-menu-intro mega-menu-intro--services">
+                        <h2 class="mega-menu-title">Services</h2>
+                        <p class="mega-menu-desc">End to end property development, from initial consultancy through to construction handover.</p>
+                        <div class="lifecycle-mini" aria-label="Project lifecycle: four stages">
+                            <div class="lifecycle-mini-step"><div class="lifecycle-mini-dot">1</div><div class="lifecycle-mini-label">Consultancy</div></div>
+                            <div class="lifecycle-mini-bar"></div>
+                            <div class="lifecycle-mini-step"><div class="lifecycle-mini-dot">2</div><div class="lifecycle-mini-label">Land</div></div>
+                            <div class="lifecycle-mini-bar"></div>
+                            <div class="lifecycle-mini-step"><div class="lifecycle-mini-dot">3</div><div class="lifecycle-mini-label">Planning</div></div>
+                            <div class="lifecycle-mini-bar"></div>
+                            <div class="lifecycle-mini-step"><div class="lifecycle-mini-dot">4</div><div class="lifecycle-mini-label">Build</div></div>
+                        </div>
+                    </div>
+                    <div class="mega-menu-links">
+                        <a href="services/consultancy.html" class="mega-menu-link" data-sector="svc-consult">Consultancy</a>
+                        <a href="services/land-development.html" class="mega-menu-link" data-sector="svc-land">Land Acquisitions</a>
+                        <a href="services/architecture-design.html" class="mega-menu-link" data-sector="svc-arch">Architecture &amp; Planning</a>
+                        <a href="services/master-developer.html" class="mega-menu-link" data-sector="svc-construct">Construction / Main Contractor</a>
+                    </div>
+                    <div class="mega-menu-image">
+                        <div class="mega-menu-image-container active" data-sector="svc-consult"><img loading="lazy" src="images/hero/1504307651254-35680f356dfd.webp" alt="Consultancy"></div>
+                        <div class="mega-menu-image-container" data-sector="svc-land"><img loading="lazy" src="images/hero/1600585154340-be6161a56a0c.webp" alt="Land Acquisitions"></div>
+                        <div class="mega-menu-image-container" data-sector="svc-arch"><img loading="lazy" src="images/hero/1503387762-592deb58ef4e.webp" alt="Architecture and Planning"></div>
+                        <div class="mega-menu-image-container" data-sector="svc-construct"><img loading="lazy" src="images/hero/1541888946425-d81bb19240f5.webp" alt="Construction"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- WHAT WE DO -->
+        <div class="nav-dropdown">
+            <a href="services.html" class="nav-link">What We Do</a>
+            <div class="mega-menu">
+                <div class="mega-menu-content">
+                    <div class="mega-menu-intro">
+                        <h2 class="mega-menu-title">What We Do</h2>
+                        <p class="mega-menu-desc">Specialists in complex land led development across brownfield regeneration, environmental projects, build to rent, and social housing.</p>
+                    </div>
+                    <div class="mega-menu-links">
+                        <a href="sectors/urban-regeneration.html" class="mega-menu-link" data-sector="brownfield">Brownfield Regeneration</a>
+                        <a href="sectors/urban-regeneration.html" class="mega-menu-link" data-sector="environmental">Environmental</a>
+                        <a href="sectors/residential.html" class="mega-menu-link" data-sector="btr">Build to Rent (BTR)</a>
+                        <a href="sectors/residential.html" class="mega-menu-link" data-sector="social">Social Housing</a>
+                    </div>
+                    <div class="mega-menu-image">
+                        <div class="mega-menu-image-container active" data-sector="brownfield"><img loading="lazy" src="images/hero/1600585154526-990dced4db0d.webp" alt="Brownfield Regeneration"></div>
+                        <div class="mega-menu-image-container" data-sector="environmental"><img loading="lazy" src="images/hero/1565610222536-ef125c59da2e.webp" alt="Environmental"></div>
+                        <div class="mega-menu-image-container" data-sector="btr"><img loading="lazy" src="images/W13 - Pictures/residential-main.webp" alt="Build to Rent"></div>
+                        <div class="mega-menu-image-container" data-sector="social"><img loading="lazy" src="images/hero/1600596542815-ffad4c1539a9.webp" alt="Social Housing"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- PROJECTS -->
+        <div class="nav-dropdown">
+            <a href="projects.html" class="nav-link">Projects</a>
+            <div class="mega-menu">
+                <div class="mega-menu-content mega-menu-content--compact">
+                    <div class="mega-menu-intro">
+                        <h2 class="mega-menu-title">Projects</h2>
+                        <p class="mega-menu-desc">Explore our portfolio of delivered commercial and residential developments across the UK.</p>
+                    </div>
+                    <div class="mega-menu-links">
+                        <a href="projects.html#commercial" class="mega-menu-link" data-sector="proj-commercial">Commercial</a>
+                        <a href="projects.html#residential" class="mega-menu-link" data-sector="proj-residential">Residential / New Builds</a>
+                    </div>
+                    <div class="mega-menu-image">
+                        <div class="mega-menu-image-container active" data-sector="proj-commercial"><img loading="lazy" src="images/hero/1486406146926-c627a92ad1ab.webp" alt="Commercial Projects"></div>
+                        <div class="mega-menu-image-container" data-sector="proj-residential"><img loading="lazy" src="images/hero/1565610222536-ef125c59da2e.webp" alt="Residential Projects"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="mobile-menu-btn" aria-label="Open menu" aria-expanded="false" onclick="toggleMenu()">
+            <span>Menu</span>
+            <div class="mobile-menu-lines">
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </div>
+    <a href="contact.html" class="nav-cta">Contact <span class="nav-cta-dot"><svg viewBox="0 0 16 16" fill="none"><circle cx="4" cy="4" r="1.5" fill="#fff"/><circle cx="8" cy="4" r="1.5" fill="#fff"/><circle cx="12" cy="4" r="1.5" fill="#fff"/><circle cx="4" cy="8" r="1.5" fill="#fff"/><circle cx="8" cy="8" r="1.5" fill="#fff"/><circle cx="12" cy="8" r="1.5" fill="#fff"/><circle cx="4" cy="12" r="1.5" fill="#fff"/><circle cx="8" cy="12" r="1.5" fill="#fff"/><circle cx="12" cy="12" r="1.5" fill="#fff"/></svg></span></a>
+    </div>
+</nav>
+
+<main id="main">
+    <!-- HERO -->
+    <section class="careers-hero">
+        <div class="careers-hero-label">Careers</div>
+        <h1 class="careers-hero-title">Build your career with W13.</h1>
+        <p class="careers-hero-sub">W13 Group is actively hiring across our consultancy, land, planning, and construction teams. We're looking for people who want to be part of delivering meaningful regeneration and high quality homes across the UK.</p>
+    </section>
+
+    <!-- OPEN ROLES -->
+    <section class="careers-roles" id="open-roles">
+        <div class="section-label">Open Roles</div>
+        <h2 class="section-title">We're growing our team.</h2>
+        <p class="roles-empty">Detailed role listings will be added here as positions are confirmed. In the meantime, if you're interested in joining W13 in any capacity — consultancy, land acquisition, planning, design, project management, or construction — please register your interest using the form below and a member of our team will be in touch.</p>
+        <div class="roles-grid" id="rolesGrid" hidden>
+            <!-- Role cards will be populated here when roles are confirmed -->
+        </div>
+    </section>
+
+    <!-- APPLICATION FORM -->
+    <section class="careers-apply" id="apply">
+        <div class="careers-apply-inner">
+            <div class="section-label">Register Interest</div>
+            <h2 class="section-title">Tell us about yourself.</h2>
+            <p class="careers-apply-intro">Send us your details and a brief note about the type of role you're looking for. If you have a CV or LinkedIn profile to share, include the link in the message field.</p>
+
+            <form id="careersForm" action="https://api.web3forms.com/submit" method="POST">
+                <input type="hidden" name="access_key" value="9cdae4fd-e5b5-48fd-975e-2ebf489e6fa8">
+                <input type="hidden" name="subject" value="New careers enquiry from W13 website">
+                <input type="hidden" name="from_name" value="W13 Careers Page">
+                <input type="checkbox" name="botcheck" style="display:none;">
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="first_name">First Name <span class="req">*</span></label>
+                        <input type="text" id="first_name" name="first_name" placeholder="Jane" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="last_name">Last Name <span class="req">*</span></label>
+                        <input type="text" id="last_name" name="last_name" placeholder="Smith" required>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="email">Email <span class="req">*</span></label>
+                        <input type="email" id="email" name="email" placeholder="jane@example.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Phone</label>
+                        <input type="tel" id="phone" name="phone" placeholder="07000 000000">
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="role_interest">Role of Interest <span class="req">*</span></label>
+                        <select id="role_interest" name="role_interest" required>
+                            <option value="">Select an area</option>
+                            <option value="Consultancy">Consultancy</option>
+                            <option value="Land Acquisition">Land Acquisition</option>
+                            <option value="Planning">Planning</option>
+                            <option value="Architecture / Design">Architecture / Design</option>
+                            <option value="Project Management">Project Management</option>
+                            <option value="Construction / Site">Construction / Site</option>
+                            <option value="Asset Management">Asset Management</option>
+                            <option value="Operations / Administration">Operations / Administration</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="experience">Years of Experience</label>
+                        <select id="experience" name="experience">
+                            <option value="">Select</option>
+                            <option value="0-2 years">0 to 2 years</option>
+                            <option value="3-5 years">3 to 5 years</option>
+                            <option value="6-10 years">6 to 10 years</option>
+                            <option value="10+ years">10+ years</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-row full">
+                    <div class="form-group">
+                        <label for="cv_link">CV or LinkedIn Link</label>
+                        <input type="url" id="cv_link" name="cv_link" placeholder="https://www.linkedin.com/in/yourprofile">
+                    </div>
+                </div>
+
+                <div class="form-row full">
+                    <div class="form-group">
+                        <label for="message">Tell us about yourself <span class="req">*</span></label>
+                        <textarea id="message" name="message" placeholder="Briefly describe your background and the type of role you're looking for." required></textarea>
+                    </div>
+                </div>
+
+                <div class="form-consent">
+                    <input type="checkbox" id="consent" name="consent" required>
+                    <label for="consent">I consent to W13 Group processing my information for recruitment purposes. See our <a href="privacy-policy.html">Privacy Policy</a>.</label>
+                </div>
+
+                <button type="submit" class="btn-submit">
+                    Submit Application
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+                </button>
+                <div id="formStatus" class="form-status" role="status" aria-live="polite"></div>
+            </form>
+
+            <div id="formSuccess" class="form-success">
+                <div class="form-success-icon"><i class="fas fa-check-circle"></i></div>
+                <h3>Thank you for your interest.</h3>
+                <p>We've received your details and a member of our team will be in touch shortly.</p>
+            </div>
+        </div>
+    </section>
+</main>
+
+<footer class="site-footer">
+    <div class="footer-main">
+        <div class="footer-brand">
+            <img src="images/W13_Logo_full_White.webp" alt="W13 Group" loading="lazy" width="200" height="100" decoding="async">
+            <p class="footer-tagline">Building communities, creating value, and delivering excellence across property development.</p>
+        </div>
+        <div class="footer-nav">
+            <a href="about.html">About Us</a>
+            <a href="services.html">Services</a>
+            <a href="services.html">What We Do</a>
+            <a href="projects.html">Projects</a>
+            <a href="careers.html">Careers</a>
+            <a href="news.html">News</a>
+            <a href="contact.html">Contact</a>
+        </div>
+        <div class="footer-office">
+            <div class="footer-office-label">Birmingham Office</div>
+            <div class="footer-office-addr">Beech House, Greenfield Crescent<br>Birmingham, B15 3BE</div>
+            <div class="footer-office-contact"><a href="tel:+441216630006">+44 (0)121 663 0006</a></div>
+            <div class="footer-office-contact"><a href="mailto:info@w13uk.com">info@w13uk.com</a></div>
+            <div class="footer-social-row">
+                <a href="https://www.linkedin.com/company/w13-group/" target="_blank" rel="noopener" class="footer-social-icon" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                <a href="https://x.com/W13Group" target="_blank" rel="noopener" class="footer-social-icon" aria-label="X"><i class="fab fa-x-twitter"></i></a>
+                <a href="https://www.instagram.com/w13group/" target="_blank" rel="noopener" class="footer-social-icon" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            </div>
+        </div>
+    </div>
+    <div class="footer-bottom-bar">
+        <div class="footer-legal-links">
+            <a href="terms.html">T&amp;C's</a>
+            <a href="privacy-policy.html">Privacy Policy</a>
+        </div>
+        <span class="footer-copy">&copy;2026 W13 Group. All rights reserved</span>
+    </div>
+</footer>
+
+<script>
+function toggleMenu(){var m=document.getElementById('fullscreenMenu');if(m)m.classList.toggle('active');}
+(function(){var n=document.getElementById('navbar');if(!n)return;window.addEventListener('scroll',function(){n.classList.toggle('scrolled',window.pageYOffset>100);});})();
+
+document.getElementById('careersForm').addEventListener('submit', async function(e){
+    e.preventDefault();
+    var form = this;
+    var status = document.getElementById('formStatus');
+    var success = document.getElementById('formSuccess');
+    status.className = 'form-status visible';
+    status.textContent = 'Sending...';
+    var formData = new FormData(form);
+    try {
+        var res = await fetch('https://api.web3forms.com/submit', {
+            method: 'POST',
+            body: formData
+        });
+        var data = await res.json();
+        if (data.success) {
+            form.style.display = 'none';
+            status.classList.remove('visible');
+            success.classList.add('visible');
+            success.scrollIntoView({behavior: 'smooth', block: 'center'});
+        } else {
+            status.className = 'form-status visible error';
+            status.textContent = data.message || 'Something went wrong. Please try again or email info@w13uk.com.';
+        }
+    } catch (err) {
+        status.className = 'form-status visible error';
+        status.textContent = 'Network error. Please try again or email info@w13uk.com.';
+    }
+});
+</script>
+<script src="shared.js" defer></script>
+</body>
+</html>
