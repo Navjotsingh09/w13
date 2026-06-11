@@ -263,7 +263,7 @@
             <p class="intro-text reveal-up">From initial site assembly and remediation through to placemaking and long-term stewardship, W13 Group takes a whole-lifecycle approach to regeneration. We don&rsquo;t just build &mdash; we create places with identity, resilience and enduring value.</p>
         </div>
         <div class="intro-img reveal-scale">
-            <img loading="lazy" src="../images/hero/1486406146926-c627a92ad1ab.webp" srcset="../images/hero/1486406146926-c627a92ad1ab-sm.webp 600w, ../images/hero/1486406146926-c627a92ad1ab-md.webp 750w, ../images/hero/1486406146926-c627a92ad1ab.webp 1200w" sizes="(max-width: 768px) 100vw, 1200px" alt="Urban regeneration site">
+            <img loading="lazy" src="../images/W13 - Pictures/urban-regeneration-overview.jpg" alt="Urban regeneration site">
             <div class="intro-img-badge">
                 <div class="intro-img-badge-num">85+</div>
                 <div class="intro-img-badge-label">Acres Regenerated</div>
@@ -396,6 +396,7 @@
             <div class="footer-legal-links">
                 <a href="../terms.html">T&amp;C's</a>
                 <a href="../privacy-policy.html">Privacy Policy</a>
+                <a href="../cookie-policy.html">Cookie Policy</a>
             </div>
             <span class="footer-copy">&copy;2026 W13 Group. All rights reserved</span>
         </div>
@@ -449,20 +450,8 @@ function trackLead(formType, detail) {
     }, detail || {});
     window.dataLayer = window.dataLayer || [];
     window.dataLayer.push(payload);
-
-    if (typeof window.gtag === 'function') {
-        window.gtag('event', 'generate_lead', {
-            send_to: window.W13_GOOGLE_ADS_ID || undefined,
-            form_type: formType,
-            page_path: window.location.pathname
-        });
-    }
-    if (typeof window.fbq === 'function') {
-        window.fbq('track', 'Lead', {
-            form_type: formType,
-            page_path: window.location.pathname
-        });
-    }
+    // Tracking (GA4 / Meta / Clarity etc.) is handled entirely in Google Tag
+    // Manager, which listens for the w13_form_submit event pushed above.
 }
 function handleNewsletter(e) {
     e.preventDefault();

@@ -437,6 +437,7 @@
             <div class="footer-legal-links">
                 <a href="terms.html">T&amp;C's</a>
                 <a href="privacy-policy.html">Privacy Policy</a>
+                <a href="cookie-policy.html">Cookie Policy</a>
             </div>
             <span class="footer-copy">&copy;2026 W13 Group. All rights reserved</span>
         </div>
@@ -486,20 +487,8 @@ function trackLead(formType, detail) {
     }, detail || {});
     window.dataLayer = window.dataLayer || [];
     window.dataLayer.push(payload);
-
-    if (typeof window.gtag === 'function') {
-        window.gtag('event', 'generate_lead', {
-            send_to: window.W13_GOOGLE_ADS_ID || undefined,
-            form_type: formType,
-            page_path: window.location.pathname
-        });
-    }
-    if (typeof window.fbq === 'function') {
-        window.fbq('track', 'Lead', {
-            form_type: formType,
-            page_path: window.location.pathname
-        });
-    }
+    // Tracking (GA4 / Meta / Clarity etc.) is handled entirely in Google Tag
+    // Manager, which listens for the w13_form_submit event pushed above.
 }
 function handleNewsletter(e) {
     e.preventDefault();

@@ -162,7 +162,7 @@
                         <div class="mega-menu-image-container active" data-sector="brownfield"><img src="../images/hero/1600585154526-990dced4db0d.webp" alt="Brownfield Regeneration"></div>
                         <div class="mega-menu-image-container" data-sector="environmental"><img src="../images/hero/1565610222536-ef125c59da2e.webp" alt="Environmental"></div>
                         <div class="mega-menu-image-container" data-sector="btr"><img src="../images/W13 - Pictures/residential-main.webp" alt="Build to Rent"></div>
-                        <div class="mega-menu-image-container" data-sector="social"><img src="../images/hero/1600596542815-ffad4c1539a9.webp" alt="Social Housing"></div>
+                        <div class="mega-menu-image-container" data-sector="social"><img src="../images/W13 - Pictures/social-housing-hero.jpg" alt="Social Housing"></div>
                     </div>
                 </div>
             </div>
@@ -201,7 +201,7 @@
 
 <!-- HERO -->
 <section class="sector-hero" id="main" tabindex="-1">
-    <div class="sector-hero-img"><img loading="eager" fetchpriority="high" src="../images/hero/1600596542815-ffad4c1539a9.webp" alt="Social Housing"></div>
+    <div class="sector-hero-img"><img loading="eager" fetchpriority="high" src="../images/W13 - Pictures/social-housing-hero.jpg" alt="Social Housing"></div>
     <div class="sector-hero-overlay"></div>
     <div class="sector-hero-content">
         <div class="sector-hero-label reveal-up">Social Housing</div>
@@ -231,7 +231,7 @@
             <p class="intro-text reveal-up">We focus on placemaking as much as delivery &mdash; ensuring affordable tenures sit seamlessly alongside private homes, with the same quality of build, landscaping and community infrastructure.</p>
         </div>
         <div class="intro-img reveal-scale">
-            <img loading="lazy" src="../images/hero/1600596542815-ffad4c1539a9.webp" alt="Social housing development">
+            <img loading="lazy" src="../images/W13 - Pictures/social-housing-overview.jpg" alt="Social housing development">
             <div class="intro-img-badge">
                 <div class="intro-img-badge-num">1,200+</div>
                 <div class="intro-img-badge-label">Affordable Homes</div>
@@ -364,6 +364,7 @@
             <div class="footer-legal-links">
                 <a href="../terms.html">T&amp;C's</a>
                 <a href="../privacy-policy.html">Privacy Policy</a>
+                <a href="../cookie-policy.html">Cookie Policy</a>
             </div>
             <span class="footer-copy">&copy;2026 W13 Group. All rights reserved</span>
         </div>
@@ -417,20 +418,8 @@ function trackLead(formType, detail) {
     }, detail || {});
     window.dataLayer = window.dataLayer || [];
     window.dataLayer.push(payload);
-
-    if (typeof window.gtag === 'function') {
-        window.gtag('event', 'generate_lead', {
-            send_to: window.W13_GOOGLE_ADS_ID || undefined,
-            form_type: formType,
-            page_path: window.location.pathname
-        });
-    }
-    if (typeof window.fbq === 'function') {
-        window.fbq('track', 'Lead', {
-            form_type: formType,
-            page_path: window.location.pathname
-        });
-    }
+    // Tracking (GA4 / Meta / Clarity etc.) is handled entirely in Google Tag
+    // Manager, which listens for the w13_form_submit event pushed above.
 }
 function handleNewsletter(e) {
     e.preventDefault();

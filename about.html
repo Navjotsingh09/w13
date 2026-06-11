@@ -250,7 +250,7 @@
             <p class="intro-text reveal-up">Our multidisciplinary approach leads to better project management, better understanding, and better delivery of projects, all the way through from inception to completion. W13 is headquartered in Birmingham, with a project portfolio spanning London, the West Midlands, and beyond.</p>
         </div>
         <div class="intro-img reveal-scale">
-            <img loading="lazy" src="images/W13 - Pictures/about-us-our-story.webp" alt="W13 Group construction site">
+            <img loading="lazy" src="images/W13 - Pictures/about-w13.png" alt="About W13 Group">
             <div class="intro-img-badge">
                 <div class="intro-img-badge-num">20+</div>
                 <div class="intro-img-badge-label">Years in Business</div>
@@ -331,7 +331,7 @@
             <p class="intro-text reveal-up">We also support a small number of charitable and community initiatives each year, focused on housing, education, and the wellbeing of the neighbourhoods we operate in.</p>
         </div>
         <div class="intro-img reveal-scale">
-            <img loading="lazy" src="images/hero/1449157291145-7efd050a4d0e.webp" alt="Community engagement">
+            <img loading="lazy" src="images/W13 - Pictures/csr-overview.jpg" alt="Corporate social responsibility">
         </div>
     </div>
 </section>
@@ -674,6 +674,7 @@
             <div class="footer-legal-links">
                 <a href="terms.html">T&amp;C's</a>
                 <a href="privacy-policy.html">Privacy Policy</a>
+                <a href="cookie-policy.html">Cookie Policy</a>
             </div>
             <span class="footer-copy">&copy;2026 W13 Group. All rights reserved</span>
         </div>
@@ -795,20 +796,8 @@ function trackLead(formType, detail) {
     }, detail || {});
     window.dataLayer = window.dataLayer || [];
     window.dataLayer.push(payload);
-
-    if (typeof window.gtag === 'function') {
-        window.gtag('event', 'generate_lead', {
-            send_to: window.W13_GOOGLE_ADS_ID || undefined,
-            form_type: formType,
-            page_path: window.location.pathname
-        });
-    }
-    if (typeof window.fbq === 'function') {
-        window.fbq('track', 'Lead', {
-            form_type: formType,
-            page_path: window.location.pathname
-        });
-    }
+    // Tracking (GA4 / Meta / Clarity etc.) is handled entirely in Google Tag
+    // Manager, which listens for the w13_form_submit event pushed above.
 }
 function handleNewsletter(e) {
     e.preventDefault();

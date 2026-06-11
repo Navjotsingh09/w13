@@ -233,7 +233,7 @@
 
 <!-- HERO -->
 <section class="sector-hero" id="main" tabindex="-1">
-    <div class="sector-hero-img"><img loading="eager" fetchpriority="high" src="../images/hero/1600585154526-990dced4db0d.webp" srcset="../images/hero/1600585154526-990dced4db0d-sm.webp 600w, ../images/hero/1600585154526-990dced4db0d-md.webp 750w, ../images/hero/1600585154526-990dced4db0d.webp 1200w" sizes="(max-width: 768px) 100vw, 1200px" alt="Brownfield Regeneration"></div>
+    <div class="sector-hero-img"><img loading="eager" fetchpriority="high" src="../images/W13 - Pictures/brownfield-overview.jpg" alt="Brownfield Regeneration"></div>
     <div class="sector-hero-overlay"></div>
     <div class="sector-hero-content">
         <div class="sector-hero-label reveal-up">Brownfield Regeneration</div>
@@ -263,7 +263,7 @@
             <p class="intro-text reveal-up">By prioritising brownfield over greenfield, we protect the Green Belt, reduce land-take, support Local Plan housing targets and unlock value from sites that have sat idle for years. It is development that strengthens existing communities rather than displacing them.</p>
         </div>
         <div class="intro-img reveal-scale">
-            <img loading="lazy" src="../images/hero/1600585154526-990dced4db0d.webp" srcset="../images/hero/1600585154526-990dced4db0d-sm.webp 600w, ../images/hero/1600585154526-990dced4db0d-md.webp 750w, ../images/hero/1600585154526-990dced4db0d.webp 1200w" sizes="(max-width: 768px) 100vw, 1200px" alt="Brownfield site reborn">
+            <img loading="lazy" src="../images/W13 - Pictures/brownfield-overview.jpg" alt="Brownfield site reborn">
             <div class="intro-img-badge">
                 <div class="intro-img-badge-num">60+</div>
                 <div class="intro-img-badge-label">Acres Remediated</div>
@@ -396,6 +396,7 @@
             <div class="footer-legal-links">
                 <a href="../terms.html">T&amp;C's</a>
                 <a href="../privacy-policy.html">Privacy Policy</a>
+                <a href="../cookie-policy.html">Cookie Policy</a>
             </div>
             <span class="footer-copy">&copy;2026 W13 Group. All rights reserved</span>
         </div>
@@ -449,20 +450,8 @@ function trackLead(formType, detail) {
     }, detail || {});
     window.dataLayer = window.dataLayer || [];
     window.dataLayer.push(payload);
-
-    if (typeof window.gtag === 'function') {
-        window.gtag('event', 'generate_lead', {
-            send_to: window.W13_GOOGLE_ADS_ID || undefined,
-            form_type: formType,
-            page_path: window.location.pathname
-        });
-    }
-    if (typeof window.fbq === 'function') {
-        window.fbq('track', 'Lead', {
-            form_type: formType,
-            page_path: window.location.pathname
-        });
-    }
+    // Tracking (GA4 / Meta / Clarity etc.) is handled entirely in Google Tag
+    // Manager, which listens for the w13_form_submit event pushed above.
 }
 function handleNewsletter(e) {
     e.preventDefault();
