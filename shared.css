@@ -710,3 +710,7 @@ a.anchor-target { display: block; height: 0; }
     .footer-nav a { font-size: 14px; padding: 9px 0; }
     .footer-bottom-bar { padding: 20px 24px; flex-direction: column; align-items: flex-start; }
 }
+
+/* ===== MANAGE COOKIES BUTTON (footer) ===== */
+.w13-manage-cookies-btn { background: none; border: none; color: inherit; font: inherit; cursor: pointer; padding: 0; line-height: inherit; text-decoration: none; }
+.w13-manage-cookies-btn:hover { color: #44C0C0; }
